@@ -14,12 +14,12 @@ local M = {
         -- "mfussenegger/nvim-treehopper",
         { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     },
-    -- init = function()
-    --     vim.cmd([[
-    --         omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-    --         xnoremap <silent> m :lua require('tsht').nodes()<CR>
-    --       ]])
-    -- end,
+    init = function()
+        vim.cmd([[
+            omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+            xnoremap <silent> m :lua require('tsht').nodes()<CR>
+          ]])
+    end,
     config = function()
         require("nvm-treesitter.configs").setup({
             ensure_installed = {

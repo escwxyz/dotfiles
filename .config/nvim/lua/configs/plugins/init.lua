@@ -1,3 +1,7 @@
+--- `init`: function is always executed during startup
+--- `config`: function is executed when the plugin loads
+--- `build`: function is executed when a plugin is installed or updated
+
 return {
     -- Common functions for different plugins
     "nvim-lua/plenary.nvim",
@@ -11,7 +15,7 @@ return {
     --- Theming
     {
         "catppuccin/nvim",
-        config = function()
+        init = function()
             require("catppuccin").setup({
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
                 background = { -- :h background
