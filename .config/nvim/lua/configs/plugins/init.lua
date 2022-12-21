@@ -7,7 +7,7 @@ return {
     "nvim-lua/plenary.nvim",
     -- Icons for nvim-tree
     {
-        "nvim-tree/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons", -- TODO change to https://github.com/ryanoasis/vim-devicons
         config = function()
             require("nvim-web-devicons").setup({ default = true })
         end,

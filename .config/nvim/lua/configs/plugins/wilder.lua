@@ -2,7 +2,7 @@
 --- ~~~~~~~~~~~~~~~~
 --- See https://github.com/gelguy/wilder.nvim
 
---- TODO UI
+--- TODO Icons
 
 local M = {
     "gelguy/wilder.nvim",
@@ -52,9 +52,10 @@ local M = {
                 [":"] = wilder.popupmenu_renderer(
                     wilder.popupmenu_palette_theme({
                         border = "rounded",
+                        pumblend = 20,
                         empty_message = wilder.popupmenu_empty_message_with_spinner(),
                         hightlights = {
-                            gradient = gradient, -- check performance
+                            gradient = gradient, -- TODO not working, check performance
                         },
                         highlighter = wilder.highlighter_with_gradient({
                             wilder.lua_fzy_highlighter(), -- requires romgrk/fzy-lua-native

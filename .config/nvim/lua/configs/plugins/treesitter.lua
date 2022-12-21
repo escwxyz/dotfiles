@@ -21,7 +21,7 @@ local M = {
           ]])
     end,
     config = function()
-        require("nvm-treesitter.configs").setup({
+        require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "bash",
                 "fish",

@@ -1,3 +1,6 @@
+--- Global Keymappings
+--- ~~~~~~~~~~~~~~~~~~
+
 vim.o.timeoutlen = 300
 vim.g.mapleader = " "
 
