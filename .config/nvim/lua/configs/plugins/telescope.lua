@@ -41,7 +41,7 @@ local M = {
                     sync_with_nvim_tree = true,
                 },
                 file_browser = {
-
+                    -- TODO support file operations https://github.com/nvim-telescope/telescope-file-browser.nvim#file-system-operations
                 }
             },
             defaults = {
@@ -57,7 +57,7 @@ local M = {
                         preview_width = 0.5,
                     },
                 },
-                file_previewer = require("telescope.previewers").cat.new, -- use cat/bat for file pre
+                file_previewer = require("telescope.previewers").cat.new, -- use cat/bat for file preview
             }
         })
 

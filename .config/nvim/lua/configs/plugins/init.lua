@@ -5,14 +5,14 @@
 return {
     -- Common functions for different plugins
     "nvim-lua/plenary.nvim",
-    -- Icons for nvim-tree
+    -- Icons
     {
-        "nvim-tree/nvim-web-devicons", -- TODO change to https://github.com/ryanoasis/vim-devicons
+        "nvim-tree/nvim-web-devicons",
         config = function()
             require("nvim-web-devicons").setup({ default = true })
         end,
     },
-    --- Theming
+    --- TODO multi theming match awesome wm
     {
         "catppuccin/nvim",
         init = function()
