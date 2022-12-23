@@ -9,8 +9,7 @@ local M = {
     dependencies = {
         "romgrk/fzy-lua-native"
     },
-    event = "BufReadPost",
-    config = function()
+    init = function()
         local wilder = require("wilder")
 
         wilder.setup({ modes = { ':', '/', '?' } })
