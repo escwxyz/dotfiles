@@ -12,7 +12,8 @@ if status is-interactive
 	abbr --add --global add "paru -S"
 	abbr --add --global remove "paru -R"
 	abbr --add --global clean "paru -c"
-    abbr --add --global updates "paru -Qu"
+	abbr --add --global upgrade "paru -Syu" # upgrade
+    abbr --add --global updates "paru -Qu" # check available updates
 	abbr --add --global naive "cd && cd naive && ./naive"
 end
 
