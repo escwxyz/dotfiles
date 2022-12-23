@@ -1,6 +1,6 @@
 --- Syntax Highlight
 --- ~~~~~~~~~~~~~~~~
---- See https://github.com/nvim-treesitter/nvim-treesitter#quickstart
+--- https://github.com/nvim-treesitter/nvim-treesitter#quickstart
 
 local M = {
     "nvim-treesitter/nvim-treesitter",
