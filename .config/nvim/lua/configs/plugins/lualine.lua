@@ -31,7 +31,15 @@ local M = {
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = { 'filename' },
                 -- right side
-                lualine_x = { 'encoding', 'fileformat', 'filetype' },
+                lualine_x = {
+                    'fileformat',
+                    'filetype',
+                    {
+                        require("lazy.status").updates,
+                        cond = require("lazy.status").has_updates,
+                        color = { fg = "#ff9e64" },
+                    },
+                },
                 lualine_y = { 'progress' },
                 lualine_z = { 'location' }
             },
@@ -47,7 +55,7 @@ local M = {
             tabline = {},
             winbar = {},
             inactive_winbar = {},
-            extensions = { "nvim-tree" },
+            extensions = {},
         })
     end
 }

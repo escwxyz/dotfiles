@@ -1,17 +1,19 @@
 --- `init`: function is always executed during startup
 --- `config`: function is executed when the plugin loads
 --- `build`: function is executed when a plugin is installed or updated
+--- Event Name:
+--- --- "BufReadPre": when open file directly inside terminal `nvim filename`, earliest
+--- --- "BufRead": when open a buffer?
+--- --- "BufReadPost": after open a buffer?
+--- --- "VeryLazy": when not urgent for the inital ui
 
 return {
     -- Common functions for different plugins
     "nvim-lua/plenary.nvim",
-    -- Icons
-    {
-        "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("nvim-web-devicons").setup({ default = true })
-        end,
-    },
+    -- This is for lua https://github.com/folke/neodev.nvim
+    "folke/neodev.nvim",
+    -- Icons for multiple plugins
+    "nvim-tree/nvim-web-devicons",
     --- TODO multi theming match awesome wm
     {
         "catppuccin/nvim",
@@ -61,5 +63,18 @@ return {
             -- setup must be called before loading
             vim.cmd.colorscheme "catppuccin"
         end
-    }
+    },
+    ---
+    {
+        "folke/trouble.nvim",
+        config = function()
+            require("trouble").setup()
+        end
+    },
+    --- TypeScript LSP
+    "jose-elias-alvarez/typescript.nvim",
+    --- Rust LSP
+    "simrat39/rust-tools.nvim",
+    --- Support Hot Reload for flutter project
+    -- TODO 'akinsho/flutter-tools.nvim'
 }
