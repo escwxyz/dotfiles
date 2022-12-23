@@ -89,6 +89,8 @@ local M = {
         telescope.load_extension("fzf")
         telescope.load_extension("file_browser")
         telescope.load_extension("project")
+        -- https://github.com/ThePrimeagen/harpoon#telescope-support
+        telescope.load_extension("harpoon")
     end
 }
 
