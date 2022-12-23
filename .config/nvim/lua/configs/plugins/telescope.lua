@@ -18,15 +18,15 @@ local M = {
 
         vim.keymap.set("n", "<leader>ff", function()
             telescope.extensions.file_browser.file_browser({}) -- TODO
-        end, { desc = "Find files" })
+        end, { desc = "[F]ind [F]iles" })
 
         vim.keymap.set("n", "<leader>fp", function()
             telescope.extensions.project.project({})
-        end, { desc = "Find projects" })
+        end, { desc = "[F]ind [P]rojects" })
 
         vim.keymap.set("n", "<leader>fk", function()
             require("telescope.builtin").keymaps()
-        end, { desc = "Show Keymaps" })
+        end, { desc = "[F]ind [K]eymaps" })
     end,
 
     config = function()

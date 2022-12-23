@@ -1,4 +1,4 @@
 #TODOs
 
 - ~~Use telescope keymaps, instead of which key~~
-- Use `null-ls`, instead of `lsp-zero`
+- ~~Remove `lsp-zero`~~

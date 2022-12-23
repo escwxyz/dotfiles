@@ -2,8 +2,8 @@
 --- ~~~~~~~~~~~~~
 --- See https://github.com/nvim-tree/nvim-tree.lua
 
-vim.keymap.set("n", "<leader>e", "<cmd>:NvimTreeToggle<cr>", {
-    desc = "File [E]xplorer"
+vim.keymap.set("n", "<leader>fe", "<cmd>:NvimTreeToggle<cr>", {
+    desc = "[F]ile [E]xplorer"
 })
 
 local M = {
