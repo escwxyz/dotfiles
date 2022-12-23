@@ -8,6 +8,9 @@ vim.keymap.set("n", "<leader>fe", "<cmd>:NvimTreeToggle<cr>", {
 
 local M = {
     "nvim-tree/nvim-tree.lua",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+    },
     lazy = false,
     config = function()
         require("nvim-tree").setup()
