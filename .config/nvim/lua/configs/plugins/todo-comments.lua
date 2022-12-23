@@ -1,6 +1,7 @@
 local M = {
     "folke/todo-comments.nvim",
-    init = function()
+    event = "VeryLazy",
+    config = function()
         require("todo-comments").setup({
             signs = true,
             keywords = {

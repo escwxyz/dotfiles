@@ -9,11 +9,11 @@ local M = {
     dependencies = {
         "romgrk/fzy-lua-native"
     },
-    init = function()
-        require("wilder").setup({ modes = { ':', '/', '?' } })
-    end,
+    event = "BufReadPost",
     config = function()
         local wilder = require("wilder")
+
+        wilder.setup({ modes = { ':', '/', '?' } })
 
         wilder.set_option("pipeline", {
             wilder.branch(
