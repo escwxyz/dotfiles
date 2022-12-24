@@ -1,38 +1,41 @@
---- File Finder
+--- All in One Finder
 --- ~~~~~~~~~~~
+--- https://github.com/nvim-telescope/telescope.nvim
 
 local M = {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-        -- https://github.com/nvim-telescope/telescope-file-browser.nvim
         { "nvim-telescope/telescope-file-browser.nvim" },
-        -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        -- https://github.com/nvim-telescope/telescope-project.nvim
-        { "nvim-telescope/telescope-project.nvim" }
-        -- TODO
+        { "cljoly/telescope-repo.nvim" },
+        { "lazytanuki/nvim-mapper" }
     },
     init = function()
 
         local telescope = require("telescope")
 
-        -- Mainly use this as file explorer
-        vim.keymap.set("n", "<leader>ff", function()
-            telescope.extensions.file_browser.file_browser({}) -- TODO
-        end, { desc = "[F]ind [F]iles" })
+        local key_mapper = require("nvim-mapper")
 
-        vim.keymap.set("n", "<leader>fp", function()
-            telescope.extensions.project.project({})
-        end, { desc = "[F]ind [P]rojects" })
+        key_mapper.setup({
+            no_map = true,
+            search_path = "~/.config/nvim/lua/configs/plugins/",
+            action_on_enter = "definition" -- TODO definition is not shown up in the preview
+        })
 
-        vim.keymap.set("n", "<leader>fk", function()
-            require("telescope.builtin").keymaps()
-        end, { desc = "[F]ind [K]eymaps" })
+        telescope.load_extension("mapper")
 
-        vim.keymap.set("n", "<leader>fs", function()
+        key_mapper.map({ "n", "i" }, "<leader>ff", function()
+            telescope.extensions.file_browser.file_browser()
+        end, { silent = true }, "Telescope", "file_browser", "[F]ind [F]iles")
+
+        key_mapper.map("n", "<leader>fk", "<cmd>:Telescope mapper<cr>",
+            { silent = true },
+            "Telescope", "nvim_mapper", "[F]ind [K]eymaps")
+
+        -- TODO if buffer only?
+        key_mapper.map("n", "<leader>fs", function()
             require("telescope.builtin").live_grep()
-        end, { desc = "[F]ind a [S]tring" })
-
+        end, { silent = true }, "Telescope", "live_grep", "[F]ind a [S]tring")
     end,
 
     config = function()
@@ -42,12 +45,12 @@ local M = {
 
         telescope.setup({
             extensions = {
-                -- TODO keymapping for project
-                project = {
-                    base_dirs = {
-                        "~/Projects/"
-                    },
-                    sync_with_nvim_tree = true,
+                repo = {
+                    list = {
+                        search_dirs = {
+                            "~./Projects/"
+                        }
+                    }
                 },
                 file_browser = {
                     -- https://github.com/nvim-telescope/telescope-file-browser.nvim#file-system-operations
@@ -56,13 +59,20 @@ local M = {
                     mappings = {
                         -- Note: normal mode
                         ["n"] = {
-                            -- TODO we need description for these operations
                             ["<leader><leader>n"] = fb_actions.create_from_prompt, -- create file / folder
                             ["<leader><leader>r"] = fb_actions.rename, -- rename file / folder
                             ["<leader><leader>m"] = fb_actions.move, -- move file / folder
                             ["<leader><leader>c"] = fb_actions.copy, -- copy file / folder
                             ["<leader><leader>d"] = fb_actions.remove, -- delete file / folder,
                             ["<leader><leader>s"] = fb_actions.select_all, -- select all files / folders
+                        },
+                        ["i"] = {
+                            ["<leader><leader>n"] = fb_actions.create_from_prompt,
+                            ["<leader><leader>r"] = fb_actions.rename,
+                            ["<leader><leader>m"] = fb_actions.move,
+                            ["<leader><leader>c"] = fb_actions.copy,
+                            ["<leader><leader>d"] = fb_actions.remove,
+                            ["<leader><leader>s"] = fb_actions.select_all,
                         },
 
                     }
@@ -82,17 +92,41 @@ local M = {
                         preview_width = 0.5,
                     },
                 },
-                file_previewer = require("telescope.previewers").cat.new, -- use cat/bat for file preview
+                file_previewer = require("telescope.previewers").cat.new,
             }
         })
 
         telescope.load_extension("fzf")
         telescope.load_extension("file_browser")
-        telescope.load_extension("project")
+        telescope.load_extension("repo")
         -- https://github.com/ThePrimeagen/harpoon#telescope-support
         telescope.load_extension("harpoon")
+
+
+        -- keymapping
+
+        local key_map = require("nvim-mapper")
+
+        key_map.map_virtual({ "n", "i" }, "<leader><leader>n", "", {}, "Telescope",
+            "file_browser_create_new", "Create [N]ew File or Folder")
+        key_map.map_virtual({ "n", "i" }, "<leader><leader>r", "", {}, "Telescope",
+            "file_browser_rename", "[R]ename File or Folder")
+        key_map.map_virtual({ "n", "i" }, "<leader><leader>m", "", {}, "Telescope",
+            "file_browser_move", "[M]ove File or Folder")
+        key_map.map_virtual({ "n", "i" }, "<leader><leader>c", "", {}, "Telescope",
+            "file_browser_copy", "[C]opy File or Folder")
+        key_map.map_virtual({ "n", "i" }, "<leader><leader>d", "", {}, "Telescope",
+            "file_browser_delete", "[D]elete File or Folder")
+        key_map.map_virtual({ "n", "i" }, "<leader><leader>s", "", {}, "Telescope",
+            "file_browser_select_all", "[S]elect All Files and Folders")
+
+        key_map.map({ "n", "i" }, "<leader>fr", function()
+            require("telescope").extensions.repo.list({
+                search_dirs = { "~/Projects" }
+            })
+        end, {}, "Telescope", "list_repos", "[F]ind GitHub [R]epos")
+
     end
 }
-
 
 return M

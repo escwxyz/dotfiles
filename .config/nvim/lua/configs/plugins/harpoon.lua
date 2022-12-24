@@ -2,8 +2,6 @@
 --- ~~~~~~~~~~
 --- See https://github.com/ThePrimeagen/harpoon
 
---- ?? how to use?
-
 local M = {
     "ThePrimeagen/harpoon",
     event = "BufReadPre",
@@ -15,15 +13,13 @@ local M = {
                 save_on_change = true,
                 -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
                 enter_on_sendcmd = false,
-                -- closes any tmux windows harpoon that harpoon creates when you close Neovim.
-                tmux_autoclose_windows = false,
                 -- filetypes that you want to prevent from adding to the harpoon list menu.
                 excluded_filetypes = { "harpoon" },
                 -- set marks specific to each git branch inside git repository
                 mark_branch = false,
             },
             -- projects = {
-            --     -- Yes $HOME works
+            --     -- Yes $HOME whorks
             --     ["$HOME/personal/vim-with-me/server"] = {
             --         term = {
             --             cmds = {
@@ -36,26 +32,28 @@ local M = {
 
         -- Keymapping
 
-        vim.keymap.set("n", "<leader>m", function()
-            require("harpoon.mark").add_file()
-        end, { desc = "[M]ark Files to Harpoon" })
-        vim.key.set("n", "<leader>fm", "<cmd>:Telescope harpoon marks<cr>", {
-            desc = "[F]ind Harpoom [M]arks"
-        })
+        local key_map = require("nvim-mapper")
 
-        vim.keymap.set("n", "<leader>h", function()
+        key_map.map("n", "<leader>m", function()
+            require("harpoon.mark").add_file()
+        end, { buffer = 0 }, "Harpoon", "mark_current_buffer", "[M]ark Current Buffer")
+
+        key_map.map("n", "<leader>fm", "<cmd>:Telescope harpoon marks<cr>", {}, "Telescope", "find_harpoon_marks",
+            "[F]ind Harpoon [M]arks")
+
+        key_map.map("n", "<leader>h", function()
             require("harpoon.ui").toggle_quick_menu()
-        end, { desc = "Toggle [H]arpoon Menu" })
-        vim.keymap.set("n", "h[", function()
+        end, {}, "Harpoon", "toggle_harpoon_menu", "Toggle [H]arpoon Menu")
+
+        key_map.map("n", "h[", function()
             require("harpoon.ui").nav_prev()
-        end, { desc = "To [P]revious Harpoon Mark" })
-        vim.keymap.set("n", "h]", function()
+        end, {}, "Harpoon", "go_to_prev_mark", "Previous Harpoon Mark")
+
+        key_map.map("n", "h]", function()
             require("harpoon.ui").nav_next()
-        end, { desc = "To [N]ext Harpoon Mark" })
+        end, {}, "Harpoon", "go_to_next_mark", "Next Harpoon Mark")
 
         -- TODO terminal related
-
-
     end
 }
 

@@ -1,11 +1,9 @@
 --- Global Keymappings
 --- ~~~~~~~~~~~~~~~~~~
 
-vim.o.timeoutlen = 300
-vim.g.mapleader = " "
+local key_map = require("nvim-mapper")
 
--- Move to window using the <ctrl> movement keys
-vim.keymap.set("n", "<left>", "<C-w>h")
-vim.keymap.set("n", "<down>", "<C-w>j")
-vim.keymap.set("n", "<up>", "<C-w>k")
-vim.keymap.set("n", "<right>", "<C-w>l")
+key_map.map("n", "<left>", "<C-w>h", {}, "Window", "window_move_left", "Move Window to [Left]")
+key_map.map("n", "<down>", "<C-w>j", {}, "Window", "window_move_down", "Move Window [Down]")
+key_map.map("n", "<up>", "<C-w>k", {}, "Window", "window_move_up", "Move Window [Up]")
+key_map.map("n", "<right>", "<C-w>l", {}, "Window", "window_move_right", "Move Window to [Right]")

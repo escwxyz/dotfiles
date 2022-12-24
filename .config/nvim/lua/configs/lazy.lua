@@ -46,7 +46,8 @@ require("lazy").setup("configs.plugins", {
     debug = false,
 })
 
-vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Show [L]azy Panel" })
-vim.keymap.set("n", "<leader>ls", "<cmd>:Lazy sync<cr>", { desc = "[L]azy [S]ync Plugins" })
-vim.keymap.set("n", "<leader>lu", "<cmd>:Lazy update<cr>", { desc = "[L]azy [U]pdate Plugins" })
-vim.keymap.set("n", "<leader>lc", "<cmd>:Lazy check<cr>", { desc = "[L]azy [C]pdate Plugins" })
+local key_map = require("nvim-mapper")
+
+key_map.map("n", "<leader>l", "<cmd>:Lazy<cr>", {}, "Lazy", "lazy", "Show [L]azy Panel")
+key_map.map("n", "<leader>ls", "<cmd>:Lazy sync<cr>", {}, "Lazy", "lazy_sync", "[L]azy [S]ync Plugins")
+key_map.map("n", "<leader>lc", "<cmd>:Lazy check<cr>", {}, "Lazy", "lazy_check", "[L]azy [C]heck Plugins")

@@ -12,7 +12,7 @@ local M = {
     init = function()
         local wilder = require("wilder")
 
-        wilder.setup({ modes = { ':', '/', '?' } })
+        wilder.setup({ modes = { ":", "/" } })
 
         wilder.set_option("pipeline", {
             wilder.branch(
@@ -53,11 +53,11 @@ local M = {
                         border = "rounded",
                         pumblend = 20,
                         empty_message = wilder.popupmenu_empty_message_with_spinner(),
-                        hightlights = {
-                            gradient = gradient, -- TODO not working, check performance
+                        highlights = {
+                            gradient = gradient,
                         },
                         highlighter = wilder.highlighter_with_gradient({
-                            wilder.lua_fzy_highlighter(), -- requires romgrk/fzy-lua-native
+                            wilder.lua_fzy_highlighter(),
                         }),
                         max_height = "75%",
                         min_height = 0,
@@ -74,17 +74,11 @@ local M = {
                             " ",
                             wilder.popupmenu_scrollbar(),
                         },
-                    })
-
-                ),
+                    })),
                 ["/"] = wilder.wildmenu_renderer({
                     highlighter = wilder.lua_fzy_highlighter(),
                     apply_incsearch_fix = true,
                 }),
-                -- substitute = wilder.wildmenu_renderer({
-                --     highlighter = wilder.lua_fzy_highlighter(),
-                --     apply_incsearch_fix = true,
-                -- }),
             })
         )
     end

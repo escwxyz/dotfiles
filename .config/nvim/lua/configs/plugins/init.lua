@@ -65,16 +65,10 @@ return {
         end
     },
     ---
-    {
-        "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup()
-        end
-    },
     --- TypeScript LSP
-    "jose-elias-alvarez/typescript.nvim",
+
     --- Rust LSP
-    "simrat39/rust-tools.nvim",
+
     --- Support Hot Reload for flutter project
     -- TODO 'akinsho/flutter-tools.nvim'
 }
