@@ -18,8 +18,9 @@ local M = {
 
         -- Keymapping
         -- TODO
-        vim.keymap.set("n", "<A-r>", "<cmd>:SnipRun<cr>", { desc = "[R]un code (line)" })
-        vim.keymap.set("v", "<A-r>", "<cmd>:'<,'>SnipRun<cr>", { desc = "[R]un code (block)" })
+        local key_map = require("nvim-mapper")
+        key_map.map("n", "<S-r>", "<cmd>:SnipRun<cr>", {}, "SnipRun", "run_code_line", "[R]un one line of code")
+        key_map.map("v", "<S-r>", "<cmd>:'<,'>SnipRun<cr>", {}, "SnipRun", "run_code_block", "[R]un one block of code")
 
     end
 }

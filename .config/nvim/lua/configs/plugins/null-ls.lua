@@ -36,9 +36,6 @@ local M = {
             },
             -- root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
         })
-
-        --TODO keymaps
-        local key_map = require("nvim-mapper")
     end
 }
 

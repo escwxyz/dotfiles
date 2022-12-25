@@ -39,6 +39,7 @@ local M = {
         "hrsh7th/cmp-nvim-lsp", -- source from lsp
         "saadparwaiz1/cmp_luasnip" -- source form luasnip snippets
     },
+    event = "BufReadPost",
     config = function()
         local cmp = require("cmp")
 
@@ -60,9 +61,8 @@ local M = {
 
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
-                { name = "luasnip" }, -- https://github.com/saadparwaiz1/cmp_luasnip
+                --TODO { name = "luasnip" }, -- https://github.com/saadparwaiz1/cmp_luasnip
                 { name = "buffer" },
-                -- TODO add more sources here
             }),
 
             window = {},

@@ -37,9 +37,9 @@ function M.setup(client, buf)
     enable = not (client.name == "null-ls")
   end
 
-  if client.name == "tsserver" then
-    enable = false
-  end
+  -- if client.name == "tsserver" then
+  --   enable = false -- disable null-ls for typescript
+  -- end
 
   -- util.info(client.name .. " " .. (enable and "yes" or "no"), "format")
 

@@ -9,7 +9,8 @@ local M = {
     dependencies = {
         "romgrk/fzy-lua-native"
     },
-    init = function()
+    event = "CmdlineEnter",
+    config = function()
         local wilder = require("wilder")
 
         wilder.setup({ modes = { ":", "/" } })
