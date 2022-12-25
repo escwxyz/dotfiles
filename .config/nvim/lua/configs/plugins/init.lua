@@ -1,25 +1,22 @@
---- `init`: function is always executed during startup
---- `config`: function is executed when the plugin loads
---- `build`: function is executed when a plugin is installed or updated
---- Event Name:
---- --- "BufReadPre": when open file directly inside terminal `nvim filename`, earliest
---- --- "BufRead": when open a buffer?
---- --- "BufReadPost": after open a buffer?
---- --- "VeryLazy": when not urgent for the inital ui
-
 return {
     -- Common functions for different plugins
     "nvim-lua/plenary.nvim",
-    -- This is for lua https://github.com/folke/neodev.nvim
+    -- For writing nvim related code inside neovim
     "folke/neodev.nvim",
     -- Icons for multiple plugins
     "nvim-tree/nvim-web-devicons",
+    {
+        "williamboman/mason.nvim",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim"
+        },
+    },
     --- TODO multi theming match awesome wm
     {
         "catppuccin/nvim",
         init = function()
             require("catppuccin").setup({
-                flavour = "mocha", -- latte, frappe, macchiato, mocha
+                flavour = "latte", -- latte, frappe, macchiato, mocha
                 background = { -- :h background
                     light = "latte",
                     dark = "mocha",
@@ -59,16 +56,25 @@ return {
                     -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
                 },
             })
-
             -- setup must be called before loading
             vim.cmd.colorscheme "catppuccin"
         end
     },
-    ---
-    --- TypeScript LSP
 
-    --- Rust LSP
-
-    --- Support Hot Reload for flutter project
-    -- TODO 'akinsho/flutter-tools.nvim'
+    {
+        "simrat39/rust-tools.nvim",
+        ft = "rs"
+    },
+    {
+        "jose-elias-alvarez/typescript.nvim",
+        ft = { "ts", "tsx", "js", "jsx" }
+    },
+    {
+        "b0o/SchemaStore.nvim",
+        ft = { "json" }
+    },
+    {
+        "akinsho/flutter-tools.nvim",
+        ft = { "dart" }
+    }
 }

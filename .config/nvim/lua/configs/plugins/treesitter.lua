@@ -78,8 +78,10 @@ local M = {
         })
 
 
-
-        local key_map = require("nvim-mapper")
+	local key_map = function (keys, id, desc)
+		local mapper = require("nvim-mapper")
+		mapper.map_virtual({"n", "v"}, keys, "", {}, "Treesitter", id, "Treesitter" .. desc )
+	end
 
         -- key_map.map_virtual()
     end

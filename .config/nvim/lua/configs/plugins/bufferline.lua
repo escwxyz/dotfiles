@@ -10,11 +10,6 @@ local M = {
             options = {
                 mode = "buffers", -- set to "tabs" to only show tabpages instead
                 numbers = "none",
-                left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-                indicator = {
-                    icon = '▎', -- this should be omitted if indicator style is not 'icon'
-                    style = 'icon',
-                },
                 buffer_close_icon = '',
                 modified_icon = '●',
                 close_icon = '',
@@ -24,7 +19,7 @@ local M = {
                 max_prefix_length = 15,
                 truncate_names = true,
                 tab_size = 18,
-                -- diagnostics = false | "nvim_lsp" | "coc",
+                diagnostics = "nvim_lsp",
                 diagnostics_update_in_insert = false,
                 -- TODO diagnostics
                 -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
@@ -51,19 +46,11 @@ local M = {
                 --         return true
                 --     end
                 -- end,
-                offsets = {
-                    {
-                        filetype = "NvimTree",
-                        text = "File Explorer",
-                        text_align = "left",
-                        separator = true
-                    }
-                },
                 color_icons = true, -- whether or not to add the filetype icon highlights
                 show_buffer_icons = true, -- disable filetype icons for buffers
                 show_buffer_close_icons = false,
                 show_buffer_default_icon = false, -- whether or not an unrecognised filetype should show a default icon
-                show_close_icon = true,
+                show_close_icon = false,
                 show_tab_indicators = true,
                 show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
                 persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
@@ -71,12 +58,6 @@ local M = {
                 -- [focused and unfocused]. eg: { '|', '|' }
                 separator_style = "thick",
                 -- enforce_regular_tabs = false | true,
-                always_show_bufferline = false,
-                hover = {
-                    enabled = true,
-                    delay = 200,
-                    reveal = { 'close' }
-                },
                 -- sort_by = 'insert_after_current' | 'insert_at_end' | 'id' | 'extension' | 'relative_directory' |
                 --     'directory' | 'tabs' | function(buffer_a, buffer_b)
                 --         -- add custom logic
@@ -86,13 +67,20 @@ local M = {
         }
 
         --TODO Keymapping
+	
+	local key_map = function (keys,cmd, unique_identifier, description)
+		local mapper = require("nvim-mapper")
+		mapper.map("n", keys, cmd, {silent = true}, "Buffer", unique_identifier, description)
+	end
 
-        local key_map = require("nvim-mapper")
 
-        key_map.map("n", "<S-h>", "<cmd>:BufferLineCyclePrev<cr>", {}, "Buffer", "go_to_previous_buffer",
+        key_map("<S-h>", "<cmd>:BufferLineCyclePrev<cr>", "go_to_previous_buffer",
             "Go to [P]revious Buffer")
-        key_map.map("n", "<S-l>", "<cmd>:BufferLineCycleNext<cr>", {}, "Buffer", "go_to_next_buffer",
+        key_map("<S-l>", "<cmd>:BufferLineCycleNext<cr>", "go_to_next_buffer",
             "Go to [N]ext Buffer")
+	
+	key_map("q", "<cmd>:bdelete<cr>", "quit_buffer_without_save", "[Q]uit current buffer without save")
+	key_map("<S-q>","<cmd>:wq<cr>", "quit_buffer_with_save", "[Q]uit current buffer and save changes")
 
         -- vim.keymap.set("n", "q", "<cmd>:bdelete<CR>", { desc = "[Q]uit current buffer" })
         -- vim.keymap.set("n", "<S-q>", "<cmd>:bdelete %<CR>", { desc = "[Q]uit All Buffer" })
