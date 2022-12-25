@@ -61,10 +61,9 @@ function M.setup(client, buffer)
   -- Rust
   if client.name == "rust_analyzer" then
     local rt = require("rust-tools")
-    key_map.map("n", "<c-space>", rt.hover_actions.hover_actions, bufopts, "LSP", "rust_hover_actions",
-      "Rust Hover Actions")
-    key_map.map("n", "<leader>a", rt.code_action_group.code_action_group, "LSP", "rust_action_group",
-      "Rust Code Action Group")
+
+    lsp_map("<C-space>", rt.hover_actions.hover_actions, "rust_hover_actions", "Rust Hover Actions")
+    lsp_map("<leader>a", rt.code_action_group.code_action_group, "rust_action_group", "Rust Code Action Group")
   end
 
 end
