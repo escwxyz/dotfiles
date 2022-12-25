@@ -38,7 +38,6 @@ local M = {
             action_on_enter = "definition" -- TODO definition is not shown up in the preview
         })
 
-
         telescope.load_extension("mapper")
 
     end,
@@ -93,53 +92,43 @@ local M = {
         -- https://github.com/ThePrimeagen/harpoon#telescope-support
         telescope.load_extension("harpoon")
 
-
         -- keymapping
+        local mapper = require("nvim-mapper")
 
-        local key_map = require("nvim-mapper")
+        local key_map = function(key, func, group, id, desc)
+            mapper.map({ "n", "i" }, key, func, { silent = true }, group, id, desc)
+        end
 
+        local key_map_virtual = function(key, group, id, desc)
+            mapper.map_virtual({ "n", "i" }, key, "", {}, group, id, desc)
+        end
 
-        key_map.map({ "n", "i" }, "<leader>ff", function()
-            telescope.extensions.file_browser.file_browser()
-        end, { silent = true }, "Telescope", "file_browser", "[F]ind [F]iles")
+        -- File Browser
+        key_map("<leader>fb", telescope.extensions.file_browser.file_browser, "File Browser", "file_browser",
+            "[F]ile [B]rowser")
+        key_map_virtual("<leader><leader>n", "File Browser", "file_browser_new", "File Browser Create New")
+        key_map_virtual("<leader><leader>r", "File Browser", "file_browser_renmae", "File Browser Remove File / Folder")
+        key_map_virtual("<leader><leader>m", "File Browser", "file_browser_move", "File Browser Move File / Folder")
+        key_map_virtual("<leader><leader>d", "File Browser", "file_browser_delete", "File Browser Delete File / Folder")
+        key_map_virtual("<leader><leader>c", "File Browser", "file_browser_copy", "File Browser Copy File / Folder")
 
-        key_map.map({ "n", "i" }, "<leader>fk", "<cmd>:Telescope mapper<cr>",
-            { silent = true },
-            "Telescope", "nvim_mapper", "[F]ind [K]eymaps")
+        key_map("<leader>fk", "<cmd>:Telescope mapper<cr>", "Telescope", "find_keymaps", "[F]ind [K]eymaps")
+        key_map("<leader>?", require("telescope.builtin").help_tags, "Telescope", "help_tags", "Help Tags")
 
-        -- TODO if buffer only?
-        key_map.map("n", "<leader>fs", function()
-            require("telescope.builtin").live_grep()
-        end, { silent = true }, "Telescope", "live_grep", "[F]ind a [S]tring")
+        key_map("<leader>ff", require("telescope.builtin").find_files, "Telescope", "find_files", "[F]ind [F]iles")
 
-        key_map.map({ "n", "i" }, "<leader>?", require("telescope.builtin").help_tags, { silent = true }, "Telescope",
-            "help_tags", "Help Tags")
-
-        key_map.map({ "n", "i" }, "<leader>fc", function()
+        key_map("<leader>fs", function()
             require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
                 winblend = 10,
                 previewer = false,
             }))
-        end, { silent = true }, "Telescope", "search_inside_buffer", "Search inside buffer")
+        end, "Telescope", "find_string_inside_buffer", "[F]ind [S]tring Inside Buffer")
 
-        key_map.map_virtual({ "n", "i" }, "<leader><leader>n", "", { silent = true }, "Telescope",
-            "file_browser_create_new", "Create [N]ew File or Folder")
-        key_map.map_virtual({ "n", "i" }, "<leader><leader>r", "", { silent = true }, "Telescope",
-            "file_browser_rename", "[R]ename File or Folder")
-        key_map.map_virtual({ "n", "i" }, "<leader><leader>m", "", { silent = true }, "Telescope",
-            "file_browser_move", "[M]ove File or Folder")
-        key_map.map_virtual({ "n", "i" }, "<leader><leader>c", "", { silent = true }, "Telescope",
-            "file_browser_copy", "[C]opy File or Folder")
-        key_map.map_virtual({ "n", "i" }, "<leader><leader>d", "", { silent = true }, "Telescope",
-            "file_browser_delete", "[D]elete File or Folder")
-        key_map.map_virtual({ "n", "i" }, "<leader><leader>s", "", { silent = true }, "Telescope",
-            "file_browser_select_all", "[S]elect All Files and Folders")
-
-        key_map.map({ "n", "i" }, "<leader>fr", function()
+        key_map("<leader>fr", function()
             require("telescope").extensions.repo.list({
                 search_dirs = { "~/Projects" }
             })
-        end, {}, "Telescope", "list_repos", "[F]ind GitHub [R]epos")
+        end, "Telescope", "list_repos", "[F]ind GitHub [R]epos")
 
     end
 }

@@ -26,9 +26,11 @@ function M.setup(client, buffer)
   lsp_map("[d", vim.diagnostic.goto_prev, "prev_diagnostic", "Previous [D]iagnostic")
   lsp_map("]d", vim.diagnostic.goto_next, "next_diagnostic", "Next [D]iagnostic")
   lsp_map("<leader>d", vim.diagnostic.open_float, "show_diagnostic", "Show [D]iagnostic")
-  lsp_map("<leader>fd", require("telescope.builtin").diagnostics, "telescope_find_diagnostics", "[F]ind [D]iagnostics")
+  lsp_map("<leader>fd", function()
+    require("telescope.builtin").diagnostics({ bufnr = 0 })
+  end, "telescope_find_diagnostics", "[F]ind [D]iagnostics")
 
-
+  -- TODO test
   key_map.map("n", "<leader>rr", function()
     if cap.renameProvider ~= nil then
       require("inc_rename")
