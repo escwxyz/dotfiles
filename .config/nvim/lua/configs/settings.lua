@@ -20,3 +20,7 @@ vim.o.timeoutlen = 200
 vim.g.mapleader = " "
 vim.g.maplocalleader = ' '
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
+vim.opt.list = true
+vim.opt.listchars:append "space:·"
+vim.opt.listchars:append "eol:↴"
