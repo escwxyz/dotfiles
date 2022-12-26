@@ -2,9 +2,9 @@
 --- ~~~~~~~~~~
 --- https://github.com/akinsho/bufferline.nvim
 
-local M = {
+return {
     "akinsho/bufferline.nvim",
-    event = "BufReadPre",
+    event = "VeryLazy",
     config = function()
         require('bufferline').setup {
             options = {
@@ -67,25 +67,23 @@ local M = {
         }
 
         --TODO Keymapping
-	
-	local key_map = function (keys,cmd, unique_identifier, description)
-		local mapper = require("nvim-mapper")
-		mapper.map("n", keys, cmd, {silent = true}, "Buffer", unique_identifier, description)
-	end
+
+        local key_map = function(keys, cmd, unique_identifier, description)
+            local mapper = require("nvim-mapper")
+            mapper.map("n", keys, cmd, { silent = true }, "Buffer", unique_identifier, description)
+        end
 
 
         key_map("<S-h>", "<cmd>:BufferLineCyclePrev<cr>", "go_to_previous_buffer",
             "Go to [P]revious Buffer")
         key_map("<S-l>", "<cmd>:BufferLineCycleNext<cr>", "go_to_next_buffer",
             "Go to [N]ext Buffer")
-	
-	key_map("q", "<cmd>:bdelete<cr>", "quit_buffer_without_save", "[Q]uit current buffer without save")
-	key_map("<S-q>","<cmd>:wq<cr>", "quit_buffer_with_save", "[Q]uit current buffer and save changes")
+
+        key_map("q", "<cmd>:bdelete<cr>", "quit_buffer_without_save", "[Q]uit current buffer without save")
+        key_map("<S-q>", "<cmd>:wq<cr>", "quit_buffer_with_save", "[Q]uit current buffer and save changes")
 
         -- vim.keymap.set("n", "q", "<cmd>:bdelete<CR>", { desc = "[Q]uit current buffer" })
         -- vim.keymap.set("n", "<S-q>", "<cmd>:bdelete %<CR>", { desc = "[Q]uit All Buffer" })
 
     end
 }
-
-return M

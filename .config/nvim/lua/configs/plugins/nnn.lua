@@ -3,9 +3,14 @@
 --- https://github.com/luukvbaal/nnn.nvim
 return {
 	"luukvbaal/nnn.nvim",
-	event = "VeryLazy",
+	keys = { "<leader>n", "<cmd>:NnnExplorer<cr>", desc = "nnn Explorer" },
 	config = function()
-		require("nnn").setup({
+
+		local nnn = require("nnn")
+
+		local builtin = nnn.builtin
+
+		nnn.setup({
 			explorer = {
 				cmd = "nnn",
 				width = 36,
@@ -26,13 +31,24 @@ return {
 				session = "", -- TODO
 				fullscreen = true,
 			},
+			auto_close = true,
+			mappings = {
+				{ "<C-t>", builtin.open_in_tab }, -- open file(s) in tab
+				{ "<C-s>", builtin.open_in_split }, -- open file(s) in split
+				{ "<C-v>", builtin.open_in_vsplit }, -- open file(s) in vertical split
+				{ "<C-p>", builtin.open_in_preview }, -- open file in preview split keeping nnn focused
+				{ "<C-y>", builtin.copy_to_clipboard }, -- copy file(s) to clipboard
+				{ "<C-w>", builtin.cd_to_path }, -- cd to file directory
+				{ "<C-e>", builtin.populate_cmdline }, -- populate cmdline (:) with file(s)
+			}
 		})
 
 		local mapper = require("nvim-mapper")
 
-		mapper.map({ "n", "i" }, "<leader>n", "<cmd>:NnnExplorer<cr>", { silent = true }, "NNN", "nnn_explorer",
+		mapper.map({ "n", "i", "t" }, "<leader>n", "<cmd>:NnnExplorer<cr>", { silent = true }, "NNN", "nnn_explorer",
 			"Open [N^3] Explorer")
 
-		mapper.map("n", "<leader>nn", "<cmd>:NnnPicker<cr>", { silent = true }, "NNN", "nnn_picker", "Open [N^3] Picker")
+		mapper.map({ "n", "t" }, "<leader>nn", "<cmd>:NnnPicker<cr>", { silent = true }, "NNN", "nnn_picker",
+			"Open [N^3] Picker")
 	end
 }
