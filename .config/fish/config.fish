@@ -13,9 +13,15 @@ if status is-interactive
 	abbr --add --global remove "paru -R"
 	abbr --add --global clean "paru -c"
 	abbr --add --global upgrade "paru -Syu" # upgrade
-    abbr --add --global updates "paru -Qu" # check available updates
+	abbr --add --global updates "paru -Qu" # check available updates
 	abbr --add --global naive "cd && cd naive && ./naive"
+	abbr --add --global ls "nnn -de"
 end
 
 # for zoxide
 # zoxide init fish | source
+
+# pnpm
+set -gx PNPM_HOME "/home/jiew/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
