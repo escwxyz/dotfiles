@@ -1,4 +1,4 @@
-local M = {
+return {
   "neovim/nvim-lspconfig",
   name = "lsp",
   event = "BufReadPost",
@@ -39,6 +39,10 @@ local M = {
           format = { enable = false },
           completion = {
             callSnippet = "Replace"
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file('', true),
+            checkThirdParty = false
           }
         }
       }
@@ -100,5 +104,3 @@ local M = {
 
   end
 }
-
-return M
