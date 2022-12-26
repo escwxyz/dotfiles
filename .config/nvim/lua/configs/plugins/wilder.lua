@@ -4,7 +4,7 @@
 
 --- TODO Icons
 
-local M = {
+return {
     "gelguy/wilder.nvim",
     dependencies = {
         "romgrk/fzy-lua-native"
@@ -84,6 +84,3 @@ local M = {
         )
     end
 }
-
-
-return M

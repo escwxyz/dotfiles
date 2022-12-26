@@ -2,7 +2,7 @@
 --- ~~~~~~~~~~~
 --- https://github.com/nvim-telescope/telescope.nvim
 
-local M = {
+return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         { "nvim-telescope/telescope-file-browser.nvim" },
@@ -81,6 +81,14 @@ local M = {
 
                     }
 
+                },
+                aerial = {
+                    -- Display symbols as <root>.<parent>.<symbol>
+                    show_nesting = {
+                        ['_'] = false, -- This key will be the default
+                        json = true, -- You can set the option for specific filetypes
+                        yaml = true,
+                    }
                 }
             },
 
@@ -91,6 +99,9 @@ local M = {
         telescope.load_extension("repo")
         -- https://github.com/ThePrimeagen/harpoon#telescope-support
         telescope.load_extension("harpoon")
+        -- https://github.com/stevearc/aerial.nvim#telescope
+        telescope.load_extension("aerial")
+
 
         -- keymapping
         local mapper = require("nvim-mapper")
@@ -132,5 +143,3 @@ local M = {
 
     end
 }
-
-return M

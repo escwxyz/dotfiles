@@ -11,6 +11,21 @@ return {
             "williamboman/mason-lspconfig.nvim"
         },
     },
+    {
+        "luukvbaal/stabilize.nvim",
+        init = function() require("stabilize").setup() end
+    },
+    {
+        "folke/twilight.nvim",
+        event = "BufReadPre",
+        config = function()
+            require("twilight").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    },
     --- TODO multi theming match awesome wm
     {
         "catppuccin/nvim",
@@ -47,9 +62,8 @@ return {
                 color_overrides = {},
                 custom_highlights = {},
                 integrations = {
-                    cmp = false,
+                    cmp = true,
                     gitsigns = false,
-                    nvimtree = true,
                     telescope = true,
                     notify = false,
                     mini = false,
