@@ -1,10 +1,8 @@
 return {
-    -- Common functions for different plugins
     "nvim-lua/plenary.nvim",
-    -- For writing nvim related code inside neovim
     "folke/neodev.nvim",
-    -- Icons for multiple plugins
     "nvim-tree/nvim-web-devicons",
+    "anuvyklack/hydra.nvim",
     {
         "williamboman/mason.nvim",
         dependencies = {
@@ -31,7 +29,7 @@ return {
         "catppuccin/nvim",
         init = function()
             require("catppuccin").setup({
-                flavour = "latte", -- latte, frappe, macchiato, mocha
+                flavour = "mocha", -- latte, frappe, macchiato, mocha
                 background = { -- :h background
                     light = "latte",
                     dark = "mocha",
