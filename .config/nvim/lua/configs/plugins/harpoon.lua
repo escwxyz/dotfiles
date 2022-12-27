@@ -2,7 +2,7 @@
 --- ~~~~~~~~~~
 --- See https://github.com/ThePrimeagen/harpoon
 
-local M = {
+return {
     "ThePrimeagen/harpoon",
     event = "BufReadPre",
     config = function()
@@ -32,30 +32,37 @@ local M = {
 
         -- Keymapping
 
-        local key_map = require("nvim-mapper")
+        local Hydra = require("hydra")
 
-        key_map.map("n", "<leader>m", function()
-            require("harpoon.mark").add_file()
-        end, { buffer = 0 }, "Harpoon", "mark_current_buffer", "[M]ark Current Buffer")
+        local hint = [[
+^_m_: mark buffer _p_: prev mark _n_: next mark
+^
+^^_<Enter>_: menu^^ _<Esc>_: exit     
+        ]]
 
-        key_map.map("n", "<leader>fm", "<cmd>:Telescope harpoon marks<cr>", {}, "Telescope", "find_harpoon_marks",
-            "[F]ind Harpoon [M]arks")
+        Hydra({
+            name = "Harpoon",
+            config = {
+                color = 'teal',
+                invoke_on_body = true,
+                hint = {
+                    position = 'bottom',
+                    border = 'rounded',
+                },
+            },
+            hint = hint,
+            mode = "n",
+            body = "<leader>h",
+            heads = {
+                { "m", require("harpoon.mark").add_file, { desc = "Mark Current Buffer", exit = true } }, -- TODO with notification feedback
+                { "p", require("harpoon.ui").nav_prev, { exit = false } },
+                { "n", require("harpoon.ui").nav_next, { exit = false } },
+                { "<Enter>", require("harpoon.ui").toggle_quick_menu, { desc = "Menu", exit = true } },
+                { "<Esc>", nil, { exit = true } }
 
-        key_map.map("n", "<leader>h", function()
-            require("harpoon.ui").toggle_quick_menu()
-        end, {}, "Harpoon", "toggle_harpoon_menu", "Toggle [H]arpoon Menu")
-
-        key_map.map("n", "h[", function()
-            require("harpoon.ui").nav_prev()
-        end, {}, "Harpoon", "go_to_prev_mark", "Previous Harpoon Mark")
-
-        key_map.map("n", "h]", function()
-            require("harpoon.ui").nav_next()
-        end, {}, "Harpoon", "go_to_next_mark", "Next Harpoon Mark")
+            }
+        })
 
         -- TODO terminal related
     end
 }
-
-
-return M

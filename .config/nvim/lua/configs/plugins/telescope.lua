@@ -1,17 +1,14 @@
---- All in One Finder
---- ~~~~~~~~~~~
---- https://github.com/nvim-telescope/telescope.nvim
-
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-        { "nvim-telescope/telescope-file-browser.nvim" },
+        "lazytanuki/nvim-mapper",
+        "cljoly/telescope-repo.nvim",
+        "debugloop/telescope-undo.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        { "cljoly/telescope-repo.nvim" },
-        { "lazytanuki/nvim-mapper" }
-    },
-    init = function()
 
+    },
+    -- TODO change to key lazyload when finish removing nvim-mapper
+    init = function()
         local telescope = require("telescope")
 
         telescope.setup({
@@ -35,53 +32,17 @@ return {
         require("nvim-mapper").setup({
             no_map = true,
             search_path = "~/.config/nvim/lua/configs/plugins/",
-            action_on_enter = "definition" -- TODO definition is not shown up in the preview
+            action_on_enter = "definition"
         })
 
         telescope.load_extension("mapper")
-
     end,
 
     config = function()
         local telescope = require("telescope")
 
-        local fb_actions = telescope.extensions.file_browser.actions
-
         telescope.setup({
             extensions = {
-                repo = {
-                    list = {
-                        search_dirs = {
-                            "~./Projects/"
-                        }
-                    }
-                },
-                file_browser = {
-                    -- https://github.com/nvim-telescope/telescope-file-browser.nvim#file-system-operations
-                    hijack_netrw = true,
-                    grouped = true,
-                    mappings = {
-                        -- Note: normal mode
-                        ["n"] = {
-                            ["<leader><leader>n"] = fb_actions.create_from_prompt, -- create file / folder
-                            ["<leader><leader>r"] = fb_actions.rename, -- rename file / folder
-                            ["<leader><leader>m"] = fb_actions.move, -- move file / folder
-                            ["<leader><leader>c"] = fb_actions.copy, -- copy file / folder
-                            ["<leader><leader>d"] = fb_actions.remove, -- delete file / folder,
-                            ["<leader><leader>s"] = fb_actions.select_all, -- select all files / folders
-                        },
-                        ["i"] = {
-                            ["<leader><leader>n"] = fb_actions.create_from_prompt,
-                            ["<leader><leader>r"] = fb_actions.rename,
-                            ["<leader><leader>m"] = fb_actions.move,
-                            ["<leader><leader>c"] = fb_actions.copy,
-                            ["<leader><leader>d"] = fb_actions.remove,
-                            ["<leader><leader>s"] = fb_actions.select_all,
-                        },
-
-                    }
-
-                },
                 aerial = {
                     -- Display symbols as <root>.<parent>.<symbol>
                     show_nesting = {
@@ -89,57 +50,100 @@ return {
                         json = true, -- You can set the option for specific filetypes
                         yaml = true,
                     }
+                },
+                repo = {
+                    list = {
+                        search_dirs = {
+                            "~./Projects/"
+                        }
+                    }
+                },
+                -- TODO
+                undo = {
+                    use_delta = true, -- this is the default
+                    side_by_side = false, -- this is the default
+                    mappings = { -- this whole table is the default
+                        i = {
+                            -- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
+                            -- you want to use the following actions. This means installing as a dependency of
+                            -- telescope in it's `requirements` and loading this extension from there instead of
+                            -- having the separate plugin definition as outlined above. See issue #6.
+                            ["<cr>"] = require("telescope-undo.actions").yank_additions,
+                            ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+                            ["<C-cr>"] = require("telescope-undo.actions").restore,
+                        },
+                    },
                 }
             },
 
         })
 
-        telescope.load_extension("fzf")
-        telescope.load_extension("file_browser")
+        telescope.load_extension("undo")
         telescope.load_extension("repo")
+        telescope.load_extension("fzf")
         -- https://github.com/ThePrimeagen/harpoon#telescope-support
         telescope.load_extension("harpoon")
         -- https://github.com/stevearc/aerial.nvim#telescope
         telescope.load_extension("aerial")
 
+        local Hydra = require("hydra")
 
-        -- keymapping
-        local mapper = require("nvim-mapper")
+        local cmd = require('hydra.keymap-util').cmd
 
-        local key_map = function(key, func, group, id, desc)
-            mapper.map({ "n", "i" }, key, func, { silent = true }, group, id, desc)
-        end
+        local hint = [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀_f_: Find Files
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠿⠿⣿⣦⠀⠀⠀⠀⠀⠀⠀_r_: Find Repos
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣼⣭⡣⣽⣶⣿⠟⠁⠀⠀⠀⠀⠀⠀_h_: Help Tags
+    ⠀⠀⠀⠀⠀⡀⠀⠀⢀⡤⢿⡉⠹⣷⡿⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀_t_: Find Todos
+    ⠀⠀⠀⣠⡾⠃⢠⢴⡅⠀⣈⣿⡺⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_m_: Harpoon Marks
+    ⠀⠀⠘⠋⠈⠽⣇⠀⡽⠿⠟⣻⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_a_: Aerial Outline
+    ⠀⠀⠐⢶⣿⠗⠚⠉⠀⢰⣿⢻⣿⣿⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_k_: Keymaps
+    ⠀⠀⠀⠀⠀⠀⠀⠀⡰⡫⠃⢸⢸⠈⣯⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_o_: Vim Options
+    ⠀⠀⠀⠀⠀⠀⠀⡰⡳⠁⠀⢸⢸⠀⠘⡲⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀_/_: Search in buffer 
+    ⠀⠀⠀⠀⠀⠀⣰⡥⠁⠀⢀⣼⣼⠀⠀⢳⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀_u_: Undo Tree
+    ⠀⠀⠀⠀⢀⡾⣵⠥⠔⠚⠛⢻⠟⠛⠒⠤⣷⡦⠀⠀⠀⠀⠀⠀⠀⠀_g_: Live Grep
+    ⠀⠀⠀⠀⣼⠝⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡞⡀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠼⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠇⠀⠀⠀⠀⠀⠀⠀_<Esc>_: Exit
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ]]
 
-        local key_map_virtual = function(key, group, id, desc)
-            mapper.map_virtual({ "n", "i" }, key, "", {}, group, id, desc)
-        end
-
-        -- File Browser
-        key_map("<leader>fb", telescope.extensions.file_browser.file_browser, "File Browser", "file_browser",
-            "[F]ile [B]rowser")
-        key_map_virtual("<leader><leader>n", "File Browser", "file_browser_new", "File Browser Create New")
-        key_map_virtual("<leader><leader>r", "File Browser", "file_browser_renmae", "File Browser Remove File / Folder")
-        key_map_virtual("<leader><leader>m", "File Browser", "file_browser_move", "File Browser Move File / Folder")
-        key_map_virtual("<leader><leader>d", "File Browser", "file_browser_delete", "File Browser Delete File / Folder")
-        key_map_virtual("<leader><leader>c", "File Browser", "file_browser_copy", "File Browser Copy File / Folder")
-
-        key_map("<leader>fk", "<cmd>:Telescope mapper<cr>", "Telescope", "find_keymaps", "[F]ind [K]eymaps")
-        key_map("<leader>?", require("telescope.builtin").help_tags, "Telescope", "help_tags", "Help Tags")
-
-        key_map("<leader>ff", require("telescope.builtin").find_files, "Telescope", "find_files", "[F]ind [F]iles")
-
-        key_map("<leader>fs", function()
-            require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-                winblend = 10,
-                previewer = false,
-            }))
-        end, "Telescope", "find_string_inside_buffer", "[F]ind [S]tring Inside Buffer")
-
-        key_map("<leader>fr", function()
-            require("telescope").extensions.repo.list({
-                search_dirs = { "~/Projects" }
-            })
-        end, "Telescope", "list_repos", "[F]ind GitHub [R]epos")
-
+        Hydra({
+            name = "Telescope",
+            hint = hint,
+            config = {
+                color = 'teal',
+                invoke_on_body = true,
+                hint = {
+                    position = 'middle',
+                    border = 'rounded',
+                },
+            },
+            mode = { "n", "i" },
+            body = '<leader>f',
+            heads = {
+                { "f", cmd "Telescope find_files", { desc = "Find Files" } },
+                { "r", function()
+                    require("configs.plugins.telescope.repo")
+                    require("telescope").extensions.repo.list({
+                        search_dirs = { "~/Projects" }
+                    })
+                end, { desc = "Find Repos" } },
+                { "t", cmd "TodoTelescope", { desc = "Find Todos" } },
+                { "a", cmd "Telescope aerial", { desc = "Aerial Code Outline" } },
+                { 'g', cmd 'Telescope live_grep' },
+                { "h", cmd "Telescope help_tags", { desc = "vim help" } },
+                { 'm', cmd 'Telescope harpoon marks', { desc = 'Find Harpoon Marks' } },
+                { 'k', cmd 'Telescope keymaps' },
+                { 'o', cmd 'Telescope vim_options' },
+                { '/', function()
+                    require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+                        winblend = 10,
+                        previewer = false,
+                    }))
+                end, { desc = 'search string inside buffer' } },
+                { 'u', cmd 'Telescope undo', { exit = true, desc = 'undotree' } },
+                { '<Esc>', nil, { exit = true, nowait = true } },
+            }
+        })
     end
 }

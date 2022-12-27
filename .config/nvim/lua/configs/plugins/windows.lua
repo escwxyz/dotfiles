@@ -44,8 +44,8 @@ return {
         local splits = require("smart-splits")
 
         local Hydra = require("hydra")
-        local cmd = require('hydra.keymap-util').cmd
-        local pcmd = require('hydra.keymap-util').pcmd
+        local cmd = require("hydra.keymap-util").cmd
+        local pcmd = require("hydra.keymap-util").pcmd
 
         local window_hint = [[
     ^^^^^^^^^^^^     Move      ^^    Size   ^^   ^^     Split
