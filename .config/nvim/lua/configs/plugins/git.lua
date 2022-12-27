@@ -55,6 +55,7 @@ return {
                 local gitsigns = package.loaded.gitsigns
                 local Terminal = require("toggleterm.terminal").Terminal
                 local Hydra = require("hydra")
+                local cmd = require('hydra.keymap-util').cmd
 
                 local Lazygit = Terminal:new({
                     cmd = "lazygit",
@@ -64,16 +65,16 @@ return {
                         border = "curved"
                     }
                 })
+                local hint = [[
+ _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+ _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
+ ^
+ ^ ^              _<Enter>_: Lazygit              _<Esc>_: exit
+]]
 
                 Hydra({
                     name = 'Git',
-                    hint = [[
-                        _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
-                        _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
-                        ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
-                        ^
-                        ^ ^              _<Enter>_: Lazygit              _q_: exit
-                    ]],
+                    hint = hint,
                     config = {
                         buffer = bufnr,
                         color = 'pink',
@@ -90,7 +91,7 @@ return {
                         end,
                         on_exit = function()
                             local cursor_pos = vim.api.nvim_win_get_cursor(0)
-                            vim.cmd 'loadview'
+                            -- vim.cmd 'loadview'
                             vim.api.nvim_win_set_cursor(0, cursor_pos)
                             vim.cmd 'normal zv'
                             gitsigns.toggle_signs(false)
@@ -115,16 +116,14 @@ return {
                                 return '<Ignore>'
                             end,
                             { expr = true, desc = 'prev hunk' } },
-                        { 's', ':Gitsigns stage_hunk<CR>', { silent = true, desc = 'stage hunk' } },
+                        { 's', cmd "Gitsigns stage_hunk", { silent = true, desc = 'stage hunk' } },
                         { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
-                        { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
                         { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
                         { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
                         { 'b', gitsigns.blame_line, { desc = 'blame' } },
                         { 'B', function() gitsigns.blame_line { full = true } end, { desc = 'blame show full' } },
-                        { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
                         { '<Enter>', function() Lazygit:toggle() end, { exit = true, desc = 'Lazygit' } },
-                        { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+                        { '<Esc>', nil, { exit = true, nowait = true, desc = 'exit' } },
                     }
                 })
 
