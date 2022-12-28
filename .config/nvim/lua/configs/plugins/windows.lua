@@ -13,7 +13,11 @@ return {
         "sindrets/winshift.nvim",
         "mrjones2014/smart-splits.nvim",
     },
-    event = "BufReadPre",
+
+    keys = {
+        "<C-w>",
+    },
+
     config = function()
         require("windows").setup({
             ignore = {

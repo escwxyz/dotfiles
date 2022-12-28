@@ -2,10 +2,12 @@
 --- ~~~~~~~~~~~
 --- https://michaelb.github.io/sniprun/sources/README.html#
 
-local M = {
+return {
     "michaelb/sniprun",
     build = "bash ./install.sh",
-    event = "VeryLazy",
+    keys = {
+        "<leader>r"
+    },
     config = function()
         require("sniprun").setup({
             -- TODO setup interpreters (need to be installed locally first)
@@ -17,12 +19,23 @@ local M = {
         })
 
         -- Keymapping
-        -- TODO
-        local key_map = require("nvim-mapper")
-        key_map.map("n", "<S-r>", "<cmd>:SnipRun<cr>", {}, "SnipRun", "run_code_line", "[R]un one line of code")
-        key_map.map("v", "<S-r>", "<cmd>:'<,'>SnipRun<cr>", {}, "SnipRun", "run_code_block", "[R]un one block of code")
 
+        local Hydra = require("hydra")
+        local cmd = require("hydra.keymap-util").cmd
+
+        Hydra({
+            name = "SnipRun",
+            config = {
+                hint = {
+                    type = "statusline"
+                }
+            },
+            mode = { "n", "v" },
+            body = "<leader>r",
+            heads = {
+                { "l", cmd "SnipRun", { desc = "run code line", exit = true } },
+                { "b", cmd "'<,'>SnipRun", { desc = "run code block", exit = true } }
+            }
+        })
     end
 }
-
-return M
