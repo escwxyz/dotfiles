@@ -2,53 +2,33 @@
 --- ~~~~~~~~~~~~~~~~~~
 --- https://github.com/jose-elias-alvarez/null-ls.nvim
 
-local M = {
+return {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPost",
+    -- dependencies = {
+    --     "jayp0521/mason-null-ls.nvim",
+    -- },
+    event = "VeryLazy",
     config = function()
-        local nls = require("null-ls")
+        local null_ls = require("null-ls")
 
-        local builtins = nls.builtins
-
-        nls.setup({
+        null_ls.setup({
+            on_attach = require("configs.plugins.lsp.on_attach").on_attach,
             debounce = 150,
             save_after_format = false,
             sources = {
-                -- TODO add extra flags
-                builtins.formatting.isort,
-                builtins.formatting.prettierd.with({
-                    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html",
-                    },
+                -- null_ls.builtins.completion.luasnip,
+                null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.prettierd.with({
+                    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html" },
                     extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
                 }),
-                builtins.formatting.stylua,
-                builtins.formatting.fish_indent,
-                -- nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
-                -- nls.builtins.formatting.eslint_d,
-                builtins.formatting.shfmt,
-
-                builtins.diagnostics.markdownlint,
-                builtins.diagnostics.eslint,
-                -- nls.builtins.diagnostics.luacheck,
-                -- nls.builtins.code_actions.gitsigns,
-                builtins.completion.spell
-
             },
-            -- root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
         })
+        -- automatically install available sources from mason
+        -- require("mason-null-ls").setup({
+        --     ensure_installed = nil,
+        --     automatic_installation = true,
+        --     automatic_setup = false,
+        -- })
     end
 }
-
-function M.on_attach(opts)
-    require("null-ls").setup({
-        on_attach = opts
-    })
-end
-
-function M.has_formatter(ft)
-    local sources = require("null-ls.sources")
-    local available = sources.get_available(ft, "NULL_LS_FORMATTING")
-    return #available > 0
-end
-
-return M

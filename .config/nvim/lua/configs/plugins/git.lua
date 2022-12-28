@@ -1,14 +1,14 @@
 --- Git Related Utils (Gitsigns & Lazygit)
---- ~~~~~~~~~~~~~~~~~
+--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 --- https://github.com/lewis6991/gitsigns.nvim
 
 return {
     "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
+    event = "VeryLazy",
     config = function()
         require('gitsigns').setup({
             signs                        = {
-                add          = { hl = 'GitSignsAdd', text = '│', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+                add          = { hl = 'GitSignsAdd', text = '+', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
                 change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr',
                     linehl = 'GitSignsChangeLn' },
                 delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr',
@@ -89,10 +89,11 @@ return {
                             gitsigns.toggle_signs(true)
                             gitsigns.toggle_linehl(true)
                         end,
+                        -- TODO
                         on_exit = function()
-                            local cursor_pos = vim.api.nvim_win_get_cursor(0)
+                            --local cursor_pos = vim.api.nvim_win_get_cursor(0)
                             -- vim.cmd 'loadview'
-                            vim.api.nvim_win_set_cursor(0, cursor_pos)
+                            -- vim.api.nvim_win_set_cursor(0, cursor_pos)
                             vim.cmd 'normal zv'
                             gitsigns.toggle_signs(false)
                             gitsigns.toggle_linehl(false)

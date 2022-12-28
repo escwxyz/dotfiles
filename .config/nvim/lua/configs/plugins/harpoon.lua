@@ -4,7 +4,9 @@
 
 return {
     "ThePrimeagen/harpoon",
-    event = "BufReadPre",
+    keys = {
+        "<leader>h"
+    },
     config = function()
         require("harpoon").setup({
             global_settings = {

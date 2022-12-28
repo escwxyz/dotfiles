@@ -3,12 +3,8 @@ return {
     "folke/neodev.nvim",
     "nvim-tree/nvim-web-devicons",
     "anuvyklack/hydra.nvim",
-    {
-        "williamboman/mason.nvim",
-        dependencies = {
-            "williamboman/mason-lspconfig.nvim"
-        },
-    },
+    "jose-elias-alvarez/typescript.nvim",
+    "simrat39/rust-tools.nvim",
     {
         "luukvbaal/stabilize.nvim",
         init = function() require("stabilize").setup() end
@@ -27,7 +23,9 @@ return {
     --- TODO multi theming match awesome wm
     {
         "catppuccin/nvim",
-        init = function()
+        lazy = false,
+        priority = 1000,
+        config = function()
             require("catppuccin").setup({
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
                 background = { -- :h background
@@ -61,7 +59,7 @@ return {
                 custom_highlights = {},
                 integrations = {
                     cmp = true,
-                    gitsigns = false,
+                    gitsigns = true,
                     telescope = true,
                     notify = false,
                     mini = false,
@@ -72,21 +70,4 @@ return {
             vim.cmd.colorscheme "catppuccin"
         end
     },
-
-    {
-        "simrat39/rust-tools.nvim",
-        ft = "rs"
-    },
-    {
-        "jose-elias-alvarez/typescript.nvim",
-        ft = { "ts", "tsx", "js", "jsx" }
-    },
-    {
-        "b0o/SchemaStore.nvim",
-        ft = { "json" }
-    },
-    {
-        "akinsho/flutter-tools.nvim",
-        ft = { "dart" }
-    }
 }

@@ -6,33 +6,17 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "smjonas/inc-rename.nvim",
     "folke/trouble.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "j-hui/fidget.nvim"
   },
   config = function()
+    require("mason")
     require("neodev").setup()
-    require("configs.plugins.lsp.diagnostics").setup()
 
-    local function on_attach(client, bufnr)
-      require("configs.plugins.lsp.formatting").setup(client, bufnr)
-      require("configs.plugins.lsp.keys").setup(client, bufnr)
-    end
-
+    -- LSP Servers
     local servers = {
-      jsonls = {
-        json = {
-          format = {
-            enable = true,
-          },
-          schemas = require("schemastore").json.schemas(),
-          validate = { enable = true },
-
-        },
-      },
-      rust_analyzer = {
-        -- https://github.com/simrat39/rust-tools.nvim
-        -- executor = require("rust-tools.executors").termopen,
-        -- reload_workspace_from_cargo_toml = true,
-      },
       tsserver = {},
+      rust_analyzer = {},
       sumneko_lua = {
         Lua = {
           telemetry = { enable = false },
@@ -48,59 +32,22 @@ return {
       }
     }
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- https://github.com/hrsh7th/nvim-cmp#setup
-    -- combination with cmp
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
-    require("mason").setup()
-    -- TODO lazy load on file format??
     require("mason-lspconfig").setup({
       ensure_installed = vim.tbl_keys(servers)
     })
 
-    require("mason-lspconfig").setup_handlers({
+    require("fidget").setup()
+
+    local on_attach = require("configs.plugins.lsp.on_attach").on_attach
+
+    require("mason-lspconfig").setup_handlers {
       function(server_name)
-        require("lspconfig")[server_name].setup({
-          capabilities = capabilities,
+        require('lspconfig')[server_name].setup {
+          capabilities = require("configs.plugins.lsp.cap").cap,
           on_attach = on_attach,
           settings = servers[server_name],
-          flags = {
-            debounce_text_changes = 150,
-          }
-        })
+        }
       end,
-
-      ["rust_analyzer"] = function()
-        require("rust-tools").setup({
-          server = {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            flags = {
-              debounce_text_changes = 150
-            },
-          },
-          tools = servers["rust_analyzer"]
-        })
-      end,
-
-      ["tsserver"] = function()
-        require("typescript").setup({
-          server = {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            flags = {
-              debounce_text_changes = 150
-            },
-          },
-        })
-      end
-    })
-
-    require("configs.plugins.null-ls").on_attach(on_attach)
-
+    }
   end
 }
