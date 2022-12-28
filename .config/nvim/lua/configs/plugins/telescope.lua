@@ -1,14 +1,16 @@
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-        "lazytanuki/nvim-mapper",
         "cljoly/telescope-repo.nvim",
         "debugloop/telescope-undo.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 
     },
-    -- TODO change to key lazyload when finish removing nvim-mapper
-    init = function()
+    keys = {
+        "<leader>f"
+    },
+
+    config = function()
         local telescope = require("telescope")
 
         telescope.setup({
@@ -26,22 +28,7 @@ return {
                     },
                 },
                 file_previewer = require("telescope.previewers").cat.new,
-            }
-        })
-
-        require("nvim-mapper").setup({
-            no_map = true,
-            search_path = "~/.config/nvim/lua/configs/plugins/",
-            action_on_enter = "definition"
-        })
-
-        telescope.load_extension("mapper")
-    end,
-
-    config = function()
-        local telescope = require("telescope")
-
-        telescope.setup({
+            },
             extensions = {
                 aerial = {
                     -- Display symbols as <root>.<parent>.<symbol>
@@ -106,7 +93,6 @@ return {
     ⠀⠀⠀⠼⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠇⠀⠀⠀⠀⠀⠀⠀_<Esc>_: Exit
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
         ]]
-
         Hydra({
             name = "Telescope",
             hint = hint,

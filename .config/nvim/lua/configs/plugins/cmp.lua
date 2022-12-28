@@ -39,14 +39,13 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "saadparwaiz1/cmp_luasnip"
     },
-    event = "BufReadPost",
+    event = "InsertEnter",
     config = function()
         local cmp = require("cmp")
 
         local luasnip = require("luasnip")
 
         cmp.setup({
-            -- TODO disable when in telescope
             enabled = function()
                 local buftype = vim.api.nvim_buf_get_option(0, "buftype")
                 if buftype == "prompt" then return false end

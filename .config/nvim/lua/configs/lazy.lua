@@ -12,7 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
--- load lazy
 require("lazy").setup("configs.plugins", {
     defaults = {
         lazy = true, -- lazily load all plugins
@@ -46,8 +45,4 @@ require("lazy").setup("configs.plugins", {
     debug = false,
 })
 
-local key_map = require("nvim-mapper")
-
-key_map.map("n", "<leader>l", "<cmd>:Lazy<cr>", {}, "Lazy", "lazy", "Show [L]azy Panel")
-key_map.map("n", "<leader>ls", "<cmd>:Lazy sync<cr>", {}, "Lazy", "lazy_sync", "[L]azy [S]ync Plugins")
-key_map.map("n", "<leader>lc", "<cmd>:Lazy check<cr>", {}, "Lazy", "lazy_check", "[L]azy [C]heck Plugins")
+vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", { silent = true })
