@@ -2,7 +2,7 @@
 --- ~~~~~~~~~~~~~~~~
 --- https://github.com/nvim-treesitter/nvim-treesitter#quickstart
 
-local M = {
+return {
     "nvim-treesitter/nvim-treesitter",
     dev = false,
     build = ":TSUpdate",
@@ -33,7 +33,8 @@ local M = {
                 "graphql",
                 "toml",
                 "yaml",
-                "json"
+                "json",
+                "lua"
             },
             highlight = {
                 enable = true,
@@ -51,41 +52,49 @@ local M = {
             textobjects = {
                 select = {
                     enable = true,
-                    lookahead = true,
+                    lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
                     keymaps = {
                         -- You can use the capture groups defined in textobjects.scm
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        -- You can optionally set descriptions to the mappings (used in the desc parameter of
-                        -- nvim_buf_set_keymap) which plugins like which-key display
-                        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                        ['aa'] = '@parameter.outer',
+                        ['ia'] = '@parameter.inner',
+                        ['af'] = '@function.outer',
+                        ['if'] = '@function.inner',
+                        ['ac'] = '@class.outer',
+                        ['ic'] = '@class.inner',
                     },
-                    -- You can choose the select mode (default is charwise 'v')
-                    --
-                    -- Can also be a function which gets passed a table with the keys
-                    -- * query_string: eg '@function.inner'
-                    -- * method: eg 'v' or 'o'
-                    -- and should return the mode ('v', 'V', or '<c-v>') or a table
-                    -- mapping query_strings to modes.
-                    selection_modes = {
-                        ['@parameter.outer'] = 'v', -- charwise
-                        ['@function.outer'] = 'V', -- linewise
-                        ['@class.outer'] = '<c-v>', -- blockwise
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true, -- whether to set jumps in the jumplist
+                    goto_next_start = {
+                        [']m'] = '@function.outer',
+                        [']]'] = '@class.outer',
                     },
-                }
+                    goto_next_end = {
+                        [']M'] = '@function.outer',
+                        [']['] = '@class.outer',
+                    },
+                    goto_previous_start = {
+                        ['[m'] = '@function.outer',
+                        ['[['] = '@class.outer',
+                    },
+                    goto_previous_end = {
+                        ['[M'] = '@function.outer',
+                        ['[]'] = '@class.outer',
+                    },
+                },
+                swap = {
+                    enable = true,
+                    swap_next = {
+                        ['<leader>a'] = '@parameter.inner',
+                    },
+                    swap_previous = {
+                        ['<leader>A'] = '@parameter.inner',
+                    },
+                },
             }
         })
 
 
-	local key_map = function (keys, id, desc)
-		local mapper = require("nvim-mapper")
-		mapper.map_virtual({"n", "v"}, keys, "", {}, "Treesitter", id, "Treesitter" .. desc )
-	end
-
-        -- key_map.map_virtual()
     end
 }
-
-
-return M

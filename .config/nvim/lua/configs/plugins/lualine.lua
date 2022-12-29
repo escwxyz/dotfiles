@@ -10,7 +10,7 @@ return {
         require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = 'auto',
+                theme = 'catppuccin',
                 component_separators = {},
                 section_separators = { left = '', right = '' },
                 disabled_filetypes = {
@@ -31,62 +31,57 @@ return {
                 lualine_a = { 'mode' }, -- neovim mode
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = {
-                    'filename',
+                    "filename",
                     {
                         function()
                             return '%='
                         end,
                     },
+                    -- TODO see https://github.com/anuvyklack/hydra.nvim/issues/48
                     {
-                        -- TODO
                         function()
-                            local hydra = require('hydra.statusline')
-                            local is_active = hydra.is_active()
-                            local hint = hydra.get_hint()
-
-                            -- print(is_active)
-
-                            if is_active and hint ~= nil then
-                                return hydra.get_name() .. ": " .. hint
-                            else return ""
-                            end
+                            local hydra = require("hydra.statusline")
+                            return hydra.get_name() ~= nil and hydra.get_name() .. ": " .. hydra.get_hint() or
+                                hydra.get_hint()
                         end,
-                        color = { fg = '#ffffff', gui = 'bold' },
-                    }
+                        cond = require("hydra.statusline").is_active,
+                        color = { fg = "#ffffff", gui = "bold" }
+                    },
                 },
                 -- right side
                 lualine_x = {
-                    'fileformat',
-                    -- TODO only show filetype names
-                    {
-                        "filetype",
-                        icon_only = true,
-
-                    },
+                    "fileformat",
+                    "filesize",
                     {
                         "aerial",
                         colored = true,
                     },
+
+                },
+                lualine_y = { 'progress', 'location' },
+                lualine_z = {
                     {
                         require("lazy.status").updates,
                         cond = require("lazy.status").has_updates,
                         color = { fg = "#ff9e64" },
                     },
-                },
-                lualine_y = { 'progress' }, -- TODO replace with other functions, timer for example
-                lualine_z = {
-                    'location',
                     {
                         function()
                             local stats = require("lazy").stats()
                             local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                            return " " .. ms .. "ms"
+                            return " " .. ms .. " ms"
                         end,
                         color = { fg = "#000000" },
                     },
                     {
                         function()
-                            return " " .. os.date("%H:%M")
+                            local up_time = os.difftime(os.time(), _G.init_time)
+                            return string.format("%.2d:%.2d:%.2d", up_time / (60 * 60), up_time / 60 % 60, up_time % 60)
+                        end
+                    },
+                    {
+                        function()
+                            return os.date("%H:%M")
                         end,
                     }
                 }

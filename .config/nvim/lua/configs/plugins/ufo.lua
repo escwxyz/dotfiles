@@ -2,12 +2,11 @@
 --- ~~~~~~~~~
 --- https://github.com/kevinhwang91/nvim-ufo#quickstart
 
--- TODO hide signs https://github.com/kevinhwang91/nvim-ufo/issues/4
 
 return {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
-    event = "VeryLazy",
+    keys = "z",
     config = function()
         vim.o.foldcolumn = '0' -- '0' is not bad
         vim.o.foldlevel = 99
@@ -45,6 +44,8 @@ return {
             end
         })
 
+        -- TODO toggle one block
+
         local Hydra = require("hydra")
 
         vim.keymap.set("n", "zo", require("ufo").openAllFolds, { silent = true, desc = "Open All Folds" })
@@ -59,11 +60,12 @@ return {
             config = {
                 invoke_on_body = true,
                 hint = {
-                    type = "statusline",
-                }
+                    type = "statusline"
+                },
             },
             mode = "n",
             body = "z",
+            -- hint = [[_O_: open folds _C_: close folds _<Esc>_: exit]],
             heads = {
                 { "O", require("ufo").openAllFolds, { desc = "Open All Folds" } },
                 { "C", require("ufo").closeAllFolds, { desc = "Close All Folds" } },

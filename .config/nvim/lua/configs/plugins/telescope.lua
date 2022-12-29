@@ -4,12 +4,9 @@ return {
         "cljoly/telescope-repo.nvim",
         "debugloop/telescope-undo.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-
     },
-    keys = {
-        "<leader>f"
-    },
-
+    keys = "<leader>f",
+    cmd = "Telescope",
     config = function()
         local telescope = require("telescope")
 
@@ -36,13 +33,6 @@ return {
                         ['_'] = false, -- This key will be the default
                         json = true, -- You can set the option for specific filetypes
                         yaml = true,
-                    }
-                },
-                repo = {
-                    list = {
-                        search_dirs = {
-                            "~./Projects/"
-                        }
                     }
                 },
                 -- TODO
@@ -72,10 +62,9 @@ return {
         telescope.load_extension("harpoon")
         -- https://github.com/stevearc/aerial.nvim#telescope
         telescope.load_extension("aerial")
+        --  telescope.load_extension("notify")
 
         local Hydra = require("hydra")
-
-        local cmd = require('hydra.keymap-util').cmd
 
         local hint = [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀_f_: Find Files
@@ -86,12 +75,12 @@ return {
     ⠀⠀⠘⠋⠈⠽⣇⠀⡽⠿⠟⣻⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_a_: Aerial Outline
     ⠀⠀⠐⢶⣿⠗⠚⠉⠀⢰⣿⢻⣿⣿⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_k_: Keymaps
     ⠀⠀⠀⠀⠀⠀⠀⠀⡰⡫⠃⢸⢸⠈⣯⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_o_: Vim Options
-    ⠀⠀⠀⠀⠀⠀⠀⡰⡳⠁⠀⢸⢸⠀⠘⡲⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀_/_: Search in buffer 
+    ⠀⠀⠀⠀⠀⠀⠀⡰⡳⠁⠀⢸⢸⠀⠘⡲⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀_b_: Search in buffer 
     ⠀⠀⠀⠀⠀⠀⣰⡥⠁⠀⢀⣼⣼⠀⠀⢳⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀_u_: Undo Tree
     ⠀⠀⠀⠀⢀⡾⣵⠥⠔⠚⠛⢻⠟⠛⠒⠤⣷⡦⠀⠀⠀⠀⠀⠀⠀⠀_g_: Live Grep
-    ⠀⠀⠀⠀⣼⠝⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡞⡀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠼⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠇⠀⠀⠀⠀⠀⠀⠀_<Esc>_: Exit
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⣼⠝⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡞⡀⠀⠀⠀⠀⠀⠀⠀_n_: Notify
+    ⠀⠀⠀⠼⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠇⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀_<Esc>_: Exit
         ]]
         Hydra({
             name = "Telescope",
@@ -107,28 +96,19 @@ return {
             mode = { "n", "i" },
             body = '<leader>f',
             heads = {
-                { "f", cmd "Telescope find_files", { desc = "Find Files" } },
-                { "r", function()
-                    require("configs.plugins.telescope.repo")
-                    require("telescope").extensions.repo.list({
-                        search_dirs = { "~/Projects" }
-                    })
-                end, { desc = "Find Repos" } },
-                { "t", cmd "TodoTelescope", { desc = "Find Todos" } },
-                { "a", cmd "Telescope aerial", { desc = "Aerial Code Outline" } },
-                { 'g', cmd 'Telescope live_grep' },
-                { "h", cmd "Telescope help_tags", { desc = "vim help" } },
-                { 'm', cmd 'Telescope harpoon marks', { desc = 'Find Harpoon Marks' } },
-                { 'k', cmd 'Telescope keymaps' },
-                { 'o', cmd 'Telescope vim_options' },
-                { '/', function()
-                    require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-                        winblend = 10,
-                        previewer = false,
-                    }))
-                end, { desc = 'search string inside buffer' } },
-                { 'u', cmd 'Telescope undo', { exit = true, desc = 'undotree' } },
-                { '<Esc>', nil, { exit = true, nowait = true } },
+                { "f", "<leader>ff", { remap = true } },
+                { "r", "<leader>fr", { remap = true } },
+                { "t", "<leader>ft", { remap = true } },
+                { "a", "<leader>fa", { remap = true } },
+                { "g", "<leader>fg", { remap = true } },
+                { "h", "<leader>fh", { remap = true } },
+                { "m", "<leader>fm", { remap = true } },
+                { "k", "<leader>fk", { remap = true } },
+                { "o", "<leader>fo", { remap = true } },
+                { "b", "<leader>fb", { remap = true } },
+                { "u", "<leader>fu", { remap = true } },
+                { "n", "<leader>fn", { remap = true } },
+                { "<Esc>", nil, { exit = true, nowait = true } },
             }
         })
     end

@@ -6,6 +6,17 @@ return {
     "jose-elias-alvarez/typescript.nvim",
     "simrat39/rust-tools.nvim",
     {
+        "stevearc/dressing.nvim",
+        event = "BufReadPre",
+        config = function()
+            require("dressing").setup({
+                input = {
+                    mappings = false,
+                }
+            })
+        end
+    },
+    {
         "luukvbaal/stabilize.nvim",
         init = function() require("stabilize").setup() end
     },
@@ -63,6 +74,10 @@ return {
                     telescope = true,
                     notify = false,
                     mini = false,
+                    dap = {
+                        enabled = true,
+                        enable_ui = true, -- enable nvim-dap-ui
+                    }
                     -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
                 },
             })

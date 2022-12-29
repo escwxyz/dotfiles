@@ -9,7 +9,7 @@ return {
         require('gitsigns').setup({
             signs                        = {
                 add          = { hl = 'GitSignsAdd', text = '+', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-                change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr',
+                change       = { hl = 'GitSignsChange', text = '▒', numhl = 'GitSignsChangeNr',
                     linehl = 'GitSignsChangeLn' },
                 delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr',
                     linehl = 'GitSignsDeleteLn' },
@@ -53,18 +53,18 @@ return {
             },
             on_attach                    = function(bufnr)
                 local gitsigns = package.loaded.gitsigns
-                local Terminal = require("toggleterm.terminal").Terminal
+                -- local Terminal = require("toggleterm.terminal").Terminal
                 local Hydra = require("hydra")
                 local cmd = require('hydra.keymap-util').cmd
 
-                local Lazygit = Terminal:new({
-                    cmd = "lazygit",
-                    hidden = true,
-                    direction = "float",
-                    float_opts = {
-                        border = "curved"
-                    }
-                })
+                -- local Lazygit = Terminal:new({
+                --     cmd = "lazygit",
+                --     hidden = true,
+                --     direction = "float",
+                --     float_opts = {
+                --         border = "curved"
+                --     }
+                -- })
                 local hint = [[
  _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
  _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
@@ -94,7 +94,7 @@ return {
                             --local cursor_pos = vim.api.nvim_win_get_cursor(0)
                             -- vim.cmd 'loadview'
                             -- vim.api.nvim_win_set_cursor(0, cursor_pos)
-                            vim.cmd 'normal zv'
+                            -- vim.cmd 'normal zv'
                             gitsigns.toggle_signs(false)
                             gitsigns.toggle_linehl(false)
                             gitsigns.toggle_deleted(false)
@@ -123,7 +123,7 @@ return {
                         { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
                         { 'b', gitsigns.blame_line, { desc = 'blame' } },
                         { 'B', function() gitsigns.blame_line { full = true } end, { desc = 'blame show full' } },
-                        { '<Enter>', function() Lazygit:toggle() end, { exit = true, desc = 'Lazygit' } },
+                        { '<Enter>', cmd "Lazygit", { exit = true, desc = 'Lazygit' } },
                         { '<Esc>', nil, { exit = true, nowait = true, desc = 'exit' } },
                     }
                 })
