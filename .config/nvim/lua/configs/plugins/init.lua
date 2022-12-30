@@ -3,8 +3,6 @@ return {
     "folke/neodev.nvim",
     "nvim-tree/nvim-web-devicons",
     "anuvyklack/hydra.nvim",
-    "jose-elias-alvarez/typescript.nvim",
-    "simrat39/rust-tools.nvim",
     {
         "stevearc/dressing.nvim",
         event = "BufReadPre",
@@ -17,19 +15,30 @@ return {
         end
     },
     {
-        "luukvbaal/stabilize.nvim",
-        init = function() require("stabilize").setup() end
+        "xiyaowong/nvim-transparent",
+        event = "VeryLazy",
+        config = function()
+            require("transparent").setup({
+                enabled = false, -- TODOs
+                -- extra_groups = "all"
+            })
+        end
     },
     {
-        "folke/twilight.nvim",
-        event = "BufReadPre",
+        "max397574/better-escape.nvim",
+        event = "BufWinEnter",
         config = function()
-            require("twilight").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
+            require("better_escape").setup({
+                mapping = { "jk", "jj" },
+                keys = function()
+                    return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
+                end,
+            })
         end
+    },
+    {
+        "luukvbaal/stabilize.nvim",
+        init = function() require("stabilize").setup() end
     },
     --- TODO multi theming match awesome wm
     {
@@ -43,7 +52,7 @@ return {
                     light = "latte",
                     dark = "mocha",
                 },
-                transparent_background = false,
+                transparent_background = vim.g.transparent_enabled,
                 term_colors = false,
                 dim_inactive = {
                     enabled = false,
