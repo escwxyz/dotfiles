@@ -4,9 +4,6 @@
 
 return {
     "jose-elias-alvarez/null-ls.nvim",
-    -- dependencies = {
-    --     "jayp0521/mason-null-ls.nvim",
-    -- },
     event = "VeryLazy",
     config = function()
         local null_ls = require("null-ls")
@@ -22,13 +19,9 @@ return {
                     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html" },
                     extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
                 }),
+                require("typescript.extensions.null-ls.code-actions"),
             },
         })
-        -- automatically install available sources from mason
-        -- require("mason-null-ls").setup({
-        --     ensure_installed = nil,
-        --     automatic_installation = true,
-        --     automatic_setup = false,
-        -- })
+
     end
 }

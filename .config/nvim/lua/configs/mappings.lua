@@ -5,8 +5,16 @@
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>:w<CR>", { silent = true, desc = "save file" })
 
 
+-- █░░ ▄▀█ ▀█ █▄█
+-- █▄▄ █▀█ █▄ ░█░
+
+vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<CR>", { silent = true })
+vim.keymap.set("n", "<leader>ll", function()
+    require("lazy").update({ show = false })
+end, { silent = true, desc = "update plugins in background" })
 
 -- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
 -- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
@@ -29,3 +37,7 @@ end)
 vim.keymap.set("n", "<leader>fo", "<cmd>:Telescope vim_options<CR>")
 vim.keymap.set("n", "<leader>fu", "<cmd>:Telescope undo<CR>")
 vim.keymap.set("n", "<leader>fn", "<cmd>:Telescope notify<CR>")
+
+vim.keymap.set({ "n", "t" }, "<leader>n", "<cmd>:Nnn<CR>")
+
+vim.keymap.set("n", "<leader>gg", "<cmd>:Lazygit<CR>")

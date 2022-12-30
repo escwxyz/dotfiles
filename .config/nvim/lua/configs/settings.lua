@@ -16,7 +16,7 @@ vim.o.updatetime = 250
 
 vim.o.completeopt = 'menuone,noselect'
 
-vim.o.timeoutlen = 200
+vim.o.timeoutlen = 250
 vim.g.mapleader = " "
 vim.g.maplocalleader = ' '
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
@@ -34,6 +34,8 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.winwidth = 10
 vim.o.winminwidth = 10
 vim.o.equalalways = false
+
+vim.g.transparent_enabled = true -- todo put this as a theme opt
 
 vim.o.cmdheight = 0
 

@@ -2,6 +2,8 @@
 --- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 --- https://github.com/anuvyklack/hydra.nvim/wiki/Vim-Options
 
+-- TODO rewrite checkbox function see hydra/hint/vim-option
+
 local Hydra = require("hydra")
 
 local hint = [[
