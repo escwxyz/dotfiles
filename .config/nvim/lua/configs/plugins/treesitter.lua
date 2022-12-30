@@ -12,7 +12,6 @@ return {
         "RRethy/nvim-treesitter-textsubjects",
         "nvim-treesitter/nvim-treesitter-refactor",
         -- "mfussenegger/nvim-treehopper",
-        { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     },
     init = function()
         vim.cmd([[
@@ -22,20 +21,7 @@ return {
     end,
     config = function()
         require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "bash",
-                "fish",
-                "typescript",
-                "rust",
-                "css",
-                "javascript",
-                "html",
-                "graphql",
-                "toml",
-                "yaml",
-                "json",
-                "lua"
-            },
+            ensure_installed = "all",
             highlight = {
                 enable = true,
             },
@@ -48,8 +34,19 @@ return {
                     node_decremental = "<c-backspace>",
                 },
             },
+            indent = {
+                enable = true,
+            },
             -- TODO
             textobjects = {
+                -- https://github.com/RRethy/nvim-treesitter-textsubjects
+                enable = true,
+                prev_selection = ',', -- (Optional) keymap to select the previous selection
+                keymaps = {
+                    ['.'] = 'textsubjects-smart',
+                    [';'] = 'textsubjects-container-outer',
+                    ['i;'] = 'textsubjects-container-inner',
+                },
                 select = {
                     enable = true,
                     lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -92,7 +89,7 @@ return {
                         ['<leader>A'] = '@parameter.inner',
                     },
                 },
-            }
+            },
         })
 
 

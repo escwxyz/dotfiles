@@ -17,7 +17,7 @@ return {
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.formatting.prettierd.with({
                     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html" },
-                    extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+                    extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote", "--print-width 100" },
                 }),
                 require("typescript.extensions.null-ls.code-actions"),
             },
