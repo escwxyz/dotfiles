@@ -47,6 +47,7 @@ return {
 
         cmp.setup({
             enabled = function()
+                -- disable in prompt
                 local buftype = vim.api.nvim_buf_get_option(0, "buftype")
                 if buftype == "prompt" then return false end
                 return true
@@ -92,11 +93,7 @@ return {
             }),
 
             window = {
-                completion = {
-                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-                    col_offset = -3,
-                    side_padding = 2,
-                },
+                completion = cmp.config.window.bordered(),
             },
             formatting = {
                 fields = {

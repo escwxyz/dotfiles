@@ -2,22 +2,42 @@
 --- ~~~~~~~~~~~~~~
 --- https://github.com/numToStr/Comment.nvim
 
-local M = {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    config = function()
-        require("Comment").setup({
-            toggler = {
-                line = "gcc", -- (un)comment current line of code
-                block = "gbb", -- (un)comment the block code of current line
-            },
-            mappings = {
-                basic = true,
-                extra = false,
-            }
-        })
-    end
+return {
+	"numToStr/Comment.nvim",
+	event = "InsertEnter",
+	config = function()
+		require("Comment").setup({
+			---Add a space b/w comment and the line
+			padding = true,
+			---Whether the cursor should stay at its position
+			sticky = true,
+			---Lines to be ignored while (un)comment
+			-- ignore = nil,
+			---LHS of toggle mappings in NORMAL mode
+			toggler = {
+				---Line-comment toggle keymap
+				line = "gcc",
+				---Block-comment toggle keymap
+				block = "gbc",
+			},
+			---LHS of operator-pending mappings in NORMAL and VISUAL mode
+			opleader = {
+				---Line-comment keymap
+				line = "gc",
+				---Block-comment keymap
+				block = "gb",
+			},
+			---Enable keybindings
+			---NOTE: If given `false` then the plugin won't create any mappings
+			mappings = {
+				---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+				basic = true,
+				extra = false,
+			},
+			---Function to call before (un)comment
+			--pre_hook = nil,
+			---Function to call after (un)comment
+			--post_hook = nil,
+		})
+	end,
 }
-
-
-return M
