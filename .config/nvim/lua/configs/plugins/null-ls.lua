@@ -24,6 +24,9 @@ return {
                     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html" },
                     extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote", "--print-width 100" },
                 }),
+                null_ls.builtins.formatting.rustfmt.with({
+                    extra_args = { "--edition=2021" }
+                }),
                 require("typescript.extensions.null-ls.code-actions"),
             },
         })
