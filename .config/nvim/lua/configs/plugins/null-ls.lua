@@ -14,7 +14,12 @@ return {
             save_after_format = false,
             sources = {
                 -- null_ls.builtins.completion.luasnip,
-                null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.stylua.with({
+                    extra_args = {
+                        "--indent-type", "Spaces",
+                        "--column-width", "100",
+                    }
+                }),
                 null_ls.builtins.formatting.prettierd.with({
                     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html" },
                     extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote", "--print-width 100" },
