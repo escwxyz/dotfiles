@@ -15,21 +15,21 @@ return {
     },
 
     keys = {
-        "<C-w>",
+        "<leader>w",
     },
 
     config = function()
         require("windows").setup({
             ignore = {
                 buftype = { "quickfix" },
-                filetype = { "NvimTree", "neo-tree", "undotree", "gundo" } -- TODO
+                filetype = { "NvimTree", "neo-tree", "undotree", "gundo" }, -- TODO
             },
             animation = {
                 enable = true,
                 duration = 300,
-                fps = 30,
-                easing = "in_out_sine"
-            }
+                fps = 60,
+                easing = "in_out_sine",
+            },
         })
         require("winshift").setup({
             keymaps = {
@@ -38,9 +38,9 @@ return {
         })
         require("smart-splits").setup({
             ignored_filetypes = {
-                'nofile',
-                'quickfix',
-                'prompt',
+                "nofile",
+                "quickfix",
+                "prompt",
             },
             -- ignored_buftypes = { 'NvimTree' }
         })
@@ -61,59 +61,83 @@ return {
     ^ ^ ^ ^ ^ ^  ^ ^ ^ ^ ^ ^   ^^ ^          ^   _o_: remain only
     _b_: choose buffer
    ]]
-
+        -- TODO add key remapping
         Hydra({
-            name = 'Windows',
+            name = "Windows",
             hint = window_hint,
             config = {
                 invoke_on_body = true,
                 hint = {
-                    border = 'rounded',
-                    offset = -1
-                }
+                    border = "rounded",
+                    offset = -1,
+                },
             },
-            mode = 'n',
-            body = '<C-w>',
+            mode = "n",
+            body = "<leader>w",
             heads = {
-                { 'h', '<C-w>h' },
-                { 'j', '<C-w>j' },
-                { 'k', pcmd('wincmd k', 'E11', 'close') },
-                { 'l', '<C-w>l' },
+                { "h", "<C-w>h" },
+                { "j", "<C-w>j" },
+                { "k", pcmd("wincmd k", "E11", "close") },
+                { "l", "<C-w>l" },
 
-                { 'H', cmd 'WinShift left' },
-                { 'J', cmd 'WinShift down' },
-                { 'K', cmd 'WinShift up' },
-                { 'L', cmd 'WinShift right' },
+                { "H", cmd("WinShift left") },
+                { "J", cmd("WinShift down") },
+                { "K", cmd("WinShift up") },
+                { "L", cmd("WinShift right") },
 
-                { '<C-h>', function() splits.resize_left(2) end },
-                { '<C-j>', function() splits.resize_down(2) end },
-                { '<C-k>', function() splits.resize_up(2) end },
-                { '<C-l>', function() splits.resize_right(2) end },
-                { '=', '<C-w>=', { desc = 'equalize' } },
+                {
+                    "<C-h>",
+                    function()
+                        splits.resize_left(2)
+                    end,
+                },
+                {
+                    "<C-j>",
+                    function()
+                        splits.resize_down(2)
+                    end,
+                },
+                {
+                    "<C-k>",
+                    function()
+                        splits.resize_up(2)
+                    end,
+                },
+                {
+                    "<C-l>",
+                    function()
+                        splits.resize_right(2)
+                    end,
+                },
+                { "=", "<C-w>=", { desc = "equalize" } },
 
-                { 's', pcmd('split', 'E36') },
-                { '<C-s>', pcmd('split', 'E36'), { desc = false } },
-                { 'v', pcmd('vsplit', 'E36') },
-                { '<C-v>', pcmd('vsplit', 'E36'), { desc = false } },
+                { "s", pcmd("split", "E36") },
+                { "<C-s>", pcmd("split", "E36"), { desc = false } },
+                { "v", pcmd("vsplit", "E36") },
+                { "<C-v>", pcmd("vsplit", "E36"), { desc = false } },
 
-                { 'w', '<C-w>w', { exit = true, desc = false } },
-                { '<C-w>', '<C-w>w', { exit = true, desc = false } },
+                { "w", "<C-w>w", { exit = true, desc = false } },
+                { "<C-w>", "<C-w>w", { exit = true, desc = false } },
 
-                { 'z', cmd 'WindowsMaximaze', { exit = true, desc = 'maximize' } },
-                { '<C-z>', cmd 'WindowsMaximaze', { exit = true, desc = false } },
+                { "z", cmd("WindowsMaximaze"), { exit = true, desc = "maximize" } },
+                { "<C-z>", cmd("WindowsMaximaze"), { exit = true, desc = false } },
 
-                { 'o', '<C-w>o', { exit = true, desc = 'remain only' } },
-                { '<C-o>', '<C-w>o', { exit = true, desc = false } },
+                { "o", "<C-w>o", { exit = true, desc = "remain only" } },
+                { "<C-o>", "<C-w>o", { exit = true, desc = false } },
 
-                { 'b', require("configs.plugins.bufferline").choose_buffer, { exit = true, desc = 'choose buffer' } },
+                {
+                    "b",
+                    require("configs.plugins.bufferline").choose_buffer,
+                    { exit = true, desc = "choose buffer" },
+                },
 
-                { 'c', pcmd('close', 'E444') },
-                { 'q', pcmd('close', 'E444'), { desc = 'close window' } },
-                { '<C-c>', pcmd('close', 'E444'), { desc = false } },
-                { '<C-q>', pcmd('close', 'E444'), { desc = false } },
+                { "c", pcmd("close", "E444") },
+                { "q", pcmd("close", "E444"), { desc = "close window" } },
+                { "<C-c>", pcmd("close", "E444"), { desc = false } },
+                { "<C-q>", pcmd("close", "E444"), { desc = false } },
 
-                { '<Esc>', nil, { exit = true, desc = false } }
-            }
+                { "<Esc>", nil, { exit = true, desc = false } },
+            },
         })
-    end
+    end,
 }

@@ -51,9 +51,9 @@ M.on_attach = function(client, bufnr)
         vim.lsp.buf.format()
     end, { desc = "Format current buffer with LSP" })
 
-    vim.keymap.set({ "n", "v" }, "ff", "<cmd>:Format<CR>", { silent = true, buffer = bufnr })
+    vim.keymap.set({ "n", "v" }, "ff", "<cmd>Format<CR>", { silent = true, buffer = bufnr })
 
-    -- vim.keymap.set("n", "rr", function()
+    -- vim.keymap.set("n", "rr", function(
     --     if client.server_capabilities.renameProvider ~= nil then
     --         return "<cmd>:IncRename " .. vim.fn.expand("<cword>") .. "<CR>"
     --     else
