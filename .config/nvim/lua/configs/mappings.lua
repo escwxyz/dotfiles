@@ -45,16 +45,18 @@ local leader_normal = {
         end, "search in buffer" },
         a = { "<cmd>Telescope aerial<CR>", "find aerial" }
     },
-    g = {
-        name = "Git",
-        g = { "<cmd>Lazygit<CR>", "Lazygit" }
-    },
+    g = { function()
+        local git = require("hydras.git-hydra").init_hydra()
+        git:activate()
+    end, "Git" },
+
+    ["gg"] = { "<cmd>Lazygit<CR>", "Lazygit" },
     l = { "<cmd>Lazy<CR>", "Lazy" },
     n = { "<cmd>Nnn<CR>", "nnn file explorer" },
 }
 
 local leader_insert = {
-    s = { "<cmd>w<CR>", "save file" }
+    s = { "<cmd>w<CR><Esc>", "save file" }
 }
 
 wk.register(general)

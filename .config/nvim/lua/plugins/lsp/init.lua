@@ -5,14 +5,14 @@ return {
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "smjonas/inc-rename.nvim",
-        "folke/trouble.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "j-hui/fidget.nvim",
         "rmagatti/goto-preview",
     },
     config = function()
         require("mason")
         require("neodev").setup()
+
+        require("plugins.lsp.progress")
 
         -- LSP Servers
         local servers = {
@@ -37,14 +37,12 @@ return {
             ensure_installed = vim.tbl_keys(servers),
         })
 
-        require("fidget").setup()
-
         require("mason-lspconfig").setup_handlers({
             function(server_name)
                 require("lspconfig")[server_name].setup({
                     capabilities = require("plugins.lsp.cap").cap,
                     on_attach = require("plugins.lsp.on_attach").on_attach,
-                    settings = servers[server_name],
+                    settings = servers[server_name], --?? sumneko_lua not attatched
                 })
             end,
         })

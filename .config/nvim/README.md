@@ -30,3 +30,8 @@
 - support fcitx5 in neovim
 - ~~config `toggleterm`~~
 - config vscode lile indent
+- graphql / rest client for neovim
+
+## Notes
+
+- Any operation that needs to be persistant, use hydra (not exit the panel); otherwise use which key
