@@ -1,44 +1,62 @@
 --- Global Keymappings
 --- ~~~~~~~~~~~~~~~~~~
 
--- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
-vim.keymap.set({ "n", "i" }, "<leader>s", "<cmd>w<CR>", { silent = true, desc = "save file" })
-
 -- █░░ ▄▀█ ▀█ █▄█
 -- █▄▄ █▀█ █▄ ░█░
 
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { silent = true })
-vim.keymap.set("n", "<leader>ll", function()
-    require("lazy").update({ show = false })
-end, { silent = true, desc = "update plugins in background" })
+local wk = require("which-key")
 
--- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
--- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
+local general = {
+    j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
+    k = { "v:count == 0 ? 'gk' : 'k'", expr = true }
+}
 
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
-vim.keymap.set("n", "<leader>fr", "<cmd>Telescope repo list search_dirs=~/Projects/<CR>")
-vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>")
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>")
-vim.keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<CR>")
-vim.keymap.set("n", "<leader>fa", "<cmd>Telescope aerial<CR>")
-vim.keymap.set("n", "<leader>fm", "<cmd>Telescope harpoon marks<CR>")
-vim.keymap.set("n", "<leader>fb", function()
-    require("telescope") -- make sure telescope is started
-    require("telescope.builtin").current_buffer_fuzzy_find(
-        require("telescope.themes").get_dropdown({
-            winblend = 10,
-            previewer = false,
-        })
-    )
-end)
-vim.keymap.set("n", "<leader>fo", "<cmd>Telescope vim_options<CR>")
-vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<CR>")
-vim.keymap.set("n", "<leader>fn", "<cmd>Telescope notify<CR>")
+local leader_normal = {
+    b = {
+        name = "Buffer",
+        ["["] = { "<cmd>BufferLineCyclePrev<CR>", "previous buffer" },
+        ["]"] = { "<cmd>BufferLineCycleNext<CR>", "next buffer" },
+        p = { "<cmd>BufferLineTogglePin<CR>", "(un)pin buffer" },
+        ["<Enter>"] = { require("plugins.bufferline").choose_buffer
+            , "[Hydra]" }
+    },
+    -- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
+    -- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
+    f = {
+        name = "Telescope",
+        f = { "<cmd>Telescope find_files<CR>", "find files" },
+        r = { "<cmd>Telescope repo list search_dirs=~/Projects/<CR>", "find repos" },
+        t = { "<cmd>TodoTelescope<CR>", "find todos" },
+        g = { "<cmd>Telescope live_grep<CR>", "live grep" },
+        h = { "<cmd>Telescope help_tags<CR>", "help tags" },
+        k = { "<cmd>Telescope keymaps<CR>", "find keymaps" },
+        o = { "<cmd>Telescope vim_options<CR>", "vim options" },
+        u = { "<cmd>Telescope undo<CR>", "undo tree" },
+        n = { "<cmd>Telescope notify<CR>", "notify history" },
+        m = { "<cmd>Telescope harpoon marks<CR>", "harpoon marks" },
+        b = { function()
+            require("telescope") -- make sure telescope is started
+            require("telescope.builtin").current_buffer_fuzzy_find(
+                require("telescope.themes").get_dropdown({
+                    winblend = 10,
+                    previewer = false,
+                })
+            )
+        end, "search in buffer" },
+        a = { "<cmd>Telescope aerial<CR>", "find aerial" }
+    },
+    g = {
+        name = "Git",
+        g = { "<cmd>Lazygit<CR>", "Lazygit" }
+    },
+    l = { "<cmd>Lazy<CR>", "Lazy" },
+    n = { "<cmd>Nnn<CR>", "nnn file explorer" },
+}
 
-vim.keymap.set({ "n", "t" }, "<leader>n", "<cmd>Nnn<CR>")
+local leader_insert = {
+    s = { "<cmd>w<CR>", "save file" }
+}
 
-vim.keymap.set("n", "<leader>gg", "<cmd>Lazygit<CR>")
+wk.register(general)
+wk.register(leader_normal, { prefix = "<leader>" })
+wk.register(leader_insert, { prefix = "<leader>", mode = { "n", "i" } })

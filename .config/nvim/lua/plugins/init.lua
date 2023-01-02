@@ -2,7 +2,7 @@ return {
     "nvim-lua/plenary.nvim",
     "folke/neodev.nvim",
     "nvim-tree/nvim-web-devicons",
-    "anuvyklack/hydra.nvim",
+    { "anuvyklack/hydra.nvim", event = "VeryLazy" },
     {
         "stevearc/dressing.nvim",
         event = "BufReadPre",
