@@ -1,5 +1,6 @@
 require("configs.settings")
 require("configs.lazy")
+require("utils.notification")
 require("configs.mappings")
 require("hydras").init_hydras()
 

@@ -12,10 +12,10 @@ M.init_hydra = function()
             },
         },
         mode = { "n", "v" },
-        body = "<S-t>",
+        body = "<A-t>",
         heads = {
-            { "p", require("todo-comments").jump_prev, { desc = "prev" } },
-            { "n", require("todo-comments").jump_next, { desc = "next" } },
+            { "[", require("todo-comments").jump_prev, { desc = "prev" } },
+            { "]", require("todo-comments").jump_next, { desc = "next" } },
             { "<Esc>", nil, { exit = true } }
         }
     })

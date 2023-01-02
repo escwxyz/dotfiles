@@ -52,7 +52,6 @@ M.init_hydra = function(bufnr)
             end,
         },
         mode = { "n", "x" },
-        body = "<leader>g",
         heads = {
             { "]",
                 function()
