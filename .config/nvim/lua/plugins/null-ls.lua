@@ -9,7 +9,7 @@ return {
         local null_ls = require("null-ls")
 
         null_ls.setup({
-            on_attach = require("configs.plugins.lsp.on_attach").on_attach,
+            on_attach = require("plugins.lsp.on_attach").on_attach,
             debounce = 150,
             save_after_format = false,
             sources = {

@@ -12,9 +12,9 @@ return {
         require("rust-tools").setup({
             server = {
                 standalone = false,
-                capabilities = require("configs.plugins.lsp.cap").cap,
+                capabilities = require("plugins.lsp.cap").cap,
                 on_attach = function(_, bufnr)
-                    require("configs.plugins.lsp.on_attach").on_attach(_, bufnr)
+                    require("plugins.lsp.on_attach").on_attach(_, bufnr)
                     -- TODO add more rust specific keymaps
                 end,
                 settings = {

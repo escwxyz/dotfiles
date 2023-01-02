@@ -35,7 +35,7 @@ vim.o.winwidth = 10
 vim.o.winminwidth = 10
 vim.o.equalalways = false
 
-vim.g.transparent_enabled = true -- todo put this as a theme opt
+vim.g.transparent_enabled = false -- todo put this as a theme opt
 
 vim.o.cmdheight = 0
 
@@ -48,3 +48,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
+
+vim.o.foldcolumn = '0' -- '0' is not bad
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true

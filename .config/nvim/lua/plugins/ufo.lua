@@ -8,10 +8,6 @@ return {
     dependencies = "kevinhwang91/promise-async",
     keys = "z",
     config = function()
-        vim.o.foldcolumn = '0' -- '0' is not bad
-        vim.o.foldlevel = 99
-        vim.o.foldlevelstart = 99
-        vim.o.foldenable = true
 
         require("ufo").setup({
             close_fold_kinds = { 'imports', 'comment' },
@@ -44,35 +40,7 @@ return {
             end
         })
 
-        -- TODO toggle one block
-
-        local Hydra = require("hydra")
-
-        vim.keymap.set("n", "zo", require("ufo").openAllFolds, { silent = true, desc = "Open All Folds" })
-        vim.keymap.set("n", "zc", require("ufo").closeAllFolds, { silent = true, desc = "Close All Folds" })
-
-        vim.keymap.set("n", "zz", function()
-
-        end)
-
-        Hydra({
-            name = "UFO",
-            config = {
-                invoke_on_body = true,
-                hint = {
-                    type = "statusline"
-                },
-            },
-            mode = "n",
-            body = "z",
-            -- hint = [[_O_: open folds _C_: close folds _<Esc>_: exit]],
-            heads = {
-                { "O", require("ufo").openAllFolds, { desc = "Open All Folds" } },
-                { "C", require("ufo").closeAllFolds, { desc = "Close All Folds" } },
-                { "<Esc>", nil, { exit = true } }
-            }
-
-        })
+        require("hydras.ufo-hydra").init_hydra()
 
     end
 }

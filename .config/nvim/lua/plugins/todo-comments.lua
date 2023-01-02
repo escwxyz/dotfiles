@@ -1,4 +1,4 @@
-local M = {
+return {
     "folke/todo-comments.nvim",
     event = "VeryLazy",
     config = function()
@@ -21,19 +21,7 @@ local M = {
             }
         })
 
-        -- Key Mappings
-        vim.keymap.set("n", "]t", function()
-            require("todo-comments").jump_next()
-        end, { desc = "Next todo comment" })
+        require("hydras.todo-hydra").init_hydra()
 
-        vim.keymap.set("n", "[t", function()
-            require("todo-comments").jump_prev()
-        end, { desc = "Previous todo comment" })
-        -- Find todos in telescope
-        vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope<cr>", {
-            desc = "[F]ind [T]odos",
-        })
     end
 }
-
-return M

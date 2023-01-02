@@ -70,40 +70,11 @@ M.config = function()
     -- directly go into bufferline mode
     vim.keymap.set("n", "<leader>b", function()
         M.choose_buffer()
-    end, { silent = true })
+    end, { silent = true, desc = "[Hydra] BufferLine" })
 end
 M.choose_buffer = function()
-    local Hydra = require("hydra")
 
-    local cmd = require("hydra.keymap-util").cmd
-
-    local bufferline_hydra = Hydra({
-        name = "BufferLine",
-        config = {
-            on_key = function()
-                vim.wait(200, function()
-                    vim.cmd("redraw")
-                end, 30, false)
-            end,
-        },
-        heads = {
-            { "h", cmd("BufferLineCyclePrev"), { desc = "go to prev", on_key = false } },
-            { "l", cmd("BufferLineCycleNext"), { desc = "go to next", on_key = false } },
-
-            { "H", cmd("BufferLineMovePrev"), { desc = "move to prev" } },
-            { "L", cmd("BufferLineMoveNext"), { desc = "move to next" } },
-
-            { "p", cmd("BufferLineTogglePin"), { desc = "(un)pin" } },
-
-            -- { 'd', function() vim.cmd('BufferClose') end, { desc = 'close' } },
-            -- { 'c', function() vim.cmd('BufferClose') end, { desc = false } },
-            -- { 'q', function() vim.cmd('BufferClose') end, { desc = false } },
-
-            -- { 'od', function() vim.cmd('BufferOrderByDirectory') end, { desc = 'by directory' } },
-            -- { 'ol', function() vim.cmd('BufferOrderByLanguage') end, { desc = 'by language' } },
-            { "<Esc>", nil, { exit = true } },
-        },
-    })
+    local bufferline_hydra = require("hydras.buffer-hydra").init_hydra()
 
     if #vim.fn.getbufinfo({ buflisted = true }) > 1 then -- if there are more than 1 buffer
         bufferline_hydra:activate()

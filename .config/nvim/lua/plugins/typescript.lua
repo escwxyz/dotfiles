@@ -9,9 +9,9 @@ return {
                 fallback = true, -- fall back to standard LSP definition on failure
             },
             server = { -- pass options to lspconfig's setup method
-                capabilities = require("configs.plugins.lsp.cap").cap,
+                capabilities = require("plugins.lsp.cap").cap,
                 on_attach = function(_, bufnr)
-                    require("configs.plugins.lsp.on_attach").on_attach(_, bufnr)
+                    require("plugins.lsp.on_attach").on_attach(_, bufnr)
                     -- TODO
                     -- vim.keymap.set({ "n", "i" }, "<A-i>", "<cmd>:TypescriptAddMissingImports<CR>",
                     --     { silent = true, buffer = bufnr })

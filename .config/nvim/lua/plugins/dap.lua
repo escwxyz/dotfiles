@@ -1,10 +1,19 @@
+--- Debug
+--- ~~~~~
+--- https://github.com/rcarriga/nvim-dap-ui
+--- https://github.com/mfussenegger/nvim-dap
+--- https://github.com/theHamsta/nvim-dap-virtual-text
+
 return {
     "mfussenegger/nvim-dap",
     dependencies = {
-        { "rcarriga/nvim-dap-ui", },
+        { "rcarriga/nvim-dap-ui" },
+        { "theHamsta/nvim-dap-virtual-text" },
     },
     keys = { "<leader>d" },
     config = function()
+
+        require("nvim-dap-virtual-text").setup()
         ----------------------
         ------- Dapui --------
         ----------------------
@@ -29,8 +38,7 @@ return {
                 -- }
             },
             -- Expand lines larger than the window
-            -- Requires >= 0.7
-            expand_lines = vim.fn.has("nvim-0.7") == 1,
+            expand_lines = true,
             -- Layouts define sections of the screen to place windows.
             -- The position can be "left", "right", "top" or "bottom".
             -- The size specifies the height/width depending on position. It can be an Int
@@ -41,14 +49,13 @@ return {
             layouts = {
                 {
                     elements = {
-                        -- Elements can be strings or table with id and size keys.
                         { id = "scopes", size = 0.25 },
                         "breakpoints",
                         "stacks",
                         "watches",
                     },
                     size = 40, -- 40 columns
-                    position = "left",
+                    position = "right",
                 },
                 {
                     elements = {
@@ -89,51 +96,7 @@ return {
             }
         })
 
-        -----------------------------------------
-        --------------- Keymaps -----------------
-        -----------------------------------------
-
-        local Hydra = require("hydra")
-
-        local dap = require("dap")
-
-        local hint = [[
-     ^ ^Step^ ^ ^      ^ ^     Action
- ----^-^-^-^--^-^----  ^-^-------------------  
-     ^ ^back^ ^ ^     ^_b_: toggle breakpoint 
-     ^ ^ _K_^ ^        _B_: clear breakpoints 
- out _H_ ^ ^ _L_ into  _c_: continue
-     ^ ^ _J_ ^ ^       _x_: terminate
-     ^ ^over ^ ^     ^^_r_: open repl
-
-     ^ ^  _<Esc>_: exit
-]]
-
-        Hydra({
-            name = 'Debug',
-            hint = hint,
-            config = {
-                color = 'pink',
-                invoke_on_body = true,
-                hint = {
-                    type = 'window'
-                },
-            },
-            mode = { 'n' },
-            body = '<leader>d',
-            heads = {
-                { 'H', dap.step_out, { desc = 'step out' } },
-                { 'J', dap.step_over, { desc = 'step over' } },
-                { 'K', dap.step_back, { desc = 'step back' } },
-                { 'L', dap.step_into, { desc = 'step into' } },
-                { 'b', dap.toggle_breakpoint, { desc = 'toggle breakpoint' } },
-                { 'B', dap.clear_breakpoints, { desc = 'clear breakpoints' } },
-                { 'c', dap.continue, { desc = 'continue' } },
-                { 'x', dap.terminate, { desc = 'terminate' } },
-                { 'r', dap.repl.open, { exit = true, desc = 'open repl' } },
-                { '<Esc>', nil, { exit = true, nowait = true, desc = 'exit' } },
-            }
-        })
+        require("hydras.debug-hydra").init_hydra()
 
     end
 }
