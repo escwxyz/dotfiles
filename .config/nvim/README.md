@@ -19,7 +19,6 @@
 | [gelguy/wilder.nvim]()                                            | CMD autocomplete              | Done   |
 | [nvim-telescope/telescope.nvim]()                                 | General Finder                |        |
 | nvim-telescope/telescope-fzf-native.nvim                          | Fuzzy support for `telescope` | Done   |
-| nvim-telescope/telescope-project.nvim                             | for `telescope`               | Done   |
 
 ## Snippets
 
