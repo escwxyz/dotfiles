@@ -428,7 +428,7 @@ draw_bold_text_with_bright_colors: true
 #thickness: 0.15
 
 # Live config reload (changes require restart)
-#live_config_reload: true
+live_config_reload: true
 
 # Shell
 #
@@ -505,10 +505,10 @@ draw_bold_text_with_bright_colors: true
 #       Select the hint's text.
 #   - MoveViModeCursor
 #       Move the vi mode cursor to the beginning of the hint.
-#enabled:
-# - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
-#           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
-#   hyperlinks: true
+enabled:
+  # - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+  #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+  hyperlinks: true
 #   command: xdg-open
 #   post_processing: true
 #   mouse:
@@ -850,8 +850,14 @@ key_bindings:
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
 
   # TODO may need to adjust after config window manager
-  - { key: Return, mods: Command, action: ToggleFullscreen }
-
+  - { key: Return, mods: Control, action: ToggleFullscreen }
+  - { key: Q, mods: Control, action: Quit }
+  - { key: V, mods: Control, mode: ~Vi, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy}
+  - { key: M, mods: Control, action: Minimize }
+  - { key: H, mods: Control, action: Hide }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
   # (macOS only)
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
