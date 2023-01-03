@@ -10,7 +10,7 @@ local M = {
 M.config = function()
     require("bufferline").setup({
         options = {
-            mode = "buffers", -- set to "tabs" to only show tabpages instead
+            mode = "buffers",
             numbers = "none",
             buffer_close_icon = "",
             modified_icon = "●",
@@ -25,9 +25,9 @@ M.config = function()
             diagnostics_update_in_insert = false,
             -- TODO diagnostics
             -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
-            -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            --     return "(" .. count .. ")"
-            -- end,
+            diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                return "(" .. count .. ")"
+            end,
             -- NOTE: this will be called a lot so don't do any heavy processing here
             -- custom_filter = function(buf_number, buf_numbers)
             --     -- filter out filetypes you don't want to see
@@ -72,8 +72,8 @@ M.config = function()
         M.choose_buffer()
     end, { silent = true, desc = "[Hydra] BufferLine" })
 end
-M.choose_buffer = function()
 
+M.choose_buffer = function()
     local bufferline_hydra = require("hydras.buffer-hydra").init_hydra()
 
     if #vim.fn.getbufinfo({ buflisted = true }) > 1 then -- if there are more than 1 buffer
