@@ -9,11 +9,10 @@ return {
     },
     event = "VeryLazy",
     config = function()
-
         local leap = require("leap")
 
-        -- leap.opts.case_sensetive = true
+        leap.opts.case_sensetive = true
 
-        leap.add_default_mappings() -- TODO `s` is conflicting agains insert mode
-    end
+        leap.add_default_mappings({ true }) -- NOTE overwrite other conflicting keymaps
+    end,
 }

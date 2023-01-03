@@ -8,7 +8,7 @@ local wk = require("which-key")
 
 local general = {
     j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
-    k = { "v:count == 0 ? 'gk' : 'k'", expr = true }
+    k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
 }
 
 local leader_normal = {
@@ -17,8 +17,7 @@ local leader_normal = {
         ["["] = { "<cmd>BufferLineCyclePrev<CR>", "previous buffer" },
         ["]"] = { "<cmd>BufferLineCycleNext<CR>", "next buffer" },
         p = { "<cmd>BufferLineTogglePin<CR>", "(un)pin buffer" },
-        ["<Enter>"] = { require("plugins.bufferline").choose_buffer
-            , "[Hydra]" }
+        ["<Enter>"] = { require("plugins.bufferline").choose_buffer, "[Hydra]" },
     },
     -- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
     -- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
@@ -34,31 +33,33 @@ local leader_normal = {
         u = { "<cmd>Telescope undo<CR>", "undo tree" },
         n = { "<cmd>Telescope notify<CR>", "notify history" },
         m = { "<cmd>Telescope harpoon marks<CR>", "harpoon marks" },
-        b = { function()
-            require("telescope") -- make sure telescope is started
-            require("telescope.builtin").current_buffer_fuzzy_find(
-                require("telescope.themes").get_dropdown({
-                    winblend = 10,
-                    previewer = false,
-                })
-            )
-        end, "search in buffer" },
-        a = { "<cmd>Telescope aerial<CR>", "find aerial" }
+        b = {
+            function()
+                require("telescope") -- make sure telescope is started
+                require("telescope.builtin").current_buffer_fuzzy_find(
+                    require("telescope.themes").get_dropdown({
+                        winblend = 10,
+                        previewer = false,
+                    })
+                )
+            end,
+            "search in buffer",
+        },
+        a = { "<cmd>Telescope aerial<CR>", "find aerial" },
     },
-    g = { function()
-        local git = require("hydras.git-hydra").init_hydra()
-        git:activate()
-    end, "Git" },
+    g = {
+        function()
+            local git = require("hydras.git-hydra").init_hydra()
+            git:activate()
+        end,
+        "Git",
+    },
 
     ["gg"] = { "<cmd>Lazygit<CR>", "Lazygit" },
     l = { "<cmd>Lazy<CR>", "Lazy" },
     n = { "<cmd>Nnn<CR>", "nnn file explorer" },
-}
-
-local leader_insert = {
-    s = { "<cmd>w<CR><Esc>", "save file" }
+    s = { "<cmd>w<CR><Esc>", "save file" },
 }
 
 wk.register(general)
 wk.register(leader_normal, { prefix = "<leader>" })
-wk.register(leader_insert, { prefix = "<leader>", mode = { "n", "i" } })
