@@ -8,24 +8,10 @@ local M = {}
 
 local Hydra = require("hydra")
 
-local hint = [[
-      ^ ^        Options
-      ^
-      _v_ %{ve} virtual edit
-      _i_ %{list} invisible characters  
-      _s_ %{spell} spell
-      _w_ %{wrap} wrap
-      _c_ %{cul} cursor line
-      _n_ %{nu} number
-      _r_ %{rnu} relative number
-      ^
-           ^^^^                _<Esc>_
-    ]]
-
 M.init_hydra = function()
     return Hydra({
         name = 'Options',
-        hint = hint,
+        hint = require("hydras.hints").options_hint,
         config = {
             color = 'amaranth',
             invoke_on_body = true,

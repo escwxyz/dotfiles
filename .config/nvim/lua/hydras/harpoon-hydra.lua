@@ -2,12 +2,6 @@ local M = {}
 
 local Hydra = require("hydra")
 
-local hint = [[
-^_m_: mark buffer _p_: prev mark _n_: next mark
-^
-^^_<Enter>_: menu^^ _<Esc>_: exit     
-        ]]
-
 M.init_hydra = function()
     return Hydra({
         name = "Harpoon",
@@ -19,7 +13,7 @@ M.init_hydra = function()
                 border = 'rounded',
             },
         },
-        hint = hint,
+        hint = require("hydras.hints").harpoon_hint,
         mode = "n",
         body = "<leader>h",
         heads = {

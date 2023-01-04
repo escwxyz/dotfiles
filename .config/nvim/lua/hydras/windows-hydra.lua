@@ -6,22 +6,12 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 local pcmd = require("hydra.keymap-util").pcmd
 
-local window_hint = [[
-    ^^^^^^^^^^^^     Move      ^^    Size   ^^   ^^     Split
-    ^^^^^^^^^^^^-------------  ^^-----------^^   ^^---------------
-    ^ ^ _k_ ^ ^  ^ ^ _K_ ^ ^   ^   _<C-k>_   ^   _s_: horizontally 
-    _h_ ^ ^ _l_  _H_ ^ ^ _L_   _<C-h>_ _<C-l>_   _v_: vertically
-    ^ ^ _j_ ^ ^  ^ ^ _J_ ^ ^   ^   _<C-j>_   ^   _q_, _c_: close
-    focus^^^^^^  window^^^^^^  ^_=_: equalize^   _z_: maximize
-    ^ ^ ^ ^ ^ ^  ^ ^ ^ ^ ^ ^   ^^ ^          ^   _o_: remain only
-    _b_: choose buffer
-   ]]
 -- TODO add key remapping
 
 M.init_hydra = function()
     return Hydra({
         name = "Windows",
-        hint = window_hint,
+        hint = require("hydras.hints").windows_hint,
         config = {
             invoke_on_body = true,
             hint = {
@@ -84,7 +74,10 @@ M.init_hydra = function()
 
             {
                 "b",
-                require("plugins.bufferline").choose_buffer,
+                function()
+                    -- TODO
+                end,
+                --require("plugins.ui.plugin_bufferline").choose_buffer,
                 { exit = true, desc = "choose buffer" },
             },
 
