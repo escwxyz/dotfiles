@@ -10,7 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
-vim.opt.runtimepath:prepend(lazypath)
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup("plugins", {
     defaults = {
@@ -18,18 +18,50 @@ require("lazy").setup("plugins", {
         version = "*", -- install the latest stable version of plugins
     },
     install = { missing = true },
+    ui = {
+        border = "rounded",
+        icons = {
+            loaded = "Y",
+            not_loaded = "N",
+            cmd = " ",
+            config = "",
+            event = "",
+            ft = " ",
+            init = " ",
+            keys = " ",
+            plugin = " ",
+            runtime = " ",
+            source = " ",
+            start = "",
+            task = "✔",
+            lazy = "鈴 ",
+            list = {
+                "●",
+                "➜",
+                "★",
+                "‒",
+            },
+        },
+    },
     checker = {
         enabled = true,
         notify = true,
         frequency = 3600 * 6,
     },
+    change_detection = {
+        enabled = true,
+        notify = true,
+    },
     performance = {
         cache = {
             enabled = true,
             path = vim.fn.stdpath("cache") .. "/lazy/cache",
+            disable_events = { "VimEnter", "BufReadPre" },
+            ttl = 3600 * 24 * 5,
         },
         reset_packpath = true,
         rtp = {
+            reset = true,
             disabled_plugins = {
                 "gzip",
                 "matchit",
@@ -43,5 +75,4 @@ require("lazy").setup("plugins", {
             },
         },
     },
-    debug = false,
 })

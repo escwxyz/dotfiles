@@ -17,7 +17,9 @@ local leader_normal = {
         ["["] = { "<cmd>BufferLineCyclePrev<CR>", "previous buffer" },
         ["]"] = { "<cmd>BufferLineCycleNext<CR>", "next buffer" },
         p = { "<cmd>BufferLineTogglePin<CR>", "(un)pin buffer" },
-        ["<Enter>"] = { require("plugins.bufferline").choose_buffer, "[Hydra]" },
+        ["<Enter>"] = { function()
+            -- TODO require("plugins.ui.plugin_bufferline").choose_buffer
+        end, "[Hydra]" },
     },
     -- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
     -- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
@@ -55,7 +57,7 @@ local leader_normal = {
         "Git",
     },
 
-    ["gg"] = { "<cmd>Lazygit<CR>", "Lazygit" },
+    -- ["gg"] = { "<cmd>Lazygit<CR>", "Lazygit" },
     l = { "<cmd>Lazy<CR>", "Lazy" },
     n = { "<cmd>Nnn<CR>", "nnn file explorer" },
     s = { "<cmd>w<CR><Esc>", "save file" },

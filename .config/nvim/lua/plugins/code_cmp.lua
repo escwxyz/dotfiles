@@ -4,34 +4,6 @@
 
 -- TODO appearance
 
-local kind_icons = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "ﴯ",
-    Interface = "",
-    Module = "",
-    Property = "ﰠ",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = ""
-}
-
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -57,15 +29,22 @@ return {
                     luasnip.lsp_expand(args.body)
                 end
             },
-
+            -- TODO the mappings need to be redone
             mapping = cmp.mapping.preset.insert({
                 ['<C-d>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
                 ['<C-Space>'] = cmp.mapping.complete(),
-                ['<CR>'] = cmp.mapping.confirm {
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = true,
-                },
+                -- TODO This is the cause for enter key: when there is no cmp menu, enter won't work for new line insertion
+                -- ['<CR>'] = cmp.mapping({
+                --     i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+                --     c = function(fallback)
+                --         if cmp.visible() then
+                --             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                --         else
+                --             fallback()
+                --         end
+                --     end
+                -- }),
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -97,17 +76,11 @@ return {
             },
             formatting = {
                 fields = {
-                    "kind", "abbr", "menu",
+                    "kind", "abbr",
                 },
                 format = function(entry, vim_item)
                     -- Kind icons
-                    vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
-                    -- Source
-                    vim_item.menu = ({
-                        nvim_lsp = "[LSP]",
-                        luasnip = "[Snippet]",
-                        buffer = "[Buffer]",
-                    })[entry.source.name]
+                    vim_item.kind = string.format('%s', require("configs.icons").kind_icons[vim_item.kind])
 
                     return vim_item
                 end
