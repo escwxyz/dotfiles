@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 
-vim.o.foldcolumn = '0' -- '0' is not bad
+vim.o.foldcolumn = '0'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true

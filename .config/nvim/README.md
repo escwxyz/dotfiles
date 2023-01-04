@@ -29,9 +29,11 @@
 - config `dap`
 - support fcitx5 in neovim
 - ~~config `toggleterm`~~
-- config vscode lile indent
+- config vscode indent
 - graphql / rest client for neovim
+- unify shared icons for different plugins
 
 ## Notes
 
 - Any operation that needs to be persistant, use hydra (not exit the panel); otherwise use which key
+- Keybindings: <leader> first, then <Shift> / <CapsLock> & <Alt>, remove all <Ctrl>
