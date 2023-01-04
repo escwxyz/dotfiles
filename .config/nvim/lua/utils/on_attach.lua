@@ -6,7 +6,14 @@ local signs = require("configs.icons").diagnostic_icons
 
 local wk = require("which-key")
 
+local navic = require("nvim-navic")
+
 M.on_attach = function(client, bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+
     vim.diagnostic.config({
         update_in_insert = true,
         virtual_text = { spacing = 4, prefix = "●" },
