@@ -9,18 +9,22 @@ local wk = require("which-key")
 local general = {
     j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
     k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
-    ["<A-r>"] = { "<C-r>", "redo" }
+    ["<A-r>"] = { "<C-r>", "redo" },
 }
 
 local leader_normal = {
+    ["<Tab>"] = { "<cmd>BufferLineCycleNext<CR>", "next buffer" },
     b = {
         name = "Buffer",
         ["["] = { "<cmd>BufferLineCyclePrev<CR>", "previous buffer" },
         ["]"] = { "<cmd>BufferLineCycleNext<CR>", "next buffer" },
         p = { "<cmd>BufferLineTogglePin<CR>", "(un)pin buffer" },
-        ["<Enter>"] = { function()
-            -- TODO require("plugins.ui.plugin_bufferline").choose_buffer
-        end, "[Hydra]" },
+        ["<Enter>"] = {
+            function()
+                -- TODO require("plugins.ui.plugin_bufferline").choose_buffer
+            end,
+            "[Hydra]",
+        },
     },
     -- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
     -- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
@@ -55,7 +59,7 @@ local leader_normal = {
             local git = require("hydras.git-hydra").init_hydra()
             git:activate()
         end,
-        "Git",
+        "[Hydra] Git",
     },
 
     -- ["gg"] = { "<cmd>Lazygit<CR>", "Lazygit" },
@@ -66,11 +70,15 @@ local leader_normal = {
         c = { "<cmd>Legendary commands<CR>", "commands" },
         f = { "<cmd>Legendary functions<CR>", "functions" },
         k = { "<cmd>Legendary keymaps<CR>", "keymaps" },
-        ["<CR>"] = { "<cmd>Legendary<CR>", "keymaps, commands, autocmds" }
+        ["<CR>"] = { "<cmd>Legendary<CR>", "keymaps, commands, autocmds" },
     },
     n = { "<cmd>Nnn<CR>", "nnn file explorer" },
     p = { "<cmd>Lazy<CR>", "plugins" },
     s = { "<cmd>w<CR><Esc>", "save file" },
+    t = {
+        name = "Toggle",
+        a = { "<cmd>ToggleAlternate<CR>", "alternate" },
+    },
 }
 
 local gmove_normal = {
@@ -82,8 +90,11 @@ local gmove_normal = {
     ["<A-H>"] = { "<Plug>GoNSDLeft", "duplicate left" },
     ["<A-J>"] = { "<Plug>GoNSDDown", "duplicate down" },
     ["<A-K>"] = { "<Plug>GoNSDUp", "duplicate up" },
-    ["<A-L>"] = { "<Plug>GoNSDRight", "duplicate right" }
+    ["<A-L>"] = { "<Plug>GoNSDRight", "duplicate right" },
+}
 
+local icon_picker = {
+    ["<A-i>"] = { "<cmd>IconPickerInsert<CR>", "insert icon" },
 }
 
 local gmove_visual = {
@@ -95,12 +106,11 @@ local gmove_visual = {
     ["<A-H>"] = { "<Plug>GoVSDLeft", "duplicate left" },
     ["<A-J>"] = { "<Plug>GoVSDDown", "duplicate down" },
     ["<A-K>"] = { "<Plug>GoVSDUp", "duplicate up" },
-    ["<A-L>"] = { "<Plug>GoVSDRight", "duplicate right" }
-
+    ["<A-L>"] = { "<Plug>GoVSDRight", "duplicate right" },
 }
 
 wk.register(gmove_normal)
 wk.register(gmove_visual, { mode = "v" })
-
+wk.register(icon_picker, { mode = "i" })
 wk.register(general)
 wk.register(leader_normal, { prefix = "<leader>" })
