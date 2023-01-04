@@ -2,16 +2,15 @@
 --- ~~~~~~~~~~~
 --- https://github.com/hrsh7th/nvim-cmp
 
--- TODO appearance
-
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
         "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-cmdline",
     },
-    event = "InsertEnter",
+    event = { "CmdlineEnter", "InsertEnter" },
     config = function()
         local cmp = require("cmp")
 
@@ -24,7 +23,7 @@ return {
                 if buftype == "prompt" then
                     return false
                 end
-
+                -- disable in comment
                 local context = require("cmp.config.context")
                 if vim.api.nvim_get_mode().mode == "c" then
                     return true
@@ -38,13 +37,10 @@ return {
                     luasnip.lsp_expand(args.body)
                 end,
             },
-            -- TODO the mappings need to be redone
             mapping = cmp.mapping.preset.insert({
-
                 ["<A-d>"] = cmp.mapping.scroll_docs(-4),
                 ["<A-f>"] = cmp.mapping.scroll_docs(4),
                 ["<A-Space>"] = cmp.mapping.complete({}),
-                -- TODO This is the cause for enter key: when there is no cmp menu, enter won't work for new line insertion
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
@@ -80,14 +76,39 @@ return {
                 fields = {
                     "kind",
                     "abbr",
+                    "menu",
                 },
                 format = function(entry, vim_item)
-                    -- Kind icons
                     vim_item.kind =
                         string.format("%s", require("configs.icons").kind_icons[vim_item.kind])
 
+                    vim_item.menu = ({
+                        buffer = "[Buffer]",
+                        nvim_lsp = "[LSP]",
+                        luasnip = "[Snippet]",
+                    })[entry.source.name]
+
                     return vim_item
                 end,
+            },
+        })
+
+        cmp.setup.cmdline(":", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = "cmdline", max_item_count = 15 },
+            }),
+        })
+        cmp.setup.cmdline("/", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = "buffer" },
+            }),
+        })
+        cmp.setup.cmdline("?", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = "buffer" },
             },
         })
     end,
