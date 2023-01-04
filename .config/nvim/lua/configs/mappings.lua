@@ -9,6 +9,7 @@ local wk = require("which-key")
 local general = {
     j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
     k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
+    ["<A-r>"] = { "<C-r>", "redo" }
 }
 
 local leader_normal = {
@@ -58,10 +59,48 @@ local leader_normal = {
     },
 
     -- ["gg"] = { "<cmd>Lazygit<CR>", "Lazygit" },
-    l = { "<cmd>Lazy<CR>", "Lazy" },
+
+    l = {
+        name = "Legendary",
+        a = { "<cmd>Legendary autocmds<CR>", "autocmds" },
+        c = { "<cmd>Legendary commands<CR>", "commands" },
+        f = { "<cmd>Legendary functions<CR>", "functions" },
+        k = { "<cmd>Legendary keymaps<CR>", "keymaps" },
+        ["<CR>"] = { "<cmd>Legendary<CR>", "keymaps, commands, autocmds" }
+    },
     n = { "<cmd>Nnn<CR>", "nnn file explorer" },
+    p = { "<cmd>Lazy<CR>", "plugins" },
     s = { "<cmd>w<CR><Esc>", "save file" },
 }
+
+local gmove_normal = {
+
+    ["<A-h>"] = { "<Plug>GoNSMLeft", "move left" },
+    ["<A-j>"] = { "<Plug>GoNSMDown", "move down" },
+    ["<A-k>"] = { "<Plug>GoNSMUp", "move up" },
+    ["<A-l>"] = { "<Plug>GoNSMRight", "move right" },
+    ["<A-H>"] = { "<Plug>GoNSDLeft", "duplicate left" },
+    ["<A-J>"] = { "<Plug>GoNSDDown", "duplicate down" },
+    ["<A-K>"] = { "<Plug>GoNSDUp", "duplicate up" },
+    ["<A-L>"] = { "<Plug>GoNSDRight", "duplicate right" }
+
+}
+
+local gmove_visual = {
+
+    ["<A-h>"] = { "<Plug>GoVSMLeft", "move left" },
+    ["<A-j>"] = { "<Plug>GoVSMDown", "move down" },
+    ["<A-k>"] = { "<Plug>GoVSMUp", "move up" },
+    ["<A-l>"] = { "<Plug>GoVSMRight", "move right" },
+    ["<A-H>"] = { "<Plug>GoVSDLeft", "duplicate left" },
+    ["<A-J>"] = { "<Plug>GoVSDDown", "duplicate down" },
+    ["<A-K>"] = { "<Plug>GoVSDUp", "duplicate up" },
+    ["<A-L>"] = { "<Plug>GoVSDRight", "duplicate right" }
+
+}
+
+wk.register(gmove_normal)
+wk.register(gmove_visual, { mode = "v" })
 
 wk.register(general)
 wk.register(leader_normal, { prefix = "<leader>" })
