@@ -5,16 +5,17 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "smjonas/inc-rename.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim"
+        "folke/neodev.nvim",
     },
     config = function()
-
-        require("neodev").setup()
-
+        require("neodev").setup({
+            library = {
+                plugins = false, --NOTE disable indexing all plugins
+            },
+        })
         require("mason-lspconfig").setup({
             ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver" },
         })
-
         require("lspconfig")["sumneko_lua"].setup({
             on_attach = require("utils.on_attach").on_attach,
             capabilities = require("utils.capabilities").capabilities,
@@ -32,5 +33,5 @@ return {
                 },
             },
         })
-    end
+    end,
 }
