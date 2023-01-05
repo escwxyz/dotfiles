@@ -1,7 +1,7 @@
 fish_vi_key_bindings
 set -g fish_greeting
 # add path (installed before fish)
-set -gx PATH /home/jiew/lua-language-server/bin:/home/jiew/.local/bin:/home/jiew/alacritty/target/release/alacritty:/home/jiew/flutter/bin:/home/jiew/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+set -gx PATH /home/jiew/.local/bin:/home/jiew/alacritty/target/release/alacritty:/home/jiew/flutter/bin:/home/jiew/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 set -gx EDITOR nvim 
 set -gx LANG en_US.UTF-8
 # flutter mirrors
