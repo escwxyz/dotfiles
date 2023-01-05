@@ -1,6 +1,6 @@
 return {
     "saecki/crates.nvim",
-    lazy = false,
+    lazy = false, -- NOTE cond only works when lazy is false
     cond = function()
         local buf = vim.api.nvim_buf_get_name(0)
         if string.sub(buf, -10) == "Cargo.toml" then
