@@ -250,18 +250,22 @@ return {
     -- Leap
     {
         mode = { "n", "x", "o" },
-        ["sf"] = { act = "<Plug>(leap-forward-to)", desc = "[Leap] Search forward" },
-        ["sb"] = { act = "<Plug>(leap-backward-to)", desc = "[Leap] Search backward" }, --TODO conflicts with surround, gonna remap
-        ["sx"] = { act = "<Plug>(leap-cross-window)", desc = "[Leap] Search cross window" },
-        ["SF"] = {
-            act = "<Plug>(leap-forward-till)",
-            desc = "[Leap] Search forward till",
-            mode = { "o", "x" },
-        },
-        ["SB"] = {
-            act = "<Plug>(leap-backward-till)",
-            desc = "[Leap] Search backward till",
-            mode = { "o", "x" },
+        ["s"] = {
+            name = "Leap",
+
+            ["f"] = { act = "<Plug>(leap-forward-to)", desc = "Search forward to" },
+            ["b"] = { act = "<Plug>(leap-backward-to)", desc = "Search backward to" },
+            ["x"] = { act = "<Plug>(leap-cross-window)", desc = "Search cross window" },
+            ["F"] = {
+                act = "<Plug>(leap-forward-till)",
+                desc = "Search forward till",
+                mode = { "x", "o" },
+            },
+            ["B"] = {
+                act = "<Plug>(leap-backward-till)",
+                desc = "Search backward till",
+                mode = { "x", "o" },
+            },
         },
     },
 }
