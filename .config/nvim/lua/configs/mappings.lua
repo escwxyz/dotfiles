@@ -1,63 +1,77 @@
 -- Global Keymappings
 -- ~~~~~~~~~~~~~~~~~~
 
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj': 'j'", { expr = true, silent = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk':'k'", { expr = true, silent = true })
--- scrolling
-vim.keymap.set("n", "<S-u>", "<C-u>", { silent = true, desc = "Scroll up" })
-vim.keymap.set("n", "<S-d>", "<C-d>", { silent = true, desc = "Scroll down" })
--- buffer
-vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer", silent = true })
-vim.keymap.set("n", "[b", "<cmd>bprevious<CR>", { desc = "Previous buffer", silent = true })
--- Head / Last of the line
-vim.keymap.set("n", "H", "_", { desc = "Head of the line", silent = true })
-vim.keymap.set("n", "L", "$", { desc = "Last of the line", silent = true })
+-- TODO manage ALL keymaps here
 
--- Save file
-vim.keymap.set("n", "<leader>s", "<cmd>w<CR><Esc>", { desc = "Save current buffer", silent = true })
+local ck = require("caskey")
+local cmd = ck.cmd
 
--- Redo
-vim.keymap.set("n", "<A-r>", "<C-r>", { desc = "Redo", silent = true })
--- Legendary
-vim.keymap.set("n", "<leader>l", "<cmd>Legendary<CR>", { desc = "Legendary", silent = true })
--- Lazy Plugins
-vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins", silent = true })
--- NNN File Explorer
-vim.keymap.set("n", "<leader>n", "<cmd>Nnn<CR>", { desc = "Nnn File Explorer", silent = true })
--- gomove
-vim.keymap.set("n", "<A-h>", "<Plug>GoNSMLeft", { desc = "Move left", silent = true })
-vim.keymap.set("n", "<A-j>", "<Plug>GoNSMDown", { desc = "Move down", silent = true })
-vim.keymap.set("n", "<A-k>", "<Plug>GoNSMUp", { desc = "Move up", silent = true })
-vim.keymap.set("n", "<A-l>", "<Plug>GoNSMRight", { desc = "Move right", silent = true })
-vim.keymap.set("n", "<A-H>", "<Plug>GoNSDLeft", { desc = "Duplicate left", silent = true })
-vim.keymap.set("n", "<A-J>", "<Plug>GoNSDDown", { desc = "Duplicate down", silent = true })
-vim.keymap.set("n", "<A-K>", "<Plug>GoNSDUp", { desc = "Duplicate up", silent = true })
-vim.keymap.set("n", "<A-L>", "<Plug>GoNSDRight", { desc = "Duplicate right", silent = true })
+return {
+    mode = { "n" },
 
-vim.keymap.set("x", "<A-h>", "<Plug>GoVSMLeft", { desc = "Move left", silent = true })
-vim.keymap.set("x", "<A-j>", "<Plug>GoVSMDown", { desc = "Move down", silent = true })
-vim.keymap.set("x", "<A-k>", "<Plug>GoVSMUp", { desc = "Move up", silent = true })
-vim.keymap.set("x", "<A-l>", "<Plug>GoVSMRight", { desc = "Move right", silent = true })
-vim.keymap.set("x", "<A-H>", "<Plug>GoVSDLeft", { desc = "Duplicate left", silent = true })
-vim.keymap.set("x", "<A-J>", "<Plug>GoVSDDown", { desc = "Duplicate down", silent = true })
-vim.keymap.set("x", "<A-K>", "<Plug>GoVSDUp", { desc = "Duplicate up", silent = true })
-vim.keymap.set("x", "<A-L>", "<Plug>GoVSDRight", { desc = "Duplicate right", silent = true })
+    ["j"] = { act = "v:count == 0 ? 'gj': 'j'", expr = true },
+    ["k"] = { act = "v:count == 0 ? 'gk':'k'", expr = true },
 
-local leader_normal = {
-    f = {
-        name = "Telescope",
-        f = { "<cmd>Telescope find_files<CR>", "find files" },
-        r = { "<cmd>Telescope repo list search_dirs=~/Projects/<CR>", "find repos" },
-        t = { "<cmd>TodoTelescope<CR>", "find todos" },
-        g = { "<cmd>Telescope live_grep<CR>", "live grep" },
-        h = { "<cmd>Telescope help_tags<CR>", "help tags" },
-        k = { "<cmd>Telescope keymaps<CR>", "find keymaps" },
-        o = { "<cmd>Telescope vim_options<CR>", "vim options" },
-        u = { "<cmd>Telescope undo<CR>", "undo tree" },
-        n = { "<cmd>Telescope notify<CR>", "notify history" },
-        m = { "<cmd>Telescope harpoon marks<CR>", "harpoon marks" },
+    ["H"] = { act = "_", desc = "Head of line" },
+    ["L"] = { act = "$", desc = "Last of line" },
+
+    ["<A-r>"] = { act = "<C-r>", desc = "Redo" },
+
+    -- scrolling
+    ["<S-u>"] = { act = "<C-u>", desc = "Scroll up" },
+    ["<S-d>"] = { act = "<C-d>", desc = "Scroll down" },
+
+    -- Buffer
+    ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
+    ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
+
+    -- Gomove
+    ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
+    ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
+    ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
+    ["<A-l>"] = { act = "<Plug>GoNSMRight", desc = "Move right" },
+    ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },
+    ["<A-J>"] = { act = "<Plug>GoNSDDown", desc = "Duplicate down" },
+    ["<A-K>"] = { act = "<Plug>GoNSDUp", desc = "Duplicate up" },
+    ["<A-L>"] = { act = "<Plug>GoNSDRight", desc = "Duplicate right" },
+
+    {
+        mode = { "x" },
+
+        ["<A-h>"] = { act = "<Plug>GoVSMLeft", desc = "Move left" },
+        ["<A-j>"] = { act = "<Plug>GoVSMDown", desc = "Move down" },
+        ["<A-k>"] = { act = "<Plug>GoVSMUp", desc = "Move up" },
+        ["<A-l>"] = { act = "<Plug>GoVSMRight", desc = "Move right" },
+        ["<A-H>"] = { act = "<Plug>GoVSDLeft", desc = "Duplicate left" },
+        ["<A-J>"] = { act = "<Plug>GoVSDDown", desc = "Duplicate down" },
+        ["<A-K>"] = { act = "<Plug>GoVSDUp", desc = "Duplicate up" },
+        ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
+    },
+
+    -- 🅰 Actions
+    ["<leader>a"] = {
+        name = "Actions",
+
+        s = { act = "<cmd>w<CR><Esc>", desc = "Save buffer" }, -- TODO notify
+    },
+
+    -- 🅱 Buffer
+
+    -- 🅲 Command Palette
+    ["<leader>c"] = { act = cmd "Legendary", desc = "Command Palette" },
+
+    -- 🅳 Debug
+    -- ["<leader>d"]
+
+    -- 🅴 File Explorer
+    ["<leader>e"] = { act = cmd "Nnn", desc = "File Explorer" },
+
+    -- 🅵 Fuzzy Finder
+    ["<leader>f"] = {
+        name = "Find",
+
         b = {
-            function()
+            act = function()
                 require("telescope") -- make sure telescope is started
                 require("telescope.builtin").current_buffer_fuzzy_find(
                     require("telescope.themes").get_dropdown({
@@ -66,25 +80,88 @@ local leader_normal = {
                     })
                 )
             end,
-            "search in buffer",
+            desc = "Search in buffer",
         },
-        a = { "<cmd>Telescope aerial<CR>", "find aerial" },
+        f = { act = cmd "Telescope find_files", desc = "Files" },
+        r = { act = cmd "Telescope repo list search_dirs=~/Projects/", desc = "Repos" },
+        g = { act = cmd("Telescope live_grep"), desc = "Live Grep" },
+        m = { act = cmd("Telescope harpoon marks"), desc = "Marks" },
+        n = { act = cmd("Telescope notify"), desc = "notify" },
+        t = { act = cmd("TodoTelescope"), desc = "Todos" },
     },
-    g = {
-        function()
-            local git = require("hydras.git-hydra").init_hydra()
-            git:activate()
+
+    -- 🅶 Git
+    ["<leader>g"] = {
+        name = "Git",
+        ["d"] = {
+            act = function()
+                --todo
+                print("diffview")
+            end,
+            desc = "Differ View",
+        },
+        ["<Enter>"] = { act = function() end, desc = "[Hydra] Git" },
+
+        ["u"] = { act = cmd "Gitui", desc = "Gitui" },
+    },
+
+    -- 🅷 Help Tags
+    ["<leader>h"] = { act = cmd "Telescope help_tags", desc = "Help Tags" },
+
+    -- 🅸
+    -- ["<leader>i"] = {}
+
+    -- 🅹 Jobs
+    -- ["<leader>j"] = {},
+
+    -- 🅺 Keymaps
+    ["<leader>k"] = { act = cmd "WhichKey", desc = "WhichKey" },
+
+    -- 🅻 Lazygit
+    -- ["<leader>l"] =
+
+    -- 🅼 Marks
+    ["<leader>m"] = {
+        act = function()
+            local hydra = require("hydras.harpoon-hydra").init_hydra()
+            hydra:activate()
         end,
-        "[Hydra] Git",
+        desc = "[Hydra] Marks",
     },
-    t = {
-        name = "Toggle",
-        -- a = { "<cmd>ToggleAlternate<CR>", "alternate" },
 
-        a = { "<cmd>AerialToggle<CR>", "Aerial" },
+    -- 🅽
+    -- ["<leader>n"] = {}
+
+    -- 🅾 Editor Options
+    -- ["<leader>o"]
+
+    -- 🅿 Plugins
+    ["<leader>p"] = { act = cmd "Lazy", desc = "Plugins" },
+
+    -- 🆀 QuickFix
+
+    -- 🆁 Runner
+
+    -- 🆂 Session
+
+    -- 🆃 Terminal
+
+    -- 🆄 Undotree
+    ["<leader>u"] = { act = cmd "UndotreeToggle", desc = "Undotree" },
+
+    -- 🆅
+
+    -- 🆆 Windows
+    ["<leader>w"] = {
+        act = function()
+            local hydra = require("hydras.windows-hydra").init_hydra()
+            hydra:activate()
+        end,
+        desc = "[Hydra] Windows",
     },
+
+    -- 🆇
+    -- 🆈
+    -- 🆉
+
 }
-
-local wk = require("which-key")
-
-wk.register(leader_normal, { prefix = "<leader>" })
