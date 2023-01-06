@@ -12,11 +12,10 @@ capabilities.textDocument.foldingRange = {
 
 local signs = require("configs.icons").diagnostic_icons
 
-local wk = require("which-key")
-
 local navic = require("nvim-navic")
 
 local on_attach = function(client, bufnr)
+    --	require("caskey").emit("LspAttach")
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
     end
@@ -32,52 +31,9 @@ local on_attach = function(client, bufnr)
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    vim.keymap.set("n", "K", function()
-        vim.lsp.buf.hover()
-    end, { silent = true, desc = "[LSP] Hover", buffer = bufnr })
-
-    vim.keymap.set("n", "[d", function()
-        vim.diagnostic.goto_prev({})
-    end, { desc = "[LSP] Prev diagnostic", silent = true, buffer = bufnr })
-
-    vim.keymap.set("n", "]d", function()
-        vim.diagnostic.goto_next({})
-    end, { desc = "[LSP] Next diagnostic", silent = true, buffer = bufnr })
-
     vim.keymap.set("n", "ff", function()
         vim.lsp.buf.format()
     end, { desc = "[LSP] Format", silent = true, buffer = bufnr })
-
-    wk.register({
-        g = {
-            name = "goto",
-
-            d = {
-                function()
-                    require("goto-preview").goto_preview_definition()
-                end,
-                "definition",
-            },
-            t = {
-                function()
-                    require("goto-preview").goto_preview_type_definition()
-                end,
-                "type definition",
-            },
-            i = {
-                function()
-                    require("goto-preview").goto_preview_implementation()
-                end,
-                "implementation",
-            },
-            q = {
-                function()
-                    require("goto-preview").close_all_win()
-                end,
-                "close all goto windows",
-            },
-        },
-    }, { buffer = bufnr })
 
     -- This requires telescope to be loaded
     -- vim.keymap.set("n", "gr", require("goto-preview").goto_preview_references, { silent = true, buffer = bufnr })

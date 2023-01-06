@@ -1,8 +1,8 @@
 local M = {}
 
-local capabilities = require("lsp.lsp_config").capabilities
+local capabilities = require("plugins.lsp.lsp_config").capabilities
 
-local on_attach = require("lsp.lsp_config").on_attach
+local on_attach = require("plugins.lsp.lsp_config").on_attach
 
 M.setup = function()
     require("typescript").setup({
@@ -15,20 +15,8 @@ M.setup = function()
             capabilities = capabilities,
             on_attach = function(_, bufnr)
                 on_attach(_, bufnr)
-
-                require("which-key").register({
-                    i = {
-                        name = "imports",
-                        a = { "<cmd>TypescriptAddMissingImports<CR>", "add missing imports" },
-                        o = { "<cmd>TypescriptOrganizeImports<CR>", "organize imports" }
-                    },
-                    f = { "<cmd>TypescriptFixAll<CR>", "fix all" },
-                    r = { "<cmd>TypescriptRenameFile<CR>", "rename" },
-                    s = { "<cmd>TypescriptGoToSourceDefinition<CR>", "source definition" },
-                    u = { "<cmd>TypescriptRemoveUnused<CR>", "remove unused" }
-                }, { prefix = "<A>", buffer = bufnr })
-
-            end
+                require("caskey").emit("TSServerAttached", bufnr)
+            end,
         },
     })
 end
