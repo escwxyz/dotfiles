@@ -5,12 +5,14 @@
 
 local ck = require("caskey")
 local cmd = ck.cmd
+local emitted = ck.emitted
+local ft = ck.ft
 
 return {
     mode = { "n" },
 
-    ["j"] = { act = "v:count == 0 ? 'gj': 'j'", expr = true },
-    ["k"] = { act = "v:count == 0 ? 'gk':'k'", expr = true },
+    ["j"] = { act = "v:count == 0 ? 'gj': 'j'", expr = true, desc = "Go down" },
+    ["k"] = { act = "v:count == 0 ? 'gk':'k'", expr = true, desc = "Go up" },
 
     ["H"] = { act = "_", desc = "Head of line" },
     ["L"] = { act = "$", desc = "Last of line" },
@@ -25,7 +27,7 @@ return {
     ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
-    -- Gomove
+    -- TODO Gomove
     ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
     ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
     ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
@@ -47,7 +49,7 @@ return {
         ["<A-K>"] = { act = "<Plug>GoVSDUp", desc = "Duplicate up" },
         ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
     },
-
+    -- Leader Starts
     -- 🅰 Actions
     ["<leader>a"] = {
         name = "Actions",
@@ -58,13 +60,13 @@ return {
     -- 🅱 Buffer
 
     -- 🅲 Command Palette
-    ["<leader>c"] = { act = cmd "Legendary", desc = "Command Palette" },
+    ["<leader>c"] = { act = cmd("Legendary"), desc = "Command Palette" },
 
     -- 🅳 Debug
     -- ["<leader>d"]
 
     -- 🅴 File Explorer
-    ["<leader>e"] = { act = cmd "Nnn", desc = "File Explorer" },
+    ["<leader>e"] = { act = cmd("Nnn"), desc = "File Explorer" },
 
     -- 🅵 Fuzzy Finder
     ["<leader>f"] = {
@@ -82,8 +84,8 @@ return {
             end,
             desc = "Search in buffer",
         },
-        f = { act = cmd "Telescope find_files", desc = "Files" },
-        r = { act = cmd "Telescope repo list search_dirs=~/Projects/", desc = "Repos" },
+        f = { act = cmd("Telescope find_files"), desc = "Files" },
+        r = { act = cmd("Telescope repo list search_dirs=~/Projects/"), desc = "Repos" },
         g = { act = cmd("Telescope live_grep"), desc = "Live Grep" },
         m = { act = cmd("Telescope harpoon marks"), desc = "Marks" },
         n = { act = cmd("Telescope notify"), desc = "notify" },
@@ -102,11 +104,11 @@ return {
         },
         ["<Enter>"] = { act = function() end, desc = "[Hydra] Git" },
 
-        ["u"] = { act = cmd "Gitui", desc = "Gitui" },
+        ["u"] = { act = cmd("Gitui"), desc = "Gitui" },
     },
 
     -- 🅷 Help Tags
-    ["<leader>h"] = { act = cmd "Telescope help_tags", desc = "Help Tags" },
+    ["<leader>h"] = { act = cmd("Telescope help_tags"), desc = "Help Tags" },
 
     -- 🅸
     -- ["<leader>i"] = {}
@@ -115,7 +117,7 @@ return {
     -- ["<leader>j"] = {},
 
     -- 🅺 Keymaps
-    ["<leader>k"] = { act = cmd "WhichKey", desc = "WhichKey" },
+    ["<leader>k"] = { act = cmd("WhichKey"), desc = "WhichKey" },
 
     -- 🅻 Lazygit
     -- ["<leader>l"] =
@@ -136,7 +138,7 @@ return {
     -- ["<leader>o"]
 
     -- 🅿 Plugins
-    ["<leader>p"] = { act = cmd "Lazy", desc = "Plugins" },
+    ["<leader>p"] = { act = cmd("Lazy"), desc = "Plugins" },
 
     -- 🆀 QuickFix
 
@@ -147,7 +149,7 @@ return {
     -- 🆃 Terminal
 
     -- 🆄 Undotree
-    ["<leader>u"] = { act = cmd "UndotreeToggle", desc = "Undotree" },
+    ["<leader>u"] = { act = cmd("UndotreeToggle"), desc = "Undotree" },
 
     -- 🆅
 
@@ -163,5 +165,103 @@ return {
     -- 🆇
     -- 🆈
     -- 🆉
+    -- Leader Ends
+    -- LSP on_attach
+    {
+        mode = { "n" },
+        when = "LspAttach",
+        -- common lsp key bindings
+        ["K"] = {
+            act = function()
+                vim.lsp.buf.hover()
+            end,
+            desc = "Hover",
+        },
+        ["]d"] = {
+            act = function()
+                vim.diagnostic.goto_next({})
+            end,
+            desc = "Next diagnostic",
+        },
+        ["[d"] = {
+            act = function()
+                vim.diagnostic.goto_prev({})
+            end,
+            desc = "Previous diagnostic",
+        },
+        ["g"] = {
+            name = "Goto",
 
+            ["d"] = {
+                act = function()
+                    require("goto-preview").goto_preview_definition()
+                end,
+                desc = "[LSP] Goto definition",
+            },
+            ["i"] = {
+                act = function()
+                    require("goto-preview").goto_preview_implementation()
+                end,
+                desc = "[LSP] Goto implementation",
+            },
+            ["t"] = {
+                act = function()
+                    require("goto-preview").goto_preview_type_definition()
+                end,
+                desc = "[LSP] Goto type definition",
+            },
+            ["r"] = {
+                act = function()
+                    require("goto-preview").goto_preview_reference()
+                end,
+                desc = "[LSP] Goto reference",
+            },
+            ["q"] = {
+                act = function()
+                    require("goto-preview").close_all_win()
+                end,
+                desc = "[LSP] Close all windows",
+            },
+        },
+        -- Typescript related key bindings
+
+        ["ai"] = {
+            act = cmd("TypescriptAddMissingImports"),
+            desc = "[LSP] Add missing imports",
+            when_extend = emitted("TSServerAttached"),
+        },
+        ["oi"] = {
+            act = cmd("TypescriptOrganizeImports"),
+            desc = "[LSP] Organize imports",
+            when_extend = emitted("TSServerAttached"),
+        },
+        ["ru"] = {
+            act = cmd("TypescriptRemoveUnused"),
+            desc = "[LSP] Remove unused vars",
+            when_extend = emitted("TSServerAttached"),
+        },
+        ["fa"] = {
+            act = cmd("TypescriptFixAll"),
+            desc = "[LSP] Fix all",
+            when_extend = emitted("TSServerAttached"),
+        },
+        -- TODO Rust related key bindings
+    },
+    -- Leap
+    {
+        mode = { "n", "x", "o" },
+        ["sf"] = { act = "<Plug>(leap-forward-to)", desc = "[Leap] Search forward" },
+        ["sb"] = { act = "<Plug>(leap-backward-to)", desc = "[Leap] Search backward" }, --TODO conflicts with surround, gonna remap
+        ["sx"] = { act = "<Plug>(leap-cross-window)", desc = "[Leap] Search cross window" },
+        ["SF"] = {
+            act = "<Plug>(leap-forward-till)",
+            desc = "[Leap] Search forward till",
+            mode = { "o", "x" },
+        },
+        ["SB"] = {
+            act = "<Plug>(leap-backward-till)",
+            desc = "[Leap] Search backward till",
+            mode = { "o", "x" },
+        },
+    },
 }

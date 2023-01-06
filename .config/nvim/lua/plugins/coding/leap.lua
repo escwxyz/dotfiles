@@ -9,7 +9,6 @@ M.setup = function()
 
     leap.opts.case_sensetive = true
 
-    leap.add_default_mappings({ true }) -- NOTE overwrite other conflicting keymaps
     -- for faster move cursor with `fFtT`
     require("flit").setup({
         keys = { f = 'f', F = 'F', t = 't', T = 'T' },
