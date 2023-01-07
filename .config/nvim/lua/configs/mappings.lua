@@ -27,7 +27,33 @@ return {
     ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
-    -- TODO Gomove
+    -- Comment
+    ["gcc"] = {
+        act = "v:count ==  0 ? '<Plug>(comment_toggle_linewise_current)': '<Plug>(comment_toggle_linewise_count)'",
+        desc = "Comment linewise",
+        expr = true,
+    },
+    ["gc"] = { act = "<Plug>(comment_toggle_linewise)", desc = "Comment toggle linewise" },
+    {
+        mode = "x",
+        ["gc"] = {
+            act = "<Plug>(comment_toggle_linewise_visual)",
+            desc = "Comment linewise",
+        },
+    },
+    ["gbb"] = {
+        act = "v:count == 0 ? '<Plug>(comment_toggle_blockwise_current)' : '<Plug>(comment_toggle_blockwise_count)'",
+        desc = "Comment blockwise",
+        expr = true,
+    },
+    ["gb"] = { act = "<Plug>(comment_toggle_blockwise)", desc = "Comment blockwise" },
+    {
+        mode = "x",
+        ["gb"] = { act = "<Plug>(comment_toggle_blockwise_visual)", desc = "Comment blockwise" },
+    },
+    -- todo blockwise
+
+    --  Gomove
     ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
     ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
     ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
@@ -209,8 +235,8 @@ return {
             desc = "[LSP] Format",
             --when_extend = vim.lsp.get_active_clients
         },
-        ["g"] = {
-            name = "Goto",
+        ["gp"] = {
+            name = "Goto Preview",
 
             ["d"] = {
                 act = function()
