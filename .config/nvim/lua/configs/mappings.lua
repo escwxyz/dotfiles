@@ -119,8 +119,13 @@ return {
     -- 🅺 Keymaps
     ["<leader>k"] = { act = cmd("WhichKey"), desc = "WhichKey" },
 
-    -- 🅻 Lazygit
-    -- ["<leader>l"] =
+    -- 🅻 Links
+    ["<leader>l"] = {
+        act = function()
+            require("hydras.urlview-hydra").activate()
+        end,
+        desc = "URL View",
+    },
 
     -- 🅼 Marks
     ["<leader>m"] = {

@@ -99,6 +99,7 @@ require("lazy").setup({
 
     {
         "jose-elias-alvarez/null-ls.nvim",
+        name = "null_ls",
         event = "InsertEnter",
         config = function()
             require("plugins.lsp.null_ls").setup()
@@ -107,6 +108,7 @@ require("lazy").setup({
 
     {
         "rmagatti/goto-preview",
+        name = "goto_preview",
         keys = { "g" },
         config = function()
             require("plugins.lsp.goto_preview").setup()
@@ -115,6 +117,7 @@ require("lazy").setup({
 
     {
         "neovim/nvim-lspconfig",
+        name = "lsp_config",
         event = "BufReadPre", -- NOTE improper event leading to unexpected behavior
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
@@ -162,12 +165,11 @@ require("lazy").setup({
 
     {
         "stevearc/dressing.nvim",
+        name = "dressing",
         lazy = false,
-        config = {
-            input = {
-                mappings = false,
-            },
-        },
+        config = function()
+            require("plugins.ui.dressing").setup()
+        end,
     },
 
     {
@@ -267,6 +269,15 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "axieax/urlview.nvim",
+        name = "urlview",
+        cmd = "UrlView",
+        config = function()
+            require("plugins.tool.urlview").setup()
+        end,
+    },
+
     { "williamboman/mason.nvim", lazy = false, config = true },
 
     {
@@ -280,6 +291,15 @@ require("lazy").setup({
             return false
         end,
         config = true,
+    },
+
+    {
+        "gbprod/yanky.nvim",
+        event = "VeryLazy",
+        dependencies = "kkharji/sqlite.lua",
+        config = function()
+            require("plugins.tool.yanky").setup()
+        end,
     },
 
     -- ░█████╗░░█████╗░██████╗░██╗███╗░░██╗░██████╗░
@@ -329,6 +349,7 @@ require("lazy").setup({
     {
         "kevinhwang91/nvim-ufo",
         dependencies = "kevinhwang91/promise-async",
+        name = "ufo",
         keys = {
             {
                 "z",
@@ -602,6 +623,6 @@ require("lazy").setup({
         event = "VeryLazy",
         config = function()
             require("plugins.editor_enhancement.fm").setup()
-        end
-    }
+        end,
+    },
 }, lazy_config)
