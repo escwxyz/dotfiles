@@ -119,8 +119,13 @@ return {
     -- 🅺 Keymaps
     ["<leader>k"] = { act = cmd("WhichKey"), desc = "WhichKey" },
 
-    -- 🅻 Lazygit
-    -- ["<leader>l"] =
+    -- 🅻 Links
+    ["<leader>l"] = {
+        act = function()
+            require("hydras.urlview-hydra").activate()
+        end,
+        desc = "URL View",
+    },
 
     -- 🅼 Marks
     ["<leader>m"] = {
@@ -163,7 +168,14 @@ return {
     },
 
     -- 🆇
-    -- 🆈
+    -- 🆈 Yanky Histoy
+    ["<leader>y"] = {
+        act = function()
+            local hydra = require("hydras.yanky-hydra").init_hydra()
+            hydra:activate()
+        end,
+        desc = "[Hydra] Yanky",
+    },
     -- 🆉
     -- Leader Ends
     -- LSP on_attach
@@ -188,6 +200,14 @@ return {
                 vim.diagnostic.goto_prev({})
             end,
             desc = "Previous diagnostic",
+        },
+        -- When null-ls is attached
+        ["ft"] = {
+            act = function()
+                vim.lsp.buf.format() -- TODO conditional format on save
+            end,
+            desc = "[LSP] Format",
+            --when_extend = vim.lsp.get_active_clients
         },
         ["g"] = {
             name = "Goto",
@@ -251,21 +271,35 @@ return {
     {
         mode = { "n", "x", "o" },
         ["s"] = {
-            name = "Leap",
-
-            ["f"] = { act = "<Plug>(leap-forward-to)", desc = "Search forward to" },
-            ["b"] = { act = "<Plug>(leap-backward-to)", desc = "Search backward to" },
-            ["x"] = { act = "<Plug>(leap-cross-window)", desc = "Search cross window" },
-            ["F"] = {
-                act = "<Plug>(leap-forward-till)",
-                desc = "Search forward till",
-                mode = { "x", "o" },
-            },
-            ["B"] = {
-                act = "<Plug>(leap-backward-till)",
-                desc = "Search backward till",
-                mode = { "x", "o" },
-            },
+            act = function()
+                require("plugins.coding.leap").search()
+            end,
+            desc = "[Leap] Search",
         },
+        ["S"] = {
+            act = function()
+                require("plugins.coding.leap").search_cross_window()
+            end,
+            desc = "[Leap] Search cross window",
+        },
+    },
+    -- Yanky
+    {
+        mode = { "n", "x" },
+        ["y"] = { act = "<Plug>(YankyYank)", desc = "Yank (Copy)" },
+        ["p"] = { act = "<Plug>(YankyPutAfter)", desc = "Paste after cursor" },
+        ["P"] = { act = "<Plug>(YankyPutBefore)", desc = "Paste before cursor" },
+        -- TODO directly invoke yanky ring
+        --[[         ["]p"] = {
+            act = function()
+                local t = require("hydras.yanky-hydra").t
+                vim.fn.feedkeys(t("<Plug>(YankyPutIndentAfterLinewise)"))
+                local hydra = require("hydras.yanky-hydra").init_hydra()
+                hydra:activate()
+            end,
+            desc = "Paste indent after linewise",
+            mode = "n",
+        },
+  ]]
     },
 }
