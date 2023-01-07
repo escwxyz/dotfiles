@@ -189,6 +189,14 @@ return {
             end,
             desc = "Previous diagnostic",
         },
+        -- When null-ls is attached
+        ["ft"] = {
+            act = function()
+                vim.lsp.buf.format() -- TODO conditional format on save
+            end,
+            desc = "[LSP] Format",
+            --when_extend = vim.lsp.get_active_clients
+        },
         ["g"] = {
             name = "Goto",
 
@@ -251,21 +259,16 @@ return {
     {
         mode = { "n", "x", "o" },
         ["s"] = {
-            name = "Leap",
-
-            ["f"] = { act = "<Plug>(leap-forward-to)", desc = "Search forward to" },
-            ["b"] = { act = "<Plug>(leap-backward-to)", desc = "Search backward to" },
-            ["x"] = { act = "<Plug>(leap-cross-window)", desc = "Search cross window" },
-            ["F"] = {
-                act = "<Plug>(leap-forward-till)",
-                desc = "Search forward till",
-                mode = { "x", "o" },
-            },
-            ["B"] = {
-                act = "<Plug>(leap-backward-till)",
-                desc = "Search backward till",
-                mode = { "x", "o" },
-            },
+            act = function()
+                require("plugins.coding.leap").search()
+            end,
+            desc = "[Leap] Search",
+        },
+        ["S"] = {
+            act = function()
+                require("plugins.coding.leap").search_cross_window()
+            end,
+            desc = "[Leap] Search cross window",
         },
     },
 }
