@@ -16,7 +16,6 @@
 | [williamboman/mason-lspconfig.nvim]()                             | for `mason`                   | Done   |
 | [nvim-tree/nvim-web-devicons]()                                   | Icons                         | Done   |
 | [nvim-treesitter/nvim-treesitter]()                               | Syntex Highlighting           |        |
-| [gelguy/wilder.nvim]()                                            | CMD autocomplete              | Done   |
 | [nvim-telescope/telescope.nvim]()                                 | General Finder                |        |
 | nvim-telescope/telescope-fzf-native.nvim                          | Fuzzy support for `telescope` | Done   |
 
@@ -32,8 +31,49 @@
 - config vscode indent
 - graphql / rest client for neovim
 - unify shared icons for different plugins
+- noice lsp status overlap lualine
+- unify ui with dressing.nvim
 
 ## Notes
 
 - Any operation that needs to be persistant, use hydra (not exit the panel); otherwise use which key
-- Keybindings: <leader> first, then <Shift> / <CapsLock> & <Alt>, remove all <Ctrl>
+- Keybindings: `<leader>` first, then `<Shift>` / `<CapsLock>` & `<Alt>`, remove all `<Ctrl>`
+
+## Keybindings
+
+### modules (starts with `<leader>` in normal mode)
+
+- `<leader>a` => Actions
+- `<leader>b` => Hydra Buffer (by `bufferline`)
+- `<leader>c` => Command Palette (by `Legendary`)
+- `<leader>d` => Debug UI
+- `<leader>e` => File Explorer (by `nnn`)
+- `<leader>f` => Fuzzy Finder (by `Telescope`)
+- `<leader>g` => Git (Hydra, by `diffview`, `gitsigns`, `gitui`)
+- `<leader>h` => 
+- `<leader>i` =>
+- `<leader>j` => Job Manager (by `overseer`)
+- `<leader>k` => Keybindings (by `WhichKey`)
+- `<leader>l` => URL Viewer (Hydra, by `UrlViewer`) 
+- `<leader>m` => Marks (Hydra, by `harpoon`)
+- `<leader>n` => 
+- `<leader>o` => Global Editor Options (Hydra)
+- `<leader>p` => Plugin Manager (by `Lazy.nvim`) 
+- `<leader>q` => QuickFix (by bqf)
+- `<leader>r` =>
+- `<leader>s` => Session
+- `<leader>t` =>
+- `<leader>u` => Undotree (by `Undotree`)
+- `<leader>v` => 
+- `<leader>w` => Windows Management (Hydra, by `windows`, `smart-split`)
+- `<leader>x` => 
+- `<leader>y` => Yank (Hydra, by `yanky`)
+- `<leader>z` =>
+
+### actions (<alt>/<Shift>)
+
+### actions (other)
+
+- `s` => Leap search current window
+- `S` => Leap search cross window
+
