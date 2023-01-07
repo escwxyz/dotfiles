@@ -163,7 +163,14 @@ return {
     },
 
     -- 🆇
-    -- 🆈
+    -- 🆈 Yanky Histoy
+    ["<leader>y"] = {
+        act = function()
+            local hydra = require("hydras.yanky-hydra").init_hydra()
+            hydra:activate()
+        end,
+        desc = "[Hydra] Yanky",
+    },
     -- 🆉
     -- Leader Ends
     -- LSP on_attach
@@ -270,5 +277,24 @@ return {
             end,
             desc = "[Leap] Search cross window",
         },
+    },
+    -- Yanky
+    {
+        mode = { "n", "x" },
+        ["y"] = { act = "<Plug>(YankyYank)", desc = "Yank (Copy)" },
+        ["p"] = { act = "<Plug>(YankyPutAfter)", desc = "Paste after cursor" },
+        ["P"] = { act = "<Plug>(YankyPutBefore)", desc = "Paste before cursor" },
+        -- TODO directly invoke yanky ring
+        --[[         ["]p"] = {
+            act = function()
+                local t = require("hydras.yanky-hydra").t
+                vim.fn.feedkeys(t("<Plug>(YankyPutIndentAfterLinewise)"))
+                local hydra = require("hydras.yanky-hydra").init_hydra()
+                hydra:activate()
+            end,
+            desc = "Paste indent after linewise",
+            mode = "n",
+        },
+  ]]
     },
 }

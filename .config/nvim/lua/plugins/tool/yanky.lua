@@ -1,10 +1,8 @@
 -- TODO https://github.com/gbprod/yanky.nvim
+local M = {}
 
-return {
-    "gbprod/yanky.nvim",
-    enabled = false,
-    event = "BufReadPost",
-    config = {
+M.setup = function()
+    require("yanky").setup({
         ring = {
             history_length = 100,
             storage = "shada",
@@ -30,5 +28,7 @@ return {
         preserve_cursor_position = {
             enabled = true,
         },
-    }
-}
+    })
+end
+
+return M
