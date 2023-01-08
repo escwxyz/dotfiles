@@ -4,12 +4,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- this capability is for fold/unfold
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-}
-
 local signs = require("configs.icons").diagnostic_icons
 
 local navic = require("nvim-navic")
@@ -30,10 +24,6 @@ local on_attach = function(client, bufnr)
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
-
-    vim.keymap.set("n", "ff", function()
-        vim.lsp.buf.format()
-    end, { desc = "[LSP] Format", silent = true, buffer = bufnr })
 
     -- This requires telescope to be loaded
     -- vim.keymap.set("n", "gr", require("goto-preview").goto_preview_references, { silent = true, buffer = bufnr })
