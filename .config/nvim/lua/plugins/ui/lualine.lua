@@ -90,7 +90,6 @@ M.setup = function()
         -- top bar below bufferline
         winbar = {
             -- lualine_b = {},
-            lualine_c = { 'filename' },
             -- lualine_x = {},
             -- lualine_y = {},
             -- lualine_z = {}

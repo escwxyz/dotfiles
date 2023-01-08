@@ -36,12 +36,7 @@ local lazy_config = {
             start = "",
             task = "✔",
             lazy = "鈴 ",
-            list = {
-                "●",
-                "➜",
-                "★",
-                "‒",
-            },
+            list = { "●", "➜", "★", "‒" },
         },
     },
     checker = {
@@ -109,7 +104,7 @@ require("lazy").setup({
     {
         "rmagatti/goto-preview",
         name = "goto_preview",
-        keys = { "g" },
+        keys = { "gp" },
         config = function()
             require("plugins.lsp.goto_preview").setup()
         end,
@@ -247,7 +242,8 @@ require("lazy").setup({
 
     {
         "Nexmean/caskey.nvim",
-        event = "VeryLazy",
+        lazy = false,
+        -- event = "VeryLazy",
         config = function()
             require("caskey.wk").setup(require("configs.mappings"))
         end,
@@ -263,7 +259,7 @@ require("lazy").setup({
 
     {
         "mrjones2014/legendary.nvim",
-        event = "VeryLazy", -- NOTE to ensure it's loaded before whichkey set the keymaps; or can set manually,
+        event = "VeryLazy", -- NOTE to ensure it's loaded before whichkey set the keymaps; or can set manually, wait for caskey's support
         config = function()
             require("plugins.tool.legendary").setup()
         end,
@@ -302,6 +298,55 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "sindrets/winshift.nvim",
+        name = "winshift",
+        cmd = {
+            "WinShift",
+        },
+        config = function()
+            require("plugins.tool.windows.winshift").setup()
+        end,
+    },
+
+    {
+        "anuvyklack/windows.nvim",
+        name = "windows",
+        dependencies = {
+            { "anuvyklack/middleclass" },
+            { "anuvyklack/animation.nvim", name = "animation" },
+        },
+        cmd = {
+            "WindowsMaximize",
+            "WindowsMaximizeVertically",
+            "WindowsMaximizeHorizontally",
+            "WindowsEqualize",
+        },
+        config = function()
+            require("plugins.tool.windows.windows").setup()
+        end,
+    },
+
+    {
+        "mrjones2014/smart-splits.nvim",
+        name = "smart_splits",
+        cmd = {
+            "GotoLeftWindow",
+            "GotoRightWindow",
+            "GotoDownWindow",
+            "GotoUpWindow",
+            "StartResizeMode",
+            "ResizeWindowLeft",
+            "ResizeWindowDown",
+            "ResizeWindowRight",
+            "ResizeWindowUp",
+        },
+        config = function()
+            require("plugins.tool.windows.smart_splits").setup()
+            require("plugins.tool.windows.smart_splits").setup_cmd()
+        end,
+    },
+
     -- ░█████╗░░█████╗░██████╗░██╗███╗░░██╗░██████╗░
     -- ██╔══██╗██╔══██╗██╔══██╗██║████╗░██║██╔════╝░
     -- ██║░░╚═╝██║░░██║██║░░██║██║██╔██╗██║██║░░██╗░
@@ -310,18 +355,19 @@ require("lazy").setup({
     -- ░╚════╝░░╚════╝░╚═════╝░╚═╝╚═╝░░╚══╝░╚═════╝░
 
     {
-        "rmagatti/alternate-toggler",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.coding.alternate_toggler").setup()
-        end,
-    },
-
-    {
         "max397574/better-escape.nvim",
         event = "ModeChanged",
         config = function()
             require("plugins.coding.better_escape").setup()
+        end,
+    },
+
+    {
+        "ckolkey/ts-node-action",
+        name = "ts_node_action",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.coding.ts_node_action").setup()
         end,
     },
 
@@ -340,7 +386,11 @@ require("lazy").setup({
 
     {
         "numToStr/Comment.nvim",
-        event = "InsertEnter",
+        name = "comment",
+        event = "VeryLazy",
+        dependencies = {
+            { "JoosepAlviste/nvim-ts-context-commentstring", name = "ts_ctx_commentstring" },
+        },
         config = function()
             require("plugins.coding.comment").setup()
         end,
@@ -432,18 +482,6 @@ require("lazy").setup({
         end,
     },
 
-    -- code splits
-    {
-        "Wansmer/treesj",
-        enabled = false,
-        keys = {
-            "sj",
-        },
-        config = {
-            use_default_keymaps = false,
-        },
-    },
-
     -- ███████╗██████╗░██╗████████╗░█████╗░██████╗░
     -- ██╔════╝██╔══██╗██║╚══██╔══╝██╔══██╗██╔══██╗
     -- █████╗░░██║░░██║██║░░░██║░░░██║░░██║██████╔╝
@@ -522,21 +560,28 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "sindrets/diffview.nvim",
+        name = "diffview",
+        cmd = "DiffviewOpen",
+        config = function()
+            require("plugins.editor_enhancement.git.diffview").setup()
+        end,
+    },
+
     -- ▀█▀ █▀█ █▀▀ █▀▀ █▀ █ ▀█▀ ▀█▀ █▀▀ █▀█
     -- ░█░ █▀▄ ██▄ ██▄ ▄█ █ ░█░ ░█░ ██▄ █▀▄
+
+    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    { "nvim-treesitter/nvim-treesitter-context", name = "ts_context", event = "VeryLazy" },
     {
         "nvim-treesitter/nvim-treesitter",
         dev = false,
         build = ":TSUpdate",
         event = "BufReadPost",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            "RRethy/nvim-treesitter-textsubjects",
-            "nvim-treesitter/nvim-treesitter-refactor",
+            { "RRethy/nvim-treesitter-textsubjects", name = "ts_textsubjects" }, --TODO
         },
-        init = function()
-            require("plugins.editor_enhancement.treesitter").setup_cmd()
-        end,
         config = function()
             require("plugins.editor_enhancement.treesitter").setup()
         end,
@@ -560,6 +605,9 @@ require("lazy").setup({
         },
         keys = "<leader>f",
         cmd = "Telescope",
+        init = function()
+            require("plugins.editor_enhancement.telescope").init_cmds()
+        end,
         config = function()
             require("plugins.editor_enhancement.telescope").setup()
         end,

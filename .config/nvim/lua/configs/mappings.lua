@@ -1,8 +1,6 @@
 -- Global Keymappings
 -- ~~~~~~~~~~~~~~~~~~
 
--- TODO manage ALL keymaps here
-
 local ck = require("caskey")
 local cmd = ck.cmd
 local emitted = ck.emitted
@@ -11,45 +9,52 @@ local ft = ck.ft
 return {
     mode = { "n" },
 
-    ["j"] = { act = "v:count == 0 ? 'gj': 'j'", expr = true, desc = "Go down" },
-    ["k"] = { act = "v:count == 0 ? 'gk':'k'", expr = true, desc = "Go up" },
+    ["j"] = { act = "v:count == 0 ? 'gj': 'j'", expr = true, desc = "Jump one line down" },
+    ["k"] = { act = "v:count == 0 ? 'gk':'k'", expr = true, desc = "Jump one line up" },
 
-    ["H"] = { act = "_", desc = "Head of line" },
-    ["L"] = { act = "$", desc = "Last of line" },
+    -- Motion inside buffer
+    ["g"] = {
+        name = "Goto",
 
+        ["t"] = { act = "gg", desc = "Top of the buffer" },
+        ["b"] = { act = "G", desc = "Bottom of the buffer" },
+        ["h"] = { act = "_", desc = "Head of the line" },
+        ["l"] = { act = "$", desc = "Last of the line" },
+        ["u"] = { act = "<c-u>", desc = "Scroll up" },
+        ["d"] = { act = "<C-d>", desc = "Scroll down" },
+    },
+    -- Treesitter Node Action
+    ["n"] = { act = require("ts-node-action").node_action, desc = "TS Node Action" },
+    --
     ["<A-r>"] = { act = "<C-r>", desc = "Redo" },
-
-    -- scrolling
-    ["<S-u>"] = { act = "<C-u>", desc = "Scroll up" },
-    ["<S-d>"] = { act = "<C-d>", desc = "Scroll down" },
 
     -- Buffer
     ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
     -- Comment
-    ["gcc"] = {
+    ["cc"] = {
         act = "v:count ==  0 ? '<Plug>(comment_toggle_linewise_current)': '<Plug>(comment_toggle_linewise_count)'",
         desc = "Comment linewise",
         expr = true,
     },
-    ["gc"] = { act = "<Plug>(comment_toggle_linewise)", desc = "Comment toggle linewise" },
+    ["CC"] = { act = "<Plug>(comment_toggle_linewise)", desc = "Comment linewise" },
     {
         mode = "x",
-        ["gc"] = {
+        ["CC"] = {
             act = "<Plug>(comment_toggle_linewise_visual)",
             desc = "Comment linewise",
         },
     },
-    ["gbb"] = {
+    ["bb"] = {
         act = "v:count == 0 ? '<Plug>(comment_toggle_blockwise_current)' : '<Plug>(comment_toggle_blockwise_count)'",
         desc = "Comment blockwise",
         expr = true,
     },
-    ["gb"] = { act = "<Plug>(comment_toggle_blockwise)", desc = "Comment blockwise" },
+    ["BB"] = { act = "<Plug>(comment_toggle_blockwise)", desc = "Comment blockwise" },
     {
         mode = "x",
-        ["gb"] = { act = "<Plug>(comment_toggle_blockwise_visual)", desc = "Comment blockwise" },
+        ["BB"] = { act = "<Plug>(comment_toggle_blockwise_visual)", desc = "Comment blockwise" },
     },
     -- todo blockwise
 
@@ -76,11 +81,19 @@ return {
         ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
     },
     -- Leader Starts
+    -- todo <leader>number => window navigation
+
+    ["<leader><BS>"] = { act = "O<Esc>", desc = "New line up" },
+    ["<leader><Enter>"] = { act = "o<Esc>", desc = "New line down" },
+
     -- 🅰 Actions
     ["<leader>a"] = {
         name = "Actions",
 
-        s = { act = "<cmd>w<CR><Esc>", desc = "Save buffer" }, -- TODO notify
+        s = {
+            act = "<cmd>w<CR><Esc>",
+            desc = "Save buffer",
+        }, -- TODO notify
     },
 
     -- 🅱 Buffer
@@ -98,16 +111,9 @@ return {
     ["<leader>f"] = {
         name = "Find",
 
+        -- TODO
         b = {
-            act = function()
-                require("telescope") -- make sure telescope is started
-                require("telescope.builtin").current_buffer_fuzzy_find(
-                    require("telescope.themes").get_dropdown({
-                        winblend = 10,
-                        previewer = false,
-                    })
-                )
-            end,
+            act = cmd("SearchInBuffer"),
             desc = "Search in buffer",
         },
         f = { act = cmd("Telescope find_files"), desc = "Files" },
@@ -186,11 +192,50 @@ return {
 
     -- 🆆 Windows
     ["<leader>w"] = {
-        act = function()
-            local hydra = require("hydras.windows-hydra").init_hydra()
-            hydra:activate()
-        end,
-        desc = "[Hydra] Windows",
+
+        name = "Windows",
+
+        -- Navigation between windows
+        ["h"] = { act = cmd("GotoLeftWindow"), desc = "Go to left window" },
+        ["j"] = { act = cmd("GotoDownWindow"), desc = "Go to down window" },
+        ["k"] = { act = cmd("GotoUpWindow"), desc = "Go to up window" },
+        ["l"] = { act = cmd("GotoRightWindow"), desc = "Go to right window" },
+        ["q"] = { act = "<C-w>q", desc = "Quit the current window" },
+
+        -- Window Resize
+        ["r"] = { act = cmd("StartResizeMode"), desc = "Start window resize mode" },
+
+        ["H"] = { act = cmd("ResizeWindowLeft"), desc = "Resize window left" },
+        ["K"] = { act = cmd("ResizeWindowUp"), desc = "Resize window up" },
+        ["J"] = { act = cmd("ResizeWindowDown"), desc = "Resize window down" },
+        ["L"] = { act = cmd("ResizeWindowRight"), desc = "Resize window right" },
+
+        -- Window Maximize
+        ["M"] = { act = cmd("WindowsMaximize"), desc = "Maximize" },
+        ["_"] = { act = cmd("WindowsMaximizeHorizontally"), desc = "Maximize horizontally" },
+        ["|"] = { act = cmd("WindowsMaximizeVertically"), desc = "Maximize vertically" },
+        ["E"] = { act = cmd("WindowsEqualize"), desc = "Equalize" },
+
+        -- WinShift (move window)
+        ["<Left>"] = { act = cmd("WinShift left"), desc = "Move window left" },
+        ["<Down>"] = { act = cmd("WinShift down"), desc = "Move window down" },
+        ["<Up>"] = { act = cmd("WinShift up"), desc = "Move window up" },
+        ["<Right>"] = { act = cmd("WinShift right"), desc = "Move window right" },
+        ["<S-Left>"] = { act = cmd("WinShift far_left"), desc = "Move window far left" },
+        ["<S-Up>"] = { act = cmd("WinShift far_up"), desc = "Move window far up" },
+        ["<S-Down>"] = { act = cmd("WinShift far_down"), desc = "Move window far down" },
+        ["<S-Right>"] = { act = cmd("WinShift far_right"), desc = "Move window far right" },
+
+        ["s"] = { act = "<C-w>s", desc = "Split window horizontally" },
+        ["v"] = { act = "<C-w>v", desc = "Split window vertically" },
+
+        ["<Enter>"] = {
+            act = function()
+                local hydra = require("hydras.windows-hydra").init_hydra()
+                hydra:activate()
+            end,
+            desc = "[Hydra] Windows",
+        },
     },
 
     -- 🆇
@@ -242,25 +287,25 @@ return {
                 act = function()
                     require("goto-preview").goto_preview_definition()
                 end,
-                desc = "[LSP] Goto definition",
+                desc = "[LSP] Goto preview definition",
             },
             ["i"] = {
                 act = function()
                     require("goto-preview").goto_preview_implementation()
                 end,
-                desc = "[LSP] Goto implementation",
+                desc = "[LSP] Goto preivew implementation",
             },
             ["t"] = {
                 act = function()
                     require("goto-preview").goto_preview_type_definition()
                 end,
-                desc = "[LSP] Goto type definition",
+                desc = "[LSP] Goto preview type definition",
             },
             ["r"] = {
                 act = function()
                     require("goto-preview").goto_preview_reference()
                 end,
-                desc = "[LSP] Goto reference",
+                desc = "[LSP] Goto preview reference",
             },
             ["q"] = {
                 act = function()
