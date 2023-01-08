@@ -213,6 +213,7 @@ require("lazy").setup({
 
     {
         "nvim-lualine/lualine.nvim",
+	name = "lualine",
         event = "VeryLazy",
         config = function()
             require("plugins.ui.lualine").setup()

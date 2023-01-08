@@ -41,11 +41,8 @@ M.setup = function()
                 -- TODO hydra integration
             },
             -- right side
-            lualine_x = {
-                "filename",
-                "fileformat",
-            },
-            lualine_y = { "progress", "location" },
+            lualine_x = {},
+            lualine_y = { "buffers" }, -- BUG see https://github.com/nvim-lualine/lualine.nvim/issues/931
             lualine_z = {
                 {
                     function()
@@ -57,7 +54,7 @@ M.setup = function()
                     cond = function()
                         local up_time = os.difftime(os.time(), _G.init_time)
                         return up_time <= 10 -- only last for 10s
-                    end
+                    end,
                 },
                 {
                     function()
@@ -87,17 +84,7 @@ M.setup = function()
             lualine_z = {},
         },
         tabline = {},
-        -- top bar below bufferline
-        winbar = {
-            -- lualine_b = {},
-            -- lualine_x = {},
-            -- lualine_y = {},
-            -- lualine_z = {}
-        },
-        inactive_winbar = {},
-        extensions = {
-            "toggleterm",
-        },
+        extensions = {},
     })
 end
 
