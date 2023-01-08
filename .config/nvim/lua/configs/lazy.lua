@@ -385,14 +385,15 @@ require("lazy").setup({
     },
 
     {
-        "numToStr/Comment.nvim",
-        name = "comment",
+        "echasnovski/mini.comment",
+        name = "mini_comment",
         event = "VeryLazy",
+        -- keys = { { "cc", mode = { "n", "x" } }, { "ccc" } },
         dependencies = {
             { "JoosepAlviste/nvim-ts-context-commentstring", name = "ts_ctx_commentstring" },
         },
         config = function()
-            require("plugins.coding.comment").setup()
+            require("plugins.coding.mini_comment").setup()
         end,
     },
 
@@ -412,6 +413,25 @@ require("lazy").setup({
         },
         config = function()
             require("plugins.coding.ufo").setup()
+        end,
+    },
+    -- mini.ai
+    {
+        "echasnovski/mini.ai",
+        name = "mini_ai",
+        dependencies = {
+            {
+                "nvim-treesitter/nvim-treesitter-textobjects",
+                name = "ts_textobjects",
+                init = function()
+                    -- no need to load the plugin, since we only need its queries
+                    require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+                end,
+            },
+        },
+        keys = { { "a", mode = { "x", "o" } }, { "i", mode = { "x", "o" } } },
+        config = function()
+            require("plugins.coding.mini_ai").setup()
         end,
     },
 
@@ -579,9 +599,6 @@ require("lazy").setup({
         dev = false,
         build = ":TSUpdate",
         event = "BufReadPost",
-        dependencies = {
-            { "RRethy/nvim-treesitter-textsubjects", name = "ts_textsubjects" }, --TODO
-        },
         config = function()
             require("plugins.editor_enhancement.treesitter").setup()
         end,

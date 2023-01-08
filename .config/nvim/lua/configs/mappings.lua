@@ -33,31 +33,23 @@ return {
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
     -- Comment
-    ["cc"] = {
-        act = "v:count ==  0 ? '<Plug>(comment_toggle_linewise_current)': '<Plug>(comment_toggle_linewise_count)'",
-        desc = "Comment linewise",
-        expr = true,
+    ["cc"] = { act = "v:lua.MiniComment.operator()", desc = "Comment textobject", expr = true },
+    {
+        mode = "o",
+        ["cc"] = { act = cmd("lua MiniComment.textobject()"), desc = "Comment textobject" },
     },
-    ["CC"] = { act = "<Plug>(comment_toggle_linewise)", desc = "Comment linewise" },
     {
         mode = "x",
-        ["CC"] = {
-            act = "<Plug>(comment_toggle_linewise_visual)",
-            desc = "Comment linewise",
+        ["cc"] = {
+            act = [[:<c-u>lua MiniComment.operator('visual')<cr>]],
+            desc = "Comment selection",
         },
     },
-    ["bb"] = {
-        act = "v:count == 0 ? '<Plug>(comment_toggle_blockwise_current)' : '<Plug>(comment_toggle_blockwise_count)'",
-        desc = "Comment blockwise",
+    ["ccc"] = {
+        act = "v:lua.MiniComment.operator() . '_'",
+        desc = "Comment current line",
         expr = true,
     },
-    ["BB"] = { act = "<Plug>(comment_toggle_blockwise)", desc = "Comment blockwise" },
-    {
-        mode = "x",
-        ["BB"] = { act = "<Plug>(comment_toggle_blockwise_visual)", desc = "Comment blockwise" },
-    },
-    -- todo blockwise
-
     --  Gomove
     ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
     ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
