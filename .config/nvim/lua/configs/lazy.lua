@@ -408,23 +408,15 @@ require("lazy").setup({
 
     {
         "kevinhwang91/nvim-ufo",
-        dependencies = "kevinhwang91/promise-async",
+        dependencies = { "kevinhwang91/promise-async", name = "promise_async" },
         name = "ufo",
-        keys = {
-            {
-                "z",
-                function()
-                    local hydra = require("hydras.ufo-hydra").init_hydra()
-                    hydra:activate()
-                end,
-                desc = "[Hydra] UFO",
-            },
-        },
+        keys = { { "zf" } },
         config = function()
             require("plugins.coding.ufo").setup()
+            require("plugins.coding.ufo").setup_cmds()
         end,
     },
-    -- mini.ai
+
     {
         "echasnovski/mini.ai",
         name = "mini_ai",

@@ -29,7 +29,38 @@ return {
     },
     -- Treesitter Node Action
     ["n"] = { act = require("ts-node-action").node_action, desc = "TS Node Action" },
-    --
+
+    ["zf"] = {
+        name = "UFO",
+
+        ["o"] = {
+            act = cmd("UFOOpenAllFolds"),
+            desc = "Open all folds",
+            when = emitted("AllFoldsClosed"),
+        }, -- TODO condition: when there are any folds
+        ["c"] = {
+            act = cmd("UFOCloseAllFolds"),
+            desc = "Close all folds",
+        }, -- TODO condition: when there are any unfolds
+        ["p"] = {
+            act = cmd("UFOGoNextClosedAndPeak"),
+            desc = "Peak next fold",
+            when = emitted("AllFoldsClosed"),
+        },
+        ["P"] = {
+            act = cmd("UFOGoPrevClosedAndPeak"),
+            desc = "Peak previous fold",
+            when = emitted("AllFoldsClosed"),
+        },
+
+        ["<Enter>"] = {
+            act = function()
+                -- TODO
+            end,
+            desc = "[Hydra] UFO",
+        },
+    },
+
     ["<A-r>"] = { act = "<C-r>", desc = "Redo" },
 
     -- Buffer
