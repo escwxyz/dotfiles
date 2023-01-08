@@ -15,6 +15,7 @@ return {
     -- Motion inside buffer
     ["g"] = {
         name = "Goto",
+        mode = { "n", "x" },
 
         ["t"] = { act = "gg", desc = "Top of the buffer" },
         ["b"] = { act = "G", desc = "Bottom of the buffer" },
@@ -22,6 +23,9 @@ return {
         ["l"] = { act = "$", desc = "Last of the line" },
         ["u"] = { act = "<c-u>", desc = "Scroll up" },
         ["d"] = { act = "<C-d>", desc = "Scroll down" },
+
+        ["k"] = { act = "H", desc = "Top of the window" },
+        ["j"] = { act = "L", desc = "Bottom of the window" },
     },
     -- Treesitter Node Action
     ["n"] = { act = require("ts-node-action").node_action, desc = "TS Node Action" },
@@ -33,46 +37,46 @@ return {
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
     -- Comment
-    ["cc"] = { act = "v:lua.MiniComment.operator()", desc = "Comment textobject", expr = true },
-    {
-        mode = "o",
-        ["cc"] = { act = cmd("lua MiniComment.textobject()"), desc = "Comment textobject" },
-    },
-    {
-        mode = "x",
-        ["cc"] = {
-            act = [[:<c-u>lua MiniComment.operator('visual')<cr>]],
-            desc = "Comment selection",
-        },
-    },
-    ["ccc"] = {
-        act = "v:lua.MiniComment.operator() . '_'",
-        desc = "Comment current line",
-        expr = true,
-    },
+    -- ["gc"] = { act = "v:lua.MiniComment.operator()", desc = "Comment textobject", expr = true },
+    -- {
+    --     mode = "o",
+    --     ["gc"] = { act = cmd("lua MiniComment.textobject()"), desc = "Comment textobject" },
+    -- },
+    -- {
+    --     mode = "x",
+    --     ["gc"] = {
+    --         act = [[:<c-u>lua MiniComment.operator('visual')<cr>]],
+    --         desc = "Comment selection",
+    --     },
+    -- },
+    -- ["gcc"] = {
+    --     act = "v:lua.MiniComment.operator() . '_'",
+    --     desc = "Comment current line",
+    --     expr = true,
+    -- },
     --  Gomove
-    ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
-    ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
-    ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
-    ["<A-l>"] = { act = "<Plug>GoNSMRight", desc = "Move right" },
-    ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },
-    ["<A-J>"] = { act = "<Plug>GoNSDDown", desc = "Duplicate down" },
-    ["<A-K>"] = { act = "<Plug>GoNSDUp", desc = "Duplicate up" },
-    ["<A-L>"] = { act = "<Plug>GoNSDRight", desc = "Duplicate right" },
-
-    {
-        mode = { "x" },
-
-        ["<A-h>"] = { act = "<Plug>GoVSMLeft", desc = "Move left" },
-        ["<A-j>"] = { act = "<Plug>GoVSMDown", desc = "Move down" },
-        ["<A-k>"] = { act = "<Plug>GoVSMUp", desc = "Move up" },
-        ["<A-l>"] = { act = "<Plug>GoVSMRight", desc = "Move right" },
-        ["<A-H>"] = { act = "<Plug>GoVSDLeft", desc = "Duplicate left" },
-        ["<A-J>"] = { act = "<Plug>GoVSDDown", desc = "Duplicate down" },
-        ["<A-K>"] = { act = "<Plug>GoVSDUp", desc = "Duplicate up" },
-        ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
-    },
-    -- Leader Starts
+    -- ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
+    -- ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
+    -- ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
+    -- ["<A-l>"] = { act = "<Plug>GoNSMRight", desc = "Move right" },
+    -- ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },
+    -- ["<A-J>"] = { act = "<Plug>GoNSDDown", desc = "Duplicate down" },
+    -- ["<A-K>"] = { act = "<Plug>GoNSDUp", desc = "Duplicate up" },
+    -- ["<A-L>"] = { act = "<Plug>GoNSDRight", desc = "Duplicate right" },
+    --
+    -- {
+    --     mode = { "x" },
+    --
+    --     ["<A-h>"] = { act = "<Plug>GoVSMLeft", desc = "Move left" },
+    --     ["<A-j>"] = { act = "<Plug>GoVSMDown", desc = "Move down" },
+    --     ["<A-k>"] = { act = "<Plug>GoVSMUp", desc = "Move up" },
+    --     ["<A-l>"] = { act = "<Plug>GoVSMRight", desc = "Move right" },
+    --     ["<A-H>"] = { act = "<Plug>GoVSDLeft", desc = "Duplicate left" },
+    --     ["<A-J>"] = { act = "<Plug>GoVSDDown", desc = "Duplicate down" },
+    --     ["<A-K>"] = { act = "<Plug>GoVSDUp", desc = "Duplicate up" },
+    --     ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
+    -- },
+    -- -- Leader Starts
     -- todo <leader>number => window navigation
 
     ["<leader><BS>"] = { act = "O<Esc>", desc = "New line up" },
@@ -170,8 +174,10 @@ return {
     ["<leader>p"] = { act = cmd("Lazy"), desc = "Plugins" },
 
     -- 🆀 QuickFix
-
-    -- 🆁 Runner
+    --
+    -- Normal mode sniprun
+    -- 🆁 Refactor
+    ["<leader>r"] = { act = cmd("Refactor"), desc = "Refactor", mode = "v" },
 
     -- 🆂 Session
 

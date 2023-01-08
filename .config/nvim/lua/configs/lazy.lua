@@ -356,9 +356,19 @@ require("lazy").setup({
 
     {
         "max397574/better-escape.nvim",
+        name = "better_escape",
         event = "ModeChanged",
         config = function()
             require("plugins.coding.better_escape").setup()
+        end,
+    },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        name = "refactoring",
+        cmd = "Refactor",
+        config = function()
+            require("plugins.coding.refactoring").setup()
+            require("plugins.coding.refactoring").setup_cmds()
         end,
     },
 
@@ -387,8 +397,7 @@ require("lazy").setup({
     {
         "echasnovski/mini.comment",
         name = "mini_comment",
-        event = "VeryLazy",
-        -- keys = { { "cc", mode = { "n", "x" } }, { "ccc" } },
+        keys = { { "gc", mode = { "n", "x" } }, { "gcc" } },
         dependencies = {
             { "JoosepAlviste/nvim-ts-context-commentstring", name = "ts_ctx_commentstring" },
         },
@@ -486,10 +495,13 @@ require("lazy").setup({
 
     -- surround
     {
-        "kylechui/nvim-surround",
-        event = "InsertEnter",
+        "echasnovski/mini.surround",
+        name = "mini_surround",
+        keys = {
+            "ms", -- [m]ini [s]urround
+        },
         config = function()
-            require("nvim-surround").setup()
+            require("plugins.coding.mini_surround").setup()
         end,
     },
 
