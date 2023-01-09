@@ -34,6 +34,9 @@ local Time = {
                     self.up_time % 60
                 )
         end,
+        hl = function(self)
+            return self.up_time >= 1800 and { fg = colors.yellow } or { fg = colors.text }
+        end,
     },
     -- Current Time
     {

@@ -20,21 +20,24 @@ local Diagnostics = require("plugins.ui.heirline.components.diagnostics")
 
 local Buffers = require("plugins.ui.heirline.components.buffers")
 
-local Space = { provider = " " } -- no colored
+local Hydra = require("plugins.ui.heirline.components.hydra")
+
+local Space = { provider = " ", hl = { fg = colors.mantle, bg = colors.mantle } }
 
 local default_statusline = {
     ViMode,
     GitStatus,
-    -- TODO   Buffers,
+    Space,
+    -- Buffers,
     Space,
     Navic,
+    Align,
+    Hydra,
     Align,
     Diagnostics,
     Space,
     Time,
 }
-
-local hydra_statusline = {}
 
 local StatusLines = { default_statusline }
 

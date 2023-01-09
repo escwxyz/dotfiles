@@ -1,39 +1,28 @@
---- Global Inital Settings
---- ~~~~~~~~~~~~~~~~~~~~~~
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Global Settings
+-- ~~~~~~~~~~~~~~~
+-- https://neovim.io/doc/user/options.html
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.undofile = true
+vim.opt.breakindent = true
 
-vim.opt.termguicolors = true
+-- vim.opt.clipboard = "unamedplus"
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.cmdheight = 0
 
-vim.o.updatetime = 250
+vim.opt.cmdwinheight = 5
 
-vim.o.completeopt = "menu,menuone,noselect"
+vim.opt.colorcolumn = { "+1" }
 
-vim.o.timeoutlen = 250
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.opt.columns = 9999
 
-vim.opt.list = true
-vim.opt.listchars:append("space:·")
-vim.opt.listchars:append("eol:↴")
+vim.opt.completeopt:append({ "menuone", "noinsert" })
 
-vim.o.breakindent = true
+vim.opt.confirm = true
 
-vim.o.undofile = true
+-- vim.opt.cursorbind = true set this when in git diffview
 
--- windows
-vim.o.winwidth = 10
-vim.o.winminwidth = 10
-vim.o.equalalways = false
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = "white", bold = true })
--- windows separator
+-- vim.opt.cursorline / cursorcolumn => autocmds
+vim.opt.equalalways = false
+
 vim.opt.fillchars = {
     horiz = "━",
     horizup = "┻",
@@ -42,26 +31,87 @@ vim.opt.fillchars = {
     vertleft = "┫",
     vertright = "┣",
     verthoriz = "╋",
+    foldopen = "",
+    foldclose = "",
+    diff = "/",
+    eob = " ",
 }
 
-vim.g.transparent_enabled = false -- todo put this as a theme opt
+vim.opt.foldlevel = 99
 
-vim.o.cmdheight = 0 -- the ui is buggy
+vim.opt.foldlevelstart = 99
 
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = "*",
-})
+-- vim.opt.guicursor = "n-c:hor50,i-ci-ve:ver25"
 
-vim.o.foldcolumn = "0"
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+vim.opt.ignorecase = true -- ignore case in search patterns /
 
-vim.o.sessionoptions =
-    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.laststatus = 3
+
+vim.opt.list = true
+
+vim.opt.listchars:append("space:·")
+
+vim.opt.listchars:append("eol:↴")
+
+vim.opt.mouse = ""
+
+vim.opt.nrformats:append("alpha")
+
+vim.opt.number = true
+
+vim.opt.pastetoggle = "`"
+
+vim.opt.pumblend = 20
+
+vim.opt.pumheight = 40 -- max number of items shown in the popup menu
+
+vim.opt.relativenumber = true
+
+vim.opt.ruler = false
+
+vim.opt.showcmd = false
+
+vim.opt.showmode = false
+
+vim.opt.smartcase = true
+
+vim.opt.splitright = true
+
+vim.opt.tabstop = 4
+
+vim.opt.termguicolors = true
+
+vim.opt.timeoutlen = 250
+
+vim.opt.undofile = true
+
+vim.opt.undolevels = 100
+
+vim.opt.updatetime = 250
+
+vim.opt.visualbell = true
+
+vim.opt.wildmode = { "full", "longest" }
+
+vim.opt.winblend = 20
+
+vim.opt.winwidth = 10
+
+vim.opt.wrap = false
+
+-- vim.api.nvim_set_hl(0, "WinSeparator", { fg = "white", bold = true })
+--
+-- vim.g.transparent_enabled = false -- todo put this as a theme opt
+--
+-- -- See `:help vim.highlight.on_yank()`
+-- local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--     callback = function()
+--         vim.highlight.on_yank()
+--     end,
+--     group = highlight_group,
+--     pattern = "*",
+-- })
+--
+-- vim.o.sessionoptions =
+--     "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
