@@ -1,8 +1,8 @@
 local M = {}
 
-local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.8.1/'
-local codelldb_path = extension_path .. 'adapter/codelldb'
-local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.8.1/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 -- TODO load time is significant
 
@@ -10,26 +10,25 @@ local capabilities = require("lsp.lsp_config").capabilities
 local on_attach = require("lsp.lsp_config").on_attach
 
 M.setup = function()
-    require("rust-tools").setup {
+    require("rust-tools").setup({
         server = {
             standalone = false,
             capabilities = capabilities,
             on_attach = function(_, bufnr)
                 on_attach(_, bufnr)
+                require("caskey").emit("RustAnalyzerAttached", bufnr)
                 -- TODO add more rust specific keymaps
             end,
             settings = {
                 ["rust-analyzer"] = {
                     checkOnSave = {
-                        command = "clippy"
+                        command = "clippy",
                     },
-                    -- https://github.com/simrat39/rust-tools.nvim/issues/300
-                    inlayHints = { locationLinks = false },
-                },
-            }
+               },
+            },
         },
         dap = {
-            adapters = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path) -- todo may use adapter from mason
+            adapters = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path), -- todo may use adapter from mason
         },
         tools = {
             -- how to execute terminal commands
@@ -184,7 +183,7 @@ M.setup = function()
                 },
             },
         },
-    }
+    })
 end
 
 return M
