@@ -31,9 +31,9 @@ window:
   # must be non-zero for this to take effect. The number of columns must be at
   # least `2`, while using a value of `0` for columns and lines will fall back
   # to the window manager's recommended size
-  #dimensions:
-  #  columns: 0
-  #  lines: 0
+  dimensions:
+    columns: 100
+    lines: 25
 
   # Window position (changes require restart)
   #
@@ -48,11 +48,11 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
-    y: 0
+    x: 20
+    y: 20
 
   # Spread additional padding evenly around the terminal content.
-  #dynamic_padding: false
+  dynamic_padding: false
 
   # Window decorations
   #
@@ -159,7 +159,7 @@ font:
   #style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 13.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -852,8 +852,8 @@ key_bindings:
   # TODO may need to adjust after config window manager
   - { key: Return, mods: Control, action: ToggleFullscreen }
   - { key: Q, mods: Control, action: Quit }
-  - { key: V, mods: Control, mode: ~Vi, action: Paste }
-  - { key: C, mods: Control|Shift, action: Copy}
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
   - { key: M, mods: Control, action: Minimize }
   - { key: H, mods: Control, action: Hide }
   - { key: Equals, mods: Control, action: IncreaseFontSize }

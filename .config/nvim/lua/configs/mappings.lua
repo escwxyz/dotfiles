@@ -86,7 +86,7 @@ return {
     -- ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
     -- ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
     -- ["<A-l>"] = { act = "<Plug>GoNSMRight", desc = "Move right" },
-    -- ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },[nvim]: refactor [nvim]: refactor windows management[nvim]: refactor windows managementwindows management
+    -- ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },
     -- ["<A-J>"] = { act = "<Plug>GoNSDDown", desc = "Duplicate down" },
     -- ["<A-K>"] = { act = "<Plug>GoNSDUp", desc = "Duplicate up" },
     -- ["<A-L>"] = { act = "<Plug>GoNSDRight", desc = "Duplicate right" },
