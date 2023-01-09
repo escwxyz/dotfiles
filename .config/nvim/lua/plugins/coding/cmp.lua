@@ -73,7 +73,7 @@ M.setup = function()
             },
             format = function(entry, vim_item)
                 vim_item.kind =
-                string.format("%s", require("configs.icons").kind_icons[vim_item.kind])
+                    string.format("%s", require("configs.icons").kind_icons[vim_item.kind])
 
                 vim_item.menu = ({
                     buffer = "[Buffer]",

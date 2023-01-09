@@ -6,6 +6,9 @@ local cmd = ck.cmd
 local emitted = ck.emitted
 local ft = ck.ft
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 return {
     mode = { "n" },
 
@@ -28,7 +31,7 @@ return {
         ["j"] = { act = "L", desc = "Bottom of the window" },
     },
     -- Treesitter Node Action
-    ["n"] = { act = require("ts-node-action").node_action, desc = "TS Node Action" },
+    ["n"] = { act = cmd("NodeAction"), desc = "TS Node Action" },
 
     ["zf"] = {
         name = "UFO",
@@ -51,13 +54,6 @@ return {
             act = cmd("UFOGoPrevClosedAndPeak"),
             desc = "Peak previous fold",
             when = emitted("AllFoldsClosed"),
-        },
-
-        ["<Enter>"] = {
-            act = function()
-                -- TODO
-            end,
-            desc = "[Hydra] UFO",
         },
     },
 
@@ -90,7 +86,7 @@ return {
     -- ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
     -- ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
     -- ["<A-l>"] = { act = "<Plug>GoNSMRight", desc = "Move right" },
-    -- ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },
+    -- ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },[nvim]: refactor [nvim]: refactor windows management[nvim]: refactor windows managementwindows management
     -- ["<A-J>"] = { act = "<Plug>GoNSDDown", desc = "Duplicate down" },
     -- ["<A-K>"] = { act = "<Plug>GoNSDUp", desc = "Duplicate up" },
     -- ["<A-L>"] = { act = "<Plug>GoNSDRight", desc = "Duplicate right" },
@@ -123,7 +119,7 @@ return {
         }, -- TODO notify
     },
 
-    -- 🅱 Buffer
+    -- 🅱  TODO
 
     -- 🅲 Command Palette
     ["<leader>c"] = { act = cmd("Legendary"), desc = "Command Palette" },

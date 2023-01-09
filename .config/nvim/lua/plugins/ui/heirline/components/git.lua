@@ -55,7 +55,7 @@ local GitStatus = {
     },
     {
         provider = "",
-        hl = { fg = colors.surface1, bg = colors.surface2 },
+        hl = { fg = colors.surface1, bg = colors.mantle },
     },
 }
 

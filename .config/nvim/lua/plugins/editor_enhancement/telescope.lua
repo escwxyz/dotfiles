@@ -40,4 +40,20 @@ M.setup = function()
     require("hydras.telescope-hydra").init_hydra()
 end
 
+local function search_in_buffer()
+    local ok, telescope = pcall(require, "telescope.builtin")
+    if not ok then
+        vim.notify("Telescope not initialized", vim.log.levels.ERROR)
+        return
+    end
+    telescope.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+        winblend = 10,
+        previewer = false,
+    }))
+end
+
+M.init_cmds = function()
+    vim.api.nvim_buf_create_user_command(0, "SearchInBuffer", search_in_buffer, {})
+end
+
 return M
