@@ -213,10 +213,22 @@ require("lazy").setup({
 
     {
         "nvim-lualine/lualine.nvim",
-	name = "lualine",
+        enabled = false,
+        name = "lualine",
         event = "VeryLazy",
         config = function()
             require("plugins.ui.lualine").setup()
+        end,
+    },
+
+    {
+        "rebelot/heirline.nvim",
+        enabled = true,
+        name = "heirline",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.ui.heirline").setup()
+            require("plugins.ui.heirline").setup_colors()
         end,
     },
 
@@ -376,9 +388,10 @@ require("lazy").setup({
     {
         "ckolkey/ts-node-action",
         name = "ts_node_action",
-        event = "VeryLazy",
+        cmd = { "NodeAction" },
         config = function()
             require("plugins.coding.ts_node_action").setup()
+            require("plugins.coding.ts_node_action").setup_cmds()
         end,
     },
 
@@ -532,16 +545,6 @@ require("lazy").setup({
         ft = "qf",
         config = function()
             require("plugins.editor_enhancement.bqf").setup()
-        end,
-    },
-
-    -- █▄▄ █░█ █▀▀ █▀▀ █▀▀ █▀█ █░░ █ █▄░█ █▀▀
-    -- █▄█ █▄█ █▀░ █▀░ ██▄ █▀▄ █▄▄ █ █░▀█ ██▄
-    {
-        "akinsho/bufferline.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.editor_enhancement.bufferline").setup()
         end,
     },
 
