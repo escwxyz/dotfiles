@@ -212,7 +212,13 @@ return {
     ["<leader>r"] = { act = cmd("Refactor"), desc = "Refactor", mode = "v" },
 
     -- 🆂 Session
+    ["<leader>s"] = {
+        name = "Session",
 
+        ["r"] = { act = cmd("Autosession search"), desc = "Restore session" },
+        ["s"] = { act = cmd("SaveSession"), desc = "Save session" },
+        ["d"] = { act = cmd("Autosession delete"), desc = "Delete session" },
+    },
     -- 🆃 Terminal
 
     -- 🆄 Undotree
