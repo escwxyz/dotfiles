@@ -1,8 +1,6 @@
 -- TODO color adjustment
 -- TODO icons
 
-local colors = require("catppuccin.palettes").get_palette("mocha")
-
 local ViMode = {
     init = function(self)
         self.mode = vim.fn.mode(1)
@@ -53,24 +51,9 @@ local ViMode = {
             ["!"] = "SHELL",
             t = "TERMINAL",
         },
-        mode_colors = {
-            n = "red",
-            i = "green",
-            v = "cyan",
-            V = "cyan",
-            ["\22"] = "cyan",
-            c = "orange",
-            s = "purple",
-            S = "purple",
-            ["\19"] = "purple",
-            R = "orange",
-            r = "orange",
-            ["!"] = "red",
-            t = "red",
-        },
         mode_bg_colors = {
-            n = "cyan",
-            i = "purple",
+            n = "blue",
+            i = "green",
             v = "red",
             V = "red",
             ["\22"] = "red",
@@ -84,22 +67,17 @@ local ViMode = {
             t = "cyan",
         },
     },
-    -- {
-    --     provider = function()
-    --         return ""
-    --     end,
-    --     hl = function(self)
-    --         local mode = self.mode:sub(1, 1)
-    --         return { fg = self.mode_bg_colors[mode], bold = true }
-    --     end,
-    -- },
     {
         provider = function(self)
             return "  " .. self.mode_names[self.mode]
         end,
         hl = function(self)
             local mode = self.mode:sub(1, 1)
-            return { fg = "base", bg = self.mode_bg_colors[mode], bold = true }
+            return {
+                fg = (mode == "t" or mode == "!") and "black" or "white",
+                bg = self.mode_bg_colors[mode],
+                bold = true,
+            }
         end,
         update = {
             "ModeChanged",
@@ -109,7 +87,7 @@ local ViMode = {
         provider = "",
         hl = function(self)
             local mode = self.mode:sub(1, 1)
-            return { fg = self.mode_bg_colors[mode], bold = true, bg = colors.surface1 }
+            return { fg = self.mode_bg_colors[mode], bold = true }
         end,
     },
 }

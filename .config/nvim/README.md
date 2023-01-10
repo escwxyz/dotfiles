@@ -33,7 +33,7 @@
 - unify shared icons for different plugins
 - noice lsp status overlap lualine
 - unify ui with dressing.nvim
-
+- hydra freezes statusline
 ## Notes
 
 - Any operation that needs to be persistant, use hydra (not exit the panel); otherwise use which key

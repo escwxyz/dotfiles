@@ -67,6 +67,7 @@ local lazy_config = {
                 "tohtml",
                 "tutor",
                 "zipPlugin",
+                "shada",
             },
         },
     },
@@ -163,25 +164,23 @@ require("lazy").setup({
         name = "dressing",
         lazy = false,
         config = function()
-            require("plugins.ui.dressing").setup()
+            require("plugins.dressing").setup()
         end,
     },
 
     {
-        "catppuccin/nvim",
+        "rrethy/nvim-base16",
+        name = "base16",
         lazy = false,
-        name = "catppuccin",
         priority = 1000,
-        config = function()
-            require("plugins.ui.catppuccin").setup()
-        end,
+        enabled = true,
     },
 
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "VeryLazy",
         config = function()
-            require("plugins.ui.indent_blankline").setup()
+            require("plugins.indent_blankline").setup()
         end,
     },
 
@@ -191,7 +190,7 @@ require("lazy").setup({
         "rcarriga/nvim-notify",
         event = "VeryLazy",
         config = function()
-            require("plugins.ui.notify").setup()
+            require("plugins.notify").setup()
         end,
     },
 
@@ -199,7 +198,7 @@ require("lazy").setup({
         "SmiteshP/nvim-navic",
         event = "VeryLazy",
         config = function()
-            require("plugins.ui.navic").setup()
+            require("plugins.navic").setup()
         end,
     },
 
@@ -207,17 +206,7 @@ require("lazy").setup({
         "echasnovski/mini.animate",
         event = "VeryLazy",
         config = function()
-            require("plugins.ui.mini_animate").setup()
-        end,
-    },
-
-    {
-        "nvim-lualine/lualine.nvim",
-        enabled = false,
-        name = "lualine",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.ui.lualine").setup()
+            require("plugins.mini_animate").setup()
         end,
     },
 
@@ -227,8 +216,8 @@ require("lazy").setup({
         name = "heirline",
         event = "VeryLazy",
         config = function()
-            require("plugins.ui.heirline").setup()
-            require("plugins.ui.heirline").setup_colors()
+            require("plugins.heirline").setup()
+            -- require("plugins.heirline").setup_colors()
         end,
     },
 
@@ -240,7 +229,7 @@ require("lazy").setup({
             "MunifTanjim/nui.nvim",
         },
         config = function()
-            require("plugins.ui.noice").setup()
+            require("plugins.noice").setup()
         end,
     },
 
@@ -266,7 +255,7 @@ require("lazy").setup({
         "folke/which-key.nvim",
         event = "VeryLazy",
         conifg = function()
-            require("plugins.tool.which_key").setup()
+            require("plugins.which_key").setup()
         end,
     },
 
@@ -274,7 +263,7 @@ require("lazy").setup({
         "mrjones2014/legendary.nvim",
         event = "VeryLazy", -- NOTE to ensure it's loaded before whichkey set the keymaps; or can set manually, wait for caskey's support
         config = function()
-            require("plugins.tool.legendary").setup()
+            require("plugins.legendary").setup()
         end,
     },
 
@@ -283,7 +272,7 @@ require("lazy").setup({
         name = "urlview",
         cmd = "UrlView",
         config = function()
-            require("plugins.tool.urlview").setup()
+            require("plugins.urlview").setup()
         end,
     },
 
@@ -303,11 +292,30 @@ require("lazy").setup({
     },
 
     {
-        "gbprod/yanky.nvim",
+        "rmagatti/auto-session",
+        name = "auto_session",
         event = "VeryLazy",
-        dependencies = "kkharji/sqlite.lua",
         config = function()
-            require("plugins.tool.yanky").setup()
+            require("plugins.auto_session").setup()
+        end,
+    },
+
+    {
+        "kkharji/sqlite.lua",
+        name = "sqlite",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("plugins.sqlite").setup_theme_table()
+        end,
+    },
+
+    {
+        "gbprod/yanky.nvim",
+        name = "yanky",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.yanky").setup()
         end,
     },
 
@@ -318,7 +326,7 @@ require("lazy").setup({
             "WinShift",
         },
         config = function()
-            require("plugins.tool.windows.winshift").setup()
+            require("plugins.windows.winshift").setup()
         end,
     },
 
@@ -336,7 +344,7 @@ require("lazy").setup({
             "WindowsEqualize",
         },
         config = function()
-            require("plugins.tool.windows.windows").setup()
+            require("plugins.windows.windows").setup()
         end,
     },
 
@@ -355,8 +363,8 @@ require("lazy").setup({
             "ResizeWindowUp",
         },
         config = function()
-            require("plugins.tool.windows.smart_splits").setup()
-            require("plugins.tool.windows.smart_splits").setup_cmd()
+            require("plugins.windows.smart_splits").setup()
+            require("plugins.windows.smart_splits").setup_cmd()
         end,
     },
 
@@ -372,7 +380,7 @@ require("lazy").setup({
         name = "better_escape",
         event = "ModeChanged",
         config = function()
-            require("plugins.coding.better_escape").setup()
+            require("plugins.better_escape").setup()
         end,
     },
     {
@@ -380,8 +388,8 @@ require("lazy").setup({
         name = "refactoring",
         cmd = "Refactor",
         config = function()
-            require("plugins.coding.refactoring").setup()
-            require("plugins.coding.refactoring").setup_cmds()
+            require("plugins.refactoring").setup()
+            require("plugins.refactoring").setup_cmds()
         end,
     },
 
@@ -390,8 +398,8 @@ require("lazy").setup({
         name = "ts_node_action",
         cmd = { "NodeAction" },
         config = function()
-            require("plugins.coding.ts_node_action").setup()
-            require("plugins.coding.ts_node_action").setup_cmds()
+            require("plugins.ts_node_action").setup()
+            require("plugins.ts_node_action").setup_cmds()
         end,
     },
 
@@ -404,7 +412,7 @@ require("lazy").setup({
         },
         event = { "CmdlineEnter", "InsertEnter" },
         config = function()
-            require("plugins.coding.cmp").setup()
+            require("plugins.cmp").setup()
         end,
     },
 
@@ -416,7 +424,7 @@ require("lazy").setup({
             { "JoosepAlviste/nvim-ts-context-commentstring", name = "ts_ctx_commentstring" },
         },
         config = function()
-            require("plugins.coding.mini_comment").setup()
+            require("plugins.mini_comment").setup()
         end,
     },
 
@@ -426,8 +434,8 @@ require("lazy").setup({
         name = "ufo",
         keys = { { "zf" } },
         config = function()
-            require("plugins.coding.ufo").setup()
-            require("plugins.coding.ufo").setup_cmds()
+            require("plugins.ufo").setup()
+            require("plugins.ufo").setup_cmds()
         end,
     },
 
@@ -446,7 +454,7 @@ require("lazy").setup({
         },
         keys = { { "a", mode = { "x", "o" } }, { "i", mode = { "x", "o" } } },
         config = function()
-            require("plugins.coding.mini_ai").setup()
+            require("plugins.mini_ai").setup()
         end,
     },
 
@@ -458,7 +466,7 @@ require("lazy").setup({
             "rafamadriz/friendly-snippets",
         },
         config = function()
-            require("plugins.coding.luasnip").setup()
+            require("plugins.luasnip").setup()
         end,
     },
     -- leap
@@ -470,7 +478,7 @@ require("lazy").setup({
         },
         event = "VeryLazy",
         config = function()
-            require("plugins.coding.leap").setup()
+            require("plugins.leap").setup()
         end,
     },
     -- gomove
@@ -478,7 +486,7 @@ require("lazy").setup({
         "booperlv/nvim-gomove",
         event = "VeryLazy",
         config = function()
-            require("plugins.coding.gomove").setup()
+            require("plugins.gomove").setup()
         end,
     },
 
@@ -487,7 +495,7 @@ require("lazy").setup({
         "echasnovski/mini.pairs",
         event = "InsertEnter",
         config = function()
-            require("plugins.coding.mini_pairs").setup()
+            require("plugins.mini_pairs").setup()
         end,
     },
 
@@ -507,7 +515,7 @@ require("lazy").setup({
             "ms", -- [m]ini [s]urround
         },
         config = function()
-            require("plugins.coding.mini_surround").setup()
+            require("plugins.mini_surround").setup()
         end,
     },
 
@@ -516,7 +524,7 @@ require("lazy").setup({
         "folke/todo-comments.nvim",
         event = "VeryLazy",
         config = function()
-            require("plugins.coding.todo_comments").setup()
+            require("plugins.todo_comments").setup()
         end,
     },
 
@@ -544,7 +552,7 @@ require("lazy").setup({
         },
         ft = "qf",
         config = function()
-            require("plugins.editor_enhancement.bqf").setup()
+            require("plugins.bqf").setup()
         end,
     },
 
@@ -553,7 +561,7 @@ require("lazy").setup({
         "numToStr/FTerm.nvim",
         event = "VeryLazy",
         config = function()
-            require("plugins.editor_enhancement.fterm").setup()
+            require("plugins.fterm").setup()
         end,
     },
 
@@ -575,7 +583,7 @@ require("lazy").setup({
             },
         },
         config = function()
-            require("plugins.editor_enhancement.dap").setup()
+            require("plugins.dap").setup()
         end,
     },
 
@@ -584,7 +592,7 @@ require("lazy").setup({
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         config = function()
-            require("plugins.editor_enhancement.git.gitsigns").setup()
+            require("plugins.git.gitsigns").setup()
         end,
     },
 
@@ -593,7 +601,7 @@ require("lazy").setup({
         name = "diffview",
         cmd = "DiffviewOpen",
         config = function()
-            require("plugins.editor_enhancement.git.diffview").setup()
+            require("plugins.git.diffview").setup()
         end,
     },
 
@@ -608,7 +616,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         event = "BufReadPost",
         config = function()
-            require("plugins.editor_enhancement.treesitter").setup()
+            require("plugins.treesitter").setup()
         end,
     },
 
@@ -631,10 +639,10 @@ require("lazy").setup({
         keys = "<leader>f",
         cmd = "Telescope",
         init = function()
-            require("plugins.editor_enhancement.telescope").init_cmds()
+            require("plugins.telescope").init_cmds()
         end,
         config = function()
-            require("plugins.editor_enhancement.telescope").setup()
+            require("plugins.telescope").setup()
         end,
     },
 
@@ -643,7 +651,7 @@ require("lazy").setup({
         "michaelb/sniprun",
         build = "bash ./install.sh",
         config = function()
-            require("plugins.editor_enhancement.sniprun").setup()
+            require("plugins.sniprun").setup()
         end,
     },
 
@@ -651,7 +659,7 @@ require("lazy").setup({
     {
         "stevearc/overseer.nvim",
         config = function()
-            require("plugins.editor_enhancement.overseer").setup()
+            require("plugins.overseer").setup()
         end,
     },
 
@@ -666,7 +674,7 @@ require("lazy").setup({
             "rouge8/neotest-rust",
         },
         config = function()
-            require("plugins.editor_enhancement.neotest").setup()
+            require("plugins.neotest").setup()
         end,
     },
 
@@ -676,7 +684,7 @@ require("lazy").setup({
         event = "VeryLazy",
         enabled = false,
         config = function()
-            require("plugins.editor_enhancement.illuminate").setup()
+            require("plugins.illuminate").setup()
         end,
     },
 
@@ -686,7 +694,7 @@ require("lazy").setup({
         "ThePrimeagen/harpoon",
         keys = "<leader>m",
         config = function()
-            require("plugins.editor_enhancement.harpoon").setup()
+            require("plugins.harpoon").setup()
         end,
     },
 
@@ -695,7 +703,7 @@ require("lazy").setup({
         "is0n/fm-nvim",
         event = "VeryLazy",
         config = function()
-            require("plugins.editor_enhancement.fm").setup()
+            require("plugins.fm").setup()
         end,
     },
 }, lazy_config)

@@ -1,7 +1,5 @@
 local conditions = require("heirline.conditions")
 
-local colors = require("catppuccin.palettes").get_palette("mocha")
-
 local Diagnostics = {
 
     condition = conditions.has_diagnostics,
@@ -34,10 +32,9 @@ local Diagnostics = {
     },
     {
         provider = function(self)
-            -- 0 is just another output, we can decide to print it or not!
             return self.errors > 0 and (" " .. self.error_icon .. self.errors)
         end,
-        hl = { fg = colors.red },
+        -- hl = { fg = colors.red },
     },
     {
         provider = " ",
@@ -49,9 +46,8 @@ local Diagnostics = {
         provider = function(self)
             return self.warnings > 0 and (self.warn_icon .. self.warnings)
         end,
-        hl = { fg = colors.orange },
+        -- hl = { fg = colors.orange },
     },
-    -- space
     {
         provider = " ",
         condition = function(self)
@@ -62,7 +58,7 @@ local Diagnostics = {
         provider = function(self)
             return self.info > 0 and (self.info_icon .. self.info)
         end,
-        hl = { fg = colors.blue },
+        -- hl = { fg = colors.blue },
     },
     {
         provider = " ",
@@ -75,7 +71,7 @@ local Diagnostics = {
         provider = function(self)
             return self.hints > 0 and (self.hint_icon .. self.hints)
         end,
-        hl = { fg = colors.green },
+        -- hl = { fg = colors.green },
     },
 }
 

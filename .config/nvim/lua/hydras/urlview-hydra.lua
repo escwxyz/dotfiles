@@ -8,12 +8,13 @@ local urlview_hydra = Hydra({
     name = "URL",
     config = {
         color = "teal",
-        hint = {
-            position = "middle",
-            border = "rounded",
-        },
+        -- hint = {
+        --     position = "middle",
+        --     border = "rounded",
+        -- },
+        hint = false,
     },
-    hint = require("hydras.hints").urlview_hint,
+    --    hint = require("hydras.hints").urlview_hint,
     heads = {
         { "b", cmd("UrlView"), { desc = "buffer links" } },
         { "p", cmd("UrlView lazy"), { desc = "plugin links" } },

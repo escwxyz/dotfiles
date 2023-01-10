@@ -10,7 +10,7 @@ local Hydra = {
     end,
 
     cond = function(self)
-        return self.is_active
+        return self.is_active and self.hint ~= nil
     end,
 }
 

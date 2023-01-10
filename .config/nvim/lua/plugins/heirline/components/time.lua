@@ -1,5 +1,3 @@
-local colors = require("catppuccin.palettes").get_palette("mocha")
-
 local Time = {
 
     init = function(self)
@@ -8,17 +6,16 @@ local Time = {
         self.up_time = os.difftime(os.time(), _G.init_time)
     end,
 
-    hl = { fg = colors.text, bg = colors.surface0 },
     {
         provider = "",
-        hl = { fg = colors.surface0, bg = colors.mantle },
+        -- hl = { fg = colors.surface0, bg = colors.mantle },
     },
     -- StartUpTime
     {
         provider = function(self)
             return " " .. self.startuptime .. " ms"
         end,
-        hl = { fg = colors.yellow },
+        hl = { fg = "orange" },
         condition = function(self)
             return self.up_time <= 10
         end,
@@ -35,13 +32,13 @@ local Time = {
                 )
         end,
         hl = function(self)
-            return self.up_time >= 1800 and { fg = colors.yellow } or { fg = colors.text }
+            return self.up_time >= 1800 and { fg = "yellow" } or { fg = "white" }
         end,
     },
     -- Current Time
     {
         provider = function()
-            return " " .. os.date("%H:%M")
+            return " " .. os.date("%H:%M") .. " "
         end,
         hl = { bold = true },
     },

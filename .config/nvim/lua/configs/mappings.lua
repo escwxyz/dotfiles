@@ -195,7 +195,12 @@ return {
     -- ["<leader>n"] = {}
 
     -- 🅾 Editor Options
-    -- ["<leader>o"]
+    ["<leader>o"] = {
+        act = function()
+            require("hydras.theme-hydra").init_hydra():activate()
+        end,
+        desc = "[Hydra] Themes",
+    },
 
     -- 🅿 Plugins
     ["<leader>p"] = { act = cmd("Lazy"), desc = "Plugins" },
