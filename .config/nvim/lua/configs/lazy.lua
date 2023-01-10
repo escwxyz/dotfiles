@@ -294,7 +294,7 @@ require("lazy").setup({
     {
         "rmagatti/auto-session",
         name = "auto_session",
-        event = "VeryLazy",
+        cmd = { "Autosession", "SaveSession", "RestoreSession", "DeleteSession" },
         config = function()
             require("plugins.auto_session").setup()
         end,
