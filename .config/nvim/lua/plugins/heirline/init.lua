@@ -6,21 +6,21 @@ local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local Align = { provider = "%=" }
 
-local ViMode = require("plugins.ui.heirline.components.vi_mode")
+local ViMode = require("plugins.heirline.components.vi_mode")
 
-local GitStatus = require("plugins.ui.heirline.components.git")
+local GitStatus = require("plugins.heirline.components.git")
 
-local Time = require("plugins.ui.heirline.components.time")
+local Time = require("plugins.heirline.components.time")
 
-local File = require("plugins.ui.heirline.components.file")
+local File = require("plugins.heirline.components.file")
 
-local Navic = require("plugins.ui.heirline.components.navic")
+local Navic = require("plugins.heirline.components.navic")
 
-local Diagnostics = require("plugins.ui.heirline.components.diagnostics")
+-- local Diagnostics = require("plugins.heirline.components.diagnostics")
 
-local Buffers = require("plugins.ui.heirline.components.buffers")
+local Buffers = require("plugins.heirline.components.buffers")
 
-local Hydra = require("plugins.ui.heirline.components.hydra")
+local Hydra = require("plugins.heirline.components.hydra")
 
 local Space = { provider = " ", hl = { fg = colors.mantle, bg = colors.mantle } }
 
@@ -34,7 +34,7 @@ local default_statusline = {
     Align,
     Hydra,
     Align,
-    Diagnostics,
+    --    Diagnostics,
     Space,
     Time,
 }

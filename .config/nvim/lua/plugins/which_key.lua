@@ -66,7 +66,6 @@ M.setup = function()
         show_help = true, -- show help message on the command line when the popup is visible
         show_keys = true, -- show the currently pressed key and its label as a message in the command line
         triggers = "auto", -- automatically setup triggers
-        -- triggers = {"<leader>"} -- or specify a list manually
         triggers_blacklist = {
             i = { "j", "k" },
             v = { "j", "k" },

@@ -41,7 +41,7 @@ local Time = {
     -- Current Time
     {
         provider = function()
-            return " " .. os.date("%H:%M")
+            return " " .. os.date("%H:%M") .. " "
         end,
         hl = { bold = true },
     },
