@@ -2,22 +2,18 @@ local M = {}
 
 local Hydra = require("hydra")
 
-local theme_list = {
-    "cupcake",
-    "catppuccin",
-    "everforest",
-    "material",
-    "ocean",
-    "oceanicnext",
-    "rose-pine",
-    "rose-pine-dawn",
-    "tokyo-city-dark",
-}
+local theme_list = require("configs.themes").theme_list
 
 local function get_heads()
     local heads = {}
     for k, v in ipairs(theme_list) do
-        table.insert(heads, { tostring(k), "<cmd>colorscheme base16-" .. v .. "<CR>" })
+        table.insert(heads, {
+            tostring(k),
+            function()
+                vim.g.Theme = "base16-" .. v
+                vim.cmd("colorscheme " .. vim.g.Theme)
+            end,
+        })
     end
     table.insert(heads, { "q", nil })
     return heads

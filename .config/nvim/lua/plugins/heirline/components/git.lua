@@ -1,5 +1,4 @@
 local conditions = require("heirline.conditions")
-local colors = require("catppuccin.palettes").get_palette("mocha")
 
 local GitStatus = {
     condition = conditions.is_git_repo,
@@ -10,7 +9,7 @@ local GitStatus = {
             or self.status_dict.changed ~= 0
     end,
 
-    hl = { fg = colors.text, bg = colors.surface1 },
+    -- hl = { fg = colors.text, bg = colors.surface1 },
 
     { -- git branch name
         provider = function(self)
@@ -30,21 +29,21 @@ local GitStatus = {
             local count = self.status_dict.added or 0
             return count > 0 and ("+" .. count)
         end,
-        hl = { fg = colors.green },
+        -- hl = { fg = colors.green },
     },
     {
         provider = function(self)
             local count = self.status_dict.changed or 0
             return count > 0 and (" ~" .. count)
         end,
-        hl = { fg = colors.yellow },
+        -- hl = { fg = colors.yellow },
     },
     {
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and (" -" .. count)
         end,
-        hl = { fg = colors.red },
+        -- hl = { fg = colors.red },
     },
 
     {
@@ -55,7 +54,7 @@ local GitStatus = {
     },
     {
         provider = "",
-        hl = { fg = colors.surface1, bg = colors.mantle },
+        -- hl = { fg = colors.surface1, bg = colors.mantle },
     },
 }
 

@@ -69,9 +69,13 @@ vim.opt.relativenumber = true
 
 vim.opt.ruler = false
 
+vim.opt.sessionoptions:append("localoptions")
+
 vim.opt.showcmd = false
 
 vim.opt.showmode = false
+
+vim.opt.showtabline = 2
 
 vim.opt.smartcase = true
 
@@ -98,20 +102,3 @@ vim.opt.winblend = 20
 vim.opt.winwidth = 10
 
 vim.opt.wrap = false
-
--- vim.api.nvim_set_hl(0, "WinSeparator", { fg = "white", bold = true })
---
--- vim.g.transparent_enabled = false -- todo put this as a theme opt
---
--- -- See `:help vim.highlight.on_yank()`
--- local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
--- vim.api.nvim_create_autocmd("TextYankPost", {
---     callback = function()
---         vim.highlight.on_yank()
---     end,
---     group = highlight_group,
---     pattern = "*",
--- })
---
--- vim.o.sessionoptions =
---     "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

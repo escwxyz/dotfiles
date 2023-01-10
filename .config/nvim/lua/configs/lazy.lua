@@ -67,6 +67,7 @@ local lazy_config = {
                 "tohtml",
                 "tutor",
                 "zipPlugin",
+                "shada",
             },
         },
     },
@@ -168,13 +169,11 @@ require("lazy").setup({
     },
 
     {
-        "catppuccin/nvim",
+        "rrethy/nvim-base16",
+        name = "base16",
         lazy = false,
-        name = "catppuccin",
         priority = 1000,
-        config = function()
-            require("plugins.catppuccin").setup()
-        end,
+        enabled = true,
     },
 
     {
@@ -212,23 +211,13 @@ require("lazy").setup({
     },
 
     {
-        "nvim-lualine/lualine.nvim",
-        enabled = false,
-        name = "lualine",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.lualine").setup()
-        end,
-    },
-
-    {
         "rebelot/heirline.nvim",
         enabled = true,
         name = "heirline",
         event = "VeryLazy",
         config = function()
             require("plugins.heirline").setup()
-            require("plugins.heirline").setup_colors()
+            -- require("plugins.heirline").setup_colors()
         end,
     },
 
@@ -303,9 +292,28 @@ require("lazy").setup({
     },
 
     {
-        "gbprod/yanky.nvim",
+        "rmagatti/auto-session",
+        name = "auto_session",
         event = "VeryLazy",
-        dependencies = "kkharji/sqlite.lua",
+        config = function()
+            require("plugins.auto_session").setup()
+        end,
+    },
+
+    {
+        "kkharji/sqlite.lua",
+        name = "sqlite",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("plugins.sqlite").setup_theme_table()
+        end,
+    },
+
+    {
+        "gbprod/yanky.nvim",
+        name = "yanky",
+        event = "VeryLazy",
         config = function()
             require("plugins.yanky").setup()
         end,

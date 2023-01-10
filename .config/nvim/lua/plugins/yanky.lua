@@ -5,7 +5,7 @@ M.setup = function()
     require("yanky").setup({
         ring = {
             history_length = 100,
-            storage = "shada",
+            storage = "sqlite",
             sync_with_numbered_registers = true,
             cancel_event = "update",
         },
