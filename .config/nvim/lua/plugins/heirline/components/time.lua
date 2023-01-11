@@ -3,7 +3,7 @@ local Time = {
     init = function(self)
         local stats = require("lazy").stats()
         self.startuptime = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        self.up_time = os.difftime(os.time(), _G.init_time)
+        self.up_time = os.difftime(os.time(), vim.g.init_time)
     end,
 
     {

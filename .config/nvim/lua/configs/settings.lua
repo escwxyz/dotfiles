@@ -73,8 +73,6 @@ vim.opt.sessionoptions:append("localoptions")
 
 vim.opt.showcmd = false
 
-vim.opt.showmode = false
-
 vim.opt.showtabline = 2
 
 vim.opt.smartcase = true

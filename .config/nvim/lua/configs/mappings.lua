@@ -194,12 +194,13 @@ return {
     -- 🅽
     -- ["<leader>n"] = {}
 
-    -- 🅾 Editor Options
+    -- 🅾 Editor Options TODO
     ["<leader>o"] = {
         act = function()
-            require("hydras.theme-hydra").init_hydra():activate()
+            local hydra = require("hydras.options-hydra").init_hydra()
+            hydra:activate()
         end,
-        desc = "[Hydra] Themes",
+        desc = "Editor Options",
     },
 
     -- 🅿 Plugins
