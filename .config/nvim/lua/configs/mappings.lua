@@ -380,13 +380,13 @@ return {
         mode = { "n", "x", "o" },
         ["s"] = {
             act = function()
-                require("plugins.coding.leap").search()
+                require("plugins.leap").search()
             end,
             desc = "[Leap] Search",
         },
         ["S"] = {
             act = function()
-                require("plugins.coding.leap").search_cross_window()
+                require("plugins.leap").search_cross_window()
             end,
             desc = "[Leap] Search cross window",
         },

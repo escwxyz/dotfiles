@@ -230,39 +230,13 @@ require("lazy").setup({
             require("plugins.noice").setup()
         end,
     },
-    -- Themes
-    {
-        "rose-pine/neovim",
-        name = "theme_rose_pine",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.colorscheme").setup_rose_pine()
-        end,
-    },
 
     {
-        "catppuccin/nvim",
-        name = "theme_catppuccin",
+        "j-hui/fidget.nvim",
+        name = "fidget",
         event = "VeryLazy",
         config = function()
-            require("plugins.colorscheme").setup_catppuccin()
-        end,
-    },
-
-    {
-        "neanias/everforest-nvim",
-        name = "theme_everforest",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.colorscheme").setup_everforest()
-        end,
-    },
-
-    {
-        "folke/tokyonight.nvim",
-        name = "theme_tokyonight",
-        config = function()
-            require("plugins.colorscheme").setup_tokyonight()
+            require("plugins.fidget").setup()
         end,
     },
 

@@ -4,7 +4,7 @@ local Lazy = {
     provider = function()
         return require("lazy.status").updates() .. " "
     end,
-    hl = { fg = "green", },
+    hl = { fg = "text_highlight", bg = "background" },
 }
 
 return Lazy

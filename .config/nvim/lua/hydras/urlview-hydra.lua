@@ -7,18 +7,12 @@ local cmd = require("hydra.keymap-util").cmd
 local urlview_hydra = Hydra({
     name = "URL",
     config = {
-        color = "teal",
-        -- hint = {
-        --     position = "middle",
-        --     border = "rounded",
-        -- },
-        hint = false,
+        hint = false, --NOTE set to false to show on statusline
     },
-    --    hint = require("hydras.hints").urlview_hint,
     heads = {
-        { "b", cmd("UrlView"), { desc = "buffer links" } },
-        { "p", cmd("UrlView lazy"), { desc = "plugin links" } },
-        { "q", nil, { desc = "quit" } },
+        { "b", cmd("UrlView"), { desc = "buffer links", exit = true } },
+        { "p", cmd("UrlView lazy"), { desc = "plugin links", exit = true } },
+        { "q", nil, { desc = "quit", exit = true } },
     },
 })
 

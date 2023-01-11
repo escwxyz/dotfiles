@@ -119,7 +119,7 @@ M.init_hydra = function()
             {
                 "<Enter>",
                 function()
-                    require("configs.themes").find_themes()
+                    require("plugins.colorscheme").find_themes()
                 end,
                 { exit = true },
             },

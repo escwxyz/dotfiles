@@ -1,15 +1,17 @@
+-- TODO git component disappear when there is popup
+
 local conditions = require("heirline.conditions")
 
 local GitStatus = {
     condition = conditions.is_git_repo,
     init = function(self)
-        self.status_dict = vim.b.gitsigns_status_dict -- this var is from gitsigns
-        self.has_changes = self.status_dict.added ~= 0
+        self.status_dict = vim.b.gitsigns_status_dict -- TODO this var is from gitsigns, it's local to buffer, when open a floating pop, it's gone
+        self.has_changes = self.status_dict ~= nil and self.status_dict.added ~= 0
             or self.status_dict.removed ~= 0
             or self.status_dict.changed ~= 0
     end,
 
-    -- hl = { fg = colors.text, bg = colors.surface1 },
+    hl = { fg = "foreground", bg = "background_nc" },
 
     { -- git branch name
         provider = function(self)
@@ -17,7 +19,7 @@ local GitStatus = {
         end,
         hl = { bold = true },
     },
-    -- You could handle delimiters, icons and counts similar to Diagnostics
+
     {
         condition = function(self)
             return self.has_changes
@@ -29,21 +31,21 @@ local GitStatus = {
             local count = self.status_dict.added or 0
             return count > 0 and ("+" .. count)
         end,
-        -- hl = { fg = colors.green },
+        hl = { fg = "git_add_fg" },
     },
     {
         provider = function(self)
             local count = self.status_dict.changed or 0
             return count > 0 and (" ~" .. count)
         end,
-        -- hl = { fg = colors.yellow },
+        hl = { fg = "git_change_fg" },
     },
     {
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and (" -" .. count)
         end,
-        -- hl = { fg = colors.red },
+        hl = { fg = "git_delete_fg" },
     },
 
     {
@@ -54,7 +56,7 @@ local GitStatus = {
     },
     {
         provider = "",
-        -- hl = { fg = colors.surface1, bg = colors.mantle },
+        hl = { fg = "background_nc", bg = "background" },
     },
 }
 

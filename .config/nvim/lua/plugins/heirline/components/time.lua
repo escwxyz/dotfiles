@@ -5,22 +5,22 @@ local Time = {
         self.startuptime = (math.floor(stats.startuptime * 100 + 0.5) / 100)
         self.up_time = os.difftime(os.time(), vim.g.init_time)
     end,
-
+    hl = { fg = "foreground", bg = "background_nc" },
     {
         provider = "",
-        -- hl = { fg = colors.surface0, bg = colors.mantle },
+        hl = { fg = "background_nc", bg = "background" },
     },
     -- StartUpTime
     {
         provider = function(self)
             return " " .. self.startuptime .. " ms"
         end,
-        hl = { fg = "orange" },
+        hl = { fg = "text_highlight" },
         condition = function(self)
             return self.up_time <= 10
         end,
     },
-    -- UpTime
+    -- UpTime TODO it freezes when open a terminal
     {
         provider = function(self)
             return " ⏱  "

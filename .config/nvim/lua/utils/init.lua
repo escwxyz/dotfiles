@@ -9,4 +9,9 @@ M.indexOf = function(array, value)
     return nil
 end
 
+M.sad = function(line_nr, from, to, fname)
+    local cmd = string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname)
+    vim.cmd(cmd)
+end
+
 return M

@@ -34,6 +34,7 @@
 - noice lsp status overlap lualine
 - unify ui with dressing.nvim
 - hydra freezes statusline
+- statusline is blinking when jumping between themes (not selected)
 ## Notes
 
 - Any operation that needs to be persistant, use hydra (not exit the panel); otherwise use which key
