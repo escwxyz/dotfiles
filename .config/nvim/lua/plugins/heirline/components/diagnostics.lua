@@ -19,22 +19,14 @@ local Diagnostics = {
     end,
 
     update = { "DiagnosticChanged", "BufEnter" },
-    -- TODO
-    on_click = {
-        callback = function()
-            local ok, trouble = pcall(require, "trouble")
-            if not ok then
-                vim.notify("Trouble not initialized")
-            end
-            trouble.toggle({ mode = "document_diagnostics" })
-        end,
-        name = "heirline_diagnostics",
-    },
+
+    hl = { bg = "background" },
+
     {
         provider = function(self)
             return self.errors > 0 and (" " .. self.error_icon .. self.errors)
         end,
-        -- hl = { fg = colors.red },
+        hl = { fg = "diag_error_fg" },
     },
     {
         provider = " ",
@@ -46,7 +38,7 @@ local Diagnostics = {
         provider = function(self)
             return self.warnings > 0 and (self.warn_icon .. self.warnings)
         end,
-        -- hl = { fg = colors.orange },
+        hl = { fg = "diag_warn_fg" },
     },
     {
         provider = " ",
@@ -58,7 +50,7 @@ local Diagnostics = {
         provider = function(self)
             return self.info > 0 and (self.info_icon .. self.info)
         end,
-        -- hl = { fg = colors.blue },
+        hl = { fg = "diag_info_fg" },
     },
     {
         provider = " ",
@@ -71,7 +63,7 @@ local Diagnostics = {
         provider = function(self)
             return self.hints > 0 and (self.hint_icon .. self.hints)
         end,
-        -- hl = { fg = colors.green },
+        hl = { fg = "diag_hint_fg" },
     },
 }
 

@@ -8,12 +8,7 @@ local signs = require("configs.icons").diagnostic_icons
 
 local navic = require("nvim-navic")
 
-local on_attach = function(client, bufnr)
-    --	require("caskey").emit("LspAttach")
-    if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-    end
-
+local define_diagnostics = function()
     vim.diagnostic.config({
         update_in_insert = true,
         virtual_text = { spacing = 4, prefix = "●" },
@@ -23,6 +18,13 @@ local on_attach = function(client, bufnr)
     for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+end
+
+local on_attach = function(client, bufnr)
+    --	require("caskey").emit("LspAttach")
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
     end
 
     -- This requires telescope to be loaded
@@ -38,6 +40,7 @@ local on_attach = function(client, bufnr)
 end
 
 M.setup = function()
+    define_diagnostics()
     require("neodev").setup({
         library = {
             plugins = false, --NOTE disable indexing all plugins
