@@ -6,20 +6,30 @@ local Tabpage = {
     end,
     hl = function(self)
         if not self.is_active then
-            return "TabLine"
+            return { fg = "tabline_fg", bg = "background" }
         else
-            return "TabLineSel"
+            return { fg = "tabline_sl_fg", bg = "background" }
         end
     end,
 }
 
-local TabPages = utils.surround({ "", "" }, nil, { utils.make_tablist(Tabpage) })
+local TabPages = utils.make_tablist(Tabpage)
 
 local TabList = {
     condition = function()
         return #vim.api.nvim_list_tabpages() >= 2
     end,
+    { provider = "%=" },
+
+    {
+        provider = "",
+        hl = { fg = "background", bg = "tabline_bg" },
+    },
     TabPages,
+    {
+        provider = "",
+        hl = { fg = "background", bg = "tabline_bg" },
+    },
 }
 
 return TabList

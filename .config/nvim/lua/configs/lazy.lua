@@ -260,9 +260,9 @@ require("lazy").setup({
 
     {
         "folke/which-key.nvim",
-        event = "VeryLazy",
+        lazy = false,
         conifg = function()
-            require("plugins.which_key").setup()
+            require("plugins.which_key").setup() --TODO whichkey config is not working
         end,
     },
 
@@ -283,7 +283,13 @@ require("lazy").setup({
         end,
     },
 
-    { "williamboman/mason.nvim", lazy = false, config = true },
+    {
+        "williamboman/mason.nvim",
+        lazy = false,
+        config = function()
+            require("plugins.mason").setup()
+        end,
+    },
 
     {
         "saecki/crates.nvim",
@@ -320,7 +326,11 @@ require("lazy").setup({
     {
         "gbprod/yanky.nvim",
         name = "yanky",
-        event = "VeryLazy",
+        keys = {
+            "y",
+            "p",
+            "P",
+        },
         config = function()
             require("plugins.yanky").setup()
         end,
@@ -483,7 +493,7 @@ require("lazy").setup({
             "tpope/vim-repeat",
             "ggandor/flit.nvim",
         },
-        event = "VeryLazy",
+        keys = { "s", "S" },
         config = function()
             require("plugins.leap").setup()
         end,
@@ -627,6 +637,20 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "stevearc/aerial.nvim",
+        name = "aerial",
+        event = "VeryLazy", -- it must be loaded for statusline
+        -- cmd = {
+        --     "AerialToggle",
+        --     "AerialOpen",
+        --     "AerialOpenAll",
+        -- },
+        config = function()
+            require("plugins.aerial").setup()
+        end,
+    },
+
     -- █░█ █▄░█ █▀▄ █▀█ ▀█▀ █▀█ █▀▀ █▀▀
     -- █▄█ █░▀█ █▄▀ █▄█ ░█░ █▀▄ ██▄ ██▄
     {
@@ -650,6 +674,25 @@ require("lazy").setup({
         end,
         config = function()
             require("plugins.telescope").setup()
+        end,
+    },
+
+    {
+        "ibhagwan/fzf-lua",
+        name = "fzf",
+        cmd = { "FzfLua" },
+        config = function()
+            require("plugins.fzf").setup()
+        end,
+    },
+
+    {
+        "echasnovski/mini.bufremove",
+        name = "mini_bufremove",
+        cmd = { "BufferRemove" },
+        config = function()
+            require("plugins.mini_bufremove").setup()
+            require("plugins.mini_bufremove").setup_cmds()
         end,
     },
 
