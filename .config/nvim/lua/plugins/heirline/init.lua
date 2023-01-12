@@ -15,7 +15,7 @@ local Navic = require("plugins.heirline.components.navic")
 local Lazy = require("plugins.heirline.components.lazy")
 
 local BufferLine = require("plugins.heirline.components.bufferline")
--- local Diagnostics = require("plugins.heirline.components.diagnostics")
+local Diagnostics = require("plugins.heirline.components.diagnostics")
 local TabLineOffset = require("plugins.heirline.components.tablineoffset")
 
 local TabList = require("plugins.heirline.components.tablist")
@@ -27,11 +27,9 @@ local Space = { provider = " " }
 local default_statusline = {
     ViMode,
     GitStatus,
-    Space,
-    Space,
-    Navic,
     Align,
-    --    Diagnostics,
+    Diagnostics,
+    Space,
     Lazy,
     Space,
     Time,
@@ -50,9 +48,7 @@ local TabLine = {
     TabLineOffset,
     Space,
     BufferLine,
-    Align,
     TabList,
-    Space,
 }
 
 local utils = require("heirline.utils")
@@ -70,6 +66,8 @@ local function setup_colors()
             text_dim = utils.get_highlight("Comment").fg,
             text_highlight = utils.get_highlight("Constant").fg,
 
+            highlight = utils.get_highlight("String").fg,
+
             git_add_fg = utils.get_highlight("DiffAdd").fg,
             git_change_fg = utils.get_highlight("DiffChange").fg,
             git_delete_fg = utils.get_highlight("DiffDelete").fg,
@@ -78,6 +76,10 @@ local function setup_colors()
             diag_error_fg = utils.get_highlight("DiagnosticError").fg,
             diag_hint_fg = utils.get_highlight("DiagnosticHint").fg,
             diag_info_fg = utils.get_highlight("DiagnosticInfo").fg,
+
+            tabline_fg = utils.get_highlight("TabLine").fg,
+            tabline_sl_fg = utils.get_highlight("TabLineSel").fg,
+            tabline_bg = utils.get_highlight("TabLine").bg,
         }
     end
 
@@ -94,6 +96,7 @@ M.setup = function()
             hydra_statusline,
             default_statusline,
         },
+        winbar = { Navic },
         tabline = TabLine,
     })
 
