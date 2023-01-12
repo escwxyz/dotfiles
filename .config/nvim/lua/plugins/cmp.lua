@@ -1,7 +1,6 @@
 --- Completion Engine
 --- ~~~~~~~~~~~
 --- https://github.com/hrsh7th/nvim-cmp
-
 local M = {}
 
 M.setup = function()
@@ -56,13 +55,29 @@ M.setup = function()
         }),
 
         sources = cmp.config.sources({
-            { name = "nvim_lsp" },
+            {
+                name = "nvim_lsp",
+                entry_filter = function(entry, _)
+                    local kind = entry:get_kind()
+                    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor():type()
+
+                    if node == "arguments" then
+                        if kind == 6 then
+                            return true
+                        else
+                            return false
+                        end
+                    end
+
+                    return true
+                end,
+            },
             { name = "luasnip" },
             { name = "buffer" },
         }),
 
         window = {
-            completion = cmp.config.window.bordered(),
+            completion = cmp.config.window.bordered(), --TODO
             documentation = cmp.config.window.bordered(),
         },
         formatting = {
@@ -80,6 +95,8 @@ M.setup = function()
                     nvim_lsp = "[LSP]",
                     luasnip = "[Snippet]",
                 })[entry.source.name]
+
+                vim_item.abbr = vim_item.abbr:match("[^(]+") -- remove parameters from function abbr
 
                 return vim_item
             end,
