@@ -194,12 +194,13 @@ return {
     -- 🅽
     -- ["<leader>n"] = {}
 
-    -- 🅾 Editor Options
+    -- 🅾 Editor Options TODO
     ["<leader>o"] = {
         act = function()
-            require("hydras.theme-hydra").init_hydra():activate()
+            local hydra = require("hydras.options-hydra").init_hydra()
+            hydra:activate()
         end,
-        desc = "[Hydra] Themes",
+        desc = "Editor Options",
     },
 
     -- 🅿 Plugins
@@ -379,13 +380,13 @@ return {
         mode = { "n", "x", "o" },
         ["s"] = {
             act = function()
-                require("plugins.coding.leap").search()
+                require("plugins.leap").search()
             end,
             desc = "[Leap] Search",
         },
         ["S"] = {
             act = function()
-                require("plugins.coding.leap").search_cross_window()
+                require("plugins.leap").search_cross_window()
             end,
             desc = "[Leap] Search cross window",
         },

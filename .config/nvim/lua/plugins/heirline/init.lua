@@ -1,5 +1,7 @@
 local M = {}
 
+local conditions = require("heirline.conditions")
+
 local Align = { provider = "%=" }
 
 local ViMode = require("plugins.heirline.components.vi_mode")
@@ -29,21 +31,20 @@ local default_statusline = {
     Space,
     Navic,
     Align,
-    Hydra,
-    Align,
     --    Diagnostics,
     Lazy,
     Space,
     Time,
 }
 
-local StatusLines = { default_statusline }
-
--- local Winbar = {
---     provider = function(_)
---         return "Hello"
---     end,
--- }
+local hydra_statusline = {
+    condition = function()
+        return require("hydra.statusline").get_hint() ~= nil
+    end,
+    Align,
+    Hydra,
+    Align,
+}
 
 local TabLine = {
     TabLineOffset,
@@ -58,36 +59,50 @@ local utils = require("heirline.utils")
 
 -- https://github.com/RRethy/nvim-base16/blob/master/lua/base16-colorscheme.lua
 local function setup_colors()
-    return {
-        bright_bg = utils.get_highlight("Folded").bg,
-        bright_fg = utils.get_highlight("Folded").fg,
-        red = utils.get_highlight("DiagnosticError").fg,
-        dark_red = utils.get_highlight("DiffDelete").bg,
-        green = utils.get_highlight("String").fg,
-        blue = utils.get_highlight("Function").fg,
-        gray = utils.get_highlight("NonText").fg,
-        orange = utils.get_highlight("Constant").fg,
-        purple = utils.get_highlight("Statement").fg,
-        cyan = utils.get_highlight("Special").fg,
-        diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-        diag_error = utils.get_highlight("DiagnosticError").fg,
-        diag_hint = utils.get_highlight("DiagnosticHint").fg,
-        diag_info = utils.get_highlight("DiagnosticInfo").fg,
-        git_del = utils.get_highlight("diffDelete").fg,
-        git_add = utils.get_highlight("diffAdded").fg,
-        git_change = utils.get_highlight("diffChange").fg,
-    }
-end
+    local colors
+    if string.sub(vim.g.Theme, 1, 6) == "base16" then
+        colors = {
+            background = utils.get_highlight("StatusLine").bg,
+            foreground = utils.get_highlight("StatusLine").fg,
+            background_nc = utils.get_highlight("StatusLineNC").bg,
+            forground_nc = utils.get_highlight("StatusLineNC").fg,
 
-M.on_colorscheme = function()
-    local colors = setup_colors()
-    utils.on_colorscheme(colors)
+            text_dim = utils.get_highlight("Comment").fg,
+            text_highlight = utils.get_highlight("Constant").fg,
+
+            git_add_fg = utils.get_highlight("DiffAdd").fg,
+            git_change_fg = utils.get_highlight("DiffChange").fg,
+            git_delete_fg = utils.get_highlight("DiffDelete").fg,
+
+            diag_warn_fg = utils.get_highlight("DiagnosticWarn").fg,
+            diag_error_fg = utils.get_highlight("DiagnosticError").fg,
+            diag_hint_fg = utils.get_highlight("DiagnosticHint").fg,
+            diag_info_fg = utils.get_highlight("DiagnosticInfo").fg,
+        }
+    end
+
+    return colors
 end
 
 M.setup = function()
-    require("heirline").setup(StatusLines, nil, TabLine)
+    -- NOTE must be loaded before setup
+    require("heirline").load_colors(setup_colors()) -- load the colors from the current theme
 
-    require("heirline").load_colors(setup_colors())
+    require("heirline").setup({
+        statusline = {
+            fallthrough = false,
+            hydra_statusline,
+            default_statusline,
+        },
+        tabline = TabLine,
+    })
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+            utils.on_colorscheme(setup_colors()) -- once the theme has been changed, update the colors
+        end,
+        group = vim.api.nvim_create_augroup("Heirline", { clear = true }),
+    })
 end
 
 return M

@@ -67,6 +67,7 @@ local ViMode = {
             t = "cyan",
         },
     },
+    hl = { bg = "background_nc" }, -- NOTE this must be the same with the background color of the next component
     {
         provider = function(self)
             return "  " .. self.mode_names[self.mode]
@@ -87,7 +88,7 @@ local ViMode = {
         provider = "",
         hl = function(self)
             local mode = self.mode:sub(1, 1)
-            return { fg = self.mode_bg_colors[mode], bold = true }
+            return { fg = self.mode_bg_colors[mode] }
         end,
     },
 }

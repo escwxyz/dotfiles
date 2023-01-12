@@ -212,12 +212,10 @@ require("lazy").setup({
 
     {
         "rebelot/heirline.nvim",
-        enabled = true,
         name = "heirline",
         event = "VeryLazy",
         config = function()
             require("plugins.heirline").setup()
-            -- require("plugins.heirline").setup_colors()
         end,
     },
 
@@ -230,6 +228,15 @@ require("lazy").setup({
         },
         config = function()
             require("plugins.noice").setup()
+        end,
+    },
+
+    {
+        "j-hui/fidget.nvim",
+        name = "fidget",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.fidget").setup()
         end,
     },
 
