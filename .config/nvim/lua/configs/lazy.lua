@@ -114,7 +114,17 @@ require("lazy").setup({
     {
         "neovim/nvim-lspconfig",
         name = "lsp_config",
-        event = "BufReadPre", -- NOTE improper event leading to unexpected behavior
+        -- event = "BufReadPre", -- NOTE improper event leading to unexpected behavior
+        ft = {
+            "rust",
+            "lua",
+            "typescript",
+            "tsx",
+            "typescriptreact",
+            "dart",
+            "javascript",
+            "css",
+        },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "smjonas/inc-rename.nvim",
@@ -519,9 +529,13 @@ require("lazy").setup({
     -- neogen anotation
     {
         "danymat/neogen",
-        enabled = false,
-        event = "InsertEnter",
-        config = true,
+        cmd = {
+            "Neogen",
+        },
+        config = function()
+            require("plugins.neogen").setup()
+            require("plugins.neogen").setup_cmds()
+        end,
     },
 
     -- surround

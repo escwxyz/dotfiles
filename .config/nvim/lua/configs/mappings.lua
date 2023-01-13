@@ -58,11 +58,16 @@ return {
     },
 
     ["<A-r>"] = { act = "<C-r>", desc = "Redo" },
-
-    -- Buffer
+    -- TODO when finish tabline / bufferline
     ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
+    {
+        mode = "i", -- NOTE do this manually since luasnip not working
+        ["<Tab>"] = { act = cmd("NeogenNext") },
+        ["<S-Tab>"] = { act = cmd("NeogenPrev") },
+    },
+    --
     -- Comment
     -- ["gc"] = { act = "v:lua.MiniComment.operator()", desc = "Comment textobject", expr = true },
     -- {
@@ -104,22 +109,27 @@ return {
     --     ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
     -- },
     -- -- Leader Starts
-    -- todo <leader>number => window navigation
+    -- todo <leader>number => window or buffer navigation
 
     ["<leader><BS>"] = { act = "O<Esc>", desc = "New line up" },
     ["<leader><Enter>"] = { act = "o<Esc>", desc = "New line down" },
 
-    -- 🅰 Actions
+    -- 🅰 Actions => Aerial
     ["<leader>a"] = {
         name = "Actions",
 
         s = {
             act = "<cmd>w<CR><Esc>",
             desc = "Save buffer",
-        }, -- TODO notify
+        },
     },
 
-    -- 🅱  TODO
+    -- 🅱  Buffer TODO add ordinal number to buffers then use <leader>number to jump to specific buffer, <Tab> for tab pages or tabout.nvim
+    ["<leader>b"] = {
+        name = "Buffer",
+
+        ["q"] = { act = cmd("BufferRemove"), desc = "Quit current buffer" },
+    },
 
     -- 🅲 Command Palette
     ["<leader>c"] = { act = cmd("Legendary"), desc = "Command Palette" },
@@ -191,8 +201,16 @@ return {
         desc = "[Hydra] Marks",
     },
 
-    -- 🅽
-    -- ["<leader>n"] = {}
+    -- 🅽 NeoGen
+    -- ["<leader>n"] = { act = cmd("Neogen"), desc = "Generate annotation" }, -- looks enough without parameters
+    ["<leader>n"] = {
+        name = "NeoGen",
+
+        ["f"] = { act = cmd("Neogen func"), desc = "Function annotation" },
+        ["c"] = { act = cmd("Neogen class"), desc = "Class annotation" },
+        ["t"] = { act = cmd("Neogen type"), desc = "Type annotation" },
+        ["l"] = { act = cmd("Neogen file"), desc = "File annotation" },
+    },
 
     -- 🅾 Editor Options TODO
     ["<leader>o"] = {
@@ -285,6 +303,7 @@ return {
         desc = "[Hydra] Yanky",
     },
     -- 🆉
+    -- ZenMode
     -- Leader Ends
     -- LSP on_attach
     {
