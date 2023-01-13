@@ -9,6 +9,7 @@ local ft = ck.ft
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+
 return {
     mode = { "n" },
 
@@ -62,11 +63,6 @@ return {
     ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
     ["<S-Tab>"] = { act = cmd("bprevious"), desc = "Previous buffer" },
 
-    {
-        mode = "i", -- NOTE do this manually since luasnip not working
-        ["<Tab>"] = { act = cmd("NeogenNext") },
-        ["<S-Tab>"] = { act = cmd("NeogenPrev") },
-    },
     --
     -- Comment
     -- ["gc"] = { act = "v:lua.MiniComment.operator()", desc = "Comment textobject", expr = true },

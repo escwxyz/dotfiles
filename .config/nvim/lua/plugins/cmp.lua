@@ -1,12 +1,15 @@
 --- Completion Engine
 --- ~~~~~~~~~~~
 --- https://github.com/hrsh7th/nvim-cmp
+
 local M = {}
 
 M.setup = function()
     local cmp = require("cmp")
 
     local luasnip = require("luasnip")
+
+    local neogen = require("neogen")
 
     cmp.setup({
         enabled = function()
@@ -39,6 +42,8 @@ M.setup = function()
                     cmp.select_next_item()
                 elseif luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
+                elseif neogen.jumpable() then
+                    neogen.jump_next()
                 else
                     fallback()
                 end
@@ -48,8 +53,10 @@ M.setup = function()
                     cmp.select_prev_item()
                 elseif luasnip.jumpable(-1) then
                     luasnip.jump(-1)
+                elseif neogen.jumpable(-1) then
+                    neogen.jump_prev()
                 else
-                    fallback()
+                   fallback()
                 end
             end, { "i", "s" }),
         }),

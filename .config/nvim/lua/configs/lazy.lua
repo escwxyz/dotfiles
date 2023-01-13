@@ -529,12 +529,9 @@ require("lazy").setup({
     -- neogen anotation
     {
         "danymat/neogen",
-        cmd = {
-            "Neogen",
-        },
+        event = "VeryLazy",
         config = function()
             require("plugins.neogen").setup()
-            require("plugins.neogen").setup_cmds()
         end,
     },
 
