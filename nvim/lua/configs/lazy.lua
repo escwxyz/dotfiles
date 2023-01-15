@@ -587,11 +587,10 @@ require("lazy").setup({
     -- fterm
     {
         "numToStr/FTerm.nvim",
-        event = "VeryLazy", --TODO
+        cmd = { "OpenTerminal" },
         config = function()
             require("plugins.fterm").setup()
             require("plugins.fterm").setup_cmds()
-            require("plugins.fterm").setup_terminals()
         end,
     },
 
@@ -762,8 +761,8 @@ require("lazy").setup({
     -- fm
     {
         "is0n/fm-nvim",
-        enabled = false,
-        event = "VeryLazy",
+        name = "fm",
+        cmd = { "Nnn", "Gitui" },
         config = function()
             require("plugins.fm").setup()
         end,

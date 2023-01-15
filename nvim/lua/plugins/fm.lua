@@ -7,8 +7,11 @@ M.setup = function()
             float = {
                 border = "rounded",
                 blend = 10,
-            }
-        }
+            },
+        },
+        cmds = {
+            nnn_cmd = "nnn -de",
+        },
     })
 end
 

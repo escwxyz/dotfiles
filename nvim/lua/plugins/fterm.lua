@@ -41,9 +41,4 @@ M.setup_cmds = function()
     vim.api.nvim_create_user_command("ExitTerminal", require("FTerm").exit, { bang = true })
 end
 
-M.setup_terminals = function()
-    require("plugins.nnn").setup()
-    require("plugins.git.gitui").setup()
-end
-
 return M
