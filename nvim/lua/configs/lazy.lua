@@ -303,15 +303,12 @@ require("lazy").setup({
 
     {
         "saecki/crates.nvim",
-        lazy = false, -- NOTE cond only works when lazy is false
-        cond = function()
-            local buf = vim.api.nvim_buf_get_name(0)
-            if string.sub(buf, -10) == "Cargo.toml" then
-                return true
-            end
-            return false
+        name = "crates",
+        event = "BufReadPost Cargo.toml",
+        config = function()
+            require("plugins.crates").setup()
+            require("plugins.crates").setup_cmds()
         end,
-        config = true,
     },
 
     {
@@ -718,6 +715,7 @@ require("lazy").setup({
     -- overseer jobs
     {
         "stevearc/overseer.nvim",
+        cmd = { "OverseerRun", "OverseerToggle", "OverseerOpen", "OverseerInfo" },
         config = function()
             require("plugins.overseer").setup()
         end,
@@ -765,6 +763,15 @@ require("lazy").setup({
         cmd = { "Nnn", "Gitui" },
         config = function()
             require("plugins.fm").setup()
+        end,
+    },
+
+    {
+        "stevearc/oil.nvim",
+        name = "oil",
+        cmd = { "Oil" },
+        config = function()
+            require("plugins.oil").setup()
         end,
     },
 }, lazy_config)

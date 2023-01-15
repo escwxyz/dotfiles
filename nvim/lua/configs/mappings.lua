@@ -178,11 +178,12 @@ return {
     -- 🅷 Help Tags
     ["<leader>h"] = { act = cmd("Telescope help_tags"), desc = "Help Tags" },
 
-    -- 🅸
-    -- ["<leader>i"] = {}
+    -- Oil
+    ["<leader>i"] = { act = cmd("Oil --float"), desc = "Oil" },
 
-    -- 🅹 Jobs
-    -- ["<leader>j"] = {},
+    -- Job
+    ["<leader>j"] = { act = cmd("OverseerRun"), desc = "Run jobs" },
+
     -- keymaps
     ["<leader>k"] = { act = cmd("FzfLua keymaps"), desc = "Find keymaps" },
 
