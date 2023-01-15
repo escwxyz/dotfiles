@@ -500,9 +500,10 @@ require("lazy").setup({
             "tpope/vim-repeat",
             "ggandor/flit.nvim",
         },
-        keys = { "s", "S" },
+        cmd = { "LeapBuffer", "LeapWindow" },
         config = function()
             require("plugins.leap").setup()
+            require("plugins.leap").setup_cmds()
         end,
     },
     -- gomove

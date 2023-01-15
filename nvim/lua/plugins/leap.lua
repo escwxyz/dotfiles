@@ -17,16 +17,18 @@ M.setup = function()
     })
 end
 
-M.search = function()
-    require("leap").leap({ target_windows = { vim.fn.win_getid() } })
-end
+M.setup_cmds = function()
+    vim.api.nvim_create_user_command("LeapBuffer", function()
+        require("leap").leap({ target_windows = { vim.fn.win_getid() } })
+    end, {})
 
-M.search_cross_window = function()
-    require("leap").leap({
-        target_windows = vim.tbl_filter(function(win)
-            return vim.api.nvim_win_get_config(win).focusable
-        end, vim.api.nvim_tabpage_list_wins(0)),
-    })
+    vim.api.nvim_create_user_command("LeapWindow", function()
+        require("leap").leap({
+            target_windows = vim.tbl_filter(function(win)
+                return vim.api.nvim_win_get_config(win).focusable
+            end, vim.api.nvim_tabpage_list_wins(0)),
+        })
+    end, {})
 end
 
 return M
