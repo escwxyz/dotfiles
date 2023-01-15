@@ -105,9 +105,15 @@ require("lazy").setup({
     {
         "rmagatti/goto-preview",
         name = "goto_preview",
-        keys = { "gp" },
+        cmd = {
+            "GotoPreviewDefinition",
+            "GotoPreviewTypeDefinition",
+            "GotoPreviewImplementation",
+            "GotoPreviewReference",
+        },
         config = function()
             require("plugins.lsp.goto_preview").setup()
+            require("plugins.lsp.goto_preview").setup_cmds()
         end,
     },
 
@@ -265,7 +271,14 @@ require("lazy").setup({
     -- ░░░██║░░░╚█████╔╝╚█████╔╝███████╗██████╔╝
     -- ░░░╚═╝░░░░╚════╝░░╚════╝░╚══════╝╚═════╝░
 
-    "anuvyklack/hydra.nvim",
+    {
+        "anuvyklack/hydra.nvim",
+        name = "hydra",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.hydra").setup_cmds()
+        end,
+    },
 
     {
         "Nexmean/caskey.nvim",
@@ -697,9 +710,10 @@ require("lazy").setup({
     {
         "ibhagwan/fzf-lua",
         name = "fzf",
-        cmd = { "FzfLua" },
+        cmd = { "FzfLua", "FindProjects" },
         config = function()
             require("plugins.fzf").setup()
+            require("plugins.fzf").setup_cmds()
         end,
     },
 

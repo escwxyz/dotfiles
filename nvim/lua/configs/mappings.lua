@@ -1,5 +1,9 @@
 -- Global Keymappings
 -- ~~~~~~~~~~~~~~~~~~
+
+-- NOTE using cmds are much safer and preferred
+--  NOTE don't directly call function to lazy load
+
 local ck = require("caskey")
 local cmd = ck.cmd
 local emitted = ck.emitted
@@ -156,7 +160,7 @@ return {
             desc = "Search in buffer",
         },
         f = { act = cmd("FzfLua files"), desc = "Files" },
-        p = { act = require("plugins.fzf").find_projects, desc = "Projects" }, -- TODO
+        p = { act = cmd("FindProjects"), desc = "Projects" }, -- TODO
         g = { act = cmd("Telescope live_grep"), desc = "Live Grep" },
         n = { act = cmd("Telescope notify"), desc = "notify" },
     },
@@ -189,19 +193,15 @@ return {
 
     -- Links
     ["<leader>l"] = {
-        act = function()
-            require("hydras.urlview-hydra").activate()
-        end,
+        act = cmd("HydraURLView"),
         desc = "[Hydra] URL View",
     },
     -- Marks --TODO sometimes triggered as m, not registered
     -- ["<leader>m"] = {
-    --     act = function()
-    --         require("hydras.harpoon-hydra").activate()
-    --     end,
+    --     act = cmd("HydraHarpoon"),
     --     desc = "[Hydra] Marks",
     -- },
-
+    --
     -- NeoGen
     ["<leader>n"] = {
         name = "NeoGen",
@@ -214,10 +214,7 @@ return {
 
     -- 🅾 Editor Options TODO
     ["<leader>o"] = {
-        act = function()
-            local hydra = require("hydras.options-hydra").init_hydra()
-            hydra:activate()
-        end,
+        act = cmd("HydraEditorOption"),
         desc = "Editor Options",
     },
 
@@ -286,10 +283,7 @@ return {
         ["v"] = { act = "<C-w>v", desc = "Split window vertically" },
 
         ["<Enter>"] = {
-            act = function()
-                local hydra = require("hydras.windows-hydra").init_hydra()
-                hydra:activate()
-            end,
+            act = cmd("HydraWindows"),
             desc = "[Hydra] Windows",
         },
     },
@@ -338,33 +332,23 @@ return {
             name = "Goto Preview",
 
             ["d"] = {
-                act = function()
-                    require("goto-preview").goto_preview_definition()
-                end,
+                act = cmd("GotoPreviewDefinition"),
                 desc = "[LSP] Goto preview definition",
             },
             ["i"] = {
-                act = function()
-                    require("goto-preview").goto_preview_implementation()
-                end,
+                act = cmd("GotoPreviewImplementation"),
                 desc = "[LSP] Goto preivew implementation",
             },
             ["t"] = {
-                act = function()
-                    require("goto-preview").goto_preview_type_definition()
-                end,
+                act = cmd("GotoPreviewTypeDefinition"),
                 desc = "[LSP] Goto preview type definition",
             },
             ["r"] = {
-                act = function()
-                    require("goto-preview").goto_preview_reference()
-                end,
+                act = cmd("GotoPreviewReference"),
                 desc = "[LSP] Goto preview reference",
             },
             ["q"] = {
-                act = function()
-                    require("goto-preview").close_all_win()
-                end,
+                act = cmd("GotoPreviewCloseWin"),
                 desc = "[LSP] Close all windows",
             },
         },

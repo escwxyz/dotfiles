@@ -28,7 +28,7 @@ local TabName = {
         provider = function(self)
             if self.is_terminal then
                 local tname, _ = self.filename:gsub(".*:", "") -- remove all .*:
-                return " " .. tname-- remove string after first space
+                return " " .. tname:match("%w+") -- remove string after first space
             else
                 local filename = self.filename == "" and "[No Name]"
                     or vim.fn.fnamemodify(self.filename, ":t")
