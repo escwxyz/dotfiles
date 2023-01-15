@@ -209,6 +209,16 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "folke/zen-mode.nvim",
+        name = "zen_mode",
+        cmd = { "StartZenMode" },
+        config = function()
+            require("plugins.zen_mode").setup()
+            require("plugins.zen_mode").setup_cmds()
+        end,
+    },
+
     -- █▄░█ █▀█ ▀█▀ █ █▀▀ █▄█
     -- █░▀█ █▄█ ░█░ █ █▀░ ░█░
     {
@@ -429,6 +439,7 @@ require("lazy").setup({
             require("plugins.better_escape").setup()
         end,
     },
+
     {
         "ThePrimeagen/refactoring.nvim",
         name = "refactoring",
@@ -724,15 +735,6 @@ require("lazy").setup({
         config = function()
             require("plugins.mini_bufremove").setup()
             require("plugins.mini_bufremove").setup_cmds()
-        end,
-    },
-
-    --sniprun
-    {
-        "michaelb/sniprun",
-        build = "bash ./install.sh",
-        config = function()
-            require("plugins.sniprun").setup()
         end,
     },
 
