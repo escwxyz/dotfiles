@@ -6,14 +6,8 @@ local M = {}
 
 M.setup = function()
     require("overseer").setup({
-        strategy = { "toggleterm" }, -- integrate with toggleterm https://github.com/stevearc/overseer.nvim/blob/master/doc/strategies.md#toggletermopts
-        -- Template modules to load
-        templates = { "builtin" },
-        -- When true, tries to detect a green color from your colorscheme to use for success highlight
-        auto_detect_success_color = true,
-        -- Patch nvim-dap to support preLaunchTask and postDebugTask
+        templates = { "builtin" }, -- common commands like cargo / npm etc. are already included
         dap = true,
-        -- Configure the task list
         task_list = {
             -- Default detail level for tasks. Can be 1-3.
             default_detail = 1,
@@ -25,10 +19,8 @@ M.setup = function()
             min_width = { 40, 0.1 },
             -- optionally define an integer/float for the exact width of the task list
             width = nil,
-            -- String that separates tasks
             separator = "────────────────────────────────────────",
-            -- Default direction. Can be "left" or "right"
-            direction = "left",
+            direction = "right",
             -- Set keymap to false to remove default behavior
             -- You can add custom keymaps here as well (anything vim.keymap.set accepts)
             bindings = {
@@ -66,7 +58,6 @@ M.setup = function()
             min_height = 10,
             max_height = 0.9,
             height = nil,
-            -- Set any window options here (e.g. winhighlight)
             win_opts = {
                 winblend = 10,
             },
@@ -88,8 +79,6 @@ M.setup = function()
             },
         },
         task_editor = {
-            -- Set keymap to false to remove default behavior
-            -- You can add custom keymaps here as well (anything vim.keymap.set accepts)
             bindings = {
                 i = {
                     ["<CR>"] = "NextOrSubmit",
@@ -108,7 +97,6 @@ M.setup = function()
                 },
             },
         },
-        -- Configure the floating window used for confirmation prompts
         confirm = {
             border = "rounded",
             zindex = 40,
@@ -120,17 +108,14 @@ M.setup = function()
             min_height = 6,
             max_height = 0.9,
             height = nil,
-            -- Set any window options here (e.g. winhighlight)
             win_opts = {
                 winblend = 10,
             },
         },
         -- Configuration for task floating windows
         task_win = {
-            -- How much space to leave around the floating window
             padding = 2,
             border = "rounded",
-            -- Set any window options here (e.g. winhighlight)
             win_opts = {
                 winblend = 10,
             },
@@ -190,5 +175,11 @@ M.setup = function()
         },
     })
 end
+
+M.tasklist = require("overseer.task_list")
+
+M.util = require("overseer.util")
+
+M.constants = require("overseer.constants")
 
 return M

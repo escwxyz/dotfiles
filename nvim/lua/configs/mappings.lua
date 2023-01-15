@@ -58,6 +58,7 @@ return {
     ["q"] = {
         --TODO normal mode
     },
+
     {
         mode = "t",
         when = {
@@ -66,22 +67,7 @@ return {
         ["<A-q>"] = { act = cmd("CloseTerminal"), desc = "Close terminal" },
         ["<A-c>"] = { act = cmd("ExitTerminal"), desc = "Exit terminal" },
     },
-    {
-        mode = "t",
-        when = {
-            ft("GitUI"),
-        },
-        ["<A-q>"] = { act = cmd("CloseGitUI"), desc = "Close GitUI" },
-        ["<A-c>"] = { act = cmd("ExitGitUI"), desc = "Exit GitUI" },
-    },
-    {
-        mode = "t",
-        when = {
-            ft("nnn"),
-        },
-        ["<A-q>"] = { act = cmd("CloseNNN"), desc = "Close nnn" },
-        ["<A-c>"] = { act = cmd("ExitNNN"), desc = "Exit nnn" },
-    },
+
     ["<A-r>"] = { act = "<C-r>", desc = "Redo" },
 
     ["<Tab>"] = { act = cmd("bnext"), desc = "Next buffer" },
@@ -159,26 +145,22 @@ return {
     -- ["<leader>d"]
 
     -- 🅴 File Explorer
-    ["<leader>e"] = { act = cmd("OpenNNN"), desc = "File Explorer" },
+    ["<leader>e"] = { act = cmd("Nnn"), desc = "File Explorer" },
 
     -- 🅵 Fuzzy Finder
     ["<leader>f"] = {
         name = "Find",
 
-        -- TODO
         b = {
-            act = cmd("SearchInBuffer"),
+            act = cmd("FzfLua blines"),
             desc = "Search in buffer",
         },
-        f = { act = cmd("Telescope find_files"), desc = "Files" },
-        r = { act = cmd("Telescope repo list search_dirs=~/Projects/"), desc = "Repos" },
+        f = { act = cmd("FzfLua files"), desc = "Files" },
+        p = { act = require("plugins.fzf").find_projects, desc = "Projects" }, -- TODO
         g = { act = cmd("Telescope live_grep"), desc = "Live Grep" },
-        m = { act = cmd("Telescope harpoon marks"), desc = "Marks" },
         n = { act = cmd("Telescope notify"), desc = "notify" },
-        t = { act = cmd("TodoTelescope"), desc = "Todos" },
     },
-
-    -- 🅶 Git
+    -- Git
     ["<leader>g"] = {
         name = "Git",
         ["d"] = {
@@ -190,40 +172,37 @@ return {
         },
         ["<Enter>"] = { act = function() end, desc = "[Hydra] Git" },
 
-        ["u"] = { act = cmd("OpenGitUI"), desc = "Gitui" },
+        ["u"] = { act = cmd("Gitui"), desc = "GitUI" },
     },
 
     -- 🅷 Help Tags
     ["<leader>h"] = { act = cmd("Telescope help_tags"), desc = "Help Tags" },
 
-    -- 🅸
-    -- ["<leader>i"] = {}
+    -- Oil
+    ["<leader>i"] = { act = cmd("Oil --float"), desc = "Oil" },
 
-    -- 🅹 Jobs
-    -- ["<leader>j"] = {},
+    -- Job
+    ["<leader>j"] = { act = cmd("OverseerRun"), desc = "Run jobs" },
 
-    -- 🅺 Keymaps
-    ["<leader>k"] = { act = cmd("WhichKey"), desc = "WhichKey" },
+    -- keymaps
+    ["<leader>k"] = { act = cmd("FzfLua keymaps"), desc = "Find keymaps" },
 
-    -- 🅻 Links
+    -- Links
     ["<leader>l"] = {
         act = function()
             require("hydras.urlview-hydra").activate()
         end,
-        desc = "URL View",
+        desc = "[Hydra] URL View",
     },
+    -- Marks --TODO sometimes triggered as m, not registered
+    -- ["<leader>m"] = {
+    --     act = function()
+    --         require("hydras.harpoon-hydra").activate()
+    --     end,
+    --     desc = "[Hydra] Marks",
+    -- },
 
-    -- 🅼 Marks
-    ["<leader>m"] = {
-        act = function()
-            local hydra = require("hydras.harpoon-hydra").init_hydra()
-            hydra:activate()
-        end,
-        desc = "[Hydra] Marks",
-    },
-
-    -- 🅽 NeoGen
-    -- ["<leader>n"] = { act = cmd("Neogen"), desc = "Generate annotation" }, -- looks enough without parameters
+    -- NeoGen
     ["<leader>n"] = {
         name = "NeoGen",
 
@@ -242,7 +221,7 @@ return {
         desc = "Editor Options",
     },
 
-    -- 🅿 Plugins
+    -- Plugins
     ["<leader>p"] = { act = cmd("Lazy"), desc = "Plugins" },
 
     -- 🆀 QuickFix
@@ -316,10 +295,10 @@ return {
     },
 
     -- 🆇
-    -- 🆈 Yanky Histoy
+    -- Yanky Histoy
     ["<leader>y"] = {
         act = cmd("Neoclip"),
-        desc = "[Hydra] Yanky",
+        desc = "Yank History",
     },
     -- 🆉
     -- ZenMode
@@ -417,35 +396,12 @@ return {
     {
         mode = { "n", "x", "o" },
         ["s"] = {
-            act = function()
-                require("plugins.leap").search()
-            end,
+            act = cmd("LeapBuffer"),
             desc = "[Leap] Search",
         },
         ["S"] = {
-            act = function()
-                require("plugins.leap").search_cross_window()
-            end,
+            act = cmd("LeapWindow"),
             desc = "[Leap] Search cross window",
         },
     },
-    -- Yanky
-    --   {
-    --       mode = { "n", "x" },
-    --       ["y"] = { act = "<Plug>(YankyYank)", desc = "Yank (Copy)" },
-    --       ["p"] = { act = "<Plug>(YankyPutAfter)", desc = "Paste after cursor" },
-    --       ["P"] = { act = "<Plug>(YankyPutBefore)", desc = "Paste before cursor" },
-    --       -- TODO directly invoke yanky ring
-    --       --[[         ["]p"] = {
-    --           act = function()
-    --               local t = require("hydras.yanky-hydra").t
-    --               vim.fn.feedkeys(t("<Plug>(YankyPutIndentAfterLinewise)"))
-    --               local hydra = require("hydras.yanky-hydra").init_hydra()
-    --               hydra:activate()
-    --           end,
-    --           desc = "Paste indent after linewise",
-    --           mode = "n",
-    --       },
-    -- ]]
-    --   },
 }

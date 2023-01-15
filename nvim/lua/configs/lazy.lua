@@ -303,15 +303,12 @@ require("lazy").setup({
 
     {
         "saecki/crates.nvim",
-        lazy = false, -- NOTE cond only works when lazy is false
-        cond = function()
-            local buf = vim.api.nvim_buf_get_name(0)
-            if string.sub(buf, -10) == "Cargo.toml" then
-                return true
-            end
-            return false
+        name = "crates",
+        event = "BufReadPost Cargo.toml",
+        config = function()
+            require("plugins.crates").setup()
+            require("plugins.crates").setup_cmds()
         end,
-        config = true,
     },
 
     {
@@ -503,9 +500,10 @@ require("lazy").setup({
             "tpope/vim-repeat",
             "ggandor/flit.nvim",
         },
-        keys = { "s", "S" },
+        cmd = { "LeapBuffer", "LeapWindow" },
         config = function()
             require("plugins.leap").setup()
+            require("plugins.leap").setup_cmds()
         end,
     },
     -- gomove
@@ -587,11 +585,10 @@ require("lazy").setup({
     -- fterm
     {
         "numToStr/FTerm.nvim",
-        event = "VeryLazy", --TODO
+        cmd = { "OpenTerminal" },
         config = function()
             require("plugins.fterm").setup()
             require("plugins.fterm").setup_cmds()
-            require("plugins.fterm").setup_terminals()
         end,
     },
 
@@ -719,6 +716,7 @@ require("lazy").setup({
     -- overseer jobs
     {
         "stevearc/overseer.nvim",
+        cmd = { "OverseerRun", "OverseerToggle", "OverseerOpen", "OverseerInfo" },
         config = function()
             require("plugins.overseer").setup()
         end,
@@ -762,10 +760,19 @@ require("lazy").setup({
     -- fm
     {
         "is0n/fm-nvim",
-        enabled = false,
-        event = "VeryLazy",
+        name = "fm",
+        cmd = { "Nnn", "Gitui" },
         config = function()
             require("plugins.fm").setup()
+        end,
+    },
+
+    {
+        "stevearc/oil.nvim",
+        name = "oil",
+        cmd = { "Oil" },
+        config = function()
+            require("plugins.oil").setup()
         end,
     },
 }, lazy_config)
