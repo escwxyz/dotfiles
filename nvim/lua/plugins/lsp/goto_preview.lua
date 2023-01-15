@@ -21,4 +21,22 @@ M.setup = function()
     })
 end
 
+M.setup_cmds = function()
+    vim.api.nvim_create_user_command("GotoPreviewDefinition", function()
+        require("goto-preview").goto_preview_definition()
+    end, {})
+    vim.api.nvim_create_user_command("GotoPreviewTypeDefinition", function()
+        require("goto-preview").goto_preview_type_definition()
+    end, {})
+    vim.api.nvim_create_user_command("GotoPreviewImplementation", function()
+        require("goto-preview").goto_preview_implemention()
+    end, {})
+    vim.api.nvim_create_user_command("GotoPreviewReference", function()
+        require("goto-preview").goto_preview_reference()
+    end, {})
+    vim.api.nvim_create_user_command("GotoPreviewCloseWin", function()
+        require("goto-preview").close_all_win()
+    end, {})
+end
+
 return M

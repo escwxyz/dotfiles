@@ -8,6 +8,13 @@ local Space = require("plugins.heirline.shared.space")
 local Hydra = require("plugins.heirline.statusline.hydra")
 
 return {
+    condition = function()
+        local zenmode = vim.g.ZenMode
+        if zenmode then
+            return false
+        end
+        return true
+    end,
     fallthrough = false,
     {
         condition = function()
