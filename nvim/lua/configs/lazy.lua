@@ -194,6 +194,15 @@ require("lazy").setup({
         end,
     },
 
+    {
+        "echasnovski/mini.animate",
+        name = "mini_animate",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.mini_animate").setup()
+        end,
+    },
+
     -- █▄░█ █▀█ ▀█▀ █ █▀▀ █▄█
     -- █░▀█ █▄█ ░█░ █ █▀░ ░█░
     {
