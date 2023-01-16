@@ -6,6 +6,8 @@ M.setup = function()
         ui = {
             check_outdated_packages_on_open = true,
             border = "rounded",
+            width = 0.8,
+            height = 0.8,
             -- TODO
             icons = {
                 package_installed = "Y",
