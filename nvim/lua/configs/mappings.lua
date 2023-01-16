@@ -1,6 +1,5 @@
 -- Global Keymappings
 -- ~~~~~~~~~~~~~~~~~~
-
 -- NOTE using cmds are much safer and preferred
 --  NOTE don't directly call function to lazy load
 
@@ -19,13 +18,15 @@ return {
     ["k"] = { act = "v:count == 0 ? 'gk':'k'", expr = true, desc = "Jump one line up" },
 
     -- Motion inside buffer
+    -- TODO too many builtins messing around
     ["g"] = {
         name = "Goto",
         mode = { "n", "x" },
 
         ["t"] = { act = "gg", desc = "Top of the buffer" },
         ["b"] = { act = "G", desc = "Bottom of the buffer" },
-        ["h"] = { act = "_", desc = "Head of the line" },
+        ["h"] = { act = "0", desc = "Head of the line" },
+        -- ["f"] = { act = "_", desc = "First char of the line" },
         ["l"] = { act = "$", desc = "Last of the line" },
         ["u"] = { act = "<c-u>", desc = "Scroll up" },
         ["d"] = { act = "<C-d>", desc = "Scroll down" },
@@ -79,53 +80,10 @@ return {
 
     ["<leader><right>"] = { act = cmd("tabnext"), desc = "Next tabpage" },
     ["<leader><left>"] = { act = cmd("tabprevious"), desc = "Prev tabpage" },
-    -- --  -- Comment
-    -- ["gc"] = { act = "v:lua.MiniComment.operator()", desc = "Comment textobject", expr = true },
-    -- {
-    --     mode = "o",
-    --     ["gc"] = { act = cmd("lua MiniComment.textobject()"), desc = "Comment textobject" },
-    -- },
-    -- {
-    --     mode = "x",
-    --     ["gc"] = {
-    --         act = [[:<c-u>lua MiniComment.operator('visual')<cr>]],
-    --         desc = "Comment selection",
-    --     },
-    -- },
-    -- ["gcc"] = {
-    --     act = "v:lua.MiniComment.operator() . '_'",
-    --     desc = "Comment current line",
-    --     expr = true,
-    -- },
-    --  Gomove
-    -- ["<A-h>"] = { act = "<Plug>GoNSMLeft", desc = "Move left" },
-    -- ["<A-j>"] = { act = "<Plug>GoNSMDown", desc = "Move down" },
-    -- ["<A-k>"] = { act = "<Plug>GoNSMUp", desc = "Move up" },
-    -- ["<A-l>"] = { act = "<Plug>GoNSMRight", desc = "Move right" },
-    -- ["<A-H>"] = { act = "<Plug>GoNSDLeft", desc = "Duplicate left" },
-    -- ["<A-J>"] = { act = "<Plug>GoNSDDown", desc = "Duplicate down" },
-    -- ["<A-K>"] = { act = "<Plug>GoNSDUp", desc = "Duplicate up" },
-    -- ["<A-L>"] = { act = "<Plug>GoNSDRight", desc = "Duplicate right" },
-    --
-    -- {
-    --     mode = { "x" },
-    --
-    --     ["<A-h>"] = { act = "<Plug>GoVSMLeft", desc = "Move left" },
-    --     ["<A-j>"] = { act = "<Plug>GoVSMDown", desc = "Move down" },
-    --     ["<A-k>"] = { act = "<Plug>GoVSMUp", desc = "Move up" },
-    --     ["<A-l>"] = { act = "<Plug>GoVSMRight", desc = "Move right" },
-    --     ["<A-H>"] = { act = "<Plug>GoVSDLeft", desc = "Duplicate left" },
-    --     ["<A-J>"] = { act = "<Plug>GoVSDDown", desc = "Duplicate down" },
-    --     ["<A-K>"] = { act = "<Plug>GoVSDUp", desc = "Duplicate up" },
-    --     ["<A-L>"] = { act = "<Plug>GoVSDRight", desc = "Duplicate right" },
-    -- },
-    -- -- Leader Starts
-    -- todo <leader>number => window or buffer navigation
-
     ["<leader><BS>"] = { act = "O<Esc>", desc = "New line up" },
     ["<leader><Enter>"] = { act = "o<Esc>", desc = "New line down" },
 
-    -- 🅰 Actions => Aerial
+    -- Actions
     ["<leader>a"] = {
         name = "Actions",
 
@@ -135,15 +93,15 @@ return {
         },
     },
 
-    -- 🅱  Buffer TODO add ordinal number to buffers then use <leader>number to jump to specific buffer, <Tab> for tab pages or tabout.nvim
+    -- 🅱  Buffer TODO add ordinal number to buffers then use <leader>number to jump to specific buffer, <Tab> for tab pages or tabout.nvim?? or <->
     ["<leader>b"] = {
         name = "Buffer",
 
         ["q"] = { act = cmd("BufferRemove"), desc = "Quit current buffer" },
     },
 
-    -- 🅲 Command Palette
-    ["<leader>c"] = { act = cmd("Legendary"), desc = "Command Palette" },
+	-- Code Outline
+    ["<leader>c"] = { act = cmd("AerialToggle"), desc = "Code outline" },
 
     -- 🅳 Debug
     -- ["<leader>d"]
@@ -151,7 +109,7 @@ return {
     -- 🅴 File Explorer
     ["<leader>e"] = { act = cmd("Nnn"), desc = "File Explorer" },
 
-    -- 🅵 Fuzzy Finder
+    -- Find files
     ["<leader>f"] = {
         name = "Find",
 
@@ -160,9 +118,8 @@ return {
             desc = "Search in buffer",
         },
         f = { act = cmd("FzfLua files"), desc = "Files" },
-        p = { act = cmd("FindProjects"), desc = "Projects" }, -- TODO
+        p = { act = cmd("FindProjects"), desc = "Projects" },
         g = { act = cmd("Telescope live_grep"), desc = "Live Grep" },
-        n = { act = cmd("Telescope notify"), desc = "notify" },
     },
     -- Git
     ["<leader>g"] = {
@@ -179,11 +136,11 @@ return {
         ["u"] = { act = cmd("Gitui"), desc = "GitUI" },
     },
 
-    -- 🅷 Help Tags
-    ["<leader>h"] = { act = cmd("Telescope help_tags"), desc = "Help Tags" },
+    -- help tags
+    ["<leader>h"] = { act = cmd("FzfLua help_tags"), desc = "Help Tags" },
 
     -- Oil
-    ["<leader>i"] = { act = cmd("Oil --float"), desc = "Oil" },
+    ["<leader>i"] = { act = cmd("Oil --float"), desc = "Oil" }, -- TODO close buffer when open a file
 
     -- Job
     ["<leader>j"] = { act = cmd("OverseerRun"), desc = "Run jobs" },
@@ -193,14 +150,16 @@ return {
 
     -- Links
     ["<leader>l"] = {
-        act = cmd("HydraURLView"),
+        act = function()
+            vim.notify("Test")
+        end, -- TODO why cmd works, while keymap not working
         desc = "[Hydra] URL View",
     },
     -- Marks --TODO sometimes triggered as m, not registered
-    -- ["<leader>m"] = {
-    --     act = cmd("HydraHarpoon"),
-    --     desc = "[Hydra] Marks",
-    -- },
+    ["<leader>m"] = {
+        act = cmd("HydraHarpoon"),
+        desc = "[Hydra] Marks",
+    },
     --
     -- NeoGen
     ["<leader>n"] = {
@@ -212,7 +171,7 @@ return {
         ["l"] = { act = cmd("Neogen file"), desc = "File annotation" },
     },
 
-    -- 🅾 Editor Options TODO
+    -- Editor Options TODO
     ["<leader>o"] = {
         act = cmd("HydraEditorOption"),
         desc = "Editor Options",
@@ -223,10 +182,11 @@ return {
 
     -- 🆀 QuickFix
     --
-    -- Normal mode sniprun
-    -- 🆁 Refactor
-    ["<leader>r"] = { act = cmd("Refactor"), desc = "Refactor", mode = "v" },
-
+    -- Refactor
+    {
+        mode = "v",
+        ["<leader>r"] = { act = cmd("Refactor"), desc = "Refactor" },
+    },
     -- 🆂 Session
     ["<leader>s"] = {
         name = "Session",
@@ -235,7 +195,8 @@ return {
         ["s"] = { act = cmd("SaveSession"), desc = "Save session" },
         ["d"] = { act = cmd("Autosession delete"), desc = "Delete session" },
     },
-    -- 🆃 Terminal
+
+    -- Terminal
     ["<leader>t"] = { act = cmd("OpenTerminal"), desc = "Terminal" },
 
     -- 🆄 Undotree
@@ -243,7 +204,7 @@ return {
 
     -- 🆅
 
-    -- 🆆 Windows
+    -- windows
     ["<leader>w"] = {
 
         name = "Windows",
@@ -294,9 +255,15 @@ return {
         act = cmd("Neoclip"),
         desc = "Yank History",
     },
-    -- 🆉
+
     -- ZenMode
-    -- Leader Ends
+    ["<leader>z"] = {
+        name = "Zen Mode",
+
+        ["s"] = { act = cmd("StartZenMode"), desc = "Start zen mode" },
+        ["c"] = { act = cmd("StopZenMode"), desc = "Stop zen mode" },
+    },
+
     -- LSP on_attach
     {
         mode = { "n" },
@@ -321,7 +288,7 @@ return {
             desc = "Previous diagnostic",
         },
         -- When null-ls is attached
-        ["ft"] = {
+        ["<leader>af"] = {
             act = function()
                 vim.lsp.buf.format() -- TODO conditional format on save
             end,

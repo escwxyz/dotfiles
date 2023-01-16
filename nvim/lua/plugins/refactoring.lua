@@ -26,7 +26,9 @@ M.setup = function()
 end
 
 M.setup_cmds = function()
-    vim.api.nvim_create_user_command("Refactor", require("refactoring").select_refactor, {})
+    vim.api.nvim_create_user_command("Refactor", function()
+        require("refactoring").select_refactor()
+    end, {})
 end
 
 return M

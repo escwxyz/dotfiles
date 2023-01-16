@@ -36,9 +36,9 @@ vim.opt.fillchars = {
 }
 
 vim.opt.foldlevel = 99
-
+--
 vim.opt.foldlevelstart = 99
-
+--
 -- vim.opt.guicursor = "n-c:hor50,i-ci-ve:ver25"
 
 vim.opt.ignorecase = true -- ignore case in search patterns /
@@ -47,9 +47,9 @@ vim.opt.laststatus = 3 -- global statusline
 
 vim.opt.list = true
 
-vim.opt.listchars:append("space:·")
+-- vim.opt.listchars:append("space:·")
 
-vim.opt.listchars:append("eol:↴")
+-- vim.opt.listchars:append("eol:↴")
 
 vim.opt.mouse = ""
 
