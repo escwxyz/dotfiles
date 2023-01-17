@@ -16,10 +16,6 @@ local urlview_hydra = Hydra({
     },
 })
 
-M.init_hydra = function()
-    return urlview_hydra
-end
-
 M.activate = function()
     urlview_hydra:activate()
 end

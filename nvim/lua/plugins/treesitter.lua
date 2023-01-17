@@ -14,16 +14,15 @@ M.setup = function()
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "<A-CR>",
-                node_incremental = "<A-CR>",
-                scope_incremental = "<A-s>",
-                node_decremental = "<A-BS>",
+                init_selection = "<CR>",
+                node_incremental = "<CR>",
+                scope_incremental = "<S-CR>",
+                node_decremental = "<BS>",
             },
         },
         indent = {
             enable = false,
         },
-
         context_commentstring = {
             enable = true, -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
             enable_autocmd = false,

@@ -96,6 +96,7 @@ require("lazy").setup({
     {
         "jose-elias-alvarez/null-ls.nvim",
         name = "null_ls",
+        enabled = true,
         event = "InsertEnter",
         config = function()
             require("plugins.lsp.null_ls").setup()
@@ -120,6 +121,7 @@ require("lazy").setup({
     {
         "neovim/nvim-lspconfig",
         name = "lsp_config",
+        enabled = true,
         -- event = "BufReadPre", -- NOTE improper event leading to unexpected behavior
         ft = {
             "rust",
@@ -178,6 +180,7 @@ require("lazy").setup({
     {
         "stevearc/dressing.nvim",
         name = "dressing",
+        enabled = true,
         lazy = false,
         config = function()
             require("plugins.dressing").setup()
@@ -194,6 +197,7 @@ require("lazy").setup({
 
     {
         "lukas-reineke/indent-blankline.nvim",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.indent_blankline").setup()
@@ -203,6 +207,7 @@ require("lazy").setup({
     {
         "echasnovski/mini.animate",
         name = "mini_animate",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.mini_animate").setup()
@@ -223,6 +228,7 @@ require("lazy").setup({
     -- █░▀█ █▄█ ░█░ █ █▀░ ░█░
     {
         "rcarriga/nvim-notify",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.notify").setup()
@@ -231,6 +237,7 @@ require("lazy").setup({
 
     {
         "SmiteshP/nvim-navic",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.navic").setup()
@@ -249,6 +256,7 @@ require("lazy").setup({
 
     {
         "tiagovla/scope.nvim",
+        enabled = true,
         name = "scope",
         event = "VeryLazy",
         config = true,
@@ -268,6 +276,7 @@ require("lazy").setup({
     {
         "j-hui/fidget.nvim",
         name = "fidget",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.fidget").setup()
@@ -284,7 +293,8 @@ require("lazy").setup({
     {
         "anuvyklack/hydra.nvim",
         name = "hydra",
-        event = "VeryLazy",
+        enabled = true,
+        lazy = false,
         config = function()
             require("plugins.hydra").setup_cmds()
         end,
@@ -292,8 +302,9 @@ require("lazy").setup({
 
     {
         "Nexmean/caskey.nvim",
+        name = "caskey",
+        enabled = true,
         lazy = false,
-        -- event = "VeryLazy",
         config = function()
             require("caskey.wk").setup(require("configs.mappings"))
         end,
@@ -301,18 +312,11 @@ require("lazy").setup({
 
     {
         "folke/which-key.nvim",
+        name = "which_key",
+        enabled = true,
         lazy = false,
         conifg = function()
             require("plugins.which_key").setup() --TODO whichkey config is not working
-        end,
-    },
-
-    {
-        "mrjones2014/legendary.nvim",
-        -- event = "VeryLazy", -- NOTE to ensure it's loaded before whichkey set the keymaps; or can set manually, wait for caskey's support
-        cmd = { "Legendary" },
-        config = function()
-            require("plugins.legendary").setup()
         end,
     },
 
@@ -327,6 +331,7 @@ require("lazy").setup({
 
     {
         "williamboman/mason.nvim",
+        enabled = true,
         lazy = false,
         config = function()
             require("plugins.mason").setup()
@@ -365,6 +370,7 @@ require("lazy").setup({
     {
         "AckslD/nvim-neoclip.lua",
         name = "neoclip",
+        enabled = true,
         dependencies = {
             { "kkharji/sqlite.lua", name = "sqlite" },
         },
@@ -434,6 +440,7 @@ require("lazy").setup({
     {
         "max397574/better-escape.nvim",
         name = "better_escape",
+		enabled = true,
         event = "ModeChanged",
         config = function()
             require("plugins.better_escape").setup()
@@ -467,6 +474,7 @@ require("lazy").setup({
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
         },
+        enabled = true,
         event = { "CmdlineEnter", "InsertEnter" },
         config = function()
             require("plugins.cmp").setup()
@@ -476,12 +484,22 @@ require("lazy").setup({
     {
         "echasnovski/mini.comment",
         name = "mini_comment",
+		enabled = true,
         keys = { { "gc", mode = { "n", "x" } }, { "gcc" } },
         dependencies = {
             { "JoosepAlviste/nvim-ts-context-commentstring", name = "ts_ctx_commentstring" },
         },
         config = function()
             require("plugins.mini_comment").setup()
+        end,
+    },
+
+    {
+        "echasnovski/mini.move",
+        name = "mini_move",
+        event = "VeryLazy",
+        config = function()
+            require("plugins.mini_move").setup()
         end,
     },
 
@@ -499,7 +517,8 @@ require("lazy").setup({
     {
         "echasnovski/mini.ai",
         name = "mini_ai",
-        dependencies = {
+        enabled = true,
+        Dependencies = {
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",
                 name = "ts_textobjects",
@@ -518,6 +537,7 @@ require("lazy").setup({
     -- luasnip
     {
         "L3MON4D3/LuaSnip",
+        enabled = true,
         event = "InsertEnter",
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -533,24 +553,19 @@ require("lazy").setup({
             "tpope/vim-repeat",
             "ggandor/flit.nvim",
         },
+        enabled = true,
         cmd = { "LeapBuffer", "LeapWindow" },
         config = function()
             require("plugins.leap").setup()
             require("plugins.leap").setup_cmds()
         end,
     },
-    -- gomove
-    {
-        "booperlv/nvim-gomove",
-        event = "VeryLazy",
-        config = function()
-            require("plugins.gomove").setup()
-        end,
-    },
 
     -- mini pairs
     {
         "echasnovski/mini.pairs",
+        name = "mini_pairs",
+        enabled = true,
         event = "InsertEnter",
         config = function()
             require("plugins.mini_pairs").setup()
@@ -560,6 +575,7 @@ require("lazy").setup({
     -- neogen anotation
     {
         "danymat/neogen",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.neogen").setup()
@@ -581,6 +597,8 @@ require("lazy").setup({
     -- todo_comments
     {
         "folke/todo-comments.nvim",
+        name = "todo_comments",
+        enabled = false,
         event = "VeryLazy",
         config = function()
             require("plugins.todo_comments").setup()
@@ -650,6 +668,8 @@ require("lazy").setup({
     -- gitsigns
     {
         "lewis6991/gitsigns.nvim",
+        name = "gitsigns",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.git.gitsigns").setup()
@@ -665,14 +685,12 @@ require("lazy").setup({
         end,
     },
 
-    -- ▀█▀ █▀█ █▀▀ █▀▀ █▀ █ ▀█▀ ▀█▀ █▀▀ █▀█
-    -- ░█░ █▀▄ ██▄ ██▄ ▄█ █ ░█░ ░█░ ██▄ █▀▄
-
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-    { "nvim-treesitter/nvim-treesitter-context", name = "ts_context", event = "VeryLazy" },
+    { "nvim-treesitter/playground", name = "ts_playground", cmd = "TSPlaygroundToggle" },
+    { "nvim-treesitter/nvim-treesitter-context", name = "ts_context", event = "VeryLazy", enabled = false },
     {
         "nvim-treesitter/nvim-treesitter",
         dev = false,
+		enabled = true,
         build = ":TSUpdate",
         event = "BufReadPost",
         config = function()
@@ -683,6 +701,7 @@ require("lazy").setup({
     {
         "stevearc/aerial.nvim",
         name = "aerial",
+        enabled = false,
         event = "VeryLazy", -- it must be loaded for statusline
         -- cmd = {
         --     "AerialToggle",
@@ -694,28 +713,11 @@ require("lazy").setup({
         end,
     },
 
-    -- █░█ █▄░█ █▀▄ █▀█ ▀█▀ █▀█ █▀▀ █▀▀
-    -- █▄█ █░▀█ █▄▀ █▄█ ░█░ █▀▄ ██▄ ██▄
     {
         "mbbill/undotree",
+        enabled = false,
         cmd = "UndotreeToggle",
         config = true,
-    },
-
-    -- ▀█▀ █▀▀ █░░ █▀▀ █▀ █▀▀ █▀█ █▀█ █▀▀
-    -- ░█░ ██▄ █▄▄ ██▄ ▄█ █▄▄ █▄█ █▀▀ ██▄
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "cljoly/telescope-repo.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        },
-        keys = "<leader>f",
-        cmd = "Telescope",
-        config = function()
-            require("plugins.telescope").setup()
-            require("plugins.telescope").init_cmds()
-        end,
     },
 
     {
@@ -752,11 +754,11 @@ require("lazy").setup({
     {
         "nvim-neotest/neotest",
         dependencies = {
-            "antoinemadec/FixCursorHold.nvim",
             "marilari88/neotest-vitest",
             "sidlatau/neotest-dart",
             "rouge8/neotest-rust",
         },
+		enabled = false,
         config = function()
             require("plugins.neotest").setup()
         end,
@@ -772,11 +774,9 @@ require("lazy").setup({
         end,
     },
 
-    -- █░█ ▄▀█ █▀█ █▀█ █▀█ █▀█ █▄░█
-    -- █▀█ █▀█ █▀▄ █▀▀ █▄█ █▄█ █░▀█
     {
         "ThePrimeagen/harpoon",
-        keys = "<leader>m",
+        cmd = { "HydraHarpoon" },
         config = function()
             require("plugins.harpoon").setup()
         end,
@@ -798,6 +798,18 @@ require("lazy").setup({
         cmd = { "Oil" },
         config = function()
             require("plugins.oil").setup()
+        end,
+    },
+
+    {
+        "toppair/peek.nvim",
+        name = "peek",
+        enabled = false,
+        build = "deno task --quiet build:fast",
+        ft = { "markdown" },
+        opts = require("plugins.peek").opts,
+        config = function()
+            require("plugins.peek").setup()
         end,
     },
 }, lazy_config)
