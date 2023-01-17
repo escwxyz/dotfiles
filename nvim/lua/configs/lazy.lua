@@ -96,6 +96,7 @@ require("lazy").setup({
     {
         "jose-elias-alvarez/null-ls.nvim",
         name = "null_ls",
+        enabled = true,
         event = "InsertEnter",
         config = function()
             require("plugins.lsp.null_ls").setup()
@@ -179,6 +180,7 @@ require("lazy").setup({
     {
         "stevearc/dressing.nvim",
         name = "dressing",
+        enabled = true,
         lazy = false,
         config = function()
             require("plugins.dressing").setup()
@@ -205,6 +207,7 @@ require("lazy").setup({
     {
         "echasnovski/mini.animate",
         name = "mini_animate",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("plugins.mini_animate").setup()
@@ -290,6 +293,7 @@ require("lazy").setup({
     {
         "anuvyklack/hydra.nvim",
         name = "hydra",
+        enabled = true,
         lazy = false,
         config = function()
             require("plugins.hydra").setup_cmds()
@@ -436,6 +440,7 @@ require("lazy").setup({
     {
         "max397574/better-escape.nvim",
         name = "better_escape",
+		enabled = true,
         event = "ModeChanged",
         config = function()
             require("plugins.better_escape").setup()
@@ -479,6 +484,7 @@ require("lazy").setup({
     {
         "echasnovski/mini.comment",
         name = "mini_comment",
+		enabled = true,
         keys = { { "gc", mode = { "n", "x" } }, { "gcc" } },
         dependencies = {
             { "JoosepAlviste/nvim-ts-context-commentstring", name = "ts_ctx_commentstring" },
@@ -680,10 +686,11 @@ require("lazy").setup({
     },
 
     { "nvim-treesitter/playground", name = "ts_playground", cmd = "TSPlaygroundToggle" },
-    { "nvim-treesitter/nvim-treesitter-context", name = "ts_context", event = "VeryLazy" },
+    { "nvim-treesitter/nvim-treesitter-context", name = "ts_context", event = "VeryLazy", enabled = false },
     {
         "nvim-treesitter/nvim-treesitter",
         dev = false,
+		enabled = true,
         build = ":TSUpdate",
         event = "BufReadPost",
         config = function()
@@ -694,7 +701,7 @@ require("lazy").setup({
     {
         "stevearc/aerial.nvim",
         name = "aerial",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy", -- it must be loaded for statusline
         -- cmd = {
         --     "AerialToggle",
@@ -711,21 +718,6 @@ require("lazy").setup({
         enabled = false,
         cmd = "UndotreeToggle",
         config = true,
-    },
-
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "cljoly/telescope-repo.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        },
-        enabled = true,
-        keys = "<leader>f",
-        cmd = "Telescope",
-        config = function()
-            require("plugins.telescope").setup()
-            require("plugins.telescope").init_cmds()
-        end,
     },
 
     {
@@ -766,6 +758,7 @@ require("lazy").setup({
             "sidlatau/neotest-dart",
             "rouge8/neotest-rust",
         },
+		enabled = false,
         config = function()
             require("plugins.neotest").setup()
         end,
