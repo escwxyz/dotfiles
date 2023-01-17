@@ -2,29 +2,30 @@ local M = {}
 
 local Hydra = require("hydra")
 
-M.init_hydra = function()
-    return Hydra({
-        name = "Harpoon",
-        config = {
-            color = 'teal',
-            invoke_on_body = true,
-            hint = {
-                position = 'bottom',
-                border = 'rounded',
-            },
+local harpoon = Hydra({
+    name = "Harpoon",
+    config = {
+        hint = false,
+    },
+    mode = "n",
+    heads = {
+        {
+            "m",
+            function()
+                require("harpoon.marks").add_file()
+                vim.notify("Marked")
+            end,
+            { desc = "mark", exit = true },
         },
-        hint = require("hydras.hints").harpoon_hint,
-        mode = "n",
-        body = "<leader>h",
-        heads = {
-            { "m", require("harpoon.mark").add_file, { desc = "Mark Current Buffer", exit = true } }, -- TODO with notification feedback
-            { "p", require("harpoon.ui").nav_prev, { exit = false } },
-            { "n", require("harpoon.ui").nav_next, { exit = false } },
-            { "<Enter>", require("harpoon.ui").toggle_quick_menu, { desc = "Menu", exit = true } },
-            { "<Esc>", nil, { exit = true } }
+        { "p", require("harpoon.ui").nav_prev, { desc = "prev", exit = false } },
+        { "n", require("harpoon.ui").nav_next, { desc = "next", exit = false } },
+        { "<Enter>", require("harpoon.ui").toggle_quick_menu, { desc = "menu", exit = true } },
+        { "q", nil, { desc = "quit", exit = true } },
+    },
+})
 
-        }
-    })
+M.activate = function()
+    harpoon:activate()
 end
 
 return M

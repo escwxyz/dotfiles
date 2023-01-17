@@ -1,24 +1,5 @@
-## Plugins
-
-| Name                                                              | Description                   | Status |
-| ----------------------------------------------------------------- | ----------------------------- | ------ |
-| [folke/trouble.nvim](https://github.com/folke/trouble.nvim)       | Utils for LSP                 |        |
-| [folke/lazy.nvim]()                                               | Plugin manager                | Done   |
-| [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)           | Snippet Engine                |        |
-| [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)           | Completation engine           | Done   |
-| hrsh7th/cmp-buffer                                                | for `nvim-cmp`                | Done   |
-| hrsh7th/cmp-path                                                  | for `nvim-cmp`                | Done   |
-| hrsh7th/cmp-cmdline                                               | for `nvim-cmp`                | Done   |
-| hrsh7th/cmp-nvim-lsp                                              | for `nvim-cmp`                | Done   |
-| [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) | Common functions for plugins  | Done   |
-| saadparwaiz1/cmp_luasnip                                          | for `nvim-cmp` & `lunasnip`   | Done   |
-| [williamboman/mason.nvim]()                                       | LSP server manager            | Done   |
-| [williamboman/mason-lspconfig.nvim]()                             | for `mason`                   | Done   |
-| [nvim-tree/nvim-web-devicons]()                                   | Icons                         | Done   |
-| [nvim-treesitter/nvim-treesitter]()                               | Syntex Highlighting           |        |
-| [nvim-telescope/telescope.nvim]()                                 | General Finder                |        |
-| nvim-telescope/telescope-fzf-native.nvim                          | Fuzzy support for `telescope` | Done   |
-
+## Plugins (sort by alphabet)
+[lazy.nvim](https://github.com/folke/lazy.nvim)
 ## Snippets
 
 ## TODOs

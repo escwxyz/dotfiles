@@ -174,9 +174,6 @@ M.setup = function()
                 cmd_deleted = "git diff --color HEAD --",
                 cmd_modified = "git diff --color HEAD",
                 cmd_untracked = "git diff --color --no-index /dev/null",
-                -- uncomment if you wish to use git-delta as pager
-                -- can also be set under 'git.status.preview_pager'
-                -- pager        = "delta --width=$FZF_PREVIEW_COLUMNS",
             },
             man = {
                 -- NOTE: remove the `-c` flag when using man-db
@@ -194,11 +191,6 @@ M.setup = function()
                     -- neovim terminal only supports `viu` block output
                     ["png"] = { "viu", "-b" },
                 },
-                -- if using `ueberzug` in the above extensions map
-                -- set the default image scaler, possible scalers:
-                --   false (none), "crop", "distort", "fit_contain",
-                --   "contain", "forced_cover", "cover"
-                -- https://github.com/seebye/ueberzug
             },
         },
         -- provider setup
@@ -258,8 +250,6 @@ M.setup = function()
                 git_icons = true,
                 color_icons = true,
                 previewer = "git_diff",
-                -- uncomment if you wish to use git-delta as pager
-                --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
                 actions = {
                     -- actions inherit from 'actions.files' and merge
                     ["right"] = { actions.git_unstage, actions.resume },
@@ -270,8 +260,6 @@ M.setup = function()
                 prompt = "Commits> ",
                 cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset'",
                 preview = "git show --pretty='%Cred%H%n%Cblue%an <%ae>%n%C(yellow)%cD%n%Cgreen%s' --color {1}",
-                -- uncomment if you wish to use git-delta as pager
-                --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
                 actions = {
                     ["default"] = actions.git_checkout,
                 },
@@ -285,8 +273,6 @@ M.setup = function()
                 --   <file> : filepath placement within the commands
                 cmd = "git log --color --pretty=format:'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset' <file>",
                 preview = "git diff --color {1}~1 {1} -- <file>",
-                -- uncomment if you wish to use git-delta as pager
-                --preview_pager = "delta --width=$FZF_PREVIEW_COLUMNS",
                 actions = {
                     ["default"] = actions.git_buf_edit,
                     ["ctrl-s"] = actions.git_buf_split,
@@ -333,10 +319,9 @@ M.setup = function()
             prompt = "Rg❯ ",
             input_prompt = "Grep For❯ ",
             multiprocess = true, -- run command in a separate process
-            git_icons = true, -- show git icons?
-            file_icons = true, -- show file icons?
-            color_icons = true, -- colorize file|git icons
-            -- executed command priority is 'cmd' (if exists)
+            git_icons = true,
+            file_icons = true,
+            color_icons = true, -- executed command priority is 'cmd' (if exists)
             -- otherwise auto-detect prioritizes `rg` over `grep`
             -- default options are controlled by 'rg|grep_opts'
             -- cmd            = "rg --vimgrep",
@@ -587,6 +572,30 @@ M.setup = function()
         -- 'EN SPACE' (U+2002), the below sets it to 'NBSP' (U+00A0) instead
         -- nbsp = '\xc2\xa0',
     })
+end
+
+M.setup_cmds = function()
+    vim.api.nvim_create_user_command("FindProjects", function()
+        local fzf = require("fzf-lua")
+        local cmd = "fd --type d . "
+            .. "~/Projects"
+            .. " "
+            .. "~/.config/awesome"
+            .. " "
+            .. "~/.config/nvim"
+        fzf.fzf_exec(cmd, {
+            prompt = "Projects:",
+            fn_transform = function(x)
+                return fzf.utils.ansi_codes.magenta(x)
+            end,
+            actions = {
+                ["default"] = function(selected)
+                    vim.cmd("cd " .. selected[1]) -- change working directory
+                    vim.cmd(":enew") -- open an empty buffer in new directory
+                end,
+            },
+        })
+    end, {})
 end
 
 return M
