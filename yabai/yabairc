@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+# for start without password
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+# layout
+yabai -m config layout bsp
+yabai -m config --space 2 layout float
+yabai -m config top_padding    10
+yabai -m config bottom_padding 10
+yabai -m config left_padding   10
+yabai -m config right_padding  10
+yabai -m config window_gap     10
+yabai -m config --space 2 window_gap 0
+
+yabai -m config focus_follows_mouse autoraise
+
+yabai -m config mouse_follows_focus on
+
+yabai -m config window_topmost on
+
+yabai -m config window_shadow on
+# TODO
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 0.9
+yabai -m config normal_window_opacity 0.8
