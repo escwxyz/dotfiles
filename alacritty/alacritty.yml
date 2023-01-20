@@ -63,7 +63,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  decorations: none
+  decorations: full
 
   # Background opacity
   #
@@ -80,7 +80,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  # startup_mode: Fullscreen # TODO not working
+  startup_mode: Maximized # TODO not working on Linux, work on macOS
 
   # Window title
   #title: Alacritty
@@ -123,7 +123,7 @@ font:
     family: JetBrainsMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Light
 
   # Bold font face
   #bold:
@@ -159,7 +159,7 @@ font:
   #style: Bold Italic
 
   # Point size
-  size: 13.5
+  size: 14.0 # 13.5 on Linux, 14.0 on macOS
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
