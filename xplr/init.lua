@@ -27,67 +27,29 @@ require("command-mode").setup({
         key = ";",
     },
 })
--- # Configurations ------------------------------------------------------------
--- ## Config ------------------------------------------------------------------
+
+-- # Configs
+
+-- ## General
+
 require("m_general").setup()
 
 require("m_general").setup_logs()
 
+-- ## UI
+
 require("m_general").setup_ui()
+
+-- ## Modes
+
+require("m_modes").setup_default()
 
 -- ## Node Types
 -- require("m_node_types").setup()
-require("m_functions").setup()
--- ### General Configuration --------------------------------------------------
+--
+-- ## Functions
 
--- ## Hooks -------------------------------------------------------------------
---
--- Example:
---
--- ```lua
--- return {
---   -- Add messages to send when the xplr loads.
---   -- This is similar to the `--on-load` command-line option.
---   --
---   -- Type: list of [Message](https://xplr.dev/en/message#message)s
---   on_load = {
---     { LogSuccess = "Configuration successfully loaded!" },
---     { CallLuaSilently = "custom.some_plugin_with_hooks.on_load" },
---   },
---
---   -- Add messages to send when the directory changes.
---   --
---   -- Type: list of [Message](https://xplr.dev/en/message#message)s
---   on_directory_change = {
---     { LogSuccess = "Changed directory" },
---     { CallLuaSilently = "custom.some_plugin_with_hooks.on_directory_change" },
---   },
---
---   -- Add messages to send when the focus changes.
---   --
---   -- Type: list of [Message](https://xplr.dev/en/message#message)s
---   on_focus_change = {
---     { LogSuccess = "Changed focus" },
---     { CallLuaSilently = "custom.some_plugin_with_hooks.on_focus_change" },
---   }
---
---   -- Add messages to send when the mode is switched.
---   --
---   -- Type: list of [Message](https://xplr.dev/en/message#message)s
---   on_mode_switch = {
---     { LogSuccess = "Switched mode" },
---     { CallLuaSilently = "custom.some_plugin_with_hooks.on_mode_switch" },
---   }
---
---   -- Add messages to send when the layout is switched
---   --
---   -- Type: list of [Message](https://xplr.dev/en/message#message)s
---   on_layout_switch = {
---     { LogSuccess = "Switched layout" },
---     { CallLuaSilently = "custom.some_plugin_with_hooks.on_layout_switch" },
---   }
--- }
--- ```
+require("m_functions").setup()
 
 return {
     on_load = {},
