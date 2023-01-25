@@ -10,8 +10,6 @@ vim.opt.cmdwinheight = 5
 
 vim.opt.colorcolumn = { "+1" }
 
-vim.opt.columns = 9999
-
 vim.opt.completeopt:append({ "menuone", "noinsert" })
 
 vim.opt.confirm = true
@@ -36,14 +34,12 @@ vim.opt.fillchars = {
 }
 
 vim.opt.foldlevel = 99
---
+
 vim.opt.foldlevelstart = 99
---
--- vim.opt.guicursor = "n-c:hor50,i-ci-ve:ver25"
 
-vim.opt.ignorecase = true -- ignore case in search patterns /
+vim.opt.ignorecase = true
 
-vim.opt.laststatus = 3 -- global statusline
+vim.opt.laststatus = 3
 
 vim.opt.list = true
 
@@ -57,11 +53,9 @@ vim.opt.nrformats:append("alpha")
 
 vim.opt.number = true
 
-vim.opt.pastetoggle = "`"
-
 vim.opt.pumblend = 20
 
-vim.opt.pumheight = 40 -- max number of items shown in the popup menu
+vim.opt.pumheight = 40
 
 vim.opt.relativenumber = true
 
@@ -81,7 +75,7 @@ vim.opt.tabstop = 4
 
 vim.opt.termguicolors = true
 
-vim.opt.timeoutlen = 250
+vim.opt.timeoutlen = 300
 
 vim.opt.undofile = true
 
