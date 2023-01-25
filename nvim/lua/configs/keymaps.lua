@@ -73,14 +73,14 @@ wk.register({
     g = {
         name = "Goto",
 
-        ["t"] = { act = "gg", desc = "Top of the buffer" },
-        ["b"] = { act = "G", desc = "Bottom of the buffer" },
-        ["h"] = { act = "_", desc = "Head of the line" },
-        -- ["f"] = { act = "_", desc = "First char of the line" },
-        ["l"] = { act = "$", desc = "Last of the line" },
+        t = { "gg", "Top of the buffer" },
+        b = { "G", "Bottom of the buffer" },
+        h = { "_", "Head of the line" },
+        l = { "$", "Last of the line" },
+        k = { "H", "Top of the window" },
+        j = { "L", "Bottom of the window" },
 
-        ["k"] = { act = "H", desc = "Top of the window" },
-        ["j"] = { act = "L", desc = "Bottom of the window" },
+        -- ["f"] = { act = "_", desc = "First char of the line" },
     },
 }, { mode = { "n", "x" } })
 
@@ -105,8 +105,7 @@ wk.register({
 wk.register({
     d = {
         name = "Debug",
-
-    }
+    },
 })
 
 wk.register({
