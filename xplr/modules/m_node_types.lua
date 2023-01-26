@@ -10,6 +10,9 @@ M.setup = function()
         style = {
             fg = "LightBlue",
         },
+        meta = {
+            icon = "\x1b[34m\x1b[0m",
+        },
     }
 end
 
