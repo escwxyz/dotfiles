@@ -113,6 +113,7 @@ wk.register({
         name = "Finder",
 
         b = { "<cmd>FzfLua blines<CR>", "Find in buffer" },
+        c = { "<cmd>FindCommands<CR>", "Find commands" },
         f = { "<cmd>FzfLua files<CR>", "Find files" },
         p = { "<cmd>FindProjects<CR>", "Find projects" },
     },

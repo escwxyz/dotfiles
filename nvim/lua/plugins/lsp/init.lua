@@ -59,6 +59,10 @@ local M = {
     },
     config = function()
         require("plugins.lsp.diagnostics").define_diagnostics()
+        require("lspconfig").tailwindcss.setup({
+            on_attach = require("plugins.lsp.on_attach"),
+            capabilities = require("plugins.lsp.capabilities"),
+        })
         require("lspconfig").sumneko_lua.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),

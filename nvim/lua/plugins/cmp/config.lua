@@ -6,6 +6,30 @@ local luasnip_installed, luasnip = pcall(require, "luasnip")
 
 local neogen_installed, neogen = pcall(require, "neogen")
 
+local lspkind = require("lspkind")
+
+local function formatTailwindCSS(entry, vim_item)
+    if vim_item.kind == "Color" and entry.completion_item.documentation then
+        local _, _, r, g, b =
+            string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
+        if r then
+            local color = string.format("%02x", r)
+                .. string.format("%02x", g)
+                .. string.format("%02x", b)
+            local group = "Tw_" .. color
+            if vim.fn.hlID(group) < 1 then
+                vim.api.nvim_set_hl(0, group, { fg = "#" .. color })
+            end
+            vim_item.kind = "●"
+            vim_item.kind_hl_group = group
+            return vim_item
+        end
+    end
+    vim_item.kind = lspkind.symbolic(vim_item.kind) and lspkind.symbolic(vim_item.kind)
+        or vim_item.kind
+    return vim_item
+end
+
 M.setup = function()
     cmp.setup({
         enabled = function()
@@ -88,20 +112,21 @@ M.setup = function()
                 "abbr",
                 "menu",
             },
-            format = function(entry, vim_item)
-                vim_item.kind =
-                string.format("%s", require("configs.icons").kind_icons[vim_item.kind])
+            format = lspkind.cmp_format({
+                before = function(entry, vim_item)
+                    vim_item = formatTailwindCSS(entry, vim_item)
 
-                vim_item.menu = ({
-                    buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
-                    luasnip = "[Snippet]",
-                })[entry.source.name]
+                    vim_item.menu = ({
+                        buffer = "[Buffer]",
+                        nvim_lsp = "[LSP]",
+                        luasnip = "[Snippet]",
+                    })[entry.source.name]
 
-                vim_item.abbr = vim_item.abbr:match("[^(]+") -- remove parameters from function abbr
+                    vim_item.abbr = vim_item.abbr:match("[^(]+") -- remove parameters from function abbr
 
-                return vim_item
-            end,
+                    return vim_item
+                end,
+            }),
         },
     })
 end
