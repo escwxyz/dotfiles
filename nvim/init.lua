@@ -84,8 +84,8 @@ if vim.loop.fs_stat(plugins_dir) then
         if config_file then -- if it's .lua or .fnl file,
             plugins[#plugins + 1] = require("plugins." .. config_file)
         elseif
-            vim.fn.filereadable(plugins_dir .. "/" .. file .. "/init.lua")
-            or vim.fn.filereadable(plugins_dir .. "/" .. file .. "/init.fnl")
+            vim.fn.filereadable(plugins_dir .. "/" .. file .. "/init.lua") == 1
+            or vim.fn.filereadable(plugins_dir .. "/" .. file .. "/init.fnl") == 1
         then
             plugins[#plugins + 1] = require("plugins." .. file)
         end
