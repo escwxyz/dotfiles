@@ -45,7 +45,7 @@ require("m_general").setup_ui()
 require("m_modes").setup_default()
 
 -- ## Node Types
--- require("m_node_types").setup()
+require("m_node_types").setup()
 --
 -- ## Functions
 

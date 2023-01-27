@@ -8,7 +8,7 @@ vim.opt.cmdheight = 0
 
 vim.opt.cmdwinheight = 5
 
-vim.opt.colorcolumn = { "+1" }
+-- vim.opt.colorcolumn = { "+1" }
 
 vim.opt.completeopt:append({ "menuone", "noinsert" })
 
