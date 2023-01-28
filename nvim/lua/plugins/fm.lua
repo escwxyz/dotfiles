@@ -3,7 +3,7 @@ return {
     enabled = true,
     cmd = { "Xplr", "Gitui" },
     config = function()
-        require("fm").setup({
+        require("fm-nvim").setup({
             ui = {
                 default = "float",
                 float = {

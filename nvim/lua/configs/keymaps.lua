@@ -1,13 +1,20 @@
--- Global Keymappings
--- ~~~~~~~~~~~~~~~~~~
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.keymap.set("n", "<left>", "<nop>")
+vim.keymap.set("n", "<top>", "<nop>")
+vim.keymap.set("n", "<right>", "<nop>")
+vim.keymap.set("n", "<down>", "<nop>")
 
 vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
+vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
+
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save buffer" })
+vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save buffer" })
 -- vim.keymap.set("n", "<Tab>", function()
 --     if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
 --         vim.cmd([[bnext]])
@@ -19,9 +26,7 @@ vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 --         vim.cmd([[]])
 --     end
 -- end, { desc = "Next tabpage" })
--- TODO not working
-vim.keymap.set("n", "<C-BS>", "<cmd>w<CR><Esc>", { desc = "Save buffer" })
-
+--
 -- Leap
 vim.keymap.set({ "n", "x", "o" }, "s", "<cmd>LeapBuffer<CR>", { desc = "[Leap] Search in buffer" })
 vim.keymap.set(
@@ -30,6 +35,13 @@ vim.keymap.set(
     "<cmd>LeapWindow<CR>",
     { desc = "[Leap] Search cross window" }
 )
+
+-- Dial
+-- TODO not working
+vim.keymap.set("n", "+", "<cmd>DialIncNormal<CR>")
+vim.keymap.set("n", "-", "<cmd>DialDecNormal<CR>")
+vim.keymap.set("v", "+", "<cmd>DialIncVisual<CR>")
+vim.keymap.set("v", "-", "<cmd>DialDecVisual<CR>")
 
 for i = 1, 6 do
     local lhs = "<leader>" .. i
