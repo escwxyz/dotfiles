@@ -11,6 +11,7 @@
 - [hydra.nvim](https://github.com/anuvyklack/hydra.nvim) - Submodule menu
 - [lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
 - [leap.nvim](https://github.com/ggandor/leap.nvim) - In vision cursor navigation
+- [lspkind.nvim](https://github.com/onsails/lspkind.nvim) - Vscode like icons for cmp
 - [Luasnip](https://github.com/L3MON4D3/LuaSnip) - Snippet engine
 - [mason.nvim](https://github.com/williamboman/mason.nvim) - Manage LSP & DAP servers, format tools etc.
 - [mini.animate](https://github.com/echasnovski/mini.animate) - Cursor animation
@@ -23,6 +24,7 @@
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion engine
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - For configuring LSP clients
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Treesitter for syntex highlighting and more
+- [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Autotag for tsx etc.
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - Icons
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Utils for many plugins
 - [ts-node-action](https://github.com/ckolkey/ts-node-action) - Node actions based on treesitter
@@ -39,7 +41,6 @@
 - [x] properly set events for different plugins, see `:help events`
 - [ ] write commonly used snippets for `rust`, `flutter / dart` and `typescript/tsx/react`
 - [ ] config `dap`
-- [ ] support fcitx5 in neovim
 - [ ] ~~config `toggleterm`~~
 - [ ] config vscode like indent
 - [ ] graphql / rest client for neovim
@@ -49,4 +50,5 @@
 - [ ] hydra freezes statusline
 - [ ] fully remove noice
 - [ ] use fzf-lua to replace telescope
+- [ ] Batch rename
 

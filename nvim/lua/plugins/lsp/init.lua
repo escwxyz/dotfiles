@@ -27,7 +27,6 @@ local M = {
     -- },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        "smjonas/inc-rename.nvim",
         {
             "williamboman/mason-lspconfig.nvim",
             config = function()
