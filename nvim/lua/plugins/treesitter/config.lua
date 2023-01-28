@@ -2,10 +2,25 @@ local M = {}
 
 M.setup = function()
     require("nvim-treesitter.configs").setup({
-        ensure_installed = "all",
+        -- NOTE this has huge effect on startup time
+        ensure_installed = {
+            "bash",
+            "dart",
+            "help",
+            "html",
+            "javascript",
+            "json",
+            "lua",
+            "markdown",
+            "rust",
+            "solidity",
+            "toml",
+            "tsx",
+            "typescript",
+            "yaml",
+        },
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = { "markdown" }, -- for obsidian
         },
         incremental_selection = {
             enable = true,

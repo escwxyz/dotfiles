@@ -31,15 +31,7 @@ M.setup = function()
                     "100",
                 },
             }),
-            null_ls.builtins.formatting.prettierd.with({
-                filetypes = {
-                    "javascript",
-                    "javascriptreact",
-                    "typescript",
-                    "typescriptreact",
-                    "css",
-                    "html",
-                },
+            null_ls.builtins.formatting.prettier.with({
                 extra_args = {
                     "--no-semi",
                     "--single-quote",
