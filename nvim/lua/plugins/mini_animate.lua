@@ -1,7 +1,7 @@
 return {
     "echasnovski/mini.animate",
     enabled = true,
-    event = "VeryLazy",
+    event = "CursorMoved",
     config = function()
         require("mini.animate").setup({
             cursor = {

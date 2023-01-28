@@ -27,6 +27,7 @@
 - [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Autotag for tsx etc.
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - Icons
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Utils for many plugins
+- [tabout.nvim](https://github.com/abecodes/tabout.nvim) - Tab out from arounds in insert mode
 - [ts-node-action](https://github.com/ckolkey/ts-node-action) - Node actions based on treesitter
 - [urlview.nvim](https://github.com/axieax/urlview.nvim) - Open / copy urls from plugin manager, or within buffer
 - [which-key.nvim](https://github.com/folke/which-key.nvim) - Keymaps utility
@@ -41,14 +42,13 @@
 - [x] properly set events for different plugins, see `:help events`
 - [ ] write commonly used snippets for `rust`, `flutter / dart` and `typescript/tsx/react`
 - [ ] config `dap`
-- [ ] ~~config `toggleterm`~~
 - [ ] config vscode like indent
 - [ ] graphql / rest client for neovim
 - [ ] unify shared icons for different plugins
-- [ ] ~~noice lsp status overlap lualine~~
 - [ ] unify builtin ui with dressing.nvim
 - [ ] hydra freezes statusline
 - [ ] fully remove noice
 - [ ] use fzf-lua to replace telescope
 - [ ] Batch rename
-
+- [ ] Add dial.nvim
+- [ ] Reduce startup time (currently between 50 - 100 ms, on M1 Max)
