@@ -37,16 +37,6 @@ local M = {
             end,
         },
         {
-            "folke/neodev.nvim",
-            config = function()
-                require("neodev").setup({
-                    library = {
-                        plugins = false,
-                    },
-                })
-            end,
-        },
-        {
             "ray-x/lsp_signature.nvim",
             config = function()
                 require("lsp_signature").setup({

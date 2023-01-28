@@ -13,14 +13,14 @@ M.setup = function()
                 init_selection = "<CR>",
                 node_incremental = "<CR>",
                 scope_incremental = "<S-CR>",
-                node_decremental = "<BS>",
+                node_decremental = "<S-BS>",
             },
         },
         indent = {
             enable = false,
         },
         context_commentstring = {
-            enable = true, -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+            enable = true,
             enable_autocmd = false,
         },
         playground = {
