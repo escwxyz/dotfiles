@@ -3,7 +3,6 @@
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Use buffer as cmp source
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Use LSP as cmp source
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim) - Improve default neovim UI
-- [fm-nvim](https://github.com/is0n/fm-nvim) - Integrate CLI file managers with NeoVim
 - [FTerm](https://github.com/numToStr/FTerm.nvim) - Floating terminal
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua) - Fuzzy finder based on fzf
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Git status signs
@@ -26,6 +25,7 @@
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Treesitter for syntex highlighting and more
 - [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Autotag for tsx etc.
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - Icons
+- [oil.nvim](https://github.com/stevearc/oil.nvim) - File explorer
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Utils for many plugins
 - [tabout.nvim](https://github.com/abecodes/tabout.nvim) - Tab out from arounds in insert mode
 - [ts-node-action](https://github.com/ckolkey/ts-node-action) - Node actions based on treesitter

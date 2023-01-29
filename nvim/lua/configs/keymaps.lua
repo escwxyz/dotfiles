@@ -1,13 +1,20 @@
--- Global Keymappings
--- ~~~~~~~~~~~~~~~~~~
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.keymap.set("n", "<left>", "<nop>")
+vim.keymap.set("n", "<top>", "<nop>")
+vim.keymap.set("n", "<right>", "<nop>")
+vim.keymap.set("n", "<down>", "<nop>")
 
 vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
+vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
+
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save buffer" })
+vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save buffer" })
 -- vim.keymap.set("n", "<Tab>", function()
 --     if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
 --         vim.cmd([[bnext]])
@@ -19,9 +26,7 @@ vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 --         vim.cmd([[]])
 --     end
 -- end, { desc = "Next tabpage" })
--- TODO not working
-vim.keymap.set("n", "<C-BS>", "<cmd>w<CR><Esc>", { desc = "Save buffer" })
-
+--
 -- Leap
 vim.keymap.set({ "n", "x", "o" }, "s", "<cmd>LeapBuffer<CR>", { desc = "[Leap] Search in buffer" })
 vim.keymap.set(
@@ -30,6 +35,13 @@ vim.keymap.set(
     "<cmd>LeapWindow<CR>",
     { desc = "[Leap] Search cross window" }
 )
+
+-- Dial
+-- TODO not working
+vim.keymap.set("n", "+", "<cmd>DialIncNormal<CR>")
+vim.keymap.set("n", "-", "<cmd>DialDecNormal<CR>")
+vim.keymap.set("v", "+", "<cmd>DialIncVisual<CR>")
+vim.keymap.set("v", "-", "<cmd>DialDecVisual<CR>")
 
 for i = 1, 6 do
     local lhs = "<leader>" .. i
@@ -42,10 +54,13 @@ vim.keymap.set("n", "<leader><BS>", "O<Esc>", { desc = "New line above" })
 
 vim.keymap.set("n", "<leader>b", "<cmd>BufferRemove<CR>", { desc = "Remove buffer" })
 
-vim.keymap.set("n", "<leader>e", "<cmd>Xplr<CR>", { desc = "File Explorer" })
+vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "File Explorer" })
+
+vim.keymap.set("n", "<leader>g", "<cmd>GitUI<CR>", { desc = "GitUI" })
+vim.keymap.set("t", "<leader>g", "<C-\\><C-n><cmd>GitUI<CR>", { desc = "Close GitUI" })
 
 vim.keymap.set("n", "<leader>h", "<cmd>FzfLua help_tags<CR>", { desc = "Help Tags" })
-vim.keymap.set("n", "<leader>i", "<cmd>Oil<CR>", { desc = "Oil" })
+
 vim.keymap.set("n", "<leader>j", "<cmd>OverseerRun<CR>", { desc = "Jobs" })
 vim.keymap.set("n", "<leader>k", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
 
@@ -54,7 +69,8 @@ vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
 
 vim.keymap.set("v", "<leader>r", "<cmd>Refactor<CR>", { desc = "Refactor" })
 vim.keymap.set("n", "<leader>s", "", {})
-vim.keymap.set("n", "<leader>t", "<cmd>OpenTerminal<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>t", "<cmd>FTermToggle<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("t", "<leader>t", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Close terminal" })
 vim.keymap.set("n", "<leader>u", "", {})
 vim.keymap.set("n", "<leader>v", "", {})
 
