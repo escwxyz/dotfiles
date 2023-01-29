@@ -54,10 +54,13 @@ vim.keymap.set("n", "<leader><BS>", "O<Esc>", { desc = "New line above" })
 
 vim.keymap.set("n", "<leader>b", "<cmd>BufferRemove<CR>", { desc = "Remove buffer" })
 
-vim.keymap.set("n", "<leader>e", "<cmd>Xplr<CR>", { desc = "File Explorer" })
+vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "File Explorer" })
+
+vim.keymap.set("n", "<leader>g", "<cmd>GitUI<CR>", { desc = "GitUI" })
+vim.keymap.set("t", "<leader>g", "<C-\\><C-n><cmd>GitUI<CR>", { desc = "Close GitUI" })
 
 vim.keymap.set("n", "<leader>h", "<cmd>FzfLua help_tags<CR>", { desc = "Help Tags" })
-vim.keymap.set("n", "<leader>i", "<cmd>Oil<CR>", { desc = "Oil" })
+
 vim.keymap.set("n", "<leader>j", "<cmd>OverseerRun<CR>", { desc = "Jobs" })
 vim.keymap.set("n", "<leader>k", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
 
@@ -66,7 +69,8 @@ vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
 
 vim.keymap.set("v", "<leader>r", "<cmd>Refactor<CR>", { desc = "Refactor" })
 vim.keymap.set("n", "<leader>s", "", {})
-vim.keymap.set("n", "<leader>t", "<cmd>OpenTerminal<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>t", "<cmd>FTermToggle<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("t", "<leader>t", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Close terminal" })
 vim.keymap.set("n", "<leader>u", "", {})
 vim.keymap.set("n", "<leader>v", "", {})
 
