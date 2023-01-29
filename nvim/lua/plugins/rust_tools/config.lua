@@ -22,30 +22,27 @@ local opts = {
             -- Hover actions
             vim.keymap.set(
                 "n",
-                "<leader>ch",
+                "<leader>ah",
                 "<cmd>RustHoverActions<CR>",
                 { desc = "[RS] Hover", buffer = bufnr }
             )
 
             vim.keymap.set(
                 "n",
-                "<leader>cc",
+                "<leader>ac",
                 "<cmd>RustOpenCargo<CR>",
                 { desc = "[RS] Open Cargo.toml", buffer = bufnr }
             )
             vim.keymap.set(
                 "n",
-                "<leader>cp",
+                "<leader>ap",
                 "<cmd>RustParentModule<CR>",
                 { desc = "[RS] Parent module", buffer = bufnr }
             )
-            -- -- Code action groups
-            -- vim.keymap.set(
-            --     "n",
-            --     "<leader>cr",
-            --     rt.code_action_group.code_action_group,
-            --     { desc = "[RS] Actions", buffer = bufnr }
-            -- )
+            -- Code action groups
+            vim.keymap.set("n", "<leader>ar", function()
+                require("rust-tools").code_action_group.code_action_group()
+            end, { desc = "[RS] Actions", buffer = bufnr })
         end,
         settings = {
             ["rust-analyzer"] = {
@@ -77,7 +74,7 @@ local opts = {
         },
     },
 }
-
+-- TODO it looks like dap was started together with rust-tools, which should be lazily loaded on demand
 if is_dap_ready then
     opts.dap =
         { adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path) }

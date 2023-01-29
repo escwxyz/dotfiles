@@ -12,6 +12,7 @@ vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", "<cmd>tabnext<CR>", { desc = "Next tabpage" })
 
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save buffer" })
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save buffer" })
@@ -52,9 +53,7 @@ end
 vim.keymap.set("n", "<leader><CR>", "o<Esc>", { desc = "New line below" })
 vim.keymap.set("n", "<leader><BS>", "O<Esc>", { desc = "New line above" })
 
-vim.keymap.set("n", "<leader>b", "<cmd>BufferRemove<CR>", { desc = "Remove buffer" })
-
-vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "File Explorer" })
+vim.keymap.set("n", "<leader>c", "<cmd>FindCommands<CR>", { desc = "Commands" })
 
 vim.keymap.set("n", "<leader>g", "<cmd>GitUI<CR>", { desc = "GitUI" })
 vim.keymap.set("t", "<leader>g", "<C-\\><C-n><cmd>GitUI<CR>", { desc = "Close GitUI" })
@@ -64,8 +63,10 @@ vim.keymap.set("n", "<leader>h", "<cmd>FzfLua help_tags<CR>", { desc = "Help Tag
 vim.keymap.set("n", "<leader>j", "<cmd>OverseerRun<CR>", { desc = "Jobs" })
 vim.keymap.set("n", "<leader>k", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
 
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy Plugins" })
+
 vim.keymap.set("n", "<leader>o", "<cmd>HydraEditorOptions<CR>", { desc = "Editor options" })
-vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
+vim.keymap.set("n", "<leader>p", "<cmd>FindProjects<CR>", { desc = "Projects" })
 
 vim.keymap.set("v", "<leader>r", "<cmd>Refactor<CR>", { desc = "Refactor" })
 vim.keymap.set("n", "<leader>s", "", {})
@@ -95,26 +96,24 @@ wk.register({
         l = { "$", "Last of the line" },
         k = { "H", "Top of the window" },
         j = { "L", "Bottom of the window" },
-
-        -- ["f"] = { act = "_", desc = "First char of the line" },
     },
 }, { mode = { "n", "x" } })
 
 wk.register({
     a = {
-        name = "Annotation",
+        name = "Actions",
 
-        c = { "<cmd>Neogen class<CR>", "Class" },
-        f = { "<cmd>Neogen func<CR>", "Function" },
-        t = { "<cmd>Neogen type<CR>", "Type" },
+        g = { "<cmd>Neogen<CR>", "Annotation" },
+        n = { "<cmd>NodeAction<CR>", "Node action" },
     },
 }, { prefix = "<leader>" })
 
 wk.register({
-    c = {
-        name = "Code action",
+    b = {
+        name = "Buffer",
 
-        n = { "<cmd>NodeAction<CR>", "Node action" },
+        b = { "<cmd>FzfLua blines<CR>", "Blines" },
+        q = { "<cmd>BufferRemove<CR>", "Quit" },
     },
 }, { prefix = "<leader>" })
 
@@ -126,12 +125,20 @@ wk.register({
 
 wk.register({
     f = {
-        name = "Finder",
+        name = "Files",
 
-        b = { "<cmd>FzfLua blines<CR>", "Find in buffer" },
-        c = { "<cmd>FindCommands<CR>", "Find commands" },
         f = { "<cmd>FzfLua files<CR>", "Find files" },
-        p = { "<cmd>FindProjects<CR>", "Find projects" },
+        o = { "<cmd>Oil --float<CR>", "Oil" },
+        -- t = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
+    },
+}, { prefix = "<leader>" })
+
+wk.register({
+    n = {
+        name = "New",
+
+        b = { "<cmd>enew<CR>", "Buffer" },
+        t = { "<cmd>tabnew<CR>", "Tabpage" },
     },
 }, { prefix = "<leader>" })
 
