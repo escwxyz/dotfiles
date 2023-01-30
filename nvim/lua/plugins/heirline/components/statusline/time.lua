@@ -1,12 +1,16 @@
 local Time = {
-
     init = function(self)
         local stats = require("lazy").stats()
         self.startuptime = (math.floor(stats.startuptime * 100 + 0.5) / 100)
         -- self.up_time = os.difftime(os.time(), vim.g.init_time)
     end,
+    hl = { bg = require("heirline.utils").get_highlight("WildMenu").fg },
     {
         provider = "",
+        hl = {
+            fg = require("heirline.utils").get_highlight("WildMenu").fg,
+            bg = require("heirline.utils").get_highlight("StatusLine").bg,
+        },
     },
     -- StartUpTime
     {

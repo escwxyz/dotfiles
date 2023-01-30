@@ -4,7 +4,10 @@ local Lazy = {
     provider = function()
         return require("lazy.status").updates()
     end,
-    hl = { fg = require("heirline.utils").get_highlight("Special").fg },
+    hl = {
+        fg = require("heirline.utils").get_highlight("String").fg,
+        bg = require("heirline.utils").get_highlight("StatusLine").bg,
+    },
 }
 
 return Lazy

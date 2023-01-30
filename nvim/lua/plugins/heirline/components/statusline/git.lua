@@ -11,7 +11,7 @@ local GitStatus = {
             or self.status_dict.changed ~= 0
     end,
 
-    hl = utils.get_highlight("Constant"),
+    hl = { fg = utils.get_highlight("Constant").fg, bg = utils.get_highlight("PMenu").bg },
 
     {
         provider = function(self)
@@ -56,7 +56,7 @@ local GitStatus = {
     },
     {
         provider = "",
-        hl = { fg = utils.get_highlight("Constant").bg },
+        hl = { fg = utils.get_highlight("PMenu").bg },
     },
 }
 
