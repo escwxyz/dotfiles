@@ -1,30 +1,49 @@
 fish_vi_key_bindings
+
+set -l os (uname)
+
+switch (uname -s)
+	case Darwin
+		abbr --add --global proxy "set -gx HTTP_PROXY socks5://127.0.0.1:1080 && set -gx HTTPS_PROXY socks5://127.0.0.1:1080 && cd && cd Downloads/naive && ./naive"
+		abbr --add --global unproxy "set -e HTTP_PROXY && set -e HTTPS_PROXY"
+
+		set -gx HOME "/Users/jiewang"
+		set SQLITE "/opt/homebrew/opt/sqlite/bin"
+		set PNPM "$HOME/Library/pnpm"
+		set SOLANA "$HOME/solana/bin"
+		set CARGO "$HOME/.cargo/bin"
+		set HOMEBREW "/opt/homebrew/bin"
+		set SYSTEM "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/usr/local/go/bin"
+		set WEZTERM "/Applications/WezTerm.app/Contents/MacOS"
+		set -gx PATH "$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$KITTY:$SYSTEM"
+
+		set -gx LDFLAGS "-L/opt/homebrew/opt/sqlite/lib"
+		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
+		set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/sqlite/lib/pkgconfig"
+
+	case Linux
+
+		abbr --add --global add "paru -S"
+		abbr --add --global remove "paru -R"
+		abbr --add --global clean "paru -c"
+		abbr --add --global upgrade "paru -Syu"
+		abbr --add --global updates "paru -Qu"
+		abbr --add --global naive "cd && cd naive && ./naive"
+
+		set -gx HOME "/home/jiew"
+		# TODO
+
+	case '*'
+		# TODO
+end 
+
+# Common settings
+
 set -g fish_greeting
-# add path (installed before fish)
-set -gx PATH /home/jiew/.local/bin:/home/jiew/alacritty/target/release/alacritty:/home/jiew/flutter/bin:/home/jiew/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
-set -gx EDITOR nvim 
+set -gx SHELL fish
+set -gx EDITOR nvim
 set -gx LANG en_US.UTF-8
-# flutter mirrors
-set -gx FLUTTER_STORAGE_BASE_URL https://storage.flutter-io.cn 
-set -gx PUB_HOSTED_URL https://pub.flutter-io.cn
 
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-	# Environments
-
-	abbr --add --global add "paru -S"
-	abbr --add --global remove "paru -R"
-	abbr --add --global clean "paru -c"
-	abbr --add --global upgrade "paru -Syu" # upgrade
-	abbr --add --global updates "paru -Qu" # check available updates
-	abbr --add --global naive "cd && cd naive && ./naive"
-	abbr --add --global ls "nnn -de"
-end
-
-# for zoxide
-# zoxide init fish | source
-
-# pnpm
-set -gx PNPM_HOME "/home/jiew/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
+# abbr --add --global ls "xplr"
+# abbr --add --global dotfiles "git --git-dir $HOME/.dotfiles --work-tree $HOME"
+# abbr --add --global dotfiles-gitui "gitui -d $HOME/.dotfiles -w $HOME"
