@@ -1,0 +1,12 @@
+[package]
+name = "rs"
+version = "0.1.0"
+edition = "2021"
+description = "neovim config in rust"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+mlua = { version = "0.8.7", features = ["luajit"] }
+nvim-oxi = { version = "0.2.2", features = ["neovim-nightly", "mlua"] }
