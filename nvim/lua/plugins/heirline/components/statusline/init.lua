@@ -4,7 +4,7 @@ local GitStatus = require("plugins.heirline.components.statusline.git")
 local Lazy = require("plugins.heirline.components.statusline.lazy")
 -- local WorkSpace = require("plugins.heirline.components.shared.workspace")
 local Align = require("plugins.heirline.components.shared.align")
--- local Space = require("plugins.heirline.components.shared.space")
+local Space = require("plugins.heirline.components.shared.space")
 local Hydra = require("plugins.heirline.components.statusline.hydra")
 
 return {
@@ -24,7 +24,6 @@ return {
         Hydra,
         Align,
     },
-
     {
         ViMode,
         -- Space,
@@ -32,6 +31,7 @@ return {
         GitStatus,
         Align,
         Lazy,
+		Space,
         Time,
     },
 }
