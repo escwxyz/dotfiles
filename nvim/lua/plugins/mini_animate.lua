@@ -1,6 +1,6 @@
 return {
     "echasnovski/mini.animate",
-    enabled = true,
+    enabled = not vim.g.neovide,
     event = "CursorMoved",
     config = function()
         require("mini.animate").setup({
@@ -12,5 +12,5 @@ return {
                 enable = true,
             },
         })
-    end
+    end,
 }
