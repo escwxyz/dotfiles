@@ -4,7 +4,7 @@
 
 vim.opt.breakindent = true
 
--- vim.opt.cmdheight = 0 
+-- vim.opt.cmdheight = 0
 -- this makes no sense as there will always be a gap when terminal size is changed
 -- this is caused by the fontsize and terminal itself, consider set this after using a GUI
 
@@ -94,3 +94,19 @@ vim.opt.winblend = 20
 vim.opt.winwidth = 10
 
 vim.opt.wrap = false
+
+-- Neovide settings
+if vim.g.neovide then
+    vim.opt.cmdheight = 0
+    vim.g.neovide_transparency = 0.9
+    vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_confirm_quit = true
+    vim.g.neovide_cursor_vfx_mode = "railgun"
+    -- vim.g.neovide_floating_blur_amount_x = 3.0
+    -- vim.g.neovide_floating_blur_amount_y = 3.0
+    -- vim.g.transparency = 0.8
+    -- if vim.fn.has("mac") then
+    --     -- vim.g.neovide_background_color = "#0f1117"
+    --     --     .. string.format("%x", math.floor(255 * vim.g.neovide_transparency_point or 0.8))
+    -- end
+end
