@@ -15,7 +15,8 @@ switch (uname -s)
 		set HOMEBREW "/opt/homebrew/bin"
 		set SYSTEM "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/usr/local/go/bin"
 		set WEZTERM "/Applications/WezTerm.app/Contents/MacOS"
-		set -gx PATH "$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$KITTY:$SYSTEM"
+		set NEOVIDE "/Applications/Neovide.app/Contents/MacOS"
+		set -gx PATH "$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
 		set -gx LDFLAGS "-L/opt/homebrew/opt/sqlite/lib"
 		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
