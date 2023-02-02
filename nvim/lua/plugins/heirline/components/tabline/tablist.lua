@@ -11,6 +11,7 @@ local TabName = {
     init = function(self)
         self.is_terminal = conditions.buffer_matches({ buftype = { "terminal" } })
 
+        -- TODO sometimes error happens
         local windows = vim.api.nvim_tabpage_list_wins(self.tabnr) -- all windows of that tabpage
         -- all unfloating wins inside that tabpage
         local unfloating_windows = vim.tbl_filter(function(winid)
