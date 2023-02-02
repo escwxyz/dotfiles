@@ -62,28 +62,34 @@ end
 vim.keymap.set("n", "<leader><CR>", "o<Esc>", { desc = "New line below" })
 vim.keymap.set("n", "<leader><BS>", "O<Esc>", { desc = "New line above" })
 
+vim.keymap.set("n", "<leader>?", "<cmd>FzfLua help_tags<CR>", { desc = "Help tags" })
+vim.keymap.set("n", "<leader>/", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
+
+vim.keymap.set("n", "<leader>b", "<cmd>FzfLua blines<CR>", { desc = "Blines" })
+
 vim.keymap.set("n", "<leader>c", "<cmd>FindCommands<CR>", { desc = "Commands" })
 
 vim.keymap.set("n", "<leader>g", "<cmd>GitUI<CR>", { desc = "GitUI" })
 vim.keymap.set("t", "<leader>g", "<C-\\><C-n><cmd>GitUI<CR>", { desc = "Close GitUI" })
 
-vim.keymap.set("n", "<leader>h", "<cmd>FzfLua help_tags<CR>", { desc = "Help Tags" })
-
-vim.keymap.set("n", "<leader>j", "<cmd>OverseerRun<CR>", { desc = "Jobs" })
-vim.keymap.set("n", "<leader>k", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
-
-vim.keymap.set("n", "<leader>l", "<cmd>UrlView<CR>", { desc = "Links" })
+vim.keymap.set("n", "<leader>h", "<cmd>FocusSplitLeft<CR>", { desc = "Split left" })
+vim.keymap.set("n", "<leader>j", "<cmd>FocusSplitDown<CR>", { desc = "Split down" })
+vim.keymap.set("n", "<leader>k", "<cmd>FocusSplitUp<CR>", { desc = "Split up" })
+vim.keymap.set("n", "<leader>l", "<cmd>FocusSplitRight<CR>", { desc = "Split right" })
 
 vim.keymap.set("n", "<leader>o", "<cmd>Oil --float<CR>", { desc = "Oil" })
 vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
 
+vim.keymap.set("n", "<leader>q", "<cmd>BufferRemove<CR>", { desc = "Quit" })
+
+vim.keymap.set("n", "<leader>r", "<cmd>OverseerRun<CR>", { desc = "Runner" })
 vim.keymap.set("v", "<leader>r", "<cmd>Refactor<CR>", { desc = "Refactor" })
 vim.keymap.set("n", "<leader>s", "", {})
 -- Toggle?
 vim.keymap.set("n", "<leader>t", "<cmd>HydraEditorOptions<CR>", { desc = "Toggle options" })
 -- vim.keymap.set("n", "<leader>t", "<cmd>FTermToggle<CR>", { desc = "Toggle terminal" })
 -- vim.keymap.set("t", "<leader>t", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Close terminal" })
-vim.keymap.set("n", "<leader>u", "", {})
+vim.keymap.set("n", "<leader>u", "<cmd>UrlView<CR>", { desc = "Urls" })
 vim.keymap.set("n", "<leader>v", "", {})
 
 vim.keymap.set("n", "<leader>x", "", {})
@@ -120,15 +126,6 @@ wk.register({
 }, { prefix = "<leader>" })
 
 wk.register({
-    b = {
-        name = "Buffer",
-
-        b = { "<cmd>FzfLua blines<CR>", "Blines" },
-        q = { "<cmd>BufferRemove<CR>", "Quit" },
-    },
-}, { prefix = "<leader>" })
-
-wk.register({
     d = {
         name = "Debug",
     },
@@ -140,32 +137,5 @@ wk.register({
 
         f = { "<cmd>FzfLua files<CR>", "Find files" },
         -- o = { "<cmd>Oil --float<CR>", "Oil" },
-    },
-}, { prefix = "<leader>" })
-
-wk.register({
-    w = {
-        name = "Windows",
-
-        h = { "<cmd>WinShift left<CR>", "Move to left" },
-        j = { "<cmd>WinShift down<CR>", "Move down" },
-        k = { "<cmd>WinShift up<CR>", "Move up" },
-        l = { "<cmd>WinShift right<CR>", "Move to right" },
-        H = { "<cmd>WinShift far_left<CR>", "Move far left" },
-        J = { "<cmd>WinShift far_down<CR>", "Move far down" },
-        K = { "<cmd>WinShift far_right<CR>", "Move far right" },
-        L = { "<cmd>WinShift far_right<CR>", "Move far right" },
-
-        r = { "<cmd>StartResizeMode<CR>", "Resize mode" },
-        ["<Left>"] = { "<cmd>ResizeWindowLeft<CR>", "Resize to left" },
-        ["<Right>"] = { "<cmd>ResizeWindowRight<CR>", "Resize to right" },
-        ["<Up>"] = { "<cmd>ResizeWindowUp<CR>", "Resize up" },
-        ["<Down>"] = { "<cmd>ResizeWindowDown<CR>", "Resize down" },
-
-        m = { "<cmd>WindowsMaximize<CR>", "Maximize window" },
-        e = { "<cmd>WindowsEqualize<CR>", "Equalize window" },
-
-        s = { "<C-w>s", "Split horizontally" },
-        v = { "<C-w>v", "Split vertically" },
     },
 }, { prefix = "<leader>" })
