@@ -11,8 +11,14 @@ vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
+-- vim.keymap.set("n", "<D-v>", "+p", { desc = "Paste" })
+-- vim.keymap.set("n", "<D-c>", "+y", { desc = "Copy" })
+
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>tabnext<CR>", { desc = "Next tabpage" })
+
+-- vim.keymap.set("n", "<Tab-=>", "<cmd>tabnew<Cr>", { desc = "New tab" })
+-- vim.keymap.set("n", "<Tab-->", "<cmd>enew<Cr>", { desc = "New buffer" })
 
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save buffer" })
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save buffer" })
@@ -36,6 +42,9 @@ vim.keymap.set(
     "<cmd>LeapWindow<CR>",
     { desc = "[Leap] Search cross window" }
 )
+
+vim.keymap.set("n", "<C-t>", "<cmd>FTermToggle<CR>", { desc = "Terminal" })
+vim.keymap.set("t", "<C-c>", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Terminal" })
 
 -- Dial
 -- TODO not working
@@ -63,15 +72,17 @@ vim.keymap.set("n", "<leader>h", "<cmd>FzfLua help_tags<CR>", { desc = "Help Tag
 vim.keymap.set("n", "<leader>j", "<cmd>OverseerRun<CR>", { desc = "Jobs" })
 vim.keymap.set("n", "<leader>k", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
 
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy Plugins" })
+vim.keymap.set("n", "<leader>l", "<cmd>UrlView<CR>", { desc = "Links" })
 
-vim.keymap.set("n", "<leader>o", "<cmd>HydraEditorOptions<CR>", { desc = "Editor options" })
-vim.keymap.set("n", "<leader>p", "<cmd>FindProjects<CR>", { desc = "Projects" })
+vim.keymap.set("n", "<leader>o", "<cmd>Oil --float<CR>", { desc = "Oil" })
+vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
 
 vim.keymap.set("v", "<leader>r", "<cmd>Refactor<CR>", { desc = "Refactor" })
 vim.keymap.set("n", "<leader>s", "", {})
-vim.keymap.set("n", "<leader>t", "<cmd>FTermToggle<CR>", { desc = "Toggle terminal" })
-vim.keymap.set("t", "<leader>t", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Close terminal" })
+-- Toggle?
+vim.keymap.set("n", "<leader>t", "<cmd>HydraEditorOptions<CR>", { desc = "Toggle options" })
+-- vim.keymap.set("n", "<leader>t", "<cmd>FTermToggle<CR>", { desc = "Toggle terminal" })
+-- vim.keymap.set("t", "<leader>t", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Close terminal" })
 vim.keymap.set("n", "<leader>u", "", {})
 vim.keymap.set("n", "<leader>v", "", {})
 
@@ -128,17 +139,7 @@ wk.register({
         name = "Files",
 
         f = { "<cmd>FzfLua files<CR>", "Find files" },
-        o = { "<cmd>Oil --float<CR>", "Oil" },
-        -- t = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
-    },
-}, { prefix = "<leader>" })
-
-wk.register({
-    n = {
-        name = "New",
-
-        b = { "<cmd>enew<CR>", "Buffer" },
-        t = { "<cmd>tabnew<CR>", "Tabpage" },
+        -- o = { "<cmd>Oil --float<CR>", "Oil" },
     },
 }, { prefix = "<leader>" })
 
