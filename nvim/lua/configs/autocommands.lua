@@ -56,9 +56,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --     pattern = "*",
 --     group = vim.api.nvim_create_augroup("UpTime", { clear = false }),
 -- })
-
-vim.api.nvim_create_autocmd("BufWrite", {
-    callback = function()
-        vim.notify("Buffer saved")
-    end,
-})
