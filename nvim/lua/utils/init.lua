@@ -27,4 +27,15 @@ M.is_floating_win = function(winid)
     return vim.api.nvim_win_get_config(winid).relative ~= ""
 end
 
+--- Check if plugin is available
+---@param plugin_name string
+---@return boolean
+M.is_available = function(plugin_name)
+    local ok, _ = pcall(require, plugin_name)
+    if not ok then
+        vim.notify(plugin_name .. " is not available", vim.log.levels.ERROR)
+    end
+    return ok
+end
+
 return M
