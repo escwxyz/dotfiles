@@ -69,6 +69,12 @@ local M = {
                 },
             },
         })
+
+        require("lspconfig").ds_pinyin_lsp.setup({
+            init_options = {
+                db_path = vim.fn.stdpath("config") .. "/dict.db3",
+            },
+        })
     end,
 }
 
