@@ -100,6 +100,7 @@ M.setup = function()
             },
             { name = "luasnip" },
             { name = "buffer" },
+            { name = "path" },
         }),
 
         window = {
