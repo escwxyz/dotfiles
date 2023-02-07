@@ -29,6 +29,7 @@
   "mason-lspconfig.nvim": { "branch": "main", "commit": "53f3a8bdcb77d4a95b082fd57e12173f353c6c3e" },
   "mason.nvim": { "branch": "main", "commit": "4952a48722b3fa01e03c67ab939d5b7d3037309e" },
   "mini.ai": { "branch": "main", "commit": "14a1382372195573c6c7f494ab8bb298b03e6f04" },
+  "mini.animate": { "branch": "main", "commit": "56a9d5438343504927412b7f858accc3cea29e00" },
   "mini.bufremove": { "branch": "main", "commit": "96c2a7f3e7d079639a0e23d2fc0d4585e5d02dfd" },
   "mini.comment": { "branch": "main", "commit": "e5294cc3e75bafb2369f235d31a98b01a9cc67ad" },
   "mini.pairs": { "branch": "main", "commit": "fec9aba50912d8c3d92d07d6a77952de84f8d7ad" },
@@ -66,6 +67,7 @@
   "typescript.nvim": { "branch": "main", "commit": "f66d4472606cb24615dfb7dbc6557e779d177624" },
   "urlview.nvim": { "branch": "main", "commit": "6a2f1ae05ba036ca1e9c505f4d58b9a188ef51bd" },
   "vim-repeat": { "branch": "master", "commit": "8106e142dfdc278ff3eaaadd7b362ad7949d4357" },
+  "vmux": { "branch": "master", "commit": "07b68c6cfb95f13a875aacd439917ce70a7429a3" },
   "which-key.nvim": { "branch": "main", "commit": "16ed12a8493628c377606da2ebac50d80736ed37" },
   "zen-mode.nvim": { "branch": "main", "commit": "4313a5828e4d48c5f2f135f29d46f769a59dcfdc" }
 }

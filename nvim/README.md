@@ -1,6 +1,7 @@
 ## Plugins (sort by alphabet)
 
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Use buffer as cmp source
+- [cmp-path](https://github.com/hrsh7th/cmp-path) - Use filesystem paths as cmp source
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Use LSP as cmp source
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim) - Improve default neovim UI
 - [FTerm](https://github.com/numToStr/FTerm.nvim) - Floating terminal
@@ -30,6 +31,7 @@
 - [tabout.nvim](https://github.com/abecodes/tabout.nvim) - Tab out from arounds in insert mode
 - [ts-node-action](https://github.com/ckolkey/ts-node-action) - Node actions based on treesitter
 - [urlview.nvim](https://github.com/axieax/urlview.nvim) - Open / copy urls from plugin manager, or within buffer
+- [vmux](https://github.com/yazgoo/vmux) - Terminal multiplexing
 - [which-key.nvim](https://github.com/folke/which-key.nvim) - Keymaps utility
 - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim) - Distraction-free UI for writing
 
@@ -47,7 +49,7 @@
 - [ ] unify shared icons for different plugins
 - [ ] unify builtin ui with dressing.nvim
 - [ ] hydra freezes statusline
-- [ ] fully remove noice
+- [x] fully remove noice
 - [ ] use fzf-lua to replace telescope
 - [ ] Batch rename
 - [ ] Add dial.nvim
