@@ -15,16 +15,6 @@ local M = {
     "neovim/nvim-lspconfig",
     enabled = true,
     event = "BufReadPre", -- NOTE improper event leading to unexpected behavior
-    -- ft = {
-    --     "rust",
-    --     "lua",
-    --     "typescript",
-    --     "tsx",
-    --     "typescriptreact",
-    --     "dart",
-    --     "javascript",
-    --     "css",
-    -- },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         {
@@ -44,7 +34,6 @@ local M = {
                 })
             end,
         },
-        "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
         require("plugins.lsp.diagnostics").define_diagnostics()
@@ -73,6 +62,17 @@ local M = {
         require("lspconfig").ds_pinyin_lsp.setup({
             init_options = {
                 db_path = vim.fn.stdpath("config") .. "/dict.db3",
+            },
+        })
+        require("lspconfig").rust_analyzer.setup({
+            on_attach = require("plugins.lsp.on_attach"),
+            capabilities = require("plugins.lsp.capabilities"),
+            settings = {
+                ["rust-analyzer"] = {
+                    checkOnSave = {
+                        command = "clippy",
+                    },
+                },
             },
         })
     end,
