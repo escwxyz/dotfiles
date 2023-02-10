@@ -4,7 +4,7 @@
 
 vim.opt.breakindent = true
 
--- vim.opt.cmdheight = 0
+vim.opt.cmdheight = 0
 -- this makes no sense as there will always be a gap when terminal size is changed
 -- this is caused by the fontsize and terminal itself, consider set this after using a GUI
 
@@ -41,7 +41,7 @@ vim.opt.foldlevelstart = 99
 
 vim.opt.ignorecase = true
 
-vim.opt.laststatus = 3
+vim.opt.laststatus = 0
 
 vim.opt.list = true
 
@@ -66,6 +66,8 @@ vim.opt.ruler = false
 vim.opt.sessionoptions:append("localoptions")
 
 vim.opt.showcmd = false
+
+vim.opt.showmode = false
 
 vim.opt.showtabline = 2
 

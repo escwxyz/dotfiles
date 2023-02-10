@@ -11,6 +11,25 @@ local function get_library()
     return lib
 end
 
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
+local handlers = {
+    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+    ["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = border }
+    ),
+}
+
 local M = {
     "neovim/nvim-lspconfig",
     enabled = true,
@@ -34,16 +53,29 @@ local M = {
                 })
             end,
         },
+        -- {
+        --     -- config = function()
+        --     --     require("lsp-inlayhints").setup({
+        --     --         inlay_hints = {
+        --     --             parameter_hints = {
+        --     --                 show = false,
+        --     --             },
+        --     --         },
+        --     --     })
+        --     -- end,
+        -- },
     },
     config = function()
         require("plugins.lsp.diagnostics").define_diagnostics()
         require("lspconfig").tailwindcss.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
+            handlers = handlers,
         })
         require("lspconfig").sumneko_lua.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
+            handlers = handlers,
             settings = {
                 Lua = {
                     runtime = { version = "LuaJIT" },
@@ -67,6 +99,7 @@ local M = {
         require("lspconfig").rust_analyzer.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
+            handlers = handlers,
             settings = {
                 ["rust-analyzer"] = {
                     checkOnSave = {

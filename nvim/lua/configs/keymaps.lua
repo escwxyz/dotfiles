@@ -13,6 +13,8 @@ vim.keymap.set({ "n", "x" }, "gl", "$")
 vim.keymap.set({ "n", "x" }, "gj", "L")
 vim.keymap.set({ "n", "x" }, "gk", "H")
 
+vim.keymap.set("n", "/", "<cmd>FzfLua blines<CR>", { desc = "Search in buffer" }) -- replace the / search
+
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
 -- TODO
@@ -61,8 +63,7 @@ vim.keymap.set("n", "<leader><BS>", "O<Esc>", { desc = "New line above" })
 vim.keymap.set("n", "<leader>?", "<cmd>FzfLua help_tags<CR>", { desc = "Help tags" })
 vim.keymap.set("n", "<leader>/", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
 
-vim.keymap.set("n", "<leader>b", "<cmd>FzfLua blines<CR>", { desc = "Blines" })
-
+vim.keymap.set("n", "<leader>b", "<cmd>FzfLua buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>c", "<cmd>FindCommands<CR>", { desc = "Commands" })
 
 vim.keymap.set("n", "<leader>h", "<cmd>FocusSplitLeft<CR>", { desc = "Split left" })
@@ -79,8 +80,8 @@ vim.keymap.set("n", "<leader>q", "<cmd>BufferRemove<CR>", { desc = "Quit" })
 vim.keymap.set("v", "<leader>r", "<cmd>Refactor<CR>", { desc = "Refactor" })
 
 -- Vmux
-vim.keymap.set("n", "<leader>s", "<cmd>VmuxSplit<CR>", {desc = "Vmux split horizontally"})
-vim.keymap.set("n", "<leader>v", "<cmd>VmuxVsplit<CR>", {desc = "Vmux split vertically"})
+vim.keymap.set("n", "<leader>s", "<cmd>VmuxSplit<CR>", { desc = "Vmux split horizontally" })
+vim.keymap.set("n", "<leader>v", "<cmd>VmuxVsplit<CR>", { desc = "Vmux split vertically" })
 -- Escape from terminal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 

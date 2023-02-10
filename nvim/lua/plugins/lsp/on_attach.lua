@@ -3,7 +3,7 @@ local on_attach = function(client, bufnr)
         vim.lsp.buf.hover()
     end, { desc = "[LSP] Hover", buffer = bufnr })
 
-    vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float) -- TODO change keymap
+    vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "[LSP] Diagnostics" }) -- TODO change keymap
 
     vim.keymap.set("n", "]d", function()
         vim.diagnostic.goto_next({})
