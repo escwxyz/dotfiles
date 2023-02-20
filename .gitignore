@@ -6,3 +6,4 @@ yarn
 alacritty/catppuccin/
 nvim/dict.db3
 nvim/lua/plugins_todo
+alacritty/base16-alacritty
