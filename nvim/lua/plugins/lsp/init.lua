@@ -69,7 +69,7 @@ local M = {
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
         })
-        require("lspconfig").sumneko_lua.setup({
+        require("lspconfig").lua_ls.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
             settings = {
