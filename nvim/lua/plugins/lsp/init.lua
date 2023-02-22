@@ -32,7 +32,7 @@ local M = {
             "williamboman/mason-lspconfig.nvim",
             config = function()
                 require("mason-lspconfig").setup({
-                    ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver" },
+                    ensure_installed = { "lua_ls", "rust_analyzer", "tsserver" },
                 })
             end,
         },
@@ -69,7 +69,7 @@ local M = {
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
         })
-        require("lspconfig").sumneko_lua.setup({
+        require("lspconfig").lua_ls.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
             settings = {
