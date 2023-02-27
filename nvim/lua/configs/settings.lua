@@ -2,6 +2,8 @@
 -- ~~~~~~~~~~~~~~~
 -- https://neovim.io/doc/user/options.html
 
+vim.o.clipboard = "unnamedplus"
+
 vim.opt.breakindent = true
 
 vim.opt.cmdheight = 0
