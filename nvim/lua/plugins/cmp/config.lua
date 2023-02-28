@@ -53,8 +53,8 @@ M.setup = function()
             end,
         },
         mapping = cmp.mapping.preset.insert({
-            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<S-up>"] = cmp.mapping.scroll_docs(-4),
+            ["<S-down>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete({}),
             ["<CR>"] = cmp.mapping.confirm({ select = true }),
             ["<Tab>"] = cmp.mapping(function(fallback)
@@ -98,6 +98,7 @@ M.setup = function()
                     return true
                 end,
             },
+            { name = "cmp_tabnine" },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "path" },
@@ -116,11 +117,11 @@ M.setup = function()
             format = lspkind.cmp_format({
                 before = function(entry, vim_item)
                     vim_item = formatTailwindCSS(entry, vim_item)
-
                     vim_item.menu = ({
                         buffer = "[Buffer]",
                         nvim_lsp = "[LSP]",
                         luasnip = "[Snippet]",
+                        cmp_tabnine = "[TN]",
                     })[entry.source.name]
 
                     vim_item.abbr = vim_item.abbr:match("[^(]+") -- remove parameters from function abbr
