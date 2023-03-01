@@ -28,8 +28,7 @@ M.setup = function()
     fzf.setup({
         winopts = {
             preview = {
-                -- default = "bat",
-                default = "bat_async", -- see https://github.com/ibhagwan/fzf-lua/issues/615
+                default = "bat",
             },
         },
         previewers = {
