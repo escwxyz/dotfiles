@@ -71,6 +71,10 @@ vim.keymap.set("n", "<leader>j", "<cmd>FocusSplitDown<CR>", { desc = "Split down
 vim.keymap.set("n", "<leader>k", "<cmd>FocusSplitUp<CR>", { desc = "Split up" })
 vim.keymap.set("n", "<leader>l", "<cmd>FocusSplitRight<CR>", { desc = "Split right" })
 
+vim.keymap.set("n", "<leader>nf", "<cmd>Neogen func<CR>", { desc = "Annotation function" })
+vim.keymap.set("n", "<leader>nt", "<cmd>Neogen type<CR>", { desc = "Annotation type" })
+vim.keymap.set("n", "<leader>nc", "<cmd>Neogen class<CR>", { desc = "Annotation class" })
+
 vim.keymap.set("n", "<leader>o", "<cmd>Oil --float<CR>", { desc = "Oil" })
 
 vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
@@ -103,8 +107,6 @@ end
 wk.register({
     a = {
         name = "Actions",
-
-        g = { "<cmd>Neogen<CR>", "Annotation" },
         n = { "<cmd>NodeAction<CR>", "Node action" },
     },
 }, { prefix = "<leader>" })

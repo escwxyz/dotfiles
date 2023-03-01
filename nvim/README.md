@@ -3,6 +3,7 @@
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Use buffer as cmp source
 - [cmp-path](https://github.com/hrsh7th/cmp-path) - Use filesystem paths as cmp source
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Use LSP as cmp source
+- [cmp-tabnine](https://github.com/tzachar/cmp-tabnine) - Use tabnine as cmp source
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim) - Improve default neovim UI
 - [FTerm](https://github.com/numToStr/FTerm.nvim) - Floating terminal
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua) - Fuzzy finder based on fzf
