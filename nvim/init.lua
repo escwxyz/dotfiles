@@ -72,7 +72,6 @@ local lazy_config = {
         notify = false,
         frequency = 3600 * 12,
     },
-    -- NOTE this seems not to work as expected if using the current structure
     change_detection = {
         enabled = true,
         notify = true,

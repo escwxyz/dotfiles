@@ -1,7 +1,7 @@
 return {
     "numToStr/FTerm.nvim",
     enabled = true,
-    cmd = { "GitUI", "FTermToggle" },
+    cmd = { "Lazygit", "FTermToggle" },
     config = function()
         require("plugins.fterm.config").setup()
         require("plugins.fterm.config").setup_cmds()

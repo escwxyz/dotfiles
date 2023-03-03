@@ -4,8 +4,6 @@ vim.g.maplocalleader = " "
 vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
--- no way to clear builtin maps, only override...
-
 vim.keymap.set({ "n", "x" }, "gt", "gg")
 vim.keymap.set({ "n", "x" }, "gb", "G")
 vim.keymap.set({ "n", "x" }, "gh", "_")
@@ -48,8 +46,8 @@ vim.keymap.set("t", "<C-t>", "<C-\\><C-n><cmd>FTermToggle<CR>", { desc = "Termin
 
 vim.keymap.set("n", "<leader>q", "<cmd>BufferRemove<CR>", { desc = "Quit" })
 
-vim.keymap.set("n", "<leader>g", "<cmd>GitUI<CR>", { desc = "GitUI" })
-vim.keymap.set("t", "<leader>g", "<C-\\><C-n><cmd>GitUI<CR>", { desc = "Close GitUI" })
+vim.keymap.set("n", "<leader>g", "<cmd>Lazygit<CR>", { desc = "Lazygit" })
+vim.keymap.set("t", "<leader>g", "<C-\\><C-n><cmd>Lazygit<CR>", { desc = "Close Lazygit" })
 
 for i = 1, 6 do
     local lhs = "<leader>" .. i
@@ -62,6 +60,7 @@ vim.keymap.set("n", "<leader><BS>", "O<Esc>", { desc = "New line above" })
 
 vim.keymap.set("n", "<leader>?", "<cmd>FzfLua help_tags<CR>", { desc = "Help tags" })
 vim.keymap.set("n", "<leader>/", "<cmd>FzfLua keymaps<CR>", { desc = "Keymaps" })
+vim.keymap.set("n", "<leader>\\", "<cmd>Lazy<CR>", { desc = "Plugins" })
 
 vim.keymap.set("n", "<leader>b", "<cmd>FzfLua buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>c", "<cmd>FindCommands<CR>", { desc = "Commands" })
@@ -77,7 +76,7 @@ vim.keymap.set("n", "<leader>nc", "<cmd>Neogen class<CR>", { desc = "Annotation 
 
 vim.keymap.set("n", "<leader>o", "<cmd>Oil --float<CR>", { desc = "Oil" })
 
-vim.keymap.set("n", "<leader>p", "<cmd>Lazy<CR>", { desc = "Plugins" })
+vim.keymap.set("n", "<leader>p", "<cmd>FindProjects<CR>", { desc = "Projects" })
 
 vim.keymap.set("n", "<leader>q", "<cmd>BufferRemove<CR>", { desc = "Quit" })
 
@@ -116,6 +115,5 @@ wk.register({
         name = "Files",
 
         f = { "<cmd>FzfLua files<CR>", "Find files" },
-        -- o = { "<cmd>Oil --float<CR>", "Oil" },
     },
 }, { prefix = "<leader>" })

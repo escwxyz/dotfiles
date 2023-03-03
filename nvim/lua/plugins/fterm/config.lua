@@ -35,9 +35,9 @@ end
 M.setup_terminals = function()
     local fterm = require("FTerm")
 
-    local gitui = fterm:new({
-        ft = "GitUI",
-        cmd = "gitui",
+    local lazygit = fterm:new({
+        ft = "Lazygit",
+        cmd = "lazygit",
         border = "rounded",
         dimensions = {
             height = 0.9,
@@ -45,8 +45,8 @@ M.setup_terminals = function()
         },
     })
 
-    vim.api.nvim_create_user_command("GitUI", function()
-        gitui:toggle()
+    vim.api.nvim_create_user_command("Lazygit", function()
+        lazygit:toggle()
     end, {})
 end
 
