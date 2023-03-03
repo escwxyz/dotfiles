@@ -761,7 +761,7 @@ enabled:
 # in the order they were defined in.
 key_bindings:
   #- { key: Paste,                                       action: Paste          }
-  #- { key: Copy,                                        action: Copy           }
+  - { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
   #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
   #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp   }
@@ -868,7 +868,7 @@ key_bindings:
   #- { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
   #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
   #- { key: V,              mods: Command,                    action: Paste                 }
-  #- { key: C,              mods: Command,                    action: Copy                  }
+  - { key: C,              mods: Command,                    action: Copy                  }
   #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
   #- { key: H,              mods: Command,                    action: Hide                  }
   #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }

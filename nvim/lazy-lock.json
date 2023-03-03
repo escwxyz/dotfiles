@@ -23,7 +23,7 @@
   "hlargs.nvim": { "branch": "main", "commit": "2a7f9878326cdfd0eb8c91ad543c07680c976227" },
   "hydra.nvim": { "branch": "master", "commit": "3ced42c0b6a6c85583ff0f221635a7f4c1ab0dd0" },
   "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
-  "lazy.nvim": { "branch": "main", "commit": "8077428e63feb0f3bf795d53b23ba1695b28ab0e" },
+  "lazy.nvim": { "branch": "main", "commit": "8d18ef44e769e98a8dc974ca85275de1d8cc7c04" },
   "leap.nvim": { "branch": "main", "commit": "b4d15d9cccffbc0773d92c5d8c8aad888800cb5e" },
   "lsp_signature.nvim": { "branch": "master", "commit": "4665921ff8e30601c7c1328625b3abc1427a6143" },
   "lspkind.nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
