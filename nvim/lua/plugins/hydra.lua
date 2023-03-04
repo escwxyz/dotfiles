@@ -11,5 +11,8 @@ return {
         command("HydraHarpoon", function()
             require("hydras.harpoon-hydra").activate()
         end, {})
+        command("HydraUrlView", function()
+            require("hydras.urlview-hydra").activate()
+        end, {})
     end,
 }

@@ -5,6 +5,7 @@
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Use LSP as cmp source
 - [cmp-tabnine](https://github.com/tzachar/cmp-tabnine) - Use tabnine as cmp source
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim) - Improve default neovim UI
+- [focus.nvim](https://github.com/beauwilliams/focus.nvim) - Window management
 - [FTerm](https://github.com/numToStr/FTerm.nvim) - Floating terminal
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua) - Fuzzy finder based on fzf
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Git status signs
@@ -24,12 +25,13 @@
 - [nvim-base16](https://github.com/rrethy/nvim-base16) - Colorschemes
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion engine
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - For configuring LSP clients
+- [nvim-neoclip](https://github.com/AckslD/nvim-neoclip.lua) - Yank history
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Treesitter for syntex highlighting and more
 - [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Autotag for tsx etc.
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - Icons
 - [oil.nvim](https://github.com/stevearc/oil.nvim) - File explorer
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Utils for many plugins
-- [tabout.nvim](https://github.com/abecodes/tabout.nvim) - Tab out from arounds in insert mode
+- [sqlite](https://github.com/kkharji/sqlite.lua) - Database for other plugins
 - [ts-node-action](https://github.com/ckolkey/ts-node-action) - Node actions based on treesitter
 - [urlview.nvim](https://github.com/axieax/urlview.nvim) - Open / copy urls from plugin manager, or within buffer
 - [vmux](https://github.com/yazgoo/vmux) - Terminal multiplexing
@@ -37,6 +39,50 @@
 - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim) - Distraction-free UI for writing
 
 ## Keybindings
+
+- `/` Search inside current buffer via fzf-lua
+- `<BS>` Format current buffer
+
+- `gt` Jump to the top of the buffer
+- `gb` Jump to the bottom of the buffer
+- `gh` Jump backward to the head of the line
+- `gl` Jump forward to the last of the line
+- `gj` Jump down to the visible bottom of the window
+- `gk` Jump up to the visible top of the window
+
+- `s` Vision scoped jump within current buffer via Leap
+- `S` Vision scoped jump across windows via Leap
+
+- `<leader>a`
+- `<leader>b` Choose buffers via fzf-lua
+- `<leader>c` Choose commands via fzf-lua
+- `<leader>f` Find files via fzf-lua
+- `<leader>g` Lazygit via FTerm
+- `<leader>h` Split window left
+- `<leader>i`
+- `<leader>j` Split window down
+- `<leader>k` Split window up
+- `<leader>l` Split window right
+- `<leader>m`
+- `<leader>n` Annotations
+- `<leader>o` Oil file / folder manipulation
+- `<leader>p` Switching projects via fzf-lua
+- `<leader>q` Quit current buffer
+- `<leader>r` Refactor selected code /
+- `<leader>t` Toggle editor options
+- `<leader>u` Urls
+- `<leader>v` Vmux split vertically
+- `<leader>y` Yank history
+- `<leader>z` Toggle Zen Mode
+- `<leader>?` Help tags via fzf-lua
+- `<leader>/` Find keymaps via fzf-lua
+- `<leader>\` Lazy plugins
+- `<leader><CR>` New lines below without entering insert mode
+- `<leader><BS>` New lines above without entering insert mode
+
+- `<C-a>` Select all
+- `<C-t>` Toggle terminal
+- `<C-s>` Save current buffer
 
 ## Snippets
 
