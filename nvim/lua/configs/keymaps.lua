@@ -90,7 +90,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<leader>t", "<cmd>HydraEditorOptions<CR>", { desc = "Toggle options" })
 
-vim.keymap.set("n", "<leader>u", "<cmd>UrlView<CR>", { desc = "Urls" })
+vim.keymap.set("n", "<leader>u", "<cmd>HydraUrlView<CR>", { desc = "Urls" })
 
 vim.keymap.set("n", "<leader>y", "<cmd>Neoclip<CR>", { desc = "Yank history" })
 
