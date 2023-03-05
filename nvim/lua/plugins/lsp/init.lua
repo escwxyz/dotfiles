@@ -2,6 +2,7 @@ local function get_library()
     local lib = {
         vim.api.nvim_get_runtime_file("", true),
     }
+	-- TODO
     if vim.fn.has("mac") > 0 then
         local hammerspoon =
             string.format("%s/.hammerspoon/Spoons/EmmyLua.spoon/annotations", os.getenv("HOME"))
@@ -102,6 +103,10 @@ local M = {
                     },
                 },
             },
+        })
+        require("lspconfig").prismals.setup({
+            on_attach = require("plugins.lsp.on_attach"),
+            capabilities = require("plugins.lsp.capabilities"),
         })
     end,
 }
