@@ -1,5 +1,5 @@
 return {
-    s({ trig = "type", snippetType = "autosnippet" }, fmta([[
+    s({ trig = "type", snippetType = "snippet" }, fmta([[
         type <> = {
             <>
         }
