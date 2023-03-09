@@ -47,7 +47,11 @@ set -gx SHELL fish
 set -gx EDITOR nvim
 set -gx LANG en_US.UTF-8
 
-bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh nvim
+if status is-interactive
+    eval (zellij setup --generate-auto-start fish | string collect)
+end
+
+# bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh nvim
 
 # abbr --add --global ls "xplr"
 # abbr --add --global dotfiles "git --git-dir $HOME/.dotfiles --work-tree $HOME"
