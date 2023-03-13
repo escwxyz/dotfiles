@@ -6,6 +6,7 @@ switch (uname -s)
 	case Darwin
 		abbr --add --global proxy "set -gx HTTP_PROXY socks5://127.0.0.1:1080 && set -gx HTTPS_PROXY socks5://127.0.0.1:1080 && cd && cd Downloads/naive && ./naive"
 		abbr --add --global unproxy "set -e HTTP_PROXY && set -e HTTPS_PROXY"
+		abbr --add --global z "zellij"
 
 		set -gx HOME "/Users/jiewang"
 		set SQLITE "/opt/homebrew/opt/sqlite/bin"
@@ -48,7 +49,7 @@ set -gx EDITOR nvim
 set -gx LANG en_US.UTF-8
 
 if status is-interactive
-    eval (zellij setup --generate-auto-start fish | string collect)
+    # eval (zellij setup --generate-auto-start fish | string collect)
 end
 
 # bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh nvim

@@ -37,9 +37,13 @@ vim.opt.fillchars = {
     eob = " ",
 }
 
+vim.opt.foldcolumn= '0'
+
 vim.opt.foldlevel = 99
 
 vim.opt.foldlevelstart = 99
+
+vim.opt.foldenable = true
 
 vim.opt.ignorecase = true
 
