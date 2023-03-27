@@ -19,7 +19,8 @@ switch (uname -s)
 		set NEOVIDE "/Applications/Neovide.app/Contents/MacOS"
 		set NPM "$PNPM/nodejs/18.12.1/bin"
 		set POSTGRESQL "/Library/PostgreSQL/14/bin/"
-		set -gx PATH "$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
+		set ZIG "$HOME/Downloads/zig"
+		set -gx PATH "$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
 		set -gx LDFLAGS "-L/opt/homebrew/opt/sqlite/lib"
 		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
