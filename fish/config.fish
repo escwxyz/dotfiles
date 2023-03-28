@@ -6,6 +6,7 @@ switch (uname -s)
 	case Darwin
 		abbr --add --global proxy "set -gx HTTP_PROXY socks5://127.0.0.1:1080 && set -gx HTTPS_PROXY socks5://127.0.0.1:1080 && cd && cd Downloads/naive && ./naive"
 		abbr --add --global unproxy "set -e HTTP_PROXY && set -e HTTPS_PROXY"
+		abbr --add --global z "zellij"
 
 		set -gx HOME "/Users/jiewang"
 		set SQLITE "/opt/homebrew/opt/sqlite/bin"
@@ -18,7 +19,8 @@ switch (uname -s)
 		set NEOVIDE "/Applications/Neovide.app/Contents/MacOS"
 		set NPM "$PNPM/nodejs/18.12.1/bin"
 		set POSTGRESQL "/Library/PostgreSQL/14/bin/"
-		set -gx PATH "$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
+		set ZIG "$HOME/Downloads/zig"
+		set -gx PATH "$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
 		set -gx LDFLAGS "-L/opt/homebrew/opt/sqlite/lib"
 		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
@@ -48,7 +50,7 @@ set -gx EDITOR nvim
 set -gx LANG en_US.UTF-8
 
 if status is-interactive
-    eval (zellij setup --generate-auto-start fish | string collect)
+    # eval (zellij setup --generate-auto-start fish | string collect)
 end
 
 # bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh nvim

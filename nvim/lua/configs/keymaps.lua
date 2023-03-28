@@ -26,6 +26,9 @@ vim.keymap.set(
     { desc = "[Leap] Search cross window" }
 )
 
+vim.keymap.set("n", "zR", "<cmd>UFOOpenAllFolds<CR>", { desc = "[UFO]Open all folds" })
+vim.keymap.set("n", "zM", "<cmd>UFOCloseAllFolds<CR>", { desc = "[UFO]Close all folds" })
+
 vim.keymap.set("n", "<leader>q", "<cmd>BufferRemove<CR>", { desc = "Quit" })
 
 vim.keymap.set("n", "<leader>g", "<cmd>Lazygit<CR>", { desc = "Lazygit" })
