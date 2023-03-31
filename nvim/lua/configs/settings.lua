@@ -37,7 +37,7 @@ vim.opt.fillchars = {
     eob = " ",
 }
 
-vim.opt.foldcolumn= '0'
+vim.opt.foldcolumn = "0"
 
 vim.opt.foldlevel = 99
 
@@ -87,7 +87,7 @@ vim.opt.termguicolors = true
 
 vim.opt.timeoutlen = 300
 
-vim.opt.undofile = true
+vim.opt.undofile = false
 
 vim.opt.undolevels = 100
 
