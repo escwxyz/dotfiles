@@ -10,12 +10,13 @@ if not vim.loop.fs_stat(lazy_path) then
         "clone",
         "--filter=blob:none",
         "--single-branch",
-        "https://github.com/folke/lazy.nvim.git",
+        "git@github.com:folke/lazy.nvim.git",
         lazy_path,
     })
 end
 
 vim.opt.runtimepath:prepend(lazy_path)
+
 local plugins = {
     { "nvim-lua/plenary.nvim", lazy = false },
 }
@@ -48,33 +49,11 @@ local lazy_config = {
     install = { missing = true },
     ui = {
         border = "rounded",
-        -- TODO load icons from configs.icons
-        icons = {
-            loaded = "Y",
-            not_loaded = "N",
-            cmd = " ",
-            config = "",
-            event = "",
-            ft = " ",
-            init = " ",
-            keys = " ",
-            plugin = " ",
-            runtime = " ",
-            source = " ",
-            start = "",
-            task = "✔",
-            lazy = "鈴 ",
-            list = { "●", "➜", "★", "‒" },
-        },
     },
     checker = {
         enabled = true,
         notify = false,
         frequency = 3600 * 12,
-    },
-    change_detection = {
-        enabled = true,
-        notify = true,
     },
     performance = {
         cache = {
@@ -83,6 +62,7 @@ local lazy_config = {
             disable_events = { "VimEnter", "BufReadPre" },
             ttl = 3600 * 24 * 5,
         },
+        reset_packpath = true,
         rtp = {
             disabled_plugins = {
                 "gzip",
