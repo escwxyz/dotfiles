@@ -2,7 +2,7 @@ local function get_library()
     local lib = {
         vim.api.nvim_get_runtime_file("", true),
     }
-	-- TODO
+    -- TODO
     if vim.fn.has("mac") > 0 then
         local hammerspoon =
             string.format("%s/.hammerspoon/Spoons/EmmyLua.spoon/annotations", os.getenv("HOME"))
@@ -33,7 +33,7 @@ local M = {
             "williamboman/mason-lspconfig.nvim",
             config = function()
                 require("mason-lspconfig").setup({
-                    ensure_installed = { "lua_ls", "rust_analyzer", "tsserver" },
+                    ensure_installed = { "rust_analyzer", "tsserver" },
                 })
             end,
         },
@@ -70,23 +70,23 @@ local M = {
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
         })
-        require("lspconfig").lua_ls.setup({
-            on_attach = require("plugins.lsp.on_attach"),
-            capabilities = require("plugins.lsp.capabilities"),
-            settings = {
-                Lua = {
-                    runtime = { version = "LuaJIT" },
-                    diagnostics = { globals = { "vim", "awesome", "client" } },
-                    telemetry = { enable = false },
-                    format = { enable = false },
-                    completion = { callSnippet = "Replace" },
-                    workspace = {
-                        library = get_library(),
-                        checkThirdParty = false,
-                    },
-                },
-            },
-        })
+        -- require("lspconfig").lua_ls.setup({
+        --     on_attach = require("plugins.lsp.on_attach"),
+        --     capabilities = require("plugins.lsp.capabilities"),
+        --     settings = {
+        --         Lua = {
+        --             runtime = { version = "LuaJIT" },
+        --             diagnostics = { globals = { "vim", "awesome", "client" } },
+        --             telemetry = { enable = false },
+        --             format = { enable = false },
+        --             completion = { callSnippet = "Replace" },
+        --             workspace = {
+        --                 library = get_library(),
+        --                 checkThirdParty = false,
+        --             },
+        --         },
+        --     },
+        -- })
 
         require("lspconfig").ds_pinyin_lsp.setup({
             init_options = {
@@ -105,6 +105,10 @@ local M = {
             },
         })
         require("lspconfig").prismals.setup({
+            on_attach = require("plugins.lsp.on_attach"),
+            capabilities = require("plugins.lsp.capabilities"),
+        })
+        require("lspconfig").astro.setup({
             on_attach = require("plugins.lsp.on_attach"),
             capabilities = require("plugins.lsp.capabilities"),
         })
