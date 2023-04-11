@@ -27,6 +27,9 @@ switch (uname -s)
 		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
 		set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/sqlite/lib/pkgconfig"
 
+		set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
+		set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
+
 	case Linux
 
 		abbr --add --global add "paru -S"
