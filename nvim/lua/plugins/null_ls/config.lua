@@ -23,6 +23,7 @@ M.setup = function()
     null_ls.setup({
         on_attach = M.on_attach,
         sources = {
+            null_ls.builtins.formatting.dprint,
             null_ls.builtins.formatting.stylua.with({
                 extra_args = {
                     "--indent-type",
@@ -42,6 +43,7 @@ M.setup = function()
             null_ls.builtins.formatting.rustfmt.with({
                 extra_args = { "--edition=2021" },
             }),
+            null_ls.builtins.formatting.dart_format,
         },
     })
 end
