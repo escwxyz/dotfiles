@@ -34,7 +34,6 @@
 - [sqlite](https://github.com/kkharji/sqlite.lua) - Database for other plugins
 - [ts-node-action](https://github.com/ckolkey/ts-node-action) - Node actions based on treesitter
 - [urlview.nvim](https://github.com/axieax/urlview.nvim) - Open / copy urls from plugin manager, or within buffer
-- [vmux](https://github.com/yazgoo/vmux) - Terminal multiplexing
 - [which-key.nvim](https://github.com/folke/which-key.nvim) - Keymaps utility
 - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim) - Distraction-free UI for writing
 
@@ -42,6 +41,7 @@
 
 - `/` Search inside current buffer via fzf-lua
 - `<BS>` Format current buffer
+- `<Tab>` Choose buffers via fzf-lua
 
 - `gt` Jump to the top of the buffer
 - `gb` Jump to the bottom of the buffer
@@ -49,13 +49,13 @@
 - `gl` Jump forward to the last of the line
 - `gj` Jump down to the visible bottom of the window
 - `gk` Jump up to the visible top of the window
+- `gp` Go to preview
 
 - `s` Vision scoped jump within current buffer via Leap
 - `S` Vision scoped jump across windows via Leap
 
 - `<leader>a`
-- `<leader>b` Choose buffers via fzf-lua
-- `<leader>c` Choose commands via fzf-lua
+- `<leader>c` Code Actions - LSP, node actions, etc
 - `<leader>f` Find files via fzf-lua
 - `<leader>g` Lazygit via FTerm
 - `<leader>h` Split window left
@@ -69,35 +69,39 @@
 - `<leader>p` Switching projects via fzf-lua
 - `<leader>q` Quit current buffer
 - `<leader>r` Refactor selected code /
-- `<leader>t` Toggle editor options
+- `<leader>s` Live grep search
+- `<leader>t` Toggle terminal
 - `<leader>u` Urls
-- `<leader>v` Vmux split vertically
 - `<leader>y` Yank history
 - `<leader>z` Toggle Zen Mode
 - `<leader>?` Help tags via fzf-lua
 - `<leader>/` Find keymaps via fzf-lua
 - `<leader>\` Lazy plugins
+- `<leader>.` Commands
 - `<leader><CR>` New lines below without entering insert mode
 - `<leader><BS>` New lines above without entering insert mode
 
 - `<C-a>` Select all
 - `<C-t>` Toggle terminal
-- `<C-s>` Save current buffer
+- `<C-w>` Save current buffer
 
 ## Snippets
+
+- all
+- dart
+- rust
+- typescript
 
 ## TODOs
 
 - [x] properly set events for different plugins, see `:help events`
 - [ ] write commonly used snippets for `rust`, `flutter / dart` and `typescript/tsx/react`
-- [ ] config `dap`
 - [ ] config vscode like indent
 - [ ] graphql / rest client for neovim
 - [ ] unify shared icons for different plugins
 - [ ] unify builtin ui with dressing.nvim
-- [ ] hydra freezes statusline
 - [x] fully remove noice
-- [ ] use fzf-lua to replace telescope
+- [x] use fzf-lua to replace telescope
 - [ ] Batch rename
 - [ ] Add dial.nvim
 - [ ] Reduce startup time (currently between 50 - 100 ms, on M1 Max)
