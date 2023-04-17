@@ -21,7 +21,8 @@ switch (uname -s)
 		set POSTGRESQL "/Library/PostgreSQL/14/bin/"
 		set ZIG "$HOME/Downloads/zig"
 		set FLUTTER "$HOME/Development/flutter/bin"
-		set -gx PATH "$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
+		set NEOVIM "$HOME/Downloads/nvim-macos/bin"
+		set -gx PATH "$NEOVIM:$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
 		set -gx LDFLAGS "-L/opt/homebrew/opt/sqlite/lib"
 		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
@@ -29,6 +30,9 @@ switch (uname -s)
 
 		set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
 		set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
+
+		# NOTE test neovim config
+		# set -gx NVIM_APPNAME "neovim"
 
 	case Linux
 
