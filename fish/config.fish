@@ -3,52 +3,53 @@ fish_vi_key_bindings
 set -l os (uname)
 
 switch (uname -s)
-	case Darwin
-		abbr --add --global proxy "set -gx HTTP_PROXY socks5://127.0.0.1:1080 && set -gx HTTPS_PROXY socks5://127.0.0.1:1080 && cd && cd Downloads/naive && ./naive"
-		abbr --add --global unproxy "set -e HTTP_PROXY && set -e HTTPS_PROXY"
-		abbr --add --global z "zellij"
+    case Darwin
+        abbr --add --global proxy "set -gx HTTP_PROXY socks5://127.0.0.1:1080 && set -gx HTTPS_PROXY socks5://127.0.0.1:1080 && cd && cd Downloads/naive && ./naive"
+        abbr --add --global unproxy "set -e HTTP_PROXY && set -e HTTPS_PROXY"
+        abbr --add --global z zellij
 
-		set -gx HOME "/Users/jiewang"
-		set SQLITE "/opt/homebrew/opt/sqlite/bin"
-		set PNPM "$HOME/Library/pnpm"
-		set SOLANA "$HOME/solana/bin"
-		set CARGO "$HOME/.cargo/bin"
-		set HOMEBREW "/opt/homebrew/bin"
-		set SYSTEM "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/usr/local/go/bin"
-		set WEZTERM "/Applications/WezTerm.app/Contents/MacOS"
-		set NEOVIDE "/Applications/Neovide.app/Contents/MacOS"
-		set NPM "$PNPM/nodejs/18.12.1/bin"
-		set POSTGRESQL "/Library/PostgreSQL/14/bin/"
-		set ZIG "$HOME/Downloads/zig"
-		set FLUTTER "$HOME/Development/flutter/bin"
-		set NEOVIM "$HOME/Downloads/nvim-macos/bin"
-		set -gx PATH "$NEOVIM:$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
+        set -gx HOME /Users/jiewang
+        set SQLITE /opt/homebrew/opt/sqlite/bin
+        set PNPM "$HOME/Library/pnpm"
+        set SOLANA "$HOME/solana/bin"
+        set CARGO "$HOME/.cargo/bin"
+        set HOMEBREW /opt/homebrew/bin
+        set SYSTEM "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/usr/local/go/bin"
+        set WEZTERM "/Applications/WezTerm.app/Contents/MacOS"
+        set NEOVIDE "/Applications/Neovide.app/Contents/MacOS"
+        set NPM "$PNPM/nodejs/18.12.1/bin"
+        set POSTGRESQL /Library/PostgreSQL/14/bin/
+        set ZIG "$HOME/Downloads/zig"
+        set NEXTEST "$HOME/Development/cargo-nextest"
+        set FLUTTER "$HOME/Development/flutter/bin"
+        set NEOVIM "$HOME/Development/nvim-macos/bin"
+        set -gx PATH "$NEXTEST:$NEOVIM:$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
-		set -gx LDFLAGS "-L/opt/homebrew/opt/sqlite/lib"
-		set -gx CPPFLAGS "-I/opt/homebrew/opt/sqlite/include"
-		set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/sqlite/lib/pkgconfig"
+        set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
+        set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
+        set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
 
-		set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
-		set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
+        set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
+        set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
 
-		# NOTE test neovim config
-		# set -gx NVIM_APPNAME "neovim"
+        # NOTE test neovim config
+        # set -gx NVIM_APPNAME "neovim"
 
-	case Linux
+    case Linux
 
-		abbr --add --global add "paru -S"
-		abbr --add --global remove "paru -R"
-		abbr --add --global clean "paru -c"
-		abbr --add --global upgrade "paru -Syu"
-		abbr --add --global updates "paru -Qu"
-		abbr --add --global naive "cd && cd naive && ./naive"
+        abbr --add --global add "paru -S"
+        abbr --add --global remove "paru -R"
+        abbr --add --global clean "paru -c"
+        abbr --add --global upgrade "paru -Syu"
+        abbr --add --global updates "paru -Qu"
+        abbr --add --global naive "cd && cd naive && ./naive"
 
-		set -gx HOME "/home/jiew"
-		# TODO
+        set -gx HOME /home/jiew
+        # TODO
 
-	case '*'
-		# TODO
-end 
+    case '*'
+        # TODO
+end
 
 # Common settings
 
