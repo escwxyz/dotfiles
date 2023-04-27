@@ -34,3 +34,7 @@ dotlink -p preset (macOS / linux)
 ```
 
 4. Download the `dict.db3` file from [here](https://github.com/iamcco/ds-pinyin-lsp/releases/) and extract it into `nvim` root folder
+
+## Tools
+
+- [delta](https://github.com/dandavison/delta) - `cargo install git-delta`
