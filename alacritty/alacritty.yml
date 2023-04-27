@@ -1,7 +1,7 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 import:
-  - ~/.config/alacritty/base16-alacritty/colors/base16-everforest.yml
+  # - ~/.config/alacritty/base16-alacritty/colors/base16-everforest.yml
   - ~/.config/alacritty/colors.yml
   - ~/.config/alacritty/font.yml
   # - ~/.config/alacritty/hints.yml
