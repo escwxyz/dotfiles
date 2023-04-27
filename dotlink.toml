@@ -1,0 +1,21 @@
+[[macOS]]
+names = [
+  "nvim",
+  "alacritty",
+  "fish",
+  "yabai",
+  "zellij",
+  "lazygit",
+  "sketchybar",
+  "xplr",
+]
+to = "~/.config"
+
+[[macOS]]
+name = "hammerspoon"
+to = "~/"
+rename = ".hammerspoon"
+
+[[linux]]
+names = []
+to = "~/.config"
