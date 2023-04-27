@@ -8,6 +8,7 @@ names = [
   "lazygit",
   "sketchybar",
   "xplr",
+  "lazyvim",
 ]
 to = "~/.config"
 
@@ -15,6 +16,10 @@ to = "~/.config"
 name = "hammerspoon"
 to = "~/"
 rename = ".hammerspoon"
+
+[[macOS]]
+name = ".gitconfig"
+to = "~/"
 
 [[linux]]
 names = []
