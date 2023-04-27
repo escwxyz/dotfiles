@@ -30,5 +30,7 @@ git submodule update --init --recursive
 3. Run dotlink:
 
 ```bash
-dotlink -p preset
+dotlink -p preset (macOS / linux)
 ```
+
+4. Download the `dict.db3` file from [here](https://github.com/iamcco/ds-pinyin-lsp/releases/) and extract it into `nvim` root folder
