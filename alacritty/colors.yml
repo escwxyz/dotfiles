@@ -1,4 +1,137 @@
 draw_bold_text_with_bright_colors: true
+schemes:
+  everforest_dark_hard: &everforest_dark_hard
+    bright:
+      black: '#475258'
+      blue: '#7fbbb3'
+      cyan: '#83c092'
+      green: '#a7c080'
+      magenta: '#d699b6'
+      red: '#e67e80'
+      white: '#d3c6aa'
+      yellow: '#dbbc7f'
+    normal:
+      black: '#414b50'
+      blue: '#7fbbb3'
+      cyan: '#83c092'
+      green: '#a7c080'
+      magenta: '#d699b6'
+      red: '#e67e80'
+      white: '#d3c6aa'
+      yellow: '#dbbc7f'
+    primary:
+      background: '#272e33'
+      foreground: '#d3c6aa'
+  everforest_dark_medium: &everforest_dark_medium
+    bright:
+      black: '#475258'
+      blue: '#7fbbb3'
+      cyan: '#83c092'
+      green: '#a7c080'
+      magenta: '#d699b6'
+      red: '#e67e80'
+      white: '#d3c6aa'
+      yellow: '#dbbc7f'
+    normal:
+      black: '#475258'
+      blue: '#7fbbb3'
+      cyan: '#83c092'
+      green: '#a7c080'
+      magenta: '#d699b6'
+      red: '#e67e80'
+      white: '#d3c6aa'
+      yellow: '#dbbc7f'
+    primary:
+      background: '#2d353b'
+      foreground: '#d3c6aa'
+  everforest_dark_soft: &everforest_dark_soft
+    bright:
+      black: '#4d5960'
+      blue: '#7fbbb3'
+      cyan: '#83c092'
+      green: '#a7c080'
+      magenta: '#d699b6'
+      red: '#e67e80'
+      white: '#d3c6aa'
+      yellow: '#dbbc7f'
+    normal:
+      black: '#4d5960'
+      blue: '#7fbbb3'
+      cyan: '#83c092'
+      green: '#a7c080'
+      magenta: '#d699b6'
+      red: '#e67e80'
+      white: '#d3c6aa'
+      yellow: '#dbbc7f'
+    primary:
+      background: '#333c43'
+      foreground: '#d3c6aa'
+  everforest_light_hard: &everforest_light_hard
+    bright:
+      black: '#5c6a72'
+      blue: '#3a94c5'
+      cyan: '#35a77c'
+      green: '#8da101'
+      magenta: '#df69ba'
+      red: '#f85552'
+      white: '#e8e5d5'
+      yellow: '#dfa000'
+    normal:
+      black: '#5c6a72'
+      blue: '#3a94c5'
+      cyan: '#35a77c'
+      green: '#8da101'
+      magenta: '#df69ba'
+      red: '#f85552'
+      white: '#e8e5d5'
+      yellow: '#dfa000'
+    primary:
+      background: '#fffbef'
+      foreground: '#5c6a72'
+  everforest_light_medium: &everforest_light_medium
+    bright:
+      black: '#5c6a72'
+      blue: '#3a94c5'
+      cyan: '#35a77c'
+      green: '#8da101'
+      magenta: '#df69ba'
+      red: '#f85552'
+      white: '#e0dcc7'
+      yellow: '#dfa000'
+    normal:
+      black: '#5c6a72'
+      blue: '#3a94c5'
+      cyan: '#35a77c'
+      green: '#8da101'
+      magenta: '#df69ba'
+      red: '#f85552'
+      white: '#e0dcc7'
+      yellow: '#dfa000'
+    primary:
+      background: '#fdf6e3'
+      foreground: '#5c6a72'
+  everforest_light_soft: &everforest_light_soft
+    bright:
+      black: '#5c6a72'
+      blue: '#3a94c5'
+      cyan: '#35a77c'
+      green: '#8da101'
+      magenta: '#df69ba'
+      red: '#f85552'
+      white: '#d8d3ba'
+      yellow: '#dfa000'
+    normal:
+      black: '#5c6a72'
+      blue: '#3a94c5'
+      cyan: '#35a77c'
+      green: '#8da101'
+      magenta: '#df69ba'
+      red: '#f85552'
+      white: '#d8d3ba'
+      yellow: '#dfa000'
+    primary:
+      background: '#f3ead3'
+      foreground: '#5c6a72'
 # Colors (Tomorrow Night)
 #colors:
 # Default colors
@@ -147,3 +280,6 @@ draw_bold_text_with_bright_colors: true
 # the default background. When set to `true` all cells will be transparent
 # regardless of their background color.
 #transparent_background_colors: false
+#
+
+colors: *everforest_dark_medium
