@@ -1,0 +1,7 @@
+import = [
+  "/Users/jiewang/.config/alacritty/colors.toml",
+  "/Users/jiewang/.config/alacritty/font.toml",
+  "/Users/jiewang/.config/alacritty/keymaps.toml",
+  "/Users/jiewang/.config/alacritty/other.toml",
+  "/Users/jiewang/.config/alacritty/window.toml",
+]
