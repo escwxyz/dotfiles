@@ -3,7 +3,7 @@ key = "Comma"
 mods = "Command"
 
 [keyboard.bindings.command]
-args = ["~/.config/alacritty/alacritty.yml"]
+args = ["~/.config/alacritty/alacritty.toml"]
 program = "nvim"
 
 [[keyboard.bindings]]
