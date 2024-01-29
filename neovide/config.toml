@@ -1,8 +1,7 @@
 wsl = false
 no-multigrid = false
 vsync = true
-maximized = true 
+maximized = true
 srgb = true
 idle = true
-neovim-bin = "/Users/jiewang/Development/nvim-macos/bin/nvim" # in reality found dynamically on $PATH if unset
 frame = "transparent"
