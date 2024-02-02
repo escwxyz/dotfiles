@@ -1,26 +1,81 @@
 #!/usr/bin/env sh
 
+# run `man yabai` to check out all the configs
+
 # for start without password
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
-# layout
-yabai -m config layout bsp
-yabai -m config --space 2 layout float
-yabai -m config top_padding    10
-yabai -m config bottom_padding 10
-yabai -m config left_padding   10
-yabai -m config right_padding  10
-yabai -m config window_gap     10
-yabai -m config --space 1 window_gap 0
 
-yabai -m config focus_follows_mouse autoraise
+# Mouse
+yabai -m config mouse_follows_focus off
+yabai -m config focus_follows_mouse off
+# Keyboard modifier used for moving and resizing windows
+yabai -m config mouse_modifier fn
+# Left click hold
+yabai -m config mouse_action1 move
+# Right click hold
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action swap
 
-yabai -m config mouse_follows_focus on
-
-yabai -m config window_topmost on
-
-yabai -m config window_shadow on
-# TODO
+# Window
+#
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+# Newly created window will be managed in where it was created
+yabai -m config window_origin_display default
+# Make floating windows stay on top
+yabai -m config window_topmost off
+# Window shadow
+yabai -m config window_shadow off
+# Duration of window frame animation
+yabai -m config window_animation_duration 2.0
+# Duration of transition between active / normal opacity
+yabai -m config window_opacity_duration 0.0
+# Enable opacity for windows
 yabai -m config window_opacity on
-yabai -m config active_window_opacity 0.9
-yabai -m config normal_window_opacity 0.7
+# Don't draw shadow for windows
+yabai -m config window_shadow off
+# Window border
+yabai -m config window_brder on
+# Window blur border
+yabai -m config window_border_blur on
+# Don't blance the window occupy
+yabai -m config auto_balance off
+# Padding
+yabai -m config top_padding 10
+yabai -m config bottom_padding 10
+yabai -m config left_padding 10
+yabai -m config right_padding 10
+yabai -m config window_gap 10
+
+# Layout
+# Every app is fullscreen inside its space, switch between spaces to use different apps
+yabai -m config layout stack 
+
+# Make the below apps transparent
+APP_LIST="(Spotify|Alacritty)"
+# When apps gain focus, make all background windows completely transparent
+yabai -m signal --add event=window_focused app="^${APP_LIST}$" action="yabai -m config active_window_opacity 0.85"
+yabai -m signal --add event=window_focused app="^${APP_LIST}$" action="yabai -m config normal_window_opacity 0.00001"
+# yabai -m signal --add event=window_focused app="$MGMT_EXCLUDED_APPS" action="yabai -m config normal_window_opacity 1.0"
+
+# When any other app gains focus, reset both active and background window opacity to fully visible
+yabai -m signal --add event=window_focused app!="^${APP_LIST}$" action="yabai -m config active_window_opacity 1.0"
+yabai -m signal --add event=window_focused app!="^${APP_LIST}$" action="yabai -m config normal_window_opacity 1.0"
+
+# make the apps below fully opaque (not transparent)
+# This makes the following windows always appear on top
+# IF THE APP WAS CLOSED, OPEN IT, AND RESTART YABAI FOR THIS TO TAKE EFFECT, otherwise can't get its ID
+# All the options can be seen using 'man yabai'
+ALWAYS_SHOWN_APPS="(Calculator)"
+# Query yabai for windows and filter with jq using the regex pattern
+WINDOW_IDS=$(yabai -m query --windows | jq -r --arg APP_REGEX "$ALWAYS_SHOWN_APPS" '.[] | select(.app | test($APP_REGEX)) | .id')
+# Set the opacity for each window ID
+for id in $WINDOW_IDS; do
+	yabai -m window "$id" --opacity 1.0
+done
+
+# Disable yabai for certain apps
+EXCLUDED_APPS="(System Settings|iStat Menus|Raycast|Calculator|Hammerspoon|BetterDisplay|GIMP|Notes)"
+yabai -m rule --add app="^${EXCLUDED_APPS}$" manage=off
+
