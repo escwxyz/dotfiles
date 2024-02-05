@@ -7,8 +7,8 @@ names = [
   "zellij",
   "lazygit",
   "sketchybar",
-  "xplr",
   "lazyvim",
+  "skhd",
 ]
 to = "~/.config"
 
@@ -22,5 +22,7 @@ name = ".gitconfig"
 to = "~/"
 
 [[linux]]
-names = []
+names = [
+  "fish",
+]
 to = "~/.config"
