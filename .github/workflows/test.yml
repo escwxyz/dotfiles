@@ -1,0 +1,42 @@
+name: Test Scripts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/**'
+      - 'setup.sh'
+      - 'utils.sh'
+
+jobs:
+  test-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run utils.sh script on macOS
+        run: ./utils.sh
+
+      - name: Run init.sh script on macOS
+        run: ./init.sh
+
+  test-fedora:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dnf on Fedora
+        run: sudo dnf install -y dnf
+
+      - name: Run utils.sh script on Fedora
+        run: ./utils.sh
+
+      - name: Run init.sh script on Fedora
+        run: ./init.sh
