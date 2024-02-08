@@ -33,7 +33,12 @@ clear
 
 echo -e "This script will bootstrap all the installations of dotfiles as well as applications for your machine."
 _warn "This script only runs on macOS & Fedora Linux."
-read -rsn 1 -p "Press Enter to continue..."
+
+if [[ -n "$GITHUB_ACTIONS" ]]; then
+  echo -e "Skipping prompt in GitHub Actions workflow."
+else
+  read -rsn 1 -p "Press Enter to continue..."
+fi
 
 # Operation system check
 
