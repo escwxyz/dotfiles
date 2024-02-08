@@ -1,4 +1,4 @@
-[[macOS]]
+[[mac]]
 names = [
   "nvim",
   "alacritty",
@@ -7,22 +7,24 @@ names = [
   "zellij",
   "lazygit",
   "sketchybar",
-  "lazyvim",
   "skhd",
 ]
 to = "~/.config"
 
-[[macOS]]
+[[mac]]
 name = "hammerspoon"
 to = "~/"
 rename = ".hammerspoon"
 
-[[macOS]]
+[[mac]]
 name = ".gitconfig"
 to = "~/"
 
+[[fedora]]
+names = ["fish", "nvim", "lazygit"]
+to = "~/.config"
+
+# Common linux configs
 [[linux]]
-names = [
-  "fish",
-]
+names = ["fish"]
 to = "~/.config"
