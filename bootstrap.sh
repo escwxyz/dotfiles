@@ -23,7 +23,6 @@ elif [[ "$OS" == "Linux" ]]; then
     echo -e "${RED}Exiting.${NC}"
     exit 1
   fi
-
 fi
 
 echo -e "${GREEN}This script will bootstrap all the installations of dotfiles as well as applications for your machine.${NC}"
@@ -94,6 +93,13 @@ sleep 3
 echo -e "${YELLOW}Installing Ansible ...${NC}"
 
 if [[ "$OS" == "Darwin" ]]; then
+
+  if ! brew --version; then
+    echo -e "${RED}Error: Homebrew is not installed.${NC}"
+    echo -e "${YELLOW}Installing Homebrew...${NC}"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
   if ! brew update; then
     echo -e "${RED}Error: Failed to update Homebrew.${NC}"
     echo -e "${RED}Exiting.${NC}"
@@ -133,6 +139,17 @@ if [ -f "Projects" ]; then
 fi
 
 echo -e "${YELLOW}Cloning dotfiles ...${NC}"
+
+# In case git is not installed
+if ! git --version; then
+  echo -e "${RED}Error: Git is not installed.${NC}"
+  echo -e "${YELLOW}Installing Git...${NC}"
+  if [[ "$OS" == "Darwin" ]]; then
+    brew install git
+  else
+    sudo dnf install git
+  fi
+fi
 
 if ! git clone https://github.com/escwxyz/dotfiles.git ~/Projects; then
   echo -e "${RED}Error: Failed to clone dotfiles repository.${NC}"
