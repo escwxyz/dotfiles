@@ -207,12 +207,12 @@ fi
 
 echo -e "Updating submodules..."
 
+cd "Projects/dotfiles" || _error "Projects/dotfiles not found."
+
 if ! git submodule update --init --recursive; then
   _error "Failed to update submodules."
   exit 1
 fi
-
-cd "Projects/dotfiles" || _error "Projects/dotfiles not found."
 
 #################################################
 
