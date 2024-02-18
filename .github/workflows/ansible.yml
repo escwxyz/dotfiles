@@ -1,0 +1,38 @@
+name: Ansible
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'playbook.yml'
+      - 'roles/**/*.yml'
+jobs:
+  test-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint Ansible Playbook
+        uses: ansible/ansible-lint-action@master
+        with:
+        targets: |
+          playbook.yml
+        # TODO: add roles directory
+      - name: Run Ansible Playbook
+        uses: dawidd6/action-ansible-playbook@v2 # https://github.com/dawidd6/action-ansible-playbook
+        with:
+          playbook: playbook.yml
+  test-fedora:
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint Ansible Playbook
+        uses: ansible/ansible-lint-action@master
+        with:
+        targets: |
+          playbook.yml
+        # TODO: add roles directory
+      - name: Run Ansible Playbook
+        uses: dawidd6/action-ansible-playbook@v2 # https://github.com/dawidd6/action-ansible-playbook
+        with:
+          playbook: playbook.yml
