@@ -1,0 +1,5 @@
+- name: Install borders on macOS
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew_tap:
+    name: FelixKratz/formulae/borders
+    state: present
