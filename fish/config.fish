@@ -54,9 +54,10 @@ set -gx EDITOR nvim
 set -gx TERM alacritty
 set -gx LANG en_US.UTF-8
 
+set -gx ALL_PROXY socks5://127.0.0.1:1080
 set -gx HTTP_PROXY socks5://127.0.0.1:1080
 set -gx HTTPS_PROXY socks5://127.0.0.1:1080
-set -gx NO_PROXY localhost,127.0.0.1
+set -gx NO_PROXY localhost,127.0.0.1,::1
 
 abbr --add --global proxy "cd && cd Downloads/naive && ./naive"
 
