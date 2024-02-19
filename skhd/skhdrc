@@ -63,11 +63,7 @@ resize < right : yabai -m window --resize right:50:0; \
 
 cmd - return : neovide
 
-hyper - p : open -a Poe
-
 hyper - return : alacritty --hold -e fish -c proxy
-
-hyper - d : open -a discord
 
 hyper - space : open -a "Google Chrome"
 
