@@ -23,17 +23,16 @@ switch (uname -s)
         set ZIG "$HOME/Downloads/zig"
         set FLUTTER "$HOME/Development/flutter/bin"
         set NEOVIM "$HOME/Development/nvim-macos/bin"
-        set -gx PATH "$NEOVIM:$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM_HOME:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
+        set NAIVE "$HOME/Downloads/naive"
+        set -gx PATH "$NAIVE:$NEOVIM:$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM_HOME:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
         set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
         set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
         set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
 
+
         # set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
         # set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
-
-        # NOTE test neovim config
-        # set -gx NVIM_APPNAME "neovim"
 
     case Linux
 
@@ -59,14 +58,8 @@ set -gx HTTP_PROXY socks5://127.0.0.1:1080
 set -gx HTTPS_PROXY socks5://127.0.0.1:1080
 set -gx NO_PROXY localhost,127.0.0.1,::1
 
-abbr --add --global proxy "cd && cd Downloads/naive && ./naive"
+alias proxy="naive ~/Downloads/naive/config.json"
 
 if status is-interactive
     # eval (zellij setup --generate-auto-start fish | string collect)
 end
-
-# bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh nvim
-
-# abbr --add --global ls "xplr"
-# abbr --add --global dotfiles "git --git-dir $HOME/.dotfiles --work-tree $HOME"
-# abbr --add --global dotfiles-gitui "gitui -d $HOME/.dotfiles -w $HOME"
