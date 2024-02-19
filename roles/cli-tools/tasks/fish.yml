@@ -1,0 +1,14 @@
+- name: Install fish shell on Mac
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew:
+    name: fish
+    state: present
+    update_homebrew: true
+- name: Install fish shell on Fedora
+  when: ansible_facts['distro'] == 'Fedora'
+  ansible.builtin.dnf:
+    name:
+      - fish
+    state: latest
+- name: Set up fish as default shell
+  shell: chsh -s $(which fish)

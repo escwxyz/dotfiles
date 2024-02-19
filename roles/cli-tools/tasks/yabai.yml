@@ -1,0 +1,5 @@
+- name: Install yabai on macOS
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew_tap:
+    name: koekeishiya/formulae/yabai
+    state: present

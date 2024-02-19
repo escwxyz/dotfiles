@@ -1,0 +1,18 @@
+- name: Check cargo if installed
+  ansible.builtin.shell: command -v cargo
+  register: if_cargo_installed
+  ignore_errors: yes
+- name: Download rustup script
+  when: if_cargo_installed is failed
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: '0755'
+    force: 'yes'
+  tag:
+    - rust
+- name: Install rust
+  when: if_cargo_installed is failed
+  shell: /tmp/sh.rustup.rs -y
+  tag:
+    - rust
