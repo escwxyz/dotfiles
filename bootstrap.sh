@@ -131,7 +131,14 @@ nohup ~/Downloads/naiveproxy/naive >/dev/null 2>&1 &
 sleep 5
 
 # Check if NaiveProxy is running and accepting connections
-if curl https://www.google.com -o /dev/null -w "%{http_code}" -s | grep -q "200"; then
+
+json_response=$(curl --socks5-hostname 127.0.0.1:1080 http://wtfismyip.com/json)
+
+country_code=$(echo "$json_response" | grep -o '"YourFuckingCountryCode": "[^"]*"' | cut -d'"' -f4)
+
+city=$(echo "$json_response" | grep -o '"YourFuckingCity": "[^"]*"' | cut -d'"' -f4)
+
+if [[ "$country_code" == "US" && "$city" == "East Los Angeles" ]]; then
   _success "NaiveProxy is working correctly."
 else
   _error "Failed to connect to NaiveProxy. Please check if NaiveProxy is running and try again."
@@ -220,11 +227,12 @@ _info "STEP 4. Run Ansible"
 
 echo -e "Running Ansible..."
 
-# NOTE: see https://galaxy.ansible.com/ui/repo/published/community/general/
-if ! ansible-galaxy collection install community.general; then
-  _error "Failed to install Ansible community collection."
-  exit 1
-fi
+# We use the requirements.yml for this
+# # NOTE: see https://galaxy.ansible.com/ui/repo/published/community/general/
+# if ! ansible-galaxy collection install community.general; then
+#   _error "Failed to install Ansible community collection."
+#   exit 1
+# fi
 
 # TODO: adjust the command after finishing playbooks
 #
