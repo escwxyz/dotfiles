@@ -15,16 +15,16 @@ switch (uname -s)
         if not string match -q -- $PNPM_HOME $PATH
             set -gx PATH "$PNPM_HOME" $PATH
         end
-        set SYSTEM "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/sbin:/Library/Apple/usr/bin:/usr/local/go/bin"
+        set SYSTEM "/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/Library/Apple/usr/bin:/usr/local/go/bin"
         set WEZTERM "/Applications/WezTerm.app/Contents/MacOS"
         set NEOVIDE "/Applications/Neovide.app/Contents/MacOS"
         set NPM "$PNPM_HOME/npm"
         set POSTGRESQL /Library/PostgreSQL/14/bin/
-        set ZIG "$HOME/Downloads/zig"
+        # set ZIG "$HOME/Downloads/zig"
         set FLUTTER "$HOME/Development/flutter/bin"
         set NEOVIM "$HOME/Development/nvim-macos/bin"
         set NAIVE "$HOME/Downloads/naive"
-        set -gx PATH "$NAIVE:$NEOVIM:$FLUTTER:$ZIG:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM_HOME:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
+        set -gx PATH "$NAIVE:$NEOVIM:$FLUTTER:$POSTGRESQL:$NPM:$HOMEBREW:$CARGO:$SOLANA:$PNPM_HOME:$SQLITE:$WEZTERM:$NEOVIDE:$SYSTEM"
 
         set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
         set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
