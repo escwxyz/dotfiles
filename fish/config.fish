@@ -3,7 +3,6 @@ fish_vi_key_bindings
 switch (uname -s)
     case Darwin
         fish_add_path /opt/homebrew/bin
-        fish_add_path ~/Development/flutter/bin
         fish_add_path ~/Library/pnpm
         fish_add_path ~/Library/PostgreSQL/14/bin
         fish_add_path ~/Development/nvim-macos/bin
@@ -29,6 +28,8 @@ set -gx SHELL fish
 set -gx EDITOR nvim
 set -gx TERM alacritty
 set -gx LANG en_US.UTF-8
+
+fish_add_path ~/Development/flutter/bin
 
 fish_add_path ~/Downloads/naive
 
