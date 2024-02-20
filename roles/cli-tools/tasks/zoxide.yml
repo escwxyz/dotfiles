@@ -1,0 +1,5 @@
+- name: Install zoxide via Cargo
+  community.general.cargo:
+    name: zoxide
+    state: latest
+    locked: true
