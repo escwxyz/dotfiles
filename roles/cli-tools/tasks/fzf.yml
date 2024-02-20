@@ -1,0 +1,11 @@
+- name: Install fzf on macOS
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew:
+    name: fzf
+    state: present
+- name: Install fzf on Fedora Linux
+  when: ansible_facts['distro'] == "Fedora"
+  ansible.builtin.dnf:
+    name:
+      - fzf
+    state: present

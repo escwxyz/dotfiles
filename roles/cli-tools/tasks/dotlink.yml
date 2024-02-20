@@ -1,0 +1,4 @@
+- name: Install dotlink via Cargo
+  community.general.cargo:
+    name: dotlink
+    state: latest
