@@ -16,16 +16,14 @@ sudo yabai --load-sa
 # Layout
 yabai -m config layout bsp
 
+yabai -m config external_bar all:32:0
+
 # Window
 #
 # New window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
 # Newly created window will be managed in where it was created
 yabai -m config window_origin_display default
-# Window shadow
-yabai -m config window_shadow off
-# Duration of window frame animation
-# yabai -m config window_animation_duration 2.0
 # Duration of transition between active / normal opacity
 yabai -m config window_opacity_duration 0.0
 # Enable opacity for windows
