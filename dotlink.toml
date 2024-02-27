@@ -1,5 +1,6 @@
 [[mac]]
 names = [
+  "bat",
   "nvim",
   "alacritty",
   "fish",
@@ -22,9 +23,4 @@ to = "~/"
 
 [[fedora]]
 names = ["fish", "nvim", "lazygit"]
-to = "~/.config"
-
-# Common linux configs
-[[linux]]
-names = ["fish"]
 to = "~/.config"

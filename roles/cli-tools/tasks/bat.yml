@@ -1,0 +1,10 @@
+- name: Install bat on macOS
+  when: asnible_facts['os_family'] == 'Darwin'
+  community.general.homebrew:
+    name: bat
+    state: present
+- name: Install bat on Fedora Linux
+  when: ansible_facts['distro'] == 'Fedora'
+  ansible.builtin.dnf:
+    name: bat
+    state: latest

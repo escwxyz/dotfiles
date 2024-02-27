@@ -3,7 +3,6 @@ fish_vi_key_bindings
 switch (uname -s)
     case Darwin
         fish_add_path /opt/homebrew/bin
-        fish_add_path ~/Library/pnpm
         fish_add_path ~/Library/PostgreSQL/14/bin
         fish_add_path ~/Development/nvim-macos/bin
 
