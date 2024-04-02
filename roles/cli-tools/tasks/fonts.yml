@@ -1,0 +1,14 @@
+- name: Homebrew font cask
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew_tap:
+    name: homebrew/cask-fonts
+    state: present
+- name: Install JetBrains Mono font
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew_cask:
+    name: font-jetbrains-mono-nerd-font
+    state: present
+- name: Install SF symbols
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew_cask:
+    name: sf-symbols
