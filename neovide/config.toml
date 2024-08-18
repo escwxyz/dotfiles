@@ -1,7 +1,0 @@
-wsl = false
-no-multigrid = false
-vsync = true
-maximized = true
-srgb = true
-idle = true
-frame = "transparent"

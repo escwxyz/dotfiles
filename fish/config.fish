@@ -41,8 +41,15 @@ set -gx NO_PROXY localhost,127.0.0.1,::1
 alias proxy="naive ~/Downloads/naive/config.json"
 
 # zoxide
-zoxide init --cmd cd fish | source
+# zoxide init --cmd cd fish | source
 
 if status is-interactive
     # eval (zellij setup --generate-auto-start fish | string collect)
 end
+
+# pnpm
+set -gx PNPM_HOME /Users/jiewang/Library/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

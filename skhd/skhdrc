@@ -60,7 +60,7 @@ resize < right : yabai -m window --resize right:50:0; \
 
 # Applications
 
-lcmd - return : open -a neovide
+lcmd - return : open -a neovide --args --frame=transparent
 
 rcmd - return : alacritty --hold -e fish -c proxy
 
