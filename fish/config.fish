@@ -4,8 +4,9 @@ switch (uname -s)
     case Darwin
         fish_add_path /opt/homebrew/bin
         fish_add_path ~/Library/PostgreSQL/14/bin
-        fish_add_path ~/Development/nvim-macos/bin
+        fish_add_path ~/Development/nvim-macos-arm64/bin
         fish_add_path ~/.bun/bin
+        fish_add_path ~/.cargo/bin
 
         # set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
         # set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
