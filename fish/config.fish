@@ -42,7 +42,7 @@ set -gx NO_PROXY localhost,127.0.0.1,::1
 alias proxy="naive ~/Downloads/naive/config.json"
 
 # zoxide
-# zoxide init --cmd cd fish | source
+zoxide init --cmd cd fish | source
 
 if status is-interactive
     # eval (zellij setup --generate-auto-start fish | string collect)

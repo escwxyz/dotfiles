@@ -9,11 +9,15 @@ lcmd - l : yabai -m window --focus east
 # Switch spaces 
 lcmd - tab : yabai -m space --focus next || yabai -m space --focus first
 lcmd + lshift - tab: yabai -m space --focus prev || yabai -m space --focus last
+
 lcmd - 1 : yabai -m space --focus 1
 lcmd - 2 : yabai -m space --focus 2
 lcmd - 3 : yabai -m space --focus 3
 lcmd - 4 : yabai -m space --focus 4
 lcmd - 5 : yabai -m space --focus 5
+lcmd - 6 : yabai -m space --focus 6
+lcmd - 7 : yabai -m space --focus 7
+
 
 # Space creation
 lcmd + lshift - n: yabai -m space --create
@@ -34,6 +38,9 @@ lcmd + lshift - 2: yabai -m window --space 2
 lcmd + lshift - 3: yabai -m window --space 3
 lcmd + lshift - 4: yabai -m window --space 4
 lcmd + lshift - 5: yabai -m window --space 5
+lcmd + lshift - 6: yabai -m window --space 6
+lcmd + lshift - 7: yabai -m window --space 7
+
 
 # Equalize windows
 lcmd + lshift - e : yabai -m space --balance
@@ -60,18 +67,10 @@ resize < right : yabai -m window --resize right:50:0; \
 
 # Applications
 
+# TODO launch neovide under projects folder
 lcmd - return : open -a neovide --args --frame=transparent
 
 rcmd - return : alacritty --hold -e fish -c proxy
 
-rcmd - space : open -a "Google Chrome"
-
 rcmd - backspace : open -a screenshot
 
-rcmd - o : open -a obsidian
-
-rcmd - d : open -a discord
-
-rcmd - b : open -a blender
-
-rcmd - a : open -a alacritty
