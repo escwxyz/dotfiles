@@ -2,6 +2,7 @@
 local wezterm = require("wezterm")
 
 local appearance = require("modules.appearance")
+local keymaps = require("modules.keymaps")
 local bar = wezterm.plugin.require("https://github.com/adriankarlen/bar.wezterm")
 
 -- This will hold the configuration.
@@ -14,6 +15,7 @@ config.font = wezterm.font("JetBrains Mono", {
 config.font_size = 12
 
 appearance.apply_to_config(config)
+keymaps.apply_config(config)
 
 bar.apply_to_config(config)
 
