@@ -2,7 +2,6 @@
 names = [
   "bat",
   "nvim",
-  "alacritty",
   "fish",
   "yabai",
   "zellij",
@@ -10,6 +9,7 @@ names = [
   "sketchybar",
   "skhd",
   "wezterm",
+  "yazi",
 ]
 to = "~/.config"
 
