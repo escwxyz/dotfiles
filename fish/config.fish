@@ -1,37 +1,36 @@
 fish_vi_key_bindings
 
-switch (uname -s)
-    case Darwin
-        fish_add_path /opt/homebrew/bin
-        fish_add_path ~/Library/PostgreSQL/14/bin
-        fish_add_path ~/Development/nvim-macos-arm64/bin
-        fish_add_path ~/.bun/bin
-        fish_add_path ~/.cargo/bin
-
-        # set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
-        # set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
-
-    case Linux
-
-        # set -gx HOME /home/jiewang
-        # set CARGO "$HOME/.cargo/bin"
-        # TODO
-
-    case '*'
-        echo "Unspported platform!"
-        # TODO
-end
+# switch (uname -s)
+#     case Darwin
+#
+#         # set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
+#         # set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
+#
+#     case Linux
+#
+#         # set -gx HOME /home/jiewang
+#         # set CARGO "$HOME/.cargo/bin"
+#         # TODO
+#
+#     case '*'
+#         echo "Unspported platform!"
+#         # TODO
+# end
 
 # Common settings
 
 set -g fish_greeting
 set -gx SHELL fish
 set -gx EDITOR nvim
-set -gx TERM alacritty
+# set -gx TERM wezterm
 set -gx LANG en_US.UTF-8
 
 fish_add_path ~/Development/flutter/bin
-
+fish_add_path /opt/homebrew/bin
+fish_add_path ~/Library/PostgreSQL/14/bin
+fish_add_path ~/Development/nvim-macos-arm64/bin
+fish_add_path ~/.bun/bin
+fish_add_path ~/.cargo/bin
 fish_add_path ~/Downloads/naive
 
 set -gx ALL_PROXY socks5://127.0.0.1:1080
@@ -40,6 +39,7 @@ set -gx HTTPS_PROXY socks5://127.0.0.1:1080
 set -gx NO_PROXY localhost,127.0.0.1,::1
 
 alias proxy="naive ~/Downloads/naive/config.json"
+alias unproxy="set -e ALL_PROXY && set -e HTTP_PROXY && set -e HTTPS_PROXY && set -e NO_PROXY"
 
 # zoxide
 zoxide init --cmd cd fish | source

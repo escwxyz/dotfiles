@@ -25,7 +25,7 @@ function M.apply_to_config(config)
     split = wezterm.color.get_builtin_schemes()["Everforest Dark (Gogh)"].ansi[2],
   }
 
-  -- config.use_fancy_tab_bar = false
+  config.use_fancy_tab_bar = false
   -- config.tab_bar_at_bottom = true
 
   -- local scheme = wezterm.color.get_builtin_schemes()["Everforest Dark (Gogh)"]
