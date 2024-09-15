@@ -25,6 +25,11 @@ set -gx EDITOR nvim
 # set -gx TERM wezterm
 set -gx LANG en_US.UTF-8
 
+# storing secrets
+if test -f ~/.config/fish/secrets.fish
+    source ~/.config/fish/secrets.fish
+end
+
 fish_add_path ~/Development/flutter/bin
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/Library/PostgreSQL/14/bin

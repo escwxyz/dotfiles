@@ -22,6 +22,10 @@ rename = ".hammerspoon"
 name = ".gitconfig"
 to = "~/"
 
+[[mac]]
+name = ".npmrc"
+to = "~/"
+
 [[fedora]]
 names = ["fish", "nvim", "lazygit"]
 to = "~/.config"
