@@ -10,6 +10,7 @@ lcmd - l : yabai -m window --focus east
 lcmd - tab : yabai -m space --focus next || yabai -m space --focus first
 lcmd + lshift - tab: yabai -m space --focus prev || yabai -m space --focus last
 
+# For this to work, we have to run `sudo yabai --load-sa`
 lcmd - 1 : yabai -m space --focus 1
 lcmd - 2 : yabai -m space --focus 2
 lcmd - 3 : yabai -m space --focus 3
@@ -70,7 +71,7 @@ resize < right : yabai -m window --resize right:50:0; \
 # TODO launch neovide under projects folder
 lcmd - return : open -a neovide --args --frame=transparent
 
-rcmd - return : alacritty --hold -e fish -c proxy
+rcmd - return : open -n -a wezterm 
 
 rcmd - backspace : open -a screenshot
 
