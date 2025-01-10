@@ -1,12 +1,8 @@
 .DS_Store
 flutter
 sanity
-alacritty/catppuccin/
-nvim/dict.db3
-alacritty/base16-alacritty
-lazyvim
-raycast
 zed
 fish/fish_variables
 fish/secrets.fish
 fish/completions
+hammerspoon
